@@ -1,0 +1,19 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "A todo list for enhance your productivity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dak79/odin-todo.git"
+  },
+  "author": "Daniele Campari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dak79/odin-todo/issues"
+  },
+  "homepage": "https://github.com/dak79/odin-todo#readme"
+}
