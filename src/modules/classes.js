@@ -15,3 +15,10 @@ export class Task {
         this.checklist = checklist;
     }
 }
+
+export class Project {
+    constructor(title) {
+        this.title = title;
+        this.data = [];
+    }
+} 
