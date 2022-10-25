@@ -6,16 +6,20 @@ import { format } from 'date-fns';
  */
 export class Task {
     static #id = 0;
+
+    /**
+     * Create an incremental Id for each task
+     */
     static #incrementId() {
         this.#id++;
     }
 
     /**
-     * @param {String} title 
-     * @param {String} description 
-     * @param {Date} dueDate 
-     * @param {Number} priority 
-     * @param {Array.String} checklist 
+     * @param { String } title 
+     * @param { String } description 
+     * @param { Date } dueDate 
+     * @param { Number } priority 
+     * @param { Array.String } checklist 
      */
     constructor(title, description, dueDate, priority, checklist){
         this.type = 'task';
@@ -30,36 +34,40 @@ export class Task {
 }
 
 /**
- * Create a new Project
+ * Create a new Project.
  * @class
  */
 export class Project {
 
     /**
-     * @param {String} title 
+     * @param { String } title 
      */
     constructor(title) {
         this.title = title;
         this.data = [];
     }
     
+    /**
+     * Check if param Object is a Task object.
+     * @param { Object } task 
+     * @returns { Boolean } True if is a Task object, otherwise false.
+     */
     static #isTask(task) {
         return task.type === 'task' ? true : false;
-        
     }
 
     /**
      * Add new task to data []
-     * @param {Object.Task} task 
+     * @param { Object.Task } task 
      */
     createTask(task) {
         Project.#isTask(task) ? this.data.push(task) : false;
     }
 
     /**
-     * 
-     * @param {number} id 
-     * @returns {Object.Task|false} Searched task or false if nothing found 
+     * Search and read a task
+     * @param { number } id 
+     * @returns { Object.Task|false } Searched task or false if nothing found 
      */
     readTask(id) {
         let length = this.data.length;
@@ -70,11 +78,11 @@ export class Project {
     }
 
     /**
-     * 
-     * @param {Number} id 
-     * @param {String} key 
-     * @param {String} value 
-     * @returns {Object.Task|false} Updated task or false if nothing 
+     * Update a task
+     * @param { Number } id 
+     * @param { String } key 
+     * @param { String } value 
+     * @returns { Object.Task|false } Updated task or false if nothing 
      * found 
      */
     updateTask(id, key, value) {
@@ -86,9 +94,9 @@ export class Project {
     }
 
     /**
-     * 
-     * @param {Number} id 
-     * @returns {Object.Task|false} Removed task or false if nothing found
+     * Delete a task
+     * @param { Number } id 
+     * @returns { Object.Task|false } Removed task or false if nothing found
      */
     removeTask(id) {
         let length = this.data.length;
