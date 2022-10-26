@@ -28,15 +28,15 @@ task1.updateTask(inbox, 'panino');
 console.log(inbox);
 
 // Remove task from inbox
-task1.removeTask(inbox);
+task1.deleteTask(inbox);
 console.log(inbox);
 
-task2.removeTask(inbox);
+task2.deleteTask(inbox);
 console.log(inbox);
 
-/* New List */
-const list1 = new List('Life');
-const list2 = new List('Work');
+// /* New List */
+// const list1 = new List('Life');
+// const list2 = new List('Work');
 
-console.log(list1);
-console.log(list2);
+// console.log(list1);
+// console.log(list2);
