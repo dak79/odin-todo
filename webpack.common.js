@@ -26,17 +26,29 @@ module.exports = {
                 }
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'imgs/[hash][ext][query]'
+                    filename: 'assets/imgs/[hash][ext][query]'
                 }
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                test: /\.svg$/i,
+                use: [
+                    {
+                        loader: 'svg-url-loader',
+                        options: {
+                            limit: 10000,
+                            name: 'assets/svg/[hash].[ext]'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(svg|woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'fonts/[hash][ext][query]'
+                    filename: 'assets/fonts/[hash][ext][query]'
                 }
             },
             {
@@ -62,7 +74,7 @@ module.exports = {
             filename: 'styles/[name].css'
         }),
         new FaviconsWebpackPlugin({
-            logo: './src/assets/icons/logo.png',
+            logo: './src/assets/icons/logo.svg',
             prefix: '',
             publicPath: 'assets/favicons',
             outputPath: 'assets/favicons'

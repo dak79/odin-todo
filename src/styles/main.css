@@ -1,3 +1,31 @@
+/* Montserrat Regular - Latin from Google Fonts Helper */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/montserrat-v25-latin-regular.eot');
+    src: local(''),
+        url('../assets/fonts/montserrat-v25-latin-regular.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/montserrat-v25-latin-regular.woff2') format('woff2'),
+        url('../assets/fonts/montserrat-v25-latin-regular.woff') format('woff'),
+        url('../assets/fonts/montserrat-v25-latin-regular.ttf') format('truetype'),
+        url('../assets/fonts/montserrat-v25-latin-regular.svg#Montserrat') format('svg');
+}
+
+/* Montserrat 700 - Latin from Google Font Helper */
+@font-face {
+    font-family: 'Montserrat-700';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/montserrat-v25-latin-700.eot');
+    src: local(''),
+    url('../assets/fonts/montserrat-v25-latin-700.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff'),
+    url('../assets/fonts/montserrat-v25-latin-700.ttf') format('truetype'),
+    url('../assets/fonts/montserrat-v25-latin-700.svg#Montserrat') format('svg'); 
+}
+
 :root {
     /* Base Color: Tailwind Palette - Slate */
     --slate-50: #f8fafc;
@@ -49,13 +77,35 @@
     grid-area: desk;
 }
 
+.sideHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
 
+.logo-img {
+    height: 6rem;
+    width: 6rem;
+    margin: 1rem;
+}
+
+.title-side {
+    margin-left: 3rem;
+}
 
 /* STYLE */
 .navbar {
-    background-color: var(--slate-500); 
+    background-color: var(--slate-700); 
 }
 
 .desk {
-    background-color: var(--slate-300);
+    background-color: var(--slate-200);
+}
+
+.title-side {
+    font-family: 'Montserrat-700';
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--slate-200);
 }
