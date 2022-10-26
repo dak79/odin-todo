@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -35,18 +38,34 @@ module.exports = {
                 generator: {
                     filename: 'fonts/[hash][ext][query]'
                 }
+            },
+            {
+                test: /.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },
     optimization: {
-        runtimeChunk: 'single'
+        runtimeChunk: 'single',
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'ToDo - List',
+            title: 'ToDo',
             template: path.resolve(__dirname,'./src/templates/template.html'),
             filename: 'index.html'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles/[name].css'
+        }),
+        new FaviconsWebpackPlugin({
+            logo: './src/assets/icons/logo.png',
+            prefix: '',
+            publicPath: 'assets/favicons',
+            outputPath: 'assets/favicons'
+        })
     ]
 }
