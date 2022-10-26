@@ -10,17 +10,16 @@ const MixCrud = superclass => class extends superclass {
     }
 
     update(array, key, value) {
-        const task = this.findTask(array);
+        const task = this.find(array);
         return (key in task) ? task[key] = value : false;
     }
 
     delete(array) {
-        const task = this.findTask(array);
+        const task = this.find(array);
         const index = array.indexOf(task);
         array.splice(index, 1);
     }
 }
-
 
 class TaskProperty {
     static #id = 0;
@@ -43,11 +42,11 @@ class TaskProperty {
 
 export class Task extends MixCrud(TaskProperty) {
     constructor(...args) {
-        super(...args)
+        super(...args);
     }
 
     addTask(array) {
-        this.add(array)
+        this.add(array);
     }
 
     findTask(array){
@@ -61,16 +60,39 @@ export class Task extends MixCrud(TaskProperty) {
     deleteTask(array){
         this.delete(array);
     }
-
 }
 
 class ListProperty {
-
+    static #id = 0;
+    static #incrementId() {
+        this.#id++;
+    }
+    
     constructor(title) {
+        ListProperty.#incrementId();
+        this.id = ListProperty.#id;
         this.title = title;
     }
 }
 
+export class List extends MixCrud(ListProperty) {
+    constructor(...args) {
+        super(...args);
+    }
 
+    addTag(array) {
+        this.add(array);
+    }
 
+    findTag(array) {
+        return this.find(array);
+    }
 
+    updateTag(array, key, value) {
+        return this.update(array, key, value);
+    }
+
+    deleteTag(array) {
+        this.delete(array);
+    }
+}

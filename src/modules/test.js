@@ -5,7 +5,7 @@ const inbox = [];
 const task1 = new Task('Cook', 'Pasta al pesto', new Date(), 1, null);
 const task2 = new Task('Play', 'Potato', new Date(2022, 9, 26), 1, null);
 
-// Create 2 new tasks
+// Create two new tasks
 console.log(task1);
 console.log(task2);
 
@@ -34,9 +34,37 @@ console.log(inbox);
 task2.deleteTask(inbox);
 console.log(inbox);
 
-// /* New List */
-// const list1 = new List('Life');
-// const list2 = new List('Work');
+/* Tests on New List Objects */
+const lists = [];
+const list1 = new List('Life');
+const list2 = new List('Work');
 
-// console.log(list1);
-// console.log(list2);
+// Create two new lists
+console.log(list1);
+console.log(list2);
+
+// Check proto and instantiated property
+console.log(Object.getPrototypeOf(list1));
+console.log(Object.hasOwn(list1, 'title'));
+
+// Add list to lists
+list1.addTag(lists);
+list2.addTag(lists);
+console.log(lists);
+
+// Find list in lists
+console.log(list1.findTag(lists));
+console.log(list2.findTag(lists));
+
+// Update task in inbox
+list1.updateTag(lists, 'title', 'Daily life');
+list1.updateTag(lists, 'panino');
+console.log(lists);
+
+// Remove task from inbox
+list1.deleteTag(lists);
+console.log(lists);
+
+list2.deleteTag(lists);
+console.log(lists);
+
