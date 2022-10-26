@@ -1,28 +1,42 @@
-import { Project, Task } from "./classes";
+import { List, Task } from "./classes";
 
-const todo1 = new Task('Cook', 'Pasta al pesto', new Date(), 1, null);
-const todo2 = new Task('Play', 'Potato', new Date(2022, 9, 26), 1, null);
+/* Test on Task Objects */
+const inbox = [];
+const task1 = new Task('Cook', 'Pasta al pesto', new Date(), 1, null);
+const task2 = new Task('Play', 'Potato', new Date(2022, 9, 26), 1, null);
 
-const project1 = new Project('Week');
-const project2 = new Project('Today');
+// Create 2 new tasks
+console.log(task1);
+console.log(task2);
 
+// Check proto and instantiated property
+console.log(Object.getPrototypeOf(task1));
+console.log(Object.hasOwn(task1, 'title'));
 
+// Add tasks to inbox
+task1.addTask(inbox);
+task2.addTask(inbox);
+console.log(inbox);
 
+// Find tasks in inbox
+console.log(task1.findTask(inbox));
+console.log(task2.findTask(inbox));
 
-project1.createTask(todo1);
-project1.createTask(todo2);
-// console.log(project1.data)
-// console.log(todo1);
-// console.log(todo1.id);
-// console.log(todo2);
-// console.log(todo2.id);
-// console.log(project1)
-// console.log(project2);
+// Update task in inbox
+task1.updateTask(inbox, 'title', 'OPPO');
+task1.updateTask(inbox, 'panino');
+console.log(inbox);
 
-// console.log(project1.readTask(1));
-project1.updateTask(1, 'title', 'Sleep');
+// Remove task from inbox
+task1.removeTask(inbox);
+console.log(inbox);
 
-// console.log(project1)
+task2.removeTask(inbox);
+console.log(inbox);
 
-project1.removeTask(2);
-console.log(project1);
+/* New List */
+const list1 = new List('Life');
+const list2 = new List('Work');
+
+console.log(list1);
+console.log(list2);
