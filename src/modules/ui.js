@@ -1,4 +1,4 @@
-import { appendChildren, setAttributes } from "./helpers";
+import { appendChildren, setAttributes, createList, sideButton } from "./helpers";
 import logoImg from '../assets/icons/logo.svg';
 
 export const hooks = () => {
@@ -29,24 +29,27 @@ const side = () => {
 const sideHeader = () => {
     const header = document.createElement('header');
     header.classList.add('sideHeader');
+    
     const logo = document.createElement('img');
     setAttributes(logo, {
         src: logoImg,
         alt: 'logo To Do',
         class: 'logo-img'
      });
+
     const title = document.createElement('h1');
     title.classList.add('title-side');
     title.textContent = 'To Do';
 
     appendChildren(header, [logo, title]);
-
     return header;
-
 }
 
 const sideNavbar = () => {
     const nav = document.createElement('nav');
+    const menu = createList(['Inbox', 'Today', 'This Week', 'Any Time'], sideButton, 'menu');
+
+    nav.appendChild(menu);
 
     return nav;
 

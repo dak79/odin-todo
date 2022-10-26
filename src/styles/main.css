@@ -94,6 +94,15 @@
     margin-left: 3rem;
 }
 
+.menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 /* STYLE */
 .navbar {
     background-color: var(--slate-700); 
@@ -104,8 +113,22 @@
 }
 
 .title-side {
-    font-family: 'Montserrat-700';
+    font-family: 'Montserrat-700', sans-serif;
     font-weight: 700;
     font-size: 3rem;
     color: var(--slate-200);
+}
+
+.btn-menu {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    color: var(--slate-200);
+    background-color: var(--slate-700);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.btn-menu:hover {
+    color: var(--amber-500);
+    cursor: pointer;
 }
