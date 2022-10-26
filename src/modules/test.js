@@ -1,6 +1,8 @@
+/* TEST ON CLASSES
+
 import { List, Task } from "./classes";
 
-/* Test on Task Objects */
+// Test on Task Objects 
 const inbox = [];
 const task1 = new Task('Cook', 'Pasta al pesto', new Date(), 1, null);
 const task2 = new Task('Play', 'Potato', new Date(2022, 9, 26), 1, null);
@@ -34,7 +36,7 @@ console.log(inbox);
 task2.delete(inbox);
 console.log(inbox);
 
-/* Tests on New List Objects */
+// Tests on New List Objects 
 const lists = [];
 const list1 = new List('Life');
 const list2 = new List('Work');
@@ -68,7 +70,7 @@ console.log(lists);
 list2.delete(lists);
 console.log(lists);
 
-/* Test add list tag to task object  */
+// Test add list tag to task object 
 const task3 = new Task('Cook', 'Pasta al pesto', new Date(), 1, null);
 const task4 = new Task('Play', 'Potato', new Date(2022, 9, 26), 1, null);
 
@@ -100,3 +102,6 @@ console.log(task3.tags);
 list3.delete(task4.tags);
 list4.delete(task4.tags);
 console.log(task4.tags);
+
+*/
+

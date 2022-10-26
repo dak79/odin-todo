@@ -1,0 +1,2 @@
+const inbox = [];
+const lists = [];
