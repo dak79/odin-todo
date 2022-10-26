@@ -84,6 +84,19 @@ list3.add(task3.tags);
 console.log(task3);
 
 // Find tag in task
-console.log(list3.find(task4.tags))
+console.log(list3.find(task4.tags));
 console.log(list4.find(task3.tags));
 
+// Update tag in task
+list3.update(task3.tags, 'title', 'BANANA');
+list3.update(task4.tags, 'panino');
+console.log(task3.tags);
+console.log(task4.tags);
+
+// Remove tag from task
+list3.delete(task3.tags);
+console.log(task3.tags);
+
+list3.delete(task4.tags);
+list4.delete(task4.tags);
+console.log(task4.tags);
