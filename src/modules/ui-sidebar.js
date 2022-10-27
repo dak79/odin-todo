@@ -58,7 +58,7 @@ const sideNavbar = () => {
 }
 
 const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Any Time'}], sideBtn, 'menu');
+    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], sideBtn, 'menu');
 
     return menu;
 }
