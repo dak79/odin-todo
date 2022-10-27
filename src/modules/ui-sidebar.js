@@ -1,4 +1,4 @@
-import { setAttributes, appendChildren, createList, sideBtn } from './helpers';
+import { setAttributes, appendChildren, createList, sideBtn, selectNode } from './helpers';
 import logoImg from '../assets/icons/logo.svg';
 import { lists } from './todo';
 
@@ -79,6 +79,18 @@ const sideSectionLists = () => {
 export const createLists = () => {
     const projects = createList(lists, sideBtn, 'btn-menu btn-lists', 'lists');
     return projects;
+}
+
+export const newListUi = () => {
+    const section = selectNode('#side-section-lists');
+    const title = document.createElement('input');
+    setAttributes(title, {
+        type: 'text',
+        id: 'new-list-title',
+        class: 'new-list-title',
+        name: 'new-list-title'
+    })
+    section.appendChild(title);
 }
 
 const sideFooter = () => {

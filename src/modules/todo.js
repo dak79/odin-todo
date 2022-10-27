@@ -1,7 +1,8 @@
-import { renderPage, renderLists } from './ui-renders';
-import { Task, List } from './classes';
-import { selectNode, selectNodes } from './helpers';
-import { addNewList, addNewTask, showInbox, showToday, showThisWeek, showAnytime, showList } from './handlers';
+import { renderPage } from './ui-renders';
+import { Task } from './classes';
+import { selectNode } from './helpers';
+import { addNewList, addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './handlers';
+import { defaultList } from './lists';
 
 const inbox = [];
 export const lists = [];
@@ -29,21 +30,6 @@ export const loadPage = () => {
 
     const btnAnytime = selectNode('#btn-anytime');
     btnAnytime.addEventListener('click', showAnytime);
-}
-
-const defaultList = () => {
-    const life = new List('Life');
-    const work = new List('Work');
-
-    life.add(lists);
-    work.add(lists); 
-    renderLists();
-    addListenerLists();
-}
-
-const addListenerLists = () => {
-    const projects = selectNodes('.btn-lists');
-    projects.forEach(project => project.addEventListener('click', showList))
 }
 
 const exampleTasks = () => {
