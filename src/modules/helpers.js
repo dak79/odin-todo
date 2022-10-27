@@ -37,18 +37,23 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
 }
 
 /**
- * Header Buttons
- * @param { Array } name - Button text content
+ * SideBar Buttons
+ * @param { Object } name - Button text content
  * @returns { Node } A button
  */
-export const sideButton = (name) => {
+export const sideBtn = (name) => {
     const btn = document.createElement('button');
     setAttributes(btn, {
         type: 'button',
-        id: `btn-${name.replace(' ', '-').toLowerCase().trim()}`,
+        id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
         class: 'btn-menu'
     });
-    btn.textContent = name;
+    btn.textContent = name.title;
 
     return btn;
 }
+
+export const selectNode = selector => document.querySelector(selector);
+
+export const cleanNode = node => node.replaceChildren();
+

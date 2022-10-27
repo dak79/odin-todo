@@ -113,6 +113,8 @@
 
 .side-section-lists {
     grid-area: lists;
+    max-height: 14rem;
+    overflow: auto;
 }
 
 .side-footer {

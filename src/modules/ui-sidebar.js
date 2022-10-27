@@ -1,22 +1,13 @@
-import { appendChildren, setAttributes, createList, sideButton } from "./helpers";
-import { lists } from "./todo";
+import { setAttributes, appendChildren, createList, sideBtn } from './helpers';
 import logoImg from '../assets/icons/logo.svg';
+import { lists } from './todo';
 
-export const hooks = () => {
-    const root = document.querySelector('#root');
-    
-    const main = document.createElement('main');
-    main.classList.add('container');
-    const navbar = side();
-    const desk = floor(); 
-
-    root.appendChild(main);
-    appendChildren(main, [navbar, desk]);
-}
-
-const side = () => {
+export const side = () => {
     const section = document.createElement('section');
-    section.classList.add('navbar');
+    setAttributes(section, {
+        id: 'navbar',
+        class: 'navbar'
+    })
     const header = sideHeader();
     const navbar = sideNavbar();
     const sectionList = sideSectionLists();
@@ -31,6 +22,14 @@ const sideHeader = () => {
     const header = document.createElement('header');
     header.classList.add('side-header');
     
+    const logo = createLogo();
+    const title = createTitle();
+
+    appendChildren(header, [logo, title]);
+    return header;
+}
+
+const createLogo = () => {
     const logo = document.createElement('img');
     setAttributes(logo, {
         src: logoImg,
@@ -38,36 +37,62 @@ const sideHeader = () => {
         class: 'logo-img'
      });
 
+     return logo;
+}
+
+const createTitle = () => {
     const title = document.createElement('h1');
     title.classList.add('side-title');
-    title.textContent = 'ToDo';
+    title.textContent = 'ToDo'
 
-    appendChildren(header, [logo, title]);
-    return header;
+    return title;
 }
 
 const sideNavbar = () => {
     const nav = document.createElement('nav');
     nav.classList.add('side-navbar');
-    const menu = createList(['Inbox', 'Today', 'This Week', 'Any Time'], sideButton, 'menu');
+    const menu = createMenu();
 
     nav.appendChild(menu);
     return nav;
 }
 
+const createMenu = () => {
+    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Any Time'}], sideBtn, 'menu');
+
+    return menu;
+}
+
 const sideSectionLists = () => {
     const section = document.createElement('section');
-    section.classList.add('side-section-lists');
-    const list = createList(lists, sideButton, 'lists');
-
-    section.appendChild(list);
+    setAttributes(section, {
+        class: 'side-section-lists',
+        id: 'side-section-lists'
+    })
+    const projects = createLists()
+        
+    section.appendChild(projects);
 
     return section
+}
+
+export const createLists = () => {
+    const projects = createList(lists, sideBtn, 'lists');
+    return projects;
 }
 
 const sideFooter = () => {
     const footer = document.createElement('footer');
     footer.classList.add('side-footer');
+    const btnNewList = createBtnNewList();
+   
+    const btnNewTask = createBtnNewTask();
+
+    appendChildren(footer, [btnNewList, btnNewTask]);
+    return footer;
+}
+
+const createBtnNewList = () => {
     const btnNewList = document.createElement('button');
     setAttributes(btnNewList, {
         type: 'button',
@@ -76,6 +101,10 @@ const sideFooter = () => {
     });
     btnNewList.textContent = '+ New List';
 
+    return btnNewList; 
+}
+
+const createBtnNewTask = () => {
     const btnNewTask = document.createElement('button');
     setAttributes(btnNewTask, {
         type: 'button',
@@ -84,12 +113,5 @@ const sideFooter = () => {
     })
     btnNewTask.textContent = '+ New Task';
 
-    appendChildren(footer, [btnNewList, btnNewTask]);
-    return footer;
-}
-const floor = () => {
-    const section = document.createElement('section');
-    section.classList.add('desk');
-
-    return section;
+    return btnNewTask;
 }
