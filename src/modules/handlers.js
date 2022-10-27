@@ -29,6 +29,14 @@ export const saveNewListEnter = (event) => {
     }
 }
 
+export const editList = () => {
+    console.log('EDIT THIS LIST');
+}
+
+export const deleteList = () => {
+    console.log('DELETE THIS LIST');
+}
+
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');
 }
@@ -46,5 +54,6 @@ export const showAnytime = () => {
     console.log('CLICK SHOW ANYTIME');
 }
 export const showList = () => {
+   
     console.log('CLICK SHOW LIST');
 }

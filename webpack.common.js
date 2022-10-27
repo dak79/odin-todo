@@ -33,7 +33,11 @@ module.exports = {
                 }
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+                test: /\.svg$/i,
+                type: 'asset/inline'
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset',
                 generator: {
                     filename: 'assets/fonts/[hash][ext][query]'

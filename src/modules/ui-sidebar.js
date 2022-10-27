@@ -1,5 +1,4 @@
-import { setAttributes, appendChildren, createList, sideBtn, selectNode } from './helpers';
-import logoImg from '../assets/icons/logo.svg';
+import { setAttributes, appendChildren, createList, navBtn, listsBtn, selectNode } from './helpers';
 import { lists } from './todo';
 
 export const side = () => {
@@ -30,14 +29,10 @@ const sideHeader = () => {
 }
 
 const createLogo = () => {
-    const logo = document.createElement('img');
-    setAttributes(logo, {
-        src: logoImg,
-        alt: 'logo To Do',
-        class: 'logo-img'
-     });
-
-     return logo;
+    const logo = document.createElement('div');
+    logo.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z" /></svg>'
+    
+    return logo;
 }
 
 const createTitle = () => {
@@ -58,7 +53,7 @@ const sideNavbar = () => {
 }
 
 const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], sideBtn, 'btn-menu', 'menu');
+    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], navBtn, 'menu', 'menu-items');
 
     return menu;
 }
@@ -77,7 +72,7 @@ const sideSectionLists = () => {
 }
 
 export const createLists = () => {
-    const projects = createList(lists, sideBtn, 'btn-menu btn-lists', 'lists');
+    const projects = createList(lists, listsBtn, 'lists', 'lists-items');
     return projects;
 }
 

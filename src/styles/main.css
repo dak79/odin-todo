@@ -87,7 +87,7 @@
     align-items: center;
 }
 
-.logo-img {
+div svg {
     height: 6rem;
     width: 6rem;
     margin: 1rem;
@@ -104,6 +104,9 @@
     list-style: none;
     justify-content: center;
     align-items: center;
+}
+
+.menu {
     gap: 20px;
 }
 
@@ -113,12 +116,33 @@
 
 .side-section-lists {
     grid-area: lists;
-    max-height: 14rem;
+    max-height: 16rem;
     overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+}
+
+.lists-items {
+    display: grid;
+    grid:
+        [row1-start] "title btns" 1fr [row1-end]
+        / 2fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.btn-lists {
+    grid-area: title;
+}
+
+.btns-lists {
+    grid-area: btns;
+}
+
+button svg {
+    width: 2rem;
+    height: 2rem;
 }
 
 .side-footer {
@@ -154,8 +178,6 @@
     background-color: var(--slate-700); 
 }
 
-
-
 .side-title {
     font-family: 'Montserrat-700', sans-serif;
     font-weight: 700;
@@ -163,7 +185,11 @@
     color: var(--slate-200);
 }
 
-.btn-menu {
+div svg {
+    fill: var(--slate-200);
+}
+.btn-menu,
+.btn-lists {
     font-family: 'Montserrat', sans-serif;
     border: none;
     color: var(--slate-200);
@@ -173,9 +199,18 @@
 }
 
 .btn-menu:hover,
+.btn-lists:hover,
 .btn-footer:hover {
     color: var(--amber-500);
     cursor: pointer;
+}
+
+button svg {
+    fill: var(--slate-200);
+}
+
+button svg:hover {
+    fill: var(--amber-500);
 }
 
 .new-list-title {
@@ -199,6 +234,7 @@
     border: none;
     border-radius: 15px;
 }
+
 
 .btn-footer:active {
     transform: translateY(5px);
