@@ -6,8 +6,7 @@
     src: url('../assets/fonts/montserrat-v25-latin-regular.eot');
     src: local(''),
         url('../assets/fonts/montserrat-v25-latin-regular.eot?#iefix') format('embedded-opentype'),
-        url('../assets/fonts/montserrat-v25-latin-regular.woff2') format('woff2'),
-        url('../assets/fonts/montserrat-v25-latin-regular.woff') format('woff'),
+        url('../assets/fonts/montserrat-v25-latin-regular.woff2') format('woff2'),url('../assets/fonts/montserrat-v25-latin-regular.woff') format('woff'),
         url('../assets/fonts/montserrat-v25-latin-regular.ttf') format('truetype'),
         url('../assets/fonts/montserrat-v25-latin-regular.svg#Montserrat') format('svg');
 }
@@ -19,11 +18,11 @@
     font-weight: 700;
     src: url('../assets/fonts/montserrat-v25-latin-700.eot');
     src: local(''),
-    url('../assets/fonts/montserrat-v25-latin-700.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
-    url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff'),
-    url('../assets/fonts/montserrat-v25-latin-700.ttf') format('truetype'),
-    url('../assets/fonts/montserrat-v25-latin-700.svg#Montserrat') format('svg'); 
+        url('../assets/fonts/montserrat-v25-latin-700.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
+        url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff'),
+        url('../assets/fonts/montserrat-v25-latin-700.ttf') format('truetype'),
+        url('../assets/fonts/montserrat-v25-latin-700.svg#Montserrat') format('svg'); 
 }
 
 :root {

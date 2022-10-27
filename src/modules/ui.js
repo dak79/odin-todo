@@ -40,7 +40,7 @@ const sideHeader = () => {
 
     const title = document.createElement('h1');
     title.classList.add('side-title');
-    title.textContent = 'To Do';
+    title.textContent = 'ToDo';
 
     appendChildren(header, [logo, title]);
     return header;

@@ -33,20 +33,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.svg$/i,
-                use: [
-                    {
-                        loader: 'svg-url-loader',
-                        options: {
-                            limit: 10000,
-                            name: 'assets/svg/[hash].[ext]'
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.(svg|woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
+                test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+                type: 'asset',
                 generator: {
                     filename: 'assets/fonts/[hash][ext][query]'
                 }
