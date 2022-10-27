@@ -1,8 +1,9 @@
-import { renderLists } from "./ui-renders";
-import { showList, saveNewList, saveNewListEnter, deleteList, editList } from "./handlers";
-import { List } from "./classes";
-import { lists } from "./todo";
-import { selectNode, selectNodes } from "./helpers";
+import { renderLists } from './lists-render';
+import { showList, saveNewList, saveNewListEnter, deleteList, editList } from './lists-handlers';
+import { List } from './list-class';
+import { selectNode, selectNodes } from '../helpers';
+
+export const lists = [];
 
 export const defaultList = () => {
     const life = new List('Life');
@@ -20,6 +21,7 @@ export const addListenerLists = () => {
 
     const deleteProjects = selectNodes('.btn-lists-delete')
     deleteProjects.forEach(btnDelete => btnDelete.addEventListener('click', deleteList));
+    
     const editProject = selectNodes('.btn-lists-edit');
     editProject.forEach(btnEdit => btnEdit.addEventListener('click', editList));
 }

@@ -1,5 +1,5 @@
-import { appendChildren, selectNode, cleanNode } from './helpers';
-import { side, createLists } from './ui-sidebar';
+import { appendChildren } from './helpers';
+import { side } from './ui-sidebar';
 import { floor } from './ui-desk';
 
 export const renderPage = () => {
@@ -13,14 +13,3 @@ export const renderPage = () => {
     root.appendChild(main);
     appendChildren(main, [sidebar, desk]);
 }
-
-export const renderLists = () => {
-    const section = selectNode('#side-section-lists');
-    const updateList = createLists();
-    cleanNode(section);
-    section.appendChild(updateList);
-}
-
-
-
-

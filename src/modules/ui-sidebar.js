@@ -1,5 +1,5 @@
-import { setAttributes, appendChildren, createList, navBtn, listsBtn, selectNode } from './helpers';
-import { lists } from './todo';
+import { setAttributes, appendChildren, createList, navBtn } from './helpers';
+import { createProjectsUi } from './lists/lists-ui';
 
 export const side = () => {
     const section = document.createElement('section');
@@ -64,28 +64,11 @@ const sideSectionLists = () => {
         class: 'side-section-lists',
         id: 'side-section-lists'
     })
-    const projects = createLists()
+    const projects = createProjectsUi()
         
     section.appendChild(projects);
 
     return section
-}
-
-export const createLists = () => {
-    const projects = createList(lists, listsBtn, 'lists', 'lists-items');
-    return projects;
-}
-
-export const newListUi = () => {
-    const section = selectNode('#side-section-lists');
-    const title = document.createElement('input');
-    setAttributes(title, {
-        type: 'text',
-        id: 'new-list-title',
-        class: 'new-list-title',
-        name: 'new-list-title'
-    })
-    section.appendChild(title);
 }
 
 const sideFooter = () => {

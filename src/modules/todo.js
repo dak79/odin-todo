@@ -1,11 +1,12 @@
 import { renderPage } from './ui-renders';
 import { Task } from './classes';
 import { selectNode } from './helpers';
-import { addNewList, addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './handlers';
-import { defaultList } from './lists';
+import { addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './handlers';
+
+import { addNewList } from './lists/lists-handlers';
+import { defaultList } from './lists/lists';
 
 const inbox = [];
-export const lists = [];
 
 export const loadPage = () => {
     renderPage();
@@ -43,6 +44,3 @@ const exampleTasks = () => {
     todoThree.add(inbox);
     todoFour.add(inbox);
 }
-
-
-
