@@ -1,7 +1,7 @@
 import { selectNode } from '../helpers';
 import { List } from './list-class';
-import { lists, newListEvent, addListenerLists } from './lists';
-import { newListUi } from './lists-ui';
+import { lists, newListListeners, addListenerLists } from './lists';
+import { editListUi, newListUi } from './lists-ui';
 import { renderLists } from './lists-render';
 
 
@@ -11,7 +11,7 @@ export const addNewList = () => {
     const newField = selectNode('#new-list-title');
     newField.focus();
 
-    newListEvent();
+    newListListeners();
 }
 
 export const saveNewList = () => {
@@ -30,8 +30,10 @@ export const saveNewListEnter = (event) => {
     }
 }
 
-export const editList = () => {
-    console.log('EDIT THIS LIST');
+export const editList = (event) => {
+    event.stopPropagation();
+    editListUi(event);
+
 }
 
 export const deleteList = () => {

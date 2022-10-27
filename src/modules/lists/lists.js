@@ -19,14 +19,14 @@ export const addListenerLists = () => {
     const projects = selectNodes('.btn-lists');
     projects.forEach(project => project.addEventListener('click', showList))
 
-    const deleteProjects = selectNodes('.btn-lists-delete')
+    const deleteProjects = selectNodes('.svg-btn-delete')
     deleteProjects.forEach(btnDelete => btnDelete.addEventListener('click', deleteList));
     
-    const editProject = selectNodes('.btn-lists-edit');
+    const editProject = selectNodes('.svg-btn-edit');
     editProject.forEach(btnEdit => btnEdit.addEventListener('click', editList));
 }
 
-export const newListEvent = () => {
+export const newListListeners = () => {
     const newTitle = selectNode('#new-list-title');
     newTitle.addEventListener('focusout', saveNewList);
     newTitle.addEventListener('keyup', saveNewListEnter);
