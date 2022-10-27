@@ -21,13 +21,13 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
  * @param { String } className - Ul class
  * @returns { Node } An unordered list
  */
- export const createList = (itemTitles, itemsType, className) => {
+ export const createList = (itemTitles, itemsType, itemClasses, className) => {
     const list = document.createElement('ul');
     list.classList.add(className);
 
     itemTitles.forEach(title => {
         const listItem = document.createElement('li');
-        const listItemContent = itemsType(title);
+        const listItemContent = itemsType(title, itemClasses);
 
         listItem.appendChild(listItemContent);
         list.appendChild(listItem);
@@ -41,12 +41,12 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
  * @param { Object } name - Button text content
  * @returns { Node } A button
  */
-export const sideBtn = (name) => {
+export const sideBtn = (name, itemClasses) => {
     const btn = document.createElement('button');
     setAttributes(btn, {
         type: 'button',
         id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
-        class: 'btn-menu'
+        class: itemClasses
     });
     btn.textContent = name.title;
 
@@ -54,6 +54,7 @@ export const sideBtn = (name) => {
 }
 
 export const selectNode = selector => document.querySelector(selector);
+export const selectNodes = selector => document.querySelectorAll(selector);
 
 export const cleanNode = node => node.replaceChildren();
 

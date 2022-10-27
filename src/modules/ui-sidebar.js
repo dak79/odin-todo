@@ -58,7 +58,7 @@ const sideNavbar = () => {
 }
 
 const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], sideBtn, 'menu');
+    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], sideBtn, 'btn-menu', 'menu');
 
     return menu;
 }
@@ -77,7 +77,7 @@ const sideSectionLists = () => {
 }
 
 export const createLists = () => {
-    const projects = createList(lists, sideBtn, 'lists');
+    const projects = createList(lists, sideBtn, 'btn-menu btn-lists', 'lists');
     return projects;
 }
 

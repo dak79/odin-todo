@@ -1,7 +1,7 @@
 import { renderPage, renderLists } from './ui-renders';
 import { List } from './classes';
-import { selectNode } from './helpers';
-import { addNewList, addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './handlers';
+import { selectNode, selectNodes } from './helpers';
+import { addNewList, addNewTask, showInbox, showToday, showThisWeek, showAnytime, showList } from './handlers';
 
 const inbox = [];
 export const lists = [];
@@ -37,5 +37,11 @@ const defaultList = () => {
     life.add(lists);
     work.add(lists); 
     renderLists();
+    addListenerLists();
+}
+
+const addListenerLists = () => {
+    const projects = selectNodes('.btn-lists');
+    projects.forEach(project => project.addEventListener('click', showList))
 }
 

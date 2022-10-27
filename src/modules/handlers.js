@@ -18,3 +18,6 @@ export const showThisWeek = () => {
 export const showAnytime = () => {
     console.log('CLICK SHOW ANYTIME');
 }
+export const showList = () => {
+    console.log('CLICK SHOW LIST');
+}
