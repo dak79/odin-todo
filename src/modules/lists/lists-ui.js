@@ -8,7 +8,6 @@ export const listTitle = () => {
     title.classList.add('lists-title');
     title.textContent = 'Lists';
 
-
     return title;
 }
 
@@ -118,5 +117,3 @@ const btnDeleteDisabled = () => {
     const deleteBtns = selectNodes('.svg-btn-delete')
     deleteBtns.forEach(btnDelete => btnDelete.removeEventListener('click', deleteList));
 }
-
-

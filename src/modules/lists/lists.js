@@ -36,5 +36,3 @@ export const editListListeners = nodes => {
     nodes[1].addEventListener('focusout', saveEditList.bind(this, nodes));
     nodes[1].addEventListener('keyup', saveOnEnter);
 }
-
-
