@@ -1,8 +1,9 @@
 import { selectNode } from '../helpers';
 import { List } from './list-class';
-import { lists, newListListeners, addListenerLists } from './lists';
+import { lists, newListListeners, addListenerLists, editListListeners } from './lists';
 import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
+import { btnNewListEnabled, btnNewListDisabled } from '../footer';
 
 
 export const addNewList = () => {
@@ -14,32 +15,41 @@ export const addNewList = () => {
     newListListeners();
 }
 
-export const saveNewList = () => {
-    const content = selectNode('#new-list-title');
-
-    if (content.value === '') {
+const checkListName = node => {
+    if (node.value === '') {
         renderLists();
         return false;
     }
 
-    const newList = new List(String(content.value));
-    const n = newList.findName(lists);
+    const newList = new List(String(node.value));
+    const listsTitles = newList.findName(lists);
 
-    if (n !== undefined && n.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
-        newListNameErrorUi(content);
-        content.focus();
-    } else {
-        const newListBtn = selectNode('#btn-new-list');
-        newListBtn.disabled = false;
+    if (listsTitles !== undefined && listsTitles.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
+        newListNameErrorUi(node);
+        node.focus();
+        return false;
+    }
+    
+    return newList
+}
+
+export const saveNewList = () => {
+    const input = selectNode('#new-list-title');
+    
+    const newList = checkListName(input);
+    if (newList) {
+        btnNewListEnabled(true);
         
         newList.add(lists);
         renderLists();
         addListenerLists();
+    } else {
+        btnNewListEnabled(true);
     }
 
 }
 
-export const saveNewListEnter = (event) => {
+export const saveOnEnter = (event) => {
     event.preventDefault();
     if (event.keyCode === 13) {
         event.target.blur();
@@ -48,7 +58,20 @@ export const saveNewListEnter = (event) => {
 
 export const editList = (event) => {
     event.stopPropagation();
-    editListUi(event);
+    const involvedNodes = editListUi(event);
+    editListListeners(involvedNodes);
+}
+
+export const saveEditList = nodes => {
+    const newTitle = checkListName(nodes[1]);
+    
+    if (newTitle) {
+        const index = newTitle.findId(lists, Number(nodes[0].dataset.listId));
+        newTitle.update(index, 'title', String(nodes[1].value))
+        renderLists();
+        addListenerLists();
+        btnNewListEnabled(false);
+    }
 
 }
 

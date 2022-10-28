@@ -3,17 +3,16 @@ export const MixCrud = superclass => class extends superclass {
         array.push(this);
     }
     
-    find(array) {
-        return array.find(element => element.id === this.id);
+    findId(array, id) {
+        return array.find(element => element.id === id);
     }
 
     findName(array) {
         return array.find(element => element.title.toLowerCase().trim() === this.title.toLowerCase().trim());
     }
 
-    update(array, key, value) {
-        const task = this.find(array);
-        return (key in task) ? task[key] = value : false;
+    update(property, key, value) {
+        return (key in property) ? property[key] = value : false;
     }
 
     delete(array) {

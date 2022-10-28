@@ -1,20 +1,23 @@
-import { createList, selectNode, setAttributes, appendChildren } from '../helpers';
+import { createList, selectNode, selectNodes, setAttributes, appendChildren } from '../helpers';
 import { lists } from './lists';
+import { editList } from './lists-handlers';
+import { btnNewListEnabled, btnNewListDisabled } from '../footer';
 
 export const createProjectsUi = () => {
     const projects = createList(lists, listsBtn, 'lists', 'lists-items');
     return projects;
 }
 
-const listsBtn = (name) => {
+const listsBtn = (list) => {
     const btnTitle = document.createElement('button');
     setAttributes(btnTitle, {
         type: 'button',
-        id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
+        id: `btn-${list.title.replace(' ', '-').toLowerCase().trim()}`,
         class: 'btn-lists',
-        'data-btn':`${name.title.replace(' ', '-').toLowerCase().trim()}`
+        'data-btn':`${list.title.replace(' ', '-').toLowerCase().trim()}`,
+        'data-list-id': `${list.id}`
     });
-    btnTitle.textContent = name.title;
+    btnTitle.textContent = list.title;
 
     const wrapper = document.createElement('span');
     wrapper.classList.add('btns-lists');
@@ -23,9 +26,9 @@ const listsBtn = (name) => {
     setAttributes(btnEdit, {
         type: 'button',
         class: 'btn-menu btn-lists-edit',
-        'data-btn':`${name.title.replace(' ', '-').toLowerCase().trim()}`
+        'data-btn':`${list.title.replace(' ', '-').toLowerCase().trim()}`
     });
-    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-btn-edit" data-btn="${name.title.replace(' ', '-').toLowerCase().trim()}"><path data-btn="${name.title.replace(' ', '-').toLowerCase().trim()}" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg>`;
+    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-btn-edit" id="svg-${list.id}" data-btn="${list.title.replace(' ', '-').toLowerCase().trim()}"><path id="svg-${list.id}" data-btn="${list.title.replace(' ', '-').toLowerCase().trim()}" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg>`;
     
     const btnDelete = document.createElement('button');
     setAttributes(btnDelete, {
@@ -42,8 +45,7 @@ const listsBtn = (name) => {
 export const newListUi = () => {
     const section = selectNode('#side-section-lists');
 
-    const newListBtn = selectNode('#btn-new-list');
-    newListBtn.disabled = true;
+    btnNewListDisabled(true);
     
     const title = document.createElement('input');
     setAttributes(title, {
@@ -68,15 +70,38 @@ export const newListNameErrorUi = element => {
     }
 }
 export const editListUi = (event) => {
-    console.log(event.target.dataset.btn);
-    // if (event.target == path)
+
+    const data = event.target.dataset.btn;
+    const button = selectNode(`#btn-${data}`);
+    const li = selectNode(`#${data}`);
+
+    btnEditDisabled(event);
+    btnNewListDisabled(false);
+
+    const input = document.createElement('input');
+    const inputValue = button.textContent;
+    setAttributes(input, {
+        type: 'text',
+        id: 'edit-list-title',
+        class: 'edit-list-title',
+        name: 'edit-list-title'
+    });
+
+    input.value = inputValue;
+    li.replaceChild(input, button);
+    input.focus();
+
+    return [button, input];
+}
+
+const btnEditDisabled = event => {
+    
+    const svg = document.querySelector(`#${event.target.id}`);
+    svg.classList.add('svg-selected');
     
 
-    // const data = event.target.parentNode.parentNode.previousSibling;
-    // console.log(data);
-    // if (data) {
-    //     const input = selectNode(`#btn-${data}`);
-    //     console.log(input);
-
-    // }
+    const editBtns = selectNodes('.svg-btn-edit');
+    editBtns.forEach(btnEdit => btnEdit.removeEventListener('click', editList));
 }
+
+

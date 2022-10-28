@@ -27,6 +27,8 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
 
     itemTitles.forEach(title => {
         const listItem = document.createElement('li');
+        console.log(title.title);
+        listItem.id = `${title.title.replace(' ', '-').toLowerCase().trim()}`;
         listItem.classList.add(liClassName);
         const listItemContent = itemsType(title);
 

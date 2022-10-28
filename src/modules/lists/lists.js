@@ -1,5 +1,5 @@
 import { renderLists } from './lists-render';
-import { showList, saveNewList, saveNewListEnter, deleteList, editList } from './lists-handlers';
+import { showList, saveNewList, saveOnEnter, deleteList, editList, saveEditList } from './lists-handlers';
 import { List } from './list-class';
 import { selectNode, selectNodes } from '../helpers';
 
@@ -29,5 +29,12 @@ export const addListenerLists = () => {
 export const newListListeners = () => {
     const newTitle = selectNode('#new-list-title');
     newTitle.addEventListener('focusout', saveNewList);
-    newTitle.addEventListener('keyup', saveNewListEnter);
+    newTitle.addEventListener('keyup', saveOnEnter);
 }
+
+export const editListListeners = nodes => {
+    nodes[1].addEventListener('focusout', saveEditList.bind(this, nodes));
+    nodes[1].addEventListener('keyup', saveOnEnter);
+}
+
+
