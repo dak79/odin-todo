@@ -3,10 +3,11 @@
     grid-area: navbar;
     display: grid;
     grid:
-        [row1-start] "header" 1fr[row1-end] 
-        [row1-start] "menu" 2.5fr[row1-end] 
-        [row1-start] "lists" 2.5fr[row1-end] 
-        [row1-start] "footer" 1fr[row1-end] 
+        [row1-start] "header" 1fr [row1-end] 
+        [row2-start] "menu" 2fr [row2-end] 
+        [row3-start] "project" 0.5fr [row3-end]
+        [row4-start] "lists" 2fr [row4-end] 
+        [row5-start] "footer" 0.5fr [row5-end] 
         / 1fr;
 }
 
@@ -52,6 +53,14 @@ div svg {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.lists-title {
+    grid-area: project;
+    font-family: 'Montserrat-700', sans-serif;
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--slate-200);
 }
 
 .lists-items {

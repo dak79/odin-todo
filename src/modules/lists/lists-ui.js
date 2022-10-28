@@ -4,13 +4,12 @@ import { editList, deleteList } from './lists-handlers';
 import { btnNewListDisabled } from '../footer';
 
 export const listTitle = () => {
-    const wrapper = document.createElement('div');
     const title = document.createElement('h2');
     title.classList.add('lists-title');
+    title.textContent = 'Lists';
 
-    wrapper.appendChild(title);
 
-    return wrapper;
+    return title;
 }
 
 export const createProjectsUi = () => {

@@ -10,10 +10,11 @@ export const side = () => {
     })
     const header = sideHeader();
     const navbar = sideNavbar();
+    const projectsTitle = listTitle();
     const sectionList = sideSectionLists();
     const footer = sideFooter();
 
-    appendChildren(section, [header, navbar, sectionList, footer]);
+    appendChildren(section, [header, navbar, projectsTitle, sectionList, footer]);
     
     return section;
 }
@@ -65,10 +66,11 @@ const sideSectionLists = () => {
         class: 'side-section-lists',
         id: 'side-section-lists'
     })
-    const title = listTitle();
     const projects = createProjectsUi()
+
     
-    appendChildren(section, [title, projects])
+    section.appendChild(projects)
+    
     
     return section
 }
