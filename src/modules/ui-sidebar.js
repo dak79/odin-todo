@@ -1,5 +1,5 @@
 import { setAttributes, appendChildren, createList, navBtn } from './helpers';
-import { createProjectsUi } from './lists/lists-ui';
+import { createProjectsUi, listTitle } from './lists/lists-ui';
 import '../styles/sidebar.css';
 
 export const side = () => {
@@ -65,10 +65,11 @@ const sideSectionLists = () => {
         class: 'side-section-lists',
         id: 'side-section-lists'
     })
+    const title = listTitle();
     const projects = createProjectsUi()
-        
-    section.appendChild(projects);
-
+    
+    appendChildren(section, [title, projects])
+    
     return section
 }
 

@@ -1,7 +1,17 @@
 import { createList, selectNode, selectNodes, setAttributes, appendChildren } from '../helpers';
 import { lists } from './lists';
-import { editList } from './lists-handlers';
-import { btnNewListEnabled, btnNewListDisabled } from '../footer';
+import { editList, deleteList } from './lists-handlers';
+import { btnNewListDisabled } from '../footer';
+
+export const listTitle = () => {
+    const wrapper = document.createElement('div');
+    const title = document.createElement('h2');
+    title.classList.add('lists-title');
+
+    wrapper.appendChild(title);
+
+    return wrapper;
+}
 
 export const createProjectsUi = () => {
     const projects = createList(lists, listsBtn, 'lists', 'lists-items');
@@ -35,7 +45,7 @@ const listsBtn = (list) => {
         type: 'button',
         class: 'btn-menu btn-lists-delete'
     });
-    btnDelete.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-btn-delete"><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>';
+    btnDelete.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-number="${list.id}" class="svg-btn-delete"><path data-number="${list.id}" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>`;
 
     appendChildren(wrapper, [btnEdit, btnDelete]);
    
@@ -76,6 +86,7 @@ export const editListUi = (event) => {
     const li = selectNode(`#${data}`);
 
     btnEditDisabled(event);
+    btnDeleteDisabled();
     btnNewListDisabled(false);
 
     const input = document.createElement('input');
@@ -102,6 +113,11 @@ const btnEditDisabled = event => {
 
     const editBtns = selectNodes('.svg-btn-edit');
     editBtns.forEach(btnEdit => btnEdit.removeEventListener('click', editList));
+}
+
+const btnDeleteDisabled = () => {
+    const deleteBtns = selectNodes('.svg-btn-delete')
+    deleteBtns.forEach(btnDelete => btnDelete.removeEventListener('click', deleteList));
 }
 
 

@@ -15,9 +15,8 @@ export const MixCrud = superclass => class extends superclass {
         return (key in property) ? property[key] = value : false;
     }
 
-    delete(array) {
-        const task = this.find(array);
-        const index = array.indexOf(task);
+    delete(array, id) {    
+        const index = array.indexOf(id);
         array.splice(index, 1);
     }
 }

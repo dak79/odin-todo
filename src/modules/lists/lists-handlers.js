@@ -3,7 +3,7 @@ import { List } from './list-class';
 import { lists, newListListeners, addListenerLists, editListListeners } from './lists';
 import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
-import { btnNewListEnabled, btnNewListDisabled } from '../footer';
+import { btnNewListEnabled } from '../footer';
 
 
 export const addNewList = () => {
@@ -75,8 +75,15 @@ export const saveEditList = nodes => {
 
 }
 
-export const deleteList = () => {
-    console.log('DELETE THIS LIST');
+export const deleteList = (event) => {
+    event.stopPropagation();
+    const data = event.target.dataset.number;
+    const deleteAgent = new List('Delete');
+    const itemToDelete = deleteAgent.findId(lists, Number(data));
+
+    deleteAgent.delete(lists, itemToDelete);
+    renderLists();
+    addListenerLists();
 }
 
 export const showList = () => {
