@@ -16,11 +16,24 @@ export const addNewList = () => {
 
 export const saveNewList = () => {
     const content = selectNode('#new-list-title');
+    console.log(content.value, typeof content.value);
+
+    if (content.value === '') {
+        renderLists();
+        return false;
+    }
+
     const newList = new List(String(content.value));
-    newList.add(lists);
-    
-    renderLists();
-    addListenerLists();
+    const n = newList.findName(lists);
+
+    if (n !== undefined && n.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
+        content.value = 'Already exists';
+        content.focus();
+    } else {
+        newList.add(lists);
+        renderLists();
+        addListenerLists();
+    }
 }
 
 export const saveNewListEnter = (event) => {
