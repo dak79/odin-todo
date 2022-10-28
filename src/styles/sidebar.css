@@ -113,7 +113,7 @@ button svg {
 }
 
 div svg {
-    fill: var(--slate-200);
+    fill: var(--amber-500);
 }
 .btn-menu,
 .btn-lists {
@@ -151,6 +151,11 @@ button svg:hover {
     line-height: 1rem;
 }
 
+.new-lists-error {
+    color: var(--amber-500);
+    background-color: var(--slate-300);
+}
+
 .btn-footer {
     font-family: 'Montserrat', sans-serif;
     color: var(--slate-700);
@@ -162,7 +167,10 @@ button svg:hover {
     border-radius: 15px;
 }
 
-.btn-footer:active {
+.btn-footer:active,
+.btn-footer:disabled {
+    color: var(--amber-500);
+    background-color: var(--slate-300);
     transform: translateY(5px);
     box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4);
 }

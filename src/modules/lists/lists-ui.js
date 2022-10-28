@@ -41,6 +41,10 @@ const listsBtn = (name) => {
 
 export const newListUi = () => {
     const section = selectNode('#side-section-lists');
+
+    const newListBtn = selectNode('#btn-new-list');
+    newListBtn.disabled = true;
+    
     const title = document.createElement('input');
     setAttributes(title, {
         type: 'text',
@@ -48,9 +52,21 @@ export const newListUi = () => {
         class: 'new-list-title',
         name: 'new-list-title'
     });
+
     section.appendChild(title);
 }
 
+export const newListNameErrorUi = element => {
+    element.value = 'Already exists';
+    element.classList.add('new-lists-error');
+    element.addEventListener('keydown', cancelText)
+
+    function cancelText () {
+        element.value = '';
+        element.removeEventListener('keydown', cancelText);
+        element.classList.remove('new-lists-error');
+    }
+}
 export const editListUi = (event) => {
     console.log(event.target.dataset.btn);
     // if (event.target == path)

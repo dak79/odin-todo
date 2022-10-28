@@ -1,7 +1,7 @@
 import { selectNode } from '../helpers';
 import { List } from './list-class';
 import { lists, newListListeners, addListenerLists } from './lists';
-import { editListUi, newListUi } from './lists-ui';
+import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
 
 
@@ -16,7 +16,6 @@ export const addNewList = () => {
 
 export const saveNewList = () => {
     const content = selectNode('#new-list-title');
-    console.log(content.value, typeof content.value);
 
     if (content.value === '') {
         renderLists();
@@ -27,13 +26,17 @@ export const saveNewList = () => {
     const n = newList.findName(lists);
 
     if (n !== undefined && n.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
-        content.value = 'Already exists';
+        newListNameErrorUi(content);
         content.focus();
     } else {
+        const newListBtn = selectNode('#btn-new-list');
+        newListBtn.disabled = false;
+        
         newList.add(lists);
         renderLists();
         addListenerLists();
     }
+
 }
 
 export const saveNewListEnter = (event) => {
