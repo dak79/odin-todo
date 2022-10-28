@@ -1,5 +1,6 @@
 import { setAttributes, appendChildren, createList, navBtn } from './helpers';
 import { createProjectsUi } from './lists/lists-ui';
+import '../styles/sidebar.css';
 
 export const side = () => {
     const section = document.createElement('section');
