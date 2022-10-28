@@ -3,8 +3,8 @@
     grid-area: navbar;
     display: grid;
     grid:
-        [row1-start] "header" 1fr [row1-end] 
-        [row2-start] "menu" 2fr [row2-end] 
+        [row1-start] "header" 0.5fr [row1-end] 
+        [row2-start] "menu" 1.5fr [row2-end] 
         [row3-start] "project" 0.5fr [row3-end]
         [row4-start] "lists" 2fr [row4-end] 
         [row5-start] "footer" 0.5fr [row5-end] 
