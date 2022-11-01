@@ -53,14 +53,17 @@ div svg {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 
 .lists-title {
     grid-area: project;
     font-family: 'Montserrat-700', sans-serif;
-    text-align: center;
     font-size: 2.5rem;
     color: var(--slate-200);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .lists-items {

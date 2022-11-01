@@ -1,6 +1,6 @@
 import { selectNode } from '../helpers';
-import { List } from './list-class';
-import { lists, newListListeners, addListenerLists, editListListeners } from './lists';
+import { List, lists } from './list-class';
+import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
 import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
 import { btnNewListEnabled } from '../footer';

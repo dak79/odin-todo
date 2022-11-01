@@ -1,5 +1,5 @@
 import { createList, selectNode, selectNodes, setAttributes, appendChildren } from '../helpers';
-import { lists } from './lists';
+import { lists } from './list-class';
 import { editList, deleteList } from './lists-handlers';
 import { btnNewListDisabled } from '../footer';
 
