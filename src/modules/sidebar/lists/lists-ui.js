@@ -1,5 +1,5 @@
 import { createList, cleanNode, selectNode, selectNodes, setAttributes, appendChildren } from '../../helpers';
-import { lists } from './lists';
+import { defaultList, lists } from './lists';
 import { addNewList, editList, deleteList } from './lists-handlers';
 
 export const renderLists = () => {
@@ -120,7 +120,7 @@ export const editListUi = (event) => {
 
     btnEditDisabled(event);
     btnDeleteDisabled();
-    btnNewListDisabled(false);
+    btnNewListDisabled();
 
     const input = document.createElement('input');
     const inputValue = button.textContent;

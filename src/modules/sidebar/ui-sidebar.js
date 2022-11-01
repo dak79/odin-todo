@@ -11,7 +11,7 @@ export const side = () => {
     const navbar = sideNavbar();
     const sectionList = sideSectionLists();
     const footer = sideFooter();
-
+    
     appendChildren(section, [header, navbar, sectionList, footer]);
     
     return section;
