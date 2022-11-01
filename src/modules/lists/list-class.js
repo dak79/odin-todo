@@ -18,6 +18,3 @@ export class List extends MixCrud(ListProperty) {
         super(...args);
     }
 }
-
-// Lists database
-export const lists = [];

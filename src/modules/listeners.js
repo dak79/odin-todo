@@ -1,10 +1,7 @@
 import { addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './handlers';
-import { addNewList } from './lists/lists-handlers';
 import { selectNode } from './helpers';
 
 export const mainPageListeners = () => {
-     const btnNewList = selectNode('#btn-new-list');
-     btnNewList.addEventListener('click', addNewList);
      
      const btnNewTask = selectNode('#btn-new-task');
      btnNewTask.addEventListener('click', addNewTask);

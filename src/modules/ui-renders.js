@@ -1,5 +1,5 @@
 import { appendChildren } from './helpers';
-import { side } from './ui-sidebar';
+import { side } from './sidebar/ui-sidebar';
 import { floor } from './ui-desk';
 
 export const renderPage = () => {

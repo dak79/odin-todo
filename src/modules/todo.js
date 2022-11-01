@@ -1,6 +1,6 @@
 import { renderPage } from './ui-renders';
 import { Task } from './classes';
-import { defaultList } from './lists/default-lists';
+import { defaultList } from './lists/lists';
 import { mainPageListeners } from './listeners';
 
 const inbox = [];

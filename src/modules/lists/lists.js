@@ -1,6 +1,9 @@
-import { List, lists } from './list-class';
-import { renderLists } from './lists-render';
+import { List } from './list-class';
+import { renderLists } from './lists-ui';
 import { addListenerLists } from './lists-listeners';
+
+// Lists database
+export const lists = [];
 
 export const defaultList = () => {
     const life = new List('Life');

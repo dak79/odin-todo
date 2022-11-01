@@ -1,6 +1,5 @@
-import { setAttributes, appendChildren, createList, navBtn } from './helpers';
-import { createProjectsUi, listTitle } from './lists/lists-ui';
-import '../styles/sidebar.css';
+import { setAttributes, appendChildren, createList, navBtn } from '../helpers';
+import '../../styles/sidebar.css';
 
 export const side = () => {
     const section = document.createElement('section');
@@ -10,11 +9,10 @@ export const side = () => {
     })
     const header = sideHeader();
     const navbar = sideNavbar();
-    const projectsTitle = listTitle();
     const sectionList = sideSectionLists();
     const footer = sideFooter();
 
-    appendChildren(section, [header, navbar, projectsTitle, sectionList, footer]);
+    appendChildren(section, [header, navbar, sectionList, footer]);
     
     return section;
 }
@@ -66,11 +64,6 @@ const sideSectionLists = () => {
         class: 'side-section-lists',
         id: 'side-section-lists'
     })
-    const projects = createProjectsUi()
-
-    
-    section.appendChild(projects)
-    
     
     return section
 }
@@ -78,24 +71,11 @@ const sideSectionLists = () => {
 const sideFooter = () => {
     const footer = document.createElement('footer');
     footer.classList.add('side-footer');
-    const btnNewList = createBtnNewList();
    
     const btnNewTask = createBtnNewTask();
 
-    appendChildren(footer, [btnNewList, btnNewTask]);
+    appendChildren(footer, [btnNewTask]);
     return footer;
-}
-
-const createBtnNewList = () => {
-    const btnNewList = document.createElement('button');
-    setAttributes(btnNewList, {
-        type: 'button',
-        id: 'btn-new-list',
-        class: 'btn-footer'
-    });
-    btnNewList.textContent = '+ New List';
-
-    return btnNewList; 
 }
 
 const createBtnNewTask = () => {

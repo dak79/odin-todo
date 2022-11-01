@@ -1,24 +1,28 @@
 import { selectNode } from '../helpers';
-import { List, lists } from './list-class';
+import { lists } from './lists';
+import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
-import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
-import { renderLists } from './lists-render';
-import { btnNewListEnabled } from '../footer';
+import { renderLists, editListUi, newListUi, newListNameErrorUi } from './lists-ui';
 
 
-export const addNewList = () => {
-    newListUi();
+export const addNewList = event => {
+    newListUi(event);
     
     const newField = selectNode('#new-list-title');
     newField.focus();
 
-    newListListeners();
+    newListListeners(newField);
 }
 
 const checkListName = node => {
     if (node.value === '') {
         renderLists();
         return false;
+    }
+
+    if (!/^[A-Za-z0-9]*$/.test(String(node.value))) {
+        renderLists();
+        return false
     }
 
     const newList = new List(String(node.value));
@@ -33,18 +37,15 @@ const checkListName = node => {
     return newList
 }
 
-export const saveNewList = () => {
-    const input = selectNode('#new-list-title');
-    
+export const saveNewList = input => {
+   
     const newList = checkListName(input);
+    
     if (newList) {
-        btnNewListEnabled(true);
         
         newList.add(lists);
         renderLists();
         addListenerLists();
-    } else {
-        btnNewListEnabled(true);
     }
 
 }
@@ -70,7 +71,8 @@ export const saveEditList = nodes => {
         newTitle.update(index, 'title', String(nodes[1].value))
         renderLists();
         addListenerLists();
-        btnNewListEnabled(false);
+    } else {
+        addListenerLists();
     }
 
 }
