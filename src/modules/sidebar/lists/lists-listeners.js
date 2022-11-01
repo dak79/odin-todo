@@ -1,5 +1,5 @@
 import { showList, saveNewList, saveOnEnter, deleteList, editList, saveEditList } from './lists-handlers';
-import { selectNodes } from '../helpers';
+import { selectNodes } from '../../helpers';
 
 export const addListenerLists = () => {
     const projects = selectNodes('.btn-lists');

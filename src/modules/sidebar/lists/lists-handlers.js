@@ -1,4 +1,4 @@
-import { selectNode } from '../helpers';
+import { selectNode } from '../../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
