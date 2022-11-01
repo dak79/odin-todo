@@ -1,4 +1,4 @@
-import { setAttributes, appendChildren, createList, navBtn } from '../helpers';
+import { setAttributes, appendChildren } from '../helpers';
 import '../../styles/sidebar.css';
 
 export const side = () => {
@@ -45,17 +45,12 @@ const createTitle = () => {
 
 const sideNavbar = () => {
     const nav = document.createElement('nav');
-    nav.classList.add('side-navbar');
-    const menu = createMenu();
+    setAttributes(nav, {
+        class: 'side-navbar',
+        id: 'side-navbar'
+    })
 
-    nav.appendChild(menu);
     return nav;
-}
-
-const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], navBtn, 'menu', 'menu-items');
-
-    return menu;
 }
 
 const sideSectionLists = () => {

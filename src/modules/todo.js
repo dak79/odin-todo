@@ -1,15 +1,14 @@
 import { renderPage } from './ui-renders';
 import { Task } from './classes';
-import { defaultList } from './sidebar/lists/lists';
-import { mainPageListeners } from './listeners';
+
+
 
 const inbox = [];
 
 export const loadPage = () => {
     renderPage();
-    defaultList();
     exampleTasks();
-    mainPageListeners();  
+    
 }
 
 const exampleTasks = () => {
