@@ -1,16 +1,8 @@
-import { createList, cleanNode, selectNode, selectNodes, setAttributes, appendChildren } from '../../helpers';
-import { defaultList, lists } from './lists';
+import { createList, selectNode, selectNodes, setAttributes, appendChildren } from '../../helpers';
+import { lists } from './lists';
 import { addNewList, editList, deleteList } from './lists-handlers';
 
-export const renderLists = () => {
-    const section = selectNode('#side-section-lists');
-    const displayHeader = listHeader();
-    const displayLists = createListsUi();
-    cleanNode(section);
-    appendChildren(section, [displayHeader, displayLists]);
-}
-
-const listHeader = () => {
+export const listHeader = () => {
     const header = document.createElement('header');
     header.classList.add('lists-header');
     const title = listsTitle();
@@ -43,7 +35,7 @@ const newListBtnUi = () => {
 
 }
 
-const createListsUi = () => {
+export const createListsUi = () => {
     const projects = createList(lists, listsBtn, 'lists', 'lists-items');
     return projects;
 }
@@ -112,6 +104,7 @@ export const newListNameErrorUi = element => {
         element.classList.remove('new-lists-error');
     }
 }
+
 export const editListUi = (event) => {
 
     const data = event.target.dataset.btn;

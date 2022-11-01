@@ -1,5 +1,5 @@
 import { List } from './list-class';
-import { renderLists } from './lists-ui';
+import { renderLists } from './lists-render';
 import { addListenerLists } from './lists-listeners';
 
 // Lists database

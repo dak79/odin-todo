@@ -2,7 +2,8 @@ import { selectNode } from '../../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
-import { renderLists, editListUi, newListUi, newListNameErrorUi } from './lists-ui';
+import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
+import { renderLists } from './lists-render';
 
 
 export const addNewList = event => {
