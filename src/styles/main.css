@@ -76,30 +76,3 @@
 .desk {
     background-color: var(--slate-200);
 }
-
-.btn {
-    font-family: 'Montserrat-700', sans-serif;
-    color: var(--slate-700);
-    background-color: var(--slate-200);
-    font-size: 2rem;
-    font-weight: 700;
-    box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
-    border: none;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-}
-
-.btn:hover {
-    color: var(--amber-500);
-    cursor: pointer;
-    box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4);
-}
-
-.btn:active {
-    color: var(--amber-500);
-    background-color: var(--slate-300);
-    transform: translateY(5px);
-}
-
-

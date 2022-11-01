@@ -10,7 +10,6 @@ export const side = () => {
     const header = sideHeader();
     const navbar = sideNavbar();
     const sectionList = sideSectionLists();
-    // const footer = sideFooter();
     
     appendChildren(section, [header, navbar, sectionList]);
     
@@ -46,25 +45,3 @@ const sideSectionLists = () => {
     
     return section
 }
-
-// const sideFooter = () => {
-//     const footer = document.createElement('footer');
-//     footer.classList.add('side-footer');
-   
-//     const btnNewTask = createBtnNewTask();
-
-//     appendChildren(footer, [btnNewTask]);
-//     return footer;
-// }
-
-// const createBtnNewTask = () => {
-//     const btnNewTask = document.createElement('button');
-//     setAttributes(btnNewTask, {
-//         type: 'button',
-//         id: 'btn-new-task',
-//         class: 'btn-footer'
-//     })
-//     btnNewTask.textContent = '+ New Task';
-
-//     return btnNewTask;
-// }

@@ -39,25 +39,7 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
     return list;
 }
 
-/**
- * SideBar Buttons
- * @param { Object } name - Button text content
- * @returns { Node } A button
- */
-export const navBtn = (name) => {
-    const btn = document.createElement('button');
-    setAttributes(btn, {
-        type: 'button',
-        id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
-        class: 'btn-menu'
-    });
-    btn.textContent = name.title;
-
-    return [btn];
-}
-
 export const selectNode = selector => document.querySelector(selector);
 export const selectNodes = selector => document.querySelectorAll(selector);
-
 export const cleanNode = node => node.replaceChildren();
 
