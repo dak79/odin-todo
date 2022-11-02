@@ -129,7 +129,7 @@ button svg {
     color: var(--slate-200);
 }
 
-div svg {
+div#side-header-logo svg {
     fill: var(--amber-500);
 }
 
