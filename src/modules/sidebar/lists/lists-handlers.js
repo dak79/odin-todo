@@ -60,8 +60,6 @@ export const editList = (event) => {
 
 export const saveEditList = nodes => {
     const newTitle = checkListName(nodes[1]);
-    console.log(newTitle);
-    console.log(nodes[0])
     
     if (newTitle) {
         const index = newTitle.findId(lists, Number(nodes[0].dataset.number));
@@ -71,7 +69,6 @@ export const saveEditList = nodes => {
     } else {
         addListenerLists();
     }
-
 }
 
 export const deleteList = (event) => {

@@ -107,11 +107,15 @@
     grid-area: 1 / 1 / 1 / span 2;
 }
 
-.new-list-title,
 .edit-list-title {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.new-list-title {
     width: 80%;
-    height: 20%;
-    padding: 1rem;
+    height: 10%;
+    padding: 0.5rem 1rem;
 }
 
 .btn-lists-edit,
