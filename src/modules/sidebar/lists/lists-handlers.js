@@ -1,8 +1,8 @@
-import { selectNode } from '../../helpers';
+import { selectNode, selectNodes } from '../../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
-import { editListUi, newListNameErrorUi } from './lists-ui';
+import { newListUi, editListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
 
 
@@ -39,16 +39,15 @@ const checkListName = node => {
 }
 
 export const saveNewList = input => {
-   
     const newList = checkListName(input);
     
     if (newList) {
-        
         newList.add(lists);
         renderLists();
         addListenerLists();
+    } else {
+        addListenerLists();
     }
-
 }
 
 export const saveOnEnter = (event) => {
@@ -78,10 +77,6 @@ export const saveEditList = nodes => {
 
 }
 
-const btnEditPressed = event => {
-    console.log(event.target)
-}
-
 export const deleteList = (event) => {
     event.stopPropagation();
     const data = event.target.dataset.number;
@@ -93,7 +88,8 @@ export const deleteList = (event) => {
     addListenerLists();
 }
 
-export const showList = () => {
+export const showList = event => {
+    
    
     console.log('CLICK SHOW LIST');
 }

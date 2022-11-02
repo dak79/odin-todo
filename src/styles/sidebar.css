@@ -181,10 +181,6 @@ button.btn-lists svg:hover {
     fill: var(--amber-500);
 }
 
-svg.active {
-    fill: red;
-}
-
 .new-list-title,
 .edit-list-title {
     background-color: var(--slate-200);
@@ -208,8 +204,4 @@ svg.active {
 .new-lists-error {
     color: var(--amber-500);
     background-color: var(--slate-300);
-}
-
-.svg-selected {
-    fill: var(--amber-500);
 }
