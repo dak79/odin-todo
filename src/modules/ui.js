@@ -1,6 +1,6 @@
 import { appendChildren } from './helpers';
 import { side } from './sidebar/ui-sidebar';
-import { floor } from './ui-desk';
+import { floor } from './desk/ui-desk';
 
 export const createMain = () => {
     const root = document.querySelector('#root');

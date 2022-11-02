@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { MixCrud } from './class-mixin'
+import { MixCrud } from '../../class-mixin';
 
 class TaskProperty {
     static #id = 0;

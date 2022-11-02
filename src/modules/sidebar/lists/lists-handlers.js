@@ -2,12 +2,12 @@ import { selectNode } from '../../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
-import { editListUi, newListUi, newListNameErrorUi } from './lists-ui';
+import { editListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
 
 
 export const addNewList = event => {
-    newListUi(event);
+        newListUi(event);
     
     const newField = selectNode('#new-list-title');
     newField.focus();
