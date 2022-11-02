@@ -21,11 +21,6 @@ const checkListName = node => {
         return false;
     }
 
-    if (!/^[A-Za-z0-9]*$/.test(String(node.value))) {
-        renderLists();
-        return false
-    }
-
     const newList = new List(String(node.value));
     const listsTitles = newList.findName(lists);
 
@@ -59,15 +54,17 @@ export const saveOnEnter = (event) => {
 
 export const editList = (event) => {
     event.stopPropagation();
-    const involvedNodes = editListUi(event);
-    editListListeners(involvedNodes);
+    const nodes = editListUi(event);
+    editListListeners(nodes);
 }
 
 export const saveEditList = nodes => {
     const newTitle = checkListName(nodes[1]);
+    console.log(newTitle);
+    console.log(nodes[0])
     
     if (newTitle) {
-        const index = newTitle.findId(lists, Number(nodes[0].dataset.listId));
+        const index = newTitle.findId(lists, Number(nodes[0].dataset.number));
         newTitle.update(index, 'title', String(nodes[1].value))
         renderLists();
         addListenerLists();
@@ -79,9 +76,10 @@ export const saveEditList = nodes => {
 
 export const deleteList = (event) => {
     event.stopPropagation();
-    const data = event.target.dataset.number;
+    const listToDelete = event.target.dataset.number;
+
     const deleteAgent = new List('Delete');
-    const itemToDelete = deleteAgent.findId(lists, Number(data));
+    const itemToDelete = deleteAgent.findId(lists, Number(listToDelete));
 
     deleteAgent.delete(lists, itemToDelete);
     renderLists();
@@ -89,7 +87,7 @@ export const deleteList = (event) => {
 }
 
 export const showList = event => {
-    
+    event.stopPropagation();
    
     console.log('CLICK SHOW LIST');
 }

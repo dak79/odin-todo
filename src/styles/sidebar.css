@@ -35,11 +35,6 @@
     grid-area: title;
 }
 
-div svg {
-    height: 6rem;
-    width: 6rem;
-    margin: 1rem 0 1rem 1rem;
-}
 
 .menu, 
 .lists {
@@ -51,7 +46,7 @@ div svg {
 }
 
 .menu {
-    gap: 10px;
+    gap: 20px;
 }
 
 .side-navbar {
@@ -84,7 +79,7 @@ div svg {
     color: var(--slate-200);
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .lists-items {
@@ -94,6 +89,7 @@ div svg {
         / 2fr 1fr;
     justify-items: center;
     align-items: center;
+    gap: 2rem;
 }
 
 .btn-lists {
@@ -102,11 +98,13 @@ div svg {
 
 .btns-lists {
     grid-area: btns;
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
 }
 
-button svg {
-    width: 2rem;
-    height: 2rem;
+.edit-list-title {
+    grid-area: 1 / 1 / 1 / span 2;
 }
 
 .new-list-title,
@@ -114,6 +112,17 @@ button svg {
     width: 80%;
     height: 20%;
     padding: 1rem;
+}
+
+.btn-lists-edit,
+.btn-lists-delete {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+}
+
+.btn-lists-edit {
+    margin-right: 1rem;
 }
 
 /* STYLE */
@@ -173,11 +182,20 @@ div#side-header-logo svg {
     box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
 }
 
-button.btn-lists svg {
+.btn-lists-edit,
+.btn-lists-delete {
+    background-color: var(--slate-700);
+    border: none;
+    cursor: pointer;
+}
+
+button.btn-lists-edit svg,
+button.btn-lists-delete svg {
     fill: var(--slate-200);
 }
 
-button.btn-lists svg:hover {
+button.btn-lists-edit svg:hover,
+button.btn-lists-delete svg:hover {
     fill: var(--amber-500);
 }
 

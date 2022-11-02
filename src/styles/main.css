@@ -67,12 +67,3 @@
     height: 100vh;
     width: 100vw;
 }
-
-.desk {
-    grid-area: desk;
-}
-
-/* STYLE */
-.desk {
-    background-color: var(--slate-200);
-}

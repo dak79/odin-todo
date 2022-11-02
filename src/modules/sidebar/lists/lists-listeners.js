@@ -5,10 +5,10 @@ export const addListenerLists = () => {
     const projects = selectNodes('.btn-lists');
     projects.forEach(project => project.addEventListener('click', showList))
 
-    const deleteProjects = selectNodes('.svg-btn-delete')
+    const deleteProjects = selectNodes('.svg-btns-delete')
     deleteProjects.forEach(btnDelete => btnDelete.addEventListener('click', deleteList));
     
-    const editProject = selectNodes('.svg-btn-edit');
+    const editProject = selectNodes('.svg-btns-edit');
     editProject.forEach(btnEdit => btnEdit.addEventListener('click', editList));
 }
 

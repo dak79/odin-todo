@@ -21,14 +21,14 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
  * @param { String } className - Ul class
  * @returns { Node } An unordered list
  */
- export const createList = (itemTitles, itemsType, ulClassName, liClassName) => {
+ export const createList = (itemTitles, itemsType, ulClassName, liIdPrefix, liClassName) => {
     const list = document.createElement('ul');
     list.classList.add(ulClassName);
     
     itemTitles.forEach(title => {
         const listItem = document.createElement('li');
 
-        listItem.id = `${title.title.replaceAll(' ', '-').toLowerCase().trim()}`;
+        listItem.id = `list-item-${liIdPrefix}-${title.id}`;
         listItem.classList.add(liClassName);
         const listItemContent = itemsType(title);
 

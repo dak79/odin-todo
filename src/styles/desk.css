@@ -1,0 +1,70 @@
+/* LAYOUT */
+.desk {
+    grid-area: desk;
+}
+
+.task-item {
+    display: grid;
+    grid: 
+        [row1-start] "check due-date btns" 1fr [row1-end]
+        / 2fr 2fr 1fr;
+    gap: 10px;
+    align-items: center;
+    margin: 1rem;
+
+}
+
+.checkbox-wrapper {
+    grid-area: check;
+    display: grid;
+    grid: 
+        [row1-start] "check label expand" 1fr [row1-end]
+        /1fr 2fr 1fr;
+    align-items: center;
+}
+
+.checkbox-wrapper button {
+    place-self: start;
+}
+
+.expand-btn {
+    display: flex;
+    justify-content: start;
+    background-color: var(--slate-700);
+}
+
+.svg-expand {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--slate-200);
+    font-size: 2rem;
+}
+
+.svg-expand:hover{
+    fill: var(--amber-500);
+    cursor: pointer;
+}
+
+
+
+.task-due-date {
+    grid-area: due-date;
+}
+
+.task-btn-wrapper {
+    grid-area: btns;
+}
+
+/* STYLE */
+.desk {
+    background-color: var(--slate-200);
+}
+
+.task-item {
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--slate-200);
+    background-color: var(--slate-700);
+    border-radius: 15px;
+
+}
