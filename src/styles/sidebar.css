@@ -173,12 +173,16 @@ div svg {
     box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
 }
 
-button svg {
+button.btn-lists svg {
     fill: var(--slate-200);
 }
 
-button svg:hover {
+button.btn-lists svg:hover {
     fill: var(--amber-500);
+}
+
+svg.active {
+    fill: red;
 }
 
 .new-list-title,

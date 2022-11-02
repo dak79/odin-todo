@@ -78,6 +78,10 @@ export const saveEditList = nodes => {
 
 }
 
+const btnEditPressed = event => {
+    console.log(event.target)
+}
+
 export const deleteList = (event) => {
     event.stopPropagation();
     const data = event.target.dataset.number;

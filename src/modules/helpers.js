@@ -24,11 +24,11 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
  export const createList = (itemTitles, itemsType, ulClassName, liClassName) => {
     const list = document.createElement('ul');
     list.classList.add(ulClassName);
-
+    
     itemTitles.forEach(title => {
         const listItem = document.createElement('li');
 
-        listItem.id = `${title.title.replace(' ', '-').toLowerCase().trim()}`;
+        listItem.id = `${title.title.replaceAll(' ', '-').toLowerCase().trim()}`;
         listItem.classList.add(liClassName);
         const listItemContent = itemsType(title);
 

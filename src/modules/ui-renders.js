@@ -3,6 +3,7 @@ import { renderHeader } from './sidebar/header/header-render';
 import { defaultList } from './sidebar/lists/lists';
 import { renderLists } from './sidebar/lists/lists-render';
 import { renderMenu } from './sidebar/menu/menu-ui';
+import { tasksRender } from './desk/task/tasks-render';
 
 export const renderPage = () => {
     
@@ -11,4 +12,5 @@ export const renderPage = () => {
     renderMenu();
     renderLists();
     defaultList();
+    tasksRender();
 }
