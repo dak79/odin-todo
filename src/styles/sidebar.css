@@ -145,6 +145,9 @@
 
 div#side-header-logo svg {
     fill: var(--amber-500);
+    width: 7rem;
+    height: 7rem;
+    padding: 1rem;;
 }
 
 .btn-menu,

@@ -3,7 +3,7 @@ import { tasks } from './tasks';
 
 
 export const createTasksUi = () => {
-    const todoes = createList(tasks, taskItem, 'tasks', 'task-item');
+    const todoes = createList(tasks, taskItem, 'tasks', 'task', 'task-item');
 
     return todoes
 }
