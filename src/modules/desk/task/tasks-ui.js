@@ -1,8 +1,8 @@
 import { appendChildren, createList, setAttributes, formatDate } from '../../helpers';
 import { tasks } from './tasks';
 
-export const createTasksUi = () => {
-    const todoes = createList(tasks, taskItem, 'tasks', 'task', 'task-item');
+export const createTasksUi = array => {
+    const todoes = createList(array, taskItem, 'tasks', 'task', 'task-item');
 
     return todoes
 }

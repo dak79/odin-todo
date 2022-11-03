@@ -17,13 +17,13 @@ export const exampleTasks = () => {
     todoThree.add(tasks);
     todoFour.add(tasks);
     orderTaskByDate(tasks);
-    tasksRender();
+    tasksRender(tasks);
     addTaskListeners();
-    console.log(tasks)
 }
 
 const orderTaskByDate = array => array.sort((firstDate, secondDate) => {
     
     return (firstDate.dueDate !== null ? firstDate.dueDate : Infinity) - (secondDate.dueDate !== null ? secondDate.dueDate : Infinity)
 })
+
 

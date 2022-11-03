@@ -50,3 +50,9 @@ export const formatDate = date => {
 
     return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${String(year)}`
 }
+
+export const filterTodayTask = array => {
+    const today = new Date();
+    
+    return array.filter(item => item.dueDate.toLocaleDateString() === today.toLocaleDateString())
+}

@@ -1,6 +1,5 @@
 import { selectNode, cleanNode } from '../../helpers';
-import { tasksRender } from '../../desk/task/tasks-render';
-import { addTaskListeners } from '../../desk/task/task-listeners';
+import { renderInbox, renderToday } from './menu-render';
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');
 }
@@ -8,16 +7,15 @@ export const addNewTask = () => {
 export const showInbox = () => {
     const desk = selectNode('#desk');
     cleanNode(desk);
-    tasksRender();
-    addTaskListeners();
-
-    console.log('CLICK SHOW INBOX');
+    renderInbox();
 }
+
 export const showToday = () => {
     const desk = selectNode('#desk');
     cleanNode(desk);
-    console.log('CLICK SHOW TODAY');
+    renderToday();
 }
+
 export const showThisWeek = () => {
     const desk = selectNode('#desk');
     cleanNode(desk);
