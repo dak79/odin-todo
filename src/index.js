@@ -1,4 +1,5 @@
-import { loadPage } from './modules/todo';
 import './styles/main.css';
 
-loadPage();
+import('./modules/ui-renders').then((module) => {
+    module.renderPage();
+})

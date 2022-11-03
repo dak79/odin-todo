@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -11,7 +12,7 @@ module.exports = {
     }, 
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: '[name].bundle.js'
+        filename: 'bundles/[name].bundle.js'
     },
     module: {
         rules: [
@@ -45,13 +46,16 @@ module.exports = {
             },
             {
                 test: /.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                sideEffects: true
             }
         ]
     },
     optimization: {
+        minimize: true,
         minimizer: [
-            new CssMinimizerPlugin()
+            new CssMinimizerPlugin(),
+            new TerserWebpackPlugin()
         ]
     },
     plugins: [
@@ -62,7 +66,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'styles/[name].css'
+            filename: 'styles/[name].min.css'
         }),
         new FaviconsWebpackPlugin({
             logo: './src/assets/icons/logo.svg',

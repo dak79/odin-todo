@@ -1,5 +1,4 @@
 import { setAttributes, appendChildren } from '../helpers';
-import '../../styles/sidebar.css';
 
 export const side = () => {
     const section = document.createElement('section');

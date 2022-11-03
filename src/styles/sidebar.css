@@ -1,4 +1,4 @@
-/* LAYOUT */
+/* NavBar */
 .navbar {
     grid-area: navbar;
     display: grid;
@@ -8,8 +8,12 @@
         [row4-start] "lists" 2.5fr [row4-end] 
         / 1fr;
     gap: 20px;
+    background-color: var(--slate-700);
+    font-family: 'Montserrat-700', sans-serif;
+    color: var(--slate-200);
 }
 
+/* NavBar Header */
 .side-header {
     grid-area: header;
     display: grid;
@@ -20,35 +24,28 @@
     align-items: center;
 }
 
-#side-header-logo {
+.side-title {
+    grid-area: title;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-left: 0.5rem;
+}
+
+div#side-header-logo {
     grid-area: logo;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#btn-new-task {
-    grid-area: btn;
+div#side-header-logo svg {
+    fill: var(--amber-500);
+    width: 7rem;
+    height: 7rem;
+    padding: 1rem;;
 }
 
-#side-header-title {
-    grid-area: title;
-}
-
-
-.menu, 
-.lists {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.menu {
-    gap: 20px;
-}
-
+/* Menu and lists */
 .side-navbar {
     grid-area: menu;
 }
@@ -61,6 +58,16 @@
     gap: 20px;
 }
 
+.menu, 
+.lists {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .lists-header {
     display: grid;
     grid: 
@@ -68,13 +75,8 @@
         / 1fr 2fr;
 }
 
-#btn-new-list {
-    grid-area: btn;
-}
-
 .lists-title {
     grid-area: title;
-    font-family: 'Montserrat-700', sans-serif;
     font-size: 2.5rem;
     color: var(--slate-200);
     display: flex;
@@ -93,10 +95,7 @@
     width: 100%;
 }
 
-.btn-lists {
-    grid-area: title;
-}
-
+/* Buttons NavBar */
 .btns-lists {
     grid-area: btns;
     display: flex;
@@ -104,55 +103,10 @@
     align-items: baseline;
 }
 
-.edit-list-title {
-    grid-area: 1 / 1 / 1 / span 2;
-}
-
-.edit-list-title {
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.new-list-title {
-    width: 80%;
-    height: 10%;
-    padding: 0.5rem 1rem;
-}
-
-.btn-lists-edit,
-.btn-lists-delete {
-    display: flex;
-    justify-content: baseline;
-    align-items: baseline;
-}
-
-.btn-lists-edit {
-    margin-right: 1rem;
-}
-
-/* STYLE */
-.navbar {
-    background-color: var(--slate-700); 
-}
-
-.side-title {
-    font-family: 'Montserrat-700', sans-serif;
-    font-weight: 700;
-    font-size: 3rem;
-    margin-left: 0.5rem;
-    color: var(--slate-200);
-}
-
-div#side-header-logo svg {
-    fill: var(--amber-500);
-    width: 7rem;
-    height: 7rem;
-    padding: 1rem;;
-}
-
 .btn-menu,
-.btn-lists {
-    font-family: 'Montserrat', sans-serif;
+.btn-lists,
+.btn {
+    font-family: 'Montserrat-700', sans-serif;
     border: none;
     color: var(--slate-200);
     background-color: var(--slate-700);
@@ -160,14 +114,14 @@ div#side-header-logo svg {
     font-weight: 700;
 }
 
+.btn-lists {
+    grid-area: title;
+}
+
 .btn {
-    font-family: 'Montserrat-700', sans-serif;
     color: var(--slate-700);
     background-color: var(--slate-200);
-    font-size: 2rem;
-    font-weight: 700;
     box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
-    border: none;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -190,11 +144,56 @@ div#side-header-logo svg {
     box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
 }
 
+#btn-new-task {
+    grid-area: btn;
+}
+
+#btn-new-list {
+    grid-area: btn;
+}
+
+/* New List and Edit List Fields */
+.new-list-title,
+.edit-list-title {
+    font-family: 'Montserrat-700', sans-serif;
+    font-size: 2rem;
+    background-color: var(--slate-200);
+    color: var(--slate-700);
+    border-radius: 15px;
+    outline-color: var(--amber-500);
+    caret-color: var(--amber-500);
+    line-height: 1rem;
+    width: 80%;
+    padding: 0.5rem 1rem;
+}
+
+.edit-list-title {
+    grid-area: 1 / 1 / 1 / span 2;
+    margin-bottom: 0.5rem;
+}
+
+.new-list-title {
+    height: 10%;
+}
+
+.new-lists-error {
+    color: var(--amber-500);
+    background-color: var(--slate-300);
+}
+
+/* New List and Edit List Fields Buttons */
 .btn-lists-edit,
 .btn-lists-delete {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
     background-color: var(--slate-700);
     border: none;
     cursor: pointer;
+}
+
+.btn-lists-edit {
+    margin-right: 1rem;
 }
 
 button.btn-lists-edit svg,
@@ -205,29 +204,4 @@ button.btn-lists-delete svg {
 button.btn-lists-edit svg:hover,
 button.btn-lists-delete svg:hover {
     fill: var(--amber-500);
-}
-
-.new-list-title,
-.edit-list-title {
-    background-color: var(--slate-200);
-    color: var(--slate-700);
-    border-radius: 15px;
-    outline-color: var(--amber-500);
-    caret-color: var(--amber-500);
-    line-height: 1rem;
-}
-
-.new-list-title {
-    font-family: 'Montserrat-700', sans-serif;
-    font-size: 2rem;
-}
-
-.edit-list-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-}
-
-.new-lists-error {
-    color: var(--amber-500);
-    background-color: var(--slate-300);
 }

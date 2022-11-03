@@ -1,6 +1,10 @@
+@import './sidebar.css';
+@import './desk.css';
+
 /* Montserrat Regular - Latin from Google Fonts Helper */
 @font-face {
     font-family: 'Montserrat';
+    font-display: swap;
     font-style: normal;
     font-weight: 400;
     src: url('../assets/fonts/montserrat-v25-latin-regular.eot');
@@ -14,6 +18,7 @@
 /* Montserrat 700 - Latin from Google Font Helper */
 @font-face {
     font-family: 'Montserrat-700';
+    font-display: swap;
     font-style: normal;
     font-weight: 700;
     src: url('../assets/fonts/montserrat-v25-latin-700.eot');
@@ -58,7 +63,7 @@
     box-sizing: border-box;
 }
 
-/* LAYOUT */
+/* Layout */
 .container {
     display: grid;
     grid: 
