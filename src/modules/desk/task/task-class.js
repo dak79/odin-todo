@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { MixCrud } from '../../class-mixin';
 
 class TaskProperty {
@@ -12,9 +13,7 @@ class TaskProperty {
         this.id = TaskProperty.#id;
         this.title = title;
         this.description = description;
-        import('date-fns').then((module) => {
-            this.dueDate = module.format(dueDate, 'dd-MM-yyyy');
-        })
+        this.dueDate = format(dueDate, 'dd-MM-yyyy');
         this.tags = [];
         this.priority = priority;
         this.checklist = checklist;

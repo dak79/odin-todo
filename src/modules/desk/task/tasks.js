@@ -1,5 +1,6 @@
-import { Task } from "./task-class";
-import { tasksRender } from "./tasks-render";
+import { Task } from './task-class';
+import { addTaskListeners } from './task-listeners';
+import { tasksRender } from './tasks-render';
 
 // Tasks database
 export const tasks = [];
@@ -14,6 +15,6 @@ export const exampleTasks = () => {
     todoTwo.add(tasks);
     todoThree.add(tasks);
     todoFour.add(tasks);
-    console.log(tasks);
     tasksRender();
+    addTaskListeners();
 }

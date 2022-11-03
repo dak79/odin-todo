@@ -18,13 +18,14 @@ const taskItem = task => {
 
     setAttributes(checkBtn, {
         type: 'checkbox',
-        id: `task-${task.id}`,
-        name: `task-${task.id}`,
+        id: `task-checkbox-${task.id}`,
+        class: 'tasks-checkbox',
+        name: `task-checkbox-${task.id}`,
         'aria-label': 'Not done/Done check field'
     })
 
     const taskLabel = document.createElement('label');
-    taskLabel.setAttribute('for', `task-${task.id}`);
+    taskLabel.setAttribute('for', `task-checkbox-${task.id}`);
     taskLabel.textContent = `${task.title}`;
 
     const expandTaskBtn = document.createElement('button');

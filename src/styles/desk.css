@@ -1,6 +1,6 @@
-/* LAYOUT */
 .desk {
     grid-area: desk;
+    background-color: var(--slate-200);
 }
 
 .task-item {
@@ -11,7 +11,11 @@
     gap: 10px;
     align-items: center;
     margin: 1rem;
-
+    list-style: none;
+    font-family: 'Montserrat-700', sans-serif;
+    color: var(--slate-200);
+    background-color: var(--slate-700);
+    border-radius: 15px;
 }
 
 .checkbox-wrapper {
@@ -27,25 +31,77 @@
     place-self: start;
 }
 
-.expand-btn {
-    display: flex;
-    justify-content: start;
+/* Task Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    margin: 0;
+    background-color: #fff;
+    font: inherit;
+    background-color: var(--slate-200);
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--slate-200);
+    border-radius: 3px;
+    transform: translateY(-0.075em);
+    transform: translateX(1em);
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-out;
+    box-shadow: inset 1em 1em var(--amber-500);
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked:before {
+    transform: scale(1);   
+}
+
+input[type="checkbox"]:checked + label,
+span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.task-due-date {
+    color: var(--amber-500);
+    text-decoration: line-through;
+}
+label:hover,
+input[type="checkbox"]:hover,
+.task-due-date:hover {
+    cursor: pointer;
+    color: var(--amber-500)
+}
+
+/* Task Buttons */
+.expand-btn,
+.task-edit-btn,
+.task-delete-btn {
     background-color: var(--slate-700);
-}
-
-.svg-expand {
-    width: 2rem;
-    height: 2rem;
     fill: var(--slate-200);
-    font-size: 2rem;
+    border: none;
+    padding: 0.5rem 0.5rem;
+    max-width: 100%;
 }
 
-.svg-expand:hover{
+.expand-btn:hover,
+.task-edit-btn:hover,
+.task-delete-btn:hover
+{
     fill: var(--amber-500);
     cursor: pointer;
 }
 
+.expand-btn-up svg {
+    transform: rotate(180deg); 
+    transition: 1s transform linear;
+}
 
+.expand-btn-down svg {
+    transform: rotate(0deg);
+    transition: 1s transform linear;
+}
 
 .task-due-date {
     grid-area: due-date;
@@ -53,18 +109,5 @@
 
 .task-btn-wrapper {
     grid-area: btns;
-}
-
-/* STYLE */
-.desk {
-    background-color: var(--slate-200);
-}
-
-.task-item {
-    list-style: none;
-    font-family: 'Montserrat', sans-serif;
-    color: var(--slate-200);
-    background-color: var(--slate-700);
-    border-radius: 15px;
-
+    place-self: center;
 }

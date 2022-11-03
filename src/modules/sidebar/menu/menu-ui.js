@@ -9,7 +9,7 @@ export const renderMenu = () => {
 }
 
 const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}], navBtn, 'menu', 'menu-items');
+    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}, {title: 'Complete'}], navBtn, 'menu', 'menu-items');
 
     return menu;
 }
