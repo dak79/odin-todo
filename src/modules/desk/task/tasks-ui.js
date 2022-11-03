@@ -1,6 +1,5 @@
-import { appendChildren, createList, setAttributes } from '../../helpers';
+import { appendChildren, createList, setAttributes, formatDate } from '../../helpers';
 import { tasks } from './tasks';
-
 
 export const createTasksUi = () => {
     const todoes = createList(tasks, taskItem, 'tasks', 'task', 'task-item');
@@ -44,7 +43,7 @@ const taskItem = task => {
         id:`task-${task.id}-due-date`,
         class: 'task-due-date'
     })
-    taskDueDate.textContent = `${task.dueDate}`;
+    taskDueDate.textContent = Date.parse(task.dueDate) ? `${formatDate(task.dueDate)}` : '';
 
     const wrapperBtns = document.createElement('span');
     setAttributes(wrapperBtns, {
