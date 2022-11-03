@@ -28,7 +28,8 @@ export const createBtnNewTask = () => {
     setAttributes(btnNewTask, {
         type: 'button',
         id: 'btn-new-task',
-        class: 'btn'
+        class: 'btn',
+        'aria-label': 'Add task'
     })
     btnNewTask.textContent = '+';
 
