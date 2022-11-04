@@ -56,3 +56,18 @@ export const filterTodayTask = array => {
     
     return array.filter(item => item.dueDate.toLocaleDateString() === today.toLocaleDateString())
 }
+
+export const filterThisWeekTask = array => {
+    const thisWeek = getWeekNumber(new Date);
+    return array.filter(item => getWeekNumber(item.dueDate) === thisWeek);
+}
+
+const getWeekNumber = date => {
+    const currentDate = date
+    
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const days = Math.ceil((currentDate - startDate) / (24 * 60 * 60 * 1000))
+    const weekNumber = Math.floor(days/7);
+    
+    return weekNumber
+}
