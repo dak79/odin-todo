@@ -13,6 +13,7 @@ class TaskProperty {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.complete = false;
         this.tags = [];
         this.priority = priority;
         this.checklist = checklist;
