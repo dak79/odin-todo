@@ -50,3 +50,7 @@ export const formatDate = date => {
 
     return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${String(year)}`;
 }
+
+export const findItemId = (array, id) => array.find(element => element.id === id);
+
+export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());

@@ -1,5 +1,6 @@
 import { selectNode, cleanNode } from '../../helpers';
-import { renderInbox, renderToday, renderThisWeek, renderAnytime } from './menu-render';
+import { renderInbox, renderToday, renderThisWeek, renderAnytime, renderComplete } from './menu-render';
+
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');
 }
@@ -26,4 +27,10 @@ export const showAnytime = () => {
     const desk = selectNode('#desk');
     cleanNode(desk);
     renderAnytime();
+}
+
+export const showComplete = () => {
+    const desk = selectNode('#desk');
+    cleanNode(desk);
+    renderComplete();
 }

@@ -1,4 +1,6 @@
-import { setAttributes } from '../helpers';
+import { setAttributes, selectNode } from '../helpers';
+
+export const desk = selectNode('#desk');
 
 export const floor = () => {
     const section = document.createElement('section');

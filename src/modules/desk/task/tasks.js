@@ -1,3 +1,4 @@
+import { renderInbox } from '../../sidebar/menu/menu-render';
 import { Task } from './task-class';
 import { addTaskListeners } from './task-listeners';
 import { tasksRender } from './tasks-render';
@@ -23,7 +24,7 @@ export const exampleTasks = () => {
     todoSix.add(tasks);
     todoSeven.add(tasks);
     orderTaskByDate(tasks);
-    tasksRender(tasks);
+    renderInbox();
     addTaskListeners();
 }
 
@@ -31,5 +32,3 @@ const orderTaskByDate = array => array.sort((firstDate, secondDate) => {
     
     return (firstDate.dueDate !== null ? firstDate.dueDate : Infinity) - (secondDate.dueDate !== null ? secondDate.dueDate : Infinity)
 })
-
-

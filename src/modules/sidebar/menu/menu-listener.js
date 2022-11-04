@@ -1,5 +1,5 @@
 import { selectNode } from "../../helpers";
-import { addNewTask, showInbox, showToday, showThisWeek, showAnytime } from './menu-handler';
+import { addNewTask, showInbox, showToday, showThisWeek, showAnytime, showComplete } from './menu-handler';
 
 export const menuListeners = () => {
      
@@ -17,4 +17,7 @@ export const menuListeners = () => {
 
     const btnAnytime = selectNode('#btn-anytime');
     btnAnytime.addEventListener('click', showAnytime);
+
+    const btnComplete = selectNode('#btn-complete');
+    btnComplete.addEventListener('click', showComplete)
 }

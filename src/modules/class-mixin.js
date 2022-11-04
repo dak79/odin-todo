@@ -1,22 +1,27 @@
 export const MixCrud = superclass => class extends superclass {
+    // USED BY LIST AND TASK
     add(array) {
         array.push(this);
     }
     
-    findId(array, id) {
-        return array.find(element => element.id === id);
+    // // USED BY LIST
+    // findId(array, id) {
+    //     return array.find(element => element.id === id);
+    // }
+
+    // // USED BY LIST
+    // findName(array) {
+    //     return array.find(element => element.title.toLowerCase().trim() === this.title.toLowerCase().trim());
+    // }
+
+    // USED BY LIST
+    update(key, value) {
+        return (key in this) ? this[key] = value : false;
     }
 
-    findName(array) {
-        return array.find(element => element.title.toLowerCase().trim() === this.title.toLowerCase().trim());
-    }
-
-    update(property, key, value) {
-        return (key in property) ? property[key] = value : false;
-    }
-
-    delete(array, id) {    
-        const index = array.indexOf(id);
+    // USED BY LIST
+    delete(array) {    
+        const index = array.indexOf(this);
         array.splice(index, 1);
     }
 }

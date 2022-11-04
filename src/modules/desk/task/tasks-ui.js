@@ -11,7 +11,7 @@ const taskItem = task => {
     const wrapperCheck = document.createElement('span');
     setAttributes(wrapperCheck, {
         id: `checkbox-wrapper-${task.id}`,
-        class: 'checkbox-wrapper'
+        class: 'checkbox-wrapper',
     })
     const checkBtn = document.createElement('input');
 
@@ -20,8 +20,15 @@ const taskItem = task => {
         id: `task-checkbox-${task.id}`,
         class: 'tasks-checkbox',
         name: `task-checkbox-${task.id}`,
-        'aria-label': 'Not done/Done check field'
+        'aria-label': 'Not done/Done check field',
+        'data-number': `${task.id}`
     })
+
+    if (task.complete === true) {
+        checkBtn.checked = true;
+    } else {
+        checkBtn.checked = false;
+    }
 
     const taskLabel = document.createElement('label');
     taskLabel.setAttribute('for', `task-checkbox-${task.id}`);
@@ -76,3 +83,4 @@ const taskItem = task => {
 
     return [wrapperCheck, taskDueDate, wrapperBtns];
 }
+

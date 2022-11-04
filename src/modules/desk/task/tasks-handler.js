@@ -1,5 +1,25 @@
-export const checkboxState = () => {
-    console.log('CHECKBOX STATUS CHANGED');
+import { findItemId, selectNode } from "../../helpers";
+import { renderAnytime, renderComplete, renderInbox } from "../../sidebar/menu/menu-render";
+import { tasks } from "./tasks";
+
+
+export const checkboxState = event => {
+    const data = event.target.dataset.number;
+    const checkbox = selectNode(`#task-checkbox-${data}`);
+
+    if (checkbox.checked) {
+        
+        const taskToUpdate = findItemId(tasks, Number(data));
+        taskToUpdate.update('complete', true);
+        renderInbox();
+    } else {
+        const taskToUpdate = findItemId(tasks, Number(data));
+        taskToUpdate.update('complete', false);
+        renderComplete();
+        
+    }
+
+    
 }
 
 export const expandTask = () => {

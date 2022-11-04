@@ -1,4 +1,4 @@
-import { selectNode, selectNodes } from '../../helpers';
+import { findItemId, findItemName, selectNode, selectNodes } from '../../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
@@ -22,15 +22,15 @@ const checkListName = node => {
     }
 
     const newList = new List(String(node.value));
-    const listsTitles = newList.findName(lists);
-
+    const listsTitles = findItemName(lists, String(node.value))
+   
     if (listsTitles !== undefined && listsTitles.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
         newListNameErrorUi(node);
         node.focus();
         return false;
     }
     
-    return newList
+    return String(node.value);
 }
 
 export const saveNewList = input => {
@@ -62,8 +62,8 @@ export const saveEditList = nodes => {
     const newTitle = checkListName(nodes[1]);
     
     if (newTitle) {
-        const index = newTitle.findId(lists, Number(nodes[0].dataset.number));
-        newTitle.update(index, 'title', String(nodes[1].value))
+        const listToUpdate = findItemId(lists, Number(nodes[0].dataset.number));
+        listToUpdate.update('title', String(newTitle));
         renderLists();
         addListenerLists();
     } else {
@@ -73,12 +73,10 @@ export const saveEditList = nodes => {
 
 export const deleteList = (event) => {
     event.stopPropagation();
-    const listToDelete = event.target.dataset.number;
-
-    const deleteAgent = new List('Delete');
-    const itemToDelete = deleteAgent.findId(lists, Number(listToDelete));
-
-    deleteAgent.delete(lists, itemToDelete);
+    const idListToDelete = event.target.dataset.number;
+    const listToDelete = findItemId(lists, Number(idListToDelete))
+    listToDelete.delete(lists, idListToDelete);
+    
     renderLists();
     addListenerLists();
 }

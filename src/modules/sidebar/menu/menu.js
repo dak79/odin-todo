@@ -24,3 +24,7 @@ const getWeekNumber = date => {
     
     return weekNumber;
 }
+
+export const filterIncompleteTask = array => array.filter(item => item.complete === false);
+
+export const filterCompleteTask = array => array.filter(item => item.complete === true);
