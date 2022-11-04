@@ -9,7 +9,7 @@ export const renderMenu = () => {
 }
 
 const createMenu = () => {
-    const menu = createList([{title: 'Inbox'}, {title: 'Today'}, {title: 'This Week'}, {title: 'Anytime'}, {title: 'Complete'}], navBtn, 'menu', 'menu-items');
+    const menu = createList([{title: 'Inbox', tags:['menu']}, {title: 'Today', tags:['menu']}, {title: 'This Week', tags:['menu']}, {title: 'Anytime', tags:['menu']}, {title: 'Complete', tags:['menu']}], 'menu', navBtn, 'menu', 'menu-items');
 
     return menu;
 }
@@ -19,7 +19,8 @@ const navBtn = (name) => {
     setAttributes(btn, {
         type: 'button',
         id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
-        class: 'btn-menu'
+        class: 'btn-menu',
+        'data-name': `${name.title.replace(' ', '-').toLowerCase().trim()}`
     });
     btn.textContent = name.title;
 

@@ -21,19 +21,29 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
  * @param { String } className - Ul class
  * @returns { Node } An unordered list
  */
- export const createList = (itemTitles, itemsType, ulClassName, liIdPrefix, liClassName) => {
+ export const createList = (array, type, itemsType, ulClassName, liIdPrefix, liClassName) => {
     const list = document.createElement('ul');
     list.classList.add(ulClassName);
     
-    itemTitles.forEach(title => {
-        const listItem = document.createElement('li');
-
-        listItem.id = `list-item-${liIdPrefix}-${title.id}`;
-        listItem.classList.add(liClassName);
-        const listItemContent = itemsType(title);
-
-        listItemContent.forEach(item => listItem.appendChild(item));
-        list.appendChild(listItem);
+    console.log(type)
+    array.forEach(item => {
+        // if (item.type === 'list') {
+        //     console.log('è una lista')
+        // } else if (item.type = 'task') {
+        //     console.log('è una task');
+        //     // se title.tag = taskTag allora crea il li
+        // }
+        const listType = item.tags.find(tag => tag === type);
+        if (listType) {
+            const listItem = document.createElement('li');
+    
+            listItem.id = `list-item-${liIdPrefix}-${item.id}`;
+            listItem.classList.add(liClassName);
+            const arrayContents = itemsType(item);
+    
+            arrayContents.forEach(content => listItem.appendChild(content));
+            list.appendChild(listItem);
+        }
     });
     
     return list;

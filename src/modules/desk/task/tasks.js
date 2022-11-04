@@ -15,6 +15,7 @@ export const exampleTasks = () => {
     const todoFive = new Task('Passport - Date null control', 'Kaya Passport', null, 1, ['Print Document', 'Send document by mail']);
     const todoSix = new Task('Call Police - In late control', 'Driving Licence', new Date('2022-10-28'), 1, ['Print Document', 'Send document by mail']);
     const todoSeven = new Task('Buy chili pepper', 'Get some spicy taste, sometime', new Date('2022-11-08'), 1, ['Take metro']);
+    const todoEight = new Task('Mail', 'Send me mail please', new Date('2022-11-04'), 1, ['Take metro']);
     
     todoOne.add(tasks);
     todoTwo.add(tasks);
@@ -23,6 +24,7 @@ export const exampleTasks = () => {
     todoFive.add(tasks);
     todoSix.add(tasks);
     todoSeven.add(tasks);
+    todoEight.add(tasks);
     orderTaskByDate(tasks);
     renderInbox();
     addTaskListeners();

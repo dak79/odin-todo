@@ -15,6 +15,6 @@ export const renderPage = () => {
     renderMenu();
     renderLists();
     defaultList();
-    renderInbox();
+    //renderInbox();
     exampleTasks();
 }

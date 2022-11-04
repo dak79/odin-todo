@@ -8,8 +8,10 @@ class ListProperty {
 
     constructor(title) {
         ListProperty.#incrementId();
+        this.type = 'list';
         this.id = ListProperty.#id;
         this.title = title;
+        this.tags = ['list'];
     }
 }
 

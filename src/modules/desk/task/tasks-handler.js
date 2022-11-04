@@ -8,18 +8,14 @@ export const checkboxState = event => {
     const checkbox = selectNode(`#task-checkbox-${data}`);
 
     if (checkbox.checked) {
-        
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', true);
         renderInbox();
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', false);
-        renderComplete();
-        
+        renderComplete(); 
     }
-
-    
 }
 
 export const expandTask = () => {

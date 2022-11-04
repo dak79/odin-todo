@@ -1,14 +1,21 @@
+import { tasksRender } from '../../desk/task/tasks-render';
 import { selectNode, cleanNode } from '../../helpers';
 import { renderInbox, renderToday, renderThisWeek, renderAnytime, renderComplete } from './menu-render';
+import { tasks } from '../../desk/task/tasks';
 
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');
 }
 
-export const showInbox = () => {
+export const showMenu = event => {
+    const menu = event.target.dataset.name;
     const desk = selectNode('#desk');
     cleanNode(desk);
-    renderInbox();
+    tasksRender(tasks, menu);
+    console.log(tasks);
+}
+
+export const showInbox = () => {
 }
 
 export const showToday = () => {

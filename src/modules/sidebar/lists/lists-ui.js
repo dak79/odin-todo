@@ -36,7 +36,7 @@ const newListBtnUi = () => {
 }
 
 export const createListsUi = () => {
-    const projects = createList(lists, listsBtn, 'lists','lists', 'lists-items');
+    const projects = createList(lists, 'list', listsBtn, 'lists','lists', 'lists-items');
     return projects;
 }
 
