@@ -6,12 +6,13 @@ class TaskProperty {
         this.#id++;
     }
 
-    static #today = new Date();
-    static #isToday(date) {
-        return date ? date.toLocaleDateString() === this.#today.toLocaleDateString() ? true : false : false;
+    
+    isToday(date) {
+        const today = new Date();
+        return date ? date.toLocaleDateString() === today.toLocaleDateString() ? true : false : false;
     }
 
-    static #getWeekNumber(date) {
+    getWeekNumber(date) {
         const currentDate = date;
         const startDate = date ? new Date(date.getFullYear(), 0, 1) : false;
         const days = Math.ceil((currentDate - startDate) / (24 * 60 * 60 * 1000));
@@ -28,19 +29,29 @@ class TaskProperty {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        console.log(this.dueDate)
         this.complete = false;
         this.tags = ['inbox'];
-        if (TaskProperty.#isToday(this.dueDate)) this.addTag('today');
-        if (TaskProperty.#getWeekNumber(new Date()) === TaskProperty.#getWeekNumber(this.dueDate)) this.addTag('this-week');
-        if (TaskProperty.#getWeekNumber(this.dueDate) > TaskProperty.#getWeekNumber(new Date()) || !this.dueDate) this.addTag('anytime')
+        this.updateTags();
+        this.visualizedOn = '';
         this.priority = priority;
         this.checklist = checklist;
     }  
 
     addTag(value) {
-        this.tags.push(value)
+        this.tags.push(value);
     } 
+
+    deleteTag() {
+        const index = this.tags.indexOf(this)
+        this.tags.splice(index, 1)
+    }
+
+    updateTags() {
+        if (this.isToday(this.dueDate)) this.addTag('today');
+        if (this.getWeekNumber(new Date()) === this.getWeekNumber(this.dueDate)) this.addTag('this-week');
+        if (this.getWeekNumber(this.dueDate) > this.getWeekNumber(new Date()) || !this.dueDate) this.addTag('anytime');
+        if (this.getWeekNumber(this.dueDate) < this.getWeekNumber(new Date())) this.addTag('late');
+    }
 }
 
 export class Task extends MixCrud(TaskProperty) {

@@ -27,12 +27,6 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
     
     console.log(type)
     array.forEach(item => {
-        // if (item.type === 'list') {
-        //     console.log('è una lista')
-        // } else if (item.type = 'task') {
-        //     console.log('è una task');
-        //     // se title.tag = taskTag allora crea il li
-        // }
         const listType = item.tags.find(tag => tag === type);
         if (listType) {
             const listItem = document.createElement('li');

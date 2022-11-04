@@ -1,6 +1,7 @@
 import { findItemId, selectNode } from "../../helpers";
-import { renderAnytime, renderComplete, renderInbox } from "../../sidebar/menu/menu-render";
+import { addTaskListeners } from "./task-listeners";
 import { tasks } from "./tasks";
+import { tasksRender } from "./tasks-render";
 
 
 export const checkboxState = event => {
@@ -10,11 +11,19 @@ export const checkboxState = event => {
     if (checkbox.checked) {
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', true);
-        renderInbox();
+        taskToUpdate.addTag('complete');
+        taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'complete');
+        tasksRender(tasks, taskToUpdate.visualizedOn);
+        addTaskListeners();
+
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', false);
-        renderComplete(); 
+        taskToUpdate.deleteTag('complete');
+        taskToUpdate.addTag('inbox');
+        taskToUpdate.updateTags();
+        tasksRender(tasks, 'complete');
+        addTaskListeners();
     }
 }
 
