@@ -1,7 +1,7 @@
 import { tasksRender } from '../../desk/task/tasks-render';
 import { addTaskListeners } from '../../desk/task/task-listeners';
 import { tasks } from '../../desk/task/tasks';
-import { filterThisWeekTask, filterTodayTask } from '../../helpers';
+import { filterAnytimeTask, filterThisWeekTask, filterTodayTask } from '../../helpers';
 
 export const renderInbox = () => {
     tasksRender(tasks);
@@ -16,4 +16,9 @@ export const renderToday = () => {
 export const renderThisWeek = () => {
     const thisWeekTask = filterThisWeekTask(tasks);
     tasksRender(thisWeekTask)
+}
+
+export const renderAnytime = () => {
+    const anytimeTask = filterAnytimeTask(tasks)
+    tasksRender(anytimeTask);
 }

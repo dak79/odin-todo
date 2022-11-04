@@ -11,11 +11,13 @@ export const exampleTasks = () => {
     const todoTwo = new Task('Organize Meeting', 'Introduce new teammate', new Date('2022-11-15'), 2, ['Send invitations', 'Prepare short presentation']);
     const todoThree = new Task('Pay Bills', 'Pay electricity and gas bills', new Date('2022-11-6'), 3, ['Electric Bill', 'Gas Bill']);
     const todoFour = new Task('ToDo App', 'The Odin Project To Do App', new Date('2022-12-8'), 1, ['Code Design', 'Classes', 'Ui', 'Logic', 'Set up webpack']);
+    const todoFive = new Task('Passport', 'Kaya Passport', null, 1, ['Print Document', 'Send document by mail']);
 
     todoOne.add(tasks);
     todoTwo.add(tasks);
     todoThree.add(tasks);
     todoFour.add(tasks);
+    todoFive.add(tasks);
     orderTaskByDate(tasks);
     tasksRender(tasks);
     addTaskListeners();
