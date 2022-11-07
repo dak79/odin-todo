@@ -28,8 +28,7 @@ const checkboxState = event => {
         taskToUpdate.update('complete', true);
         taskToUpdate.addTag('complete');
         taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'complete');
-        renderTasks(taskToUpdate.visualizedOn);
-
+        setTimeout(() => renderTasks(taskToUpdate.visualizedOn), 1000);
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', false);

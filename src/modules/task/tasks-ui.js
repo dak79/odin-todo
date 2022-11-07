@@ -15,7 +15,6 @@ export const renderTasks = desk => {
 
 const createTasksUi = desk => {
     const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', 'task-item');
-
     return todoes;
 }
 
