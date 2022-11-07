@@ -1,6 +1,6 @@
 import { List } from '../classes';
-import { renderLists } from './lists-render';
-import { addListenerLists } from './lists-listeners';
+import { renderLists } from './lists-ui';
+import { addListenerLists } from './lists-events';
 
 // Lists database
 export const lists = [];

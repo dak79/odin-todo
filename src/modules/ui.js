@@ -2,7 +2,7 @@ import { appendChildren, setAttributes } from './helpers';
 
 import { renderHeader } from './header/header-ui';
 import { defaultList } from './lists/lists';
-import { renderLists } from './lists/lists-render';
+import { renderLists } from './lists/lists-ui';
 import { renderMenu } from './menu/menu-ui';
 import { renderTasks } from './task/tasks-ui';
 import { exampleTasks } from './task/tasks-example';
