@@ -6,7 +6,6 @@ import { renderMenu } from './sidebar/menu/menu-ui';
 import { renderTasks } from './desk/task/tasks-ui';
 import { exampleTasks } from './desk/task/tasks-example';
 import { tasks } from './desk/task/tasks';
-import { renderInbox } from './sidebar/menu/menu-render';
 
 export const renderPage = () => {
     
