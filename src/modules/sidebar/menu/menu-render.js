@@ -1,5 +1,5 @@
 import { tasksRender } from '../../desk/task/tasks-render';
-import { addTaskListeners } from '../../desk/task/task-listeners';
+import { addTaskListeners } from '../../desk/task/tasks-events';
 import { tasks } from '../../desk/task/tasks';
 import { filterAnytimeTask, filterCompleteTask, filterIncompleteTask, filterThisWeekTask, filterTodayTask } from './menu';
 

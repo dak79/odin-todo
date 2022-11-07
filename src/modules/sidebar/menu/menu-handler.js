@@ -1,7 +1,7 @@
 import { tasksRender } from '../../desk/task/tasks-render';
 import { selectNode, cleanNode } from '../../helpers';
 import { tasks, tasksVisualizedOn, orderTaskByDate } from '../../desk/task/tasks';
-import { addTaskListeners } from '../../desk/task/task-listeners';
+import { addTaskListeners } from '../../desk/task/tasks-events';
 
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');

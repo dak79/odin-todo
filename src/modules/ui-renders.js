@@ -15,6 +15,6 @@ export const renderPage = () => {
     renderMenu();
     renderLists();
     defaultList();
-    //renderInbox();
+    // UPDATE TIME e MIGLIORARE LA CHIAMATA DI RENDER TASK DOPO EXAMPLE.
     exampleTasks();
 }
