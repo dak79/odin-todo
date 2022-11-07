@@ -1,4 +1,4 @@
-import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../../helpers';
+import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
 import { orderTaskByDate, tasks, updateTimeTasks } from './tasks';
 import { addTaskListeners } from './tasks-events';
 

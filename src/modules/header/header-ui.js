@@ -1,4 +1,4 @@
-import { setAttributes } from "../../helpers";
+import { setAttributes } from "../helpers";
 
 export const createLogo = () => {
     const logo = document.createElement('div');

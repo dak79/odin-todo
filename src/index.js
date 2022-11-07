@@ -1,5 +1,5 @@
 import './styles/main.css';
 
-import('./modules/ui-renders').then((module) => {
+import('./modules/ui').then((module) => {
     module.renderPage();
 })

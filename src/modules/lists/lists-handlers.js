@@ -1,4 +1,4 @@
-import { findItemId, findItemName, selectNode, selectNodes } from '../../helpers';
+import { findItemId, findItemName, selectNode, selectNodes } from '../helpers';
 import { lists } from './lists';
 import { List } from './list-class';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';

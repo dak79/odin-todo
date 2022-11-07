@@ -1,4 +1,4 @@
-import { selectNodes, findItemId, selectNode } from '../../helpers';
+import { selectNodes, findItemId, selectNode } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
 

@@ -1,6 +1,6 @@
-import { renderTasks } from '../../desk/task/tasks-ui';
-import { selectNode, cleanNode } from '../../helpers';
-import { tasks, tasksVisualizedOn, orderTaskByDate } from '../../desk/task/tasks';
+import { renderTasks } from '../task/tasks-ui';
+import { selectNode, cleanNode } from '../helpers';
+import { tasks, tasksVisualizedOn, orderTaskByDate } from '../task/tasks';
 
 export const addNewTask = () => {
     console.log('CLICK NEW TASK');

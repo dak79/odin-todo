@@ -1,4 +1,4 @@
-import { createList, selectNode, setAttributes, appendChildren, selectNodes } from '../../helpers';
+import { createList, selectNode, setAttributes, appendChildren, selectNodes } from '../helpers';
 import { lists } from './lists';
 import { addNewList, editList } from './lists-handlers';
 

@@ -1,4 +1,4 @@
-import { Task } from '../../classes';
+import { Task } from '../classes';
 import { tasks, tasksVisualizedOn } from './tasks';
 
 export const exampleTasks = () => {

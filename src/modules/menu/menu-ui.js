@@ -1,4 +1,4 @@
-import { selectNode, createList, setAttributes } from "../../helpers";
+import { selectNode, createList, setAttributes } from "../helpers";
 import { menuListeners } from "./menu-listener";
 
 export const renderMenu = () => {

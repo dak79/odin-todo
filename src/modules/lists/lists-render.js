@@ -1,4 +1,4 @@
-import { selectNode, cleanNode, appendChildren } from "../../helpers";
+import { selectNode, cleanNode, appendChildren } from "../helpers";
 import { listHeader, createListsUi } from "./lists-ui";
 
 export const renderLists = () => {

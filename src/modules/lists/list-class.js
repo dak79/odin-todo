@@ -1,4 +1,4 @@
-import { MixCrud } from '../../classes';
+import { MixCrud } from '../classes';
 
 class ListProperty {
     static #id = 0;

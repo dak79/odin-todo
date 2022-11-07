@@ -1,4 +1,4 @@
-import { selectNode, selectNodes } from "../../helpers";
+import { selectNode, selectNodes } from "../helpers";
 import { addNewTask, showInbox, showToday, showThisWeek, showAnytime, showComplete, showMenu } from './menu-handler';
 
 export const menuListeners = () => {

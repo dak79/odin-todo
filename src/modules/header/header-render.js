@@ -1,4 +1,4 @@
-import { selectNode, appendChildren } from "../../helpers";
+import { selectNode, appendChildren } from "../helpers";
 import { createLogo, createTitle, createBtnNewTask } from "./header-ui";
 export const renderHeader = () => {
     const header = selectNode('#side-header');
