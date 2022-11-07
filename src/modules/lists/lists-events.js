@@ -1,10 +1,9 @@
-
 import { findItemId, findItemName, selectNode, selectNodes } from '../helpers';
 import { lists } from './lists';
 import { List } from '../classes';
 import { newListUi, editListUi, newListNameErrorUi, renderLists } from './lists-ui';
 
-export const addListenerLists = () => {
+export const addListsListeners = () => {
     const projects = selectNodes('.btn-lists');
     projects.forEach(project => project.addEventListener('click', showList))
 
@@ -15,27 +14,52 @@ export const addListenerLists = () => {
     editProject.forEach(btnEdit => btnEdit.addEventListener('click', editList));
 }
 
-export const newListListeners = node => {
-    node.addEventListener('focusout', saveNewList.bind(this, node));
-    node.addEventListener('keyup', saveOnEnter);
+const showList = event => {
+    event.stopPropagation();
+   
+    console.log(event.target);
 }
 
-export const editListListeners = nodes => {
-    nodes[1].addEventListener('focusout', saveEditList.bind(this, nodes));
+const deleteList = (event) => {
+    event.stopPropagation();
+    const idListToDelete = event.target.dataset.number;
+    const listToDelete = findItemId(lists, Number(idListToDelete))
+    listToDelete.delete(lists, idListToDelete);
+    renderLists();
+}
+
+const editList = (event) => {
+    event.stopPropagation();
+    const nodes = editListUi(event);
+    editListListeners(nodes);
+}
+
+const editListListeners = nodes => {
+    nodes[1].addEventListener('focusout', () => saveEditList(nodes));
     nodes[1].addEventListener('keyup', saveOnEnter);
 }
 
-export const addNewList = event => {
-        newListUi(event);
-    
-    const newField = selectNode('#new-list-title');
-    newField.focus();
+const saveOnEnter = event => {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        event.target.blur();
+    }
+}
 
-    newListListeners(newField);
+const saveEditList = nodes => {
+    const newTitle = checkListName(nodes[1]);
+    
+    if (newTitle) {
+        const listToUpdate = findItemId(lists, Number(nodes[0].dataset.number));
+        listToUpdate.update('title', String(newTitle));
+        renderLists();
+    } else {
+        addListsListeners();
+    }
 }
 
 const checkListName = node => {
-    if (node.value === '') {
+    if (String(node.value) === '') {
         renderLists();
         return false;
     }
@@ -52,57 +76,28 @@ const checkListName = node => {
     return String(node.value);
 }
 
-export const saveNewList = input => {
+export const addNewList = event => {
+    newListUi(event);
+
+    const newField = selectNode('#new-list-title');
+    newField.focus();
+
+    newListListeners(newField);
+}
+
+const newListListeners = node => {
+    node.addEventListener('focusout', () => saveNewList(node));
+    node.addEventListener('keyup', saveOnEnter);
+}
+
+const saveNewList = input => {
     const newListTitle = checkListName(input);
-    
+
     if (newListTitle) {
-        const newList = new List(newList);
+        const newList = new List(newListTitle);
         newList.add(lists);
         renderLists();
-        addListenerLists();
     } else {
-        addListenerLists();
+        addListsListeners();
     }
-}
-
-export const saveOnEnter = (event) => {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        event.target.blur();
-    }
-}
-
-export const editList = (event) => {
-    event.stopPropagation();
-    const nodes = editListUi(event);
-    editListListeners(nodes);
-}
-
-export const saveEditList = nodes => {
-    const newTitle = checkListName(nodes[1]);
-    
-    if (newTitle) {
-        const listToUpdate = findItemId(lists, Number(nodes[0].dataset.number));
-        listToUpdate.update('title', String(newTitle));
-        renderLists();
-        addListenerLists();
-    } else {
-        addListenerLists();
-    }
-}
-
-export const deleteList = (event) => {
-    event.stopPropagation();
-    const idListToDelete = event.target.dataset.number;
-    const listToDelete = findItemId(lists, Number(idListToDelete))
-    listToDelete.delete(lists, idListToDelete);
-    
-    renderLists();
-    addListenerLists();
-}
-
-export const showList = event => {
-    event.stopPropagation();
-   
-    console.log('CLICK SHOW LIST');
 }

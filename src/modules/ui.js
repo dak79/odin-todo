@@ -1,7 +1,6 @@
 import { appendChildren, setAttributes } from './helpers';
-
 import { renderHeader } from './header/header-ui';
-import { defaultList } from './lists/lists';
+import { defaultList } from './lists/lists-default';
 import { renderLists } from './lists/lists-ui';
 import { renderMenu } from './menu/menu-ui';
 import { renderTasks } from './task/tasks-ui';
@@ -11,8 +10,8 @@ export const renderPage = () => {
     renderMain();
     renderHeader();
     renderMenu();
-    renderLists();
     defaultList();
+    renderLists();
     exampleTasks();
     renderTasks('inbox');
 }

@@ -1,9 +1,6 @@
 import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes } from '../helpers';
 import { lists } from './lists';
-import { addNewList, editList } from './lists-events';
-
-
-
+import { addListsListeners, addNewList } from './lists-events';
 
 export const renderLists = () => {
     const section = selectNode('#side-section-lists');
@@ -11,6 +8,7 @@ export const renderLists = () => {
     const displayLists = createListsUi();
     cleanNode(section);
     appendChildren(section, [displayHeader, displayLists]);
+    addListsListeners();
 }
 
 const listHeader = () => {
@@ -43,11 +41,10 @@ const newListBtnUi = () => {
     btnNewList.addEventListener('click', addNewList);
 
     return btnNewList; 
-
 }
 
 const createListsUi = () => {
-    const projects = createList(lists, 'list', listsBtn, 'lists','lists', 'lists-items');
+    const projects = createList(lists, 'list' /*list name*/, listsBtn, 'lists','lists', 'lists-items');
     return projects;
 }
 
@@ -57,7 +54,8 @@ const listsBtn = (list) => {
         type: 'button',
         id: `btn-list-${list.id}`,
         class: 'btn-lists',
-        'data-number': `${list.id}`
+        'data-number': `${list.id}`,
+        'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`
     });
     btnTitle.textContent = list.title;
 
@@ -65,7 +63,7 @@ const listsBtn = (list) => {
     setAttributes(wrapper, {
         id: `btns-lists-${list.id}`,
         class: 'btns-lists'
-    })
+    });
     
     const btnEdit = document.createElement('button');
     setAttributes(btnEdit, {
@@ -74,8 +72,7 @@ const listsBtn = (list) => {
         class: 'btn-lists-edit',
         'aria-label': 'Button Edit List'
     });
-    
-    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="svg-btns-edit" data-number="${list.id}"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z" class="svg-btns-edit" data-number="${list.id}"/></svg>`
+    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="svg-btns-edit" data-number="${list.id}"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z" class="svg-btns-edit" data-number="${list.id}"/></svg>`;
         
     const btnDelete = document.createElement('button');
     setAttributes(btnDelete, {
@@ -84,7 +81,7 @@ const listsBtn = (list) => {
         class: 'btn-lists-delete',
         'aria-label': 'Button Delete List'
     });
-    btnDelete.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="svg-btns-delete" data-number="${list.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" class="svg-btns-delete" data-number="${list.id}"/></svg>`
+    btnDelete.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="svg-btns-delete" data-number="${list.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" class="svg-btns-delete" data-number="${list.id}"/></svg>`;
     
     appendChildren(wrapper, [btnEdit, btnDelete]);
    
@@ -94,8 +91,9 @@ const listsBtn = (list) => {
 export const newListUi = event => {
     const section = selectNode('#side-section-lists');
 
-    const btnNewList = event.target
+    const btnNewList = event.target;
     btnNewList.remove();
+    removeDeleteEditBtns();
     
     const title = document.createElement('input');
     setAttributes(title, {
@@ -126,9 +124,8 @@ export const editListUi = (event) => {
     const data = event.target.dataset.number;
     const btnList = selectNode(`#btn-list-${data}`);
     const li = selectNode(`#list-item-lists-${data}`);
-    const btns = selectNodes(`.btns-lists`);
-    btns.forEach(btn => btn.remove());
     
+    removeDeleteEditBtns();
     btnNewListDisabled();
     
     const input = document.createElement('input');
@@ -148,8 +145,12 @@ export const editListUi = (event) => {
     return [btnList, input];
 }
 
-export const btnNewListDisabled = () => {
+const btnNewListDisabled = () => {
     const btnNewList = selectNode('#btn-new-list');
     btnNewList.removeEventListener('click', addNewList);
 }
 
+const removeDeleteEditBtns = () => {
+    const btns = selectNodes(`.btns-lists`);
+    btns.forEach(btn => btn.remove());
+}
