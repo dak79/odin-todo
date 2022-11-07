@@ -1,4 +1,4 @@
-import { renderTasks } from '../../desk/task/tasks-render';
+import { renderTasks } from '../../desk/task/tasks-ui';
 import { selectNode, cleanNode } from '../../helpers';
 import { tasks, tasksVisualizedOn, orderTaskByDate } from '../../desk/task/tasks';
 

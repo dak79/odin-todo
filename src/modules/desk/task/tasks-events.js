@@ -1,6 +1,6 @@
 import { selectNodes, findItemId, selectNode } from '../../helpers';
 import { tasks } from './tasks';
-import { renderTasks } from './tasks-render';
+import { renderTasks } from './tasks-ui';
 
 export const addTaskListeners = () => {
     const checkboxes = selectNodes('.tasks-checkbox');

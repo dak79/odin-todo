@@ -1,6 +1,6 @@
 import { renderInbox } from '../../sidebar/menu/menu-render';
 import { Task } from './task-class';
-import { renderTasks } from './tasks-render';
+import { renderTasks } from './tasks-ui';
 
 
 // Tasks database
