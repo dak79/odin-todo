@@ -25,7 +25,6 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
     const list = document.createElement('ul');
     list.classList.add(ulClassName);
     
-    console.log(type)
     array.forEach(item => {
         const listType = item.tags.find(tag => tag === type);
         if (listType) {

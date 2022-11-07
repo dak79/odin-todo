@@ -1,4 +1,3 @@
-import { renderInbox } from '../../sidebar/menu/menu-render';
 import { Task } from './task-class';
 import { renderTasks } from './tasks-ui';
 
@@ -24,16 +23,18 @@ export const exampleTasks = () => {
     todoSix.add(tasks);
     todoSeven.add(tasks);
     todoEight.add(tasks);
-    orderTaskByDate(tasks);
     tasksVisualizedOn(tasks, 'inbox')
     renderTasks(tasks, 'inbox');
 }
 
-export const orderTaskByDate = array => array.sort((firstDate, secondDate) => {
-    
-    return (firstDate.dueDate !== null ? firstDate.dueDate : Infinity) - (secondDate.dueDate !== null ? secondDate.dueDate : Infinity)
-})
+export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>(firstDate.dueDate !== null ? firstDate.dueDate : Infinity) - (secondDate.dueDate !== null ? secondDate.dueDate : Infinity));
 
+export const updateTimeTasks = () => {
+    tasks.map(task => {
+        task.updateTime()
+        console.log(task)
+    });
+}
 export const tasksVisualizedOn = (array, value) => {
     array.map(item => {
         item.visualizedOn = value;

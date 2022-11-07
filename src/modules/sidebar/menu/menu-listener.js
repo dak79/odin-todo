@@ -7,7 +7,6 @@ export const menuListeners = () => {
     btnNewTask.addEventListener('click', addNewTask);
 
     const btnsMenu = selectNodes('.btn-menu');
-    console.log(btnsMenu);
     btnsMenu.forEach(btn => btn.addEventListener('click', showMenu));
 
     // const btnInbox = selectNode('#btn-inbox');

@@ -31,7 +31,7 @@ class TaskProperty {
         this.dueDate = dueDate;
         this.complete = false;
         this.tags = ['inbox'];
-        this.updateTimeTags();
+        this.updateTime();
         this.visualizedOn = '';
         this.priority = priority;
         this.checklist = checklist;
@@ -46,11 +46,11 @@ class TaskProperty {
         this.tags.splice(index, 1)
     }
 
-    updateTimeTags() {
-        if (TaskProperty.#isToday(this.dueDate)) this.addTag('today');
-        if (TaskProperty.#getWeekNumber(new Date()) === TaskProperty.#getWeekNumber(this.dueDate)) this.addTag('this-week');
-        if (TaskProperty.#getWeekNumber(this.dueDate) > TaskProperty.#getWeekNumber(new Date()) || !this.dueDate) this.addTag('anytime');
-        if (TaskProperty.#getWeekNumber(this.dueDate) < TaskProperty.#getWeekNumber(new Date())) this.addTag('late');
+    updateTime() {
+        if (TaskProperty.#isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
+        if (TaskProperty.#getWeekNumber(new Date()) === TaskProperty.#getWeekNumber(this.dueDate) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');
+        if ((TaskProperty.#getWeekNumber(this.dueDate) > TaskProperty.#getWeekNumber(new Date()) || !this.dueDate) && (!this.tags.find(tag => tag === 'anytime'))) this.addTag('anytime');
+        if (TaskProperty.#getWeekNumber(this.dueDate) < TaskProperty.#getWeekNumber(new Date()) || this.dueDate < new Date() && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
     }
 }
 
