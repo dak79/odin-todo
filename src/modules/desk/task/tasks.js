@@ -1,6 +1,5 @@
 import { renderInbox } from '../../sidebar/menu/menu-render';
 import { Task } from './task-class';
-import { addTaskListeners } from './tasks-events';
 import { tasksRender } from './tasks-render';
 
 
@@ -28,7 +27,6 @@ export const exampleTasks = () => {
     orderTaskByDate(tasks);
     tasksVisualizedOn(tasks, 'inbox')
     tasksRender(tasks, 'inbox')
-    addTaskListeners();
     console.log(tasks);
 }
 
