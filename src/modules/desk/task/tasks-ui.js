@@ -2,18 +2,18 @@ import { appendChildren, createList, setAttributes, formatDate, cleanNode, selec
 import { orderTaskByDate, tasks, updateTimeTasks } from './tasks';
 import { addTaskListeners } from './tasks-events';
 
-export const renderTasks = (type) => {
+export const renderTasks = desk => {
     orderTaskByDate();
     updateTimeTasks();
     const section = selectNode('#desk');
-    const displayTasks = createTasksUi(type);
+    const displayTasks = createTasksUi(desk);
     cleanNode(section);
     section.appendChild(displayTasks);
     addTaskListeners();
 }
 
-const createTasksUi = (type) => {
-    const todoes = createList(tasks, type, taskItem, 'tasks', 'task', 'task-item');
+const createTasksUi = desk => {
+    const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', 'task-item');
 
     return todoes;
 }
