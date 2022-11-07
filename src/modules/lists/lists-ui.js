@@ -1,4 +1,4 @@
-import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes } from '../helpers';
+import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes, edit, removeBtns } from '../helpers';
 import { lists } from './lists';
 import { addListsListeners, addNewList } from './lists-events';
 
@@ -93,7 +93,7 @@ export const newListUi = event => {
 
     const btnNewList = event.target;
     btnNewList.remove();
-    removeDeleteEditBtns();
+    removeBtns('.btns-lists')
     
     const title = document.createElement('input');
     setAttributes(title, {
@@ -121,36 +121,23 @@ export const newListNameErrorUi = element => {
 
 export const editListUi = (event) => {
 
-    const data = event.target.dataset.number;
-    const btnList = selectNode(`#btn-list-${data}`);
-    const li = selectNode(`#list-item-lists-${data}`);
-    
-    removeDeleteEditBtns();
+    removeBtns('.btns-lists');
     btnNewListDisabled();
-    
-    const input = document.createElement('input');
-    const inputValue = btnList.textContent;
-    setAttributes(input, {
-        type: 'text',
-        id: 'edit-list-title',
-        class: 'edit-list-title',
-        name: 'edit-list-title',
-        maxlength: 15
-    });
 
-    input.value = inputValue;
-    li.replaceChild(input, btnList);
-    input.focus();
-
-    return [btnList, input];
+    const nodes = edit(
+        `#btn-list-${event.target.dataset.number}`,
+        `#list-item-lists-${event.target.dataset.number}`,
+        {
+            type: 'text',
+            id: 'edit-list-title',
+            class: 'edit-list-title',
+            name: 'edit-list-title',
+            maxlength: 15
+        });
+    return nodes;
 }
 
 const btnNewListDisabled = () => {
     const btnNewList = selectNode('#btn-new-list');
     btnNewList.removeEventListener('click', addNewList);
-}
-
-const removeDeleteEditBtns = () => {
-    const btns = selectNodes(`.btns-lists`);
-    btns.forEach(btn => btn.remove());
 }

@@ -72,3 +72,43 @@
     height: 100vh;
     width: 100vw;
 }
+
+/* New List and Edit List Fields */
+.new-list-title,
+.edit-list-title,
+.edit-task-title {
+    font-family: 'Montserrat-700', sans-serif;
+    background-color: var(--slate-200);
+    color: var(--slate-700);
+    border-radius: 15px;
+    outline-color: var(--amber-500);
+    caret-color: var(--amber-500);
+    line-height: 1rem;
+}
+
+.edit-task-title {
+    font-size: 1rem;
+    padding: 0rem 0.5rem;
+}
+
+.new-list-title,
+.edit-list-title {
+    width: 80%;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+
+}
+
+.edit-list-title {
+    grid-area: 1 / 1 / 1 / span 2;
+    margin-bottom: 0.5rem;
+}
+
+.new-list-title {
+    height: 8%;
+}
+
+.new-lists-error {
+    color: var(--amber-500);
+    background-color: var(--slate-300);
+}

@@ -1,4 +1,4 @@
-import { selectNodes, findItemId, selectNode } from '../helpers';
+import { selectNodes, findItemId, selectNode, edit, saveOnEnter } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
 
@@ -40,17 +40,42 @@ const checkboxState = event => {
 }
 
 const expandTask = () => {
-    console.log('CLICK EXPAND TASK');
+    console.log('Expand task')
+    
+
 }
 
 const selectDate = () => {
     console.log('CLICK ON SELECT DATE');
 }
 
-const editTask = () => {
-    console.log('CLICK ON EDIT TASK');
+const editTask = event => {
+    const nodes = edit(`#checkbox-wrapper-${event.target.dataset.number} > label`, 
+        `#checkbox-wrapper-${event.target.dataset.number}`, 
+        {
+            type: 'text',
+            id: 'edit-task-title',
+            class: 'edit-task-title',
+            name: 'edit-task-title',
+            maxlength: 40
+        });
+        editTaskListeners(nodes);
 }
 
-const deleteTask = () => {
-    console.log('CLICK ON DELETE TASK');
+const editTaskListeners = nodes => {
+    nodes[1].addEventListener('focusout', () => saveEditTask(nodes));
+    nodes[1].addEventListener('keyup', saveOnEnter);
+}
+
+const saveEditTask = nodes => {
+    const taskToUpdate = findItemId(tasks, Number(nodes[0].dataset.number));
+    taskToUpdate.update('title', nodes[1].value);
+    renderTasks(taskToUpdate.visualizedOn || 'Inbox');
+}
+
+const deleteTask = event => {
+    const id = event.target.dataset.number;
+    const taskToDelete = findItemId(tasks, Number(id));
+    taskToDelete.delete(tasks, id);
+    renderTasks(taskToDelete.visualizedOn || 'Inbox');
 }

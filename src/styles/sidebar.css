@@ -152,34 +152,7 @@ div#side-header-logo svg {
     grid-area: btn;
 }
 
-/* New List and Edit List Fields */
-.new-list-title,
-.edit-list-title {
-    font-family: 'Montserrat-700', sans-serif;
-    font-size: 2rem;
-    background-color: var(--slate-200);
-    color: var(--slate-700);
-    border-radius: 15px;
-    outline-color: var(--amber-500);
-    caret-color: var(--amber-500);
-    line-height: 1rem;
-    width: 80%;
-    padding: 0.5rem 1rem;
-}
 
-.edit-list-title {
-    grid-area: 1 / 1 / 1 / span 2;
-    margin-bottom: 0.5rem;
-}
-
-.new-list-title {
-    height: 10%;
-}
-
-.new-lists-error {
-    color: var(--amber-500);
-    background-color: var(--slate-300);
-}
 
 /* New List and Edit List Fields Buttons */
 .btn-lists-edit,

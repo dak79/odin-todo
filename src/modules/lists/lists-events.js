@@ -1,4 +1,4 @@
-import { findItemId, findItemName, selectNode, selectNodes } from '../helpers';
+import { findItemId, findItemName, selectNode, selectNodes, saveOnEnter } from '../helpers';
 import { lists } from './lists';
 import { List } from '../classes';
 import { newListUi, editListUi, newListNameErrorUi, renderLists } from './lists-ui';
@@ -28,7 +28,7 @@ const deleteList = (event) => {
     renderLists();
 }
 
-const editList = (event) => {
+const editList = event => {
     event.stopPropagation();
     const nodes = editListUi(event);
     editListListeners(nodes);
@@ -37,13 +37,6 @@ const editList = (event) => {
 const editListListeners = nodes => {
     nodes[1].addEventListener('focusout', () => saveEditList(nodes));
     nodes[1].addEventListener('keyup', saveOnEnter);
-}
-
-const saveOnEnter = event => {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        event.target.blur();
-    }
 }
 
 const saveEditList = nodes => {

@@ -42,6 +42,10 @@ const taskItem = task => {
     }
 
     const taskLabel = document.createElement('label');
+    setAttributes(taskLabel, {
+        for: `task-checkbox-${task.id}`,
+        'data-number': `${task.id}`
+    })
     taskLabel.setAttribute('for', `task-checkbox-${task.id}`);
     taskLabel.textContent = `${task.title}`;
 
@@ -91,20 +95,23 @@ const taskItem = task => {
         type: 'button',
         id: `task-${task.id}-edit-btn`,
         class: 'task-edit-btn',
-        'aria-label': 'Edit task title'
+        'aria-label': 'Edit task title',
+        'data-number':`${task.id}`
+
     });
 
-    editTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z"/></svg>`;
+    editTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z" data-number="${task.id}"/></svg>`;
 
     const deleteTaskBtn = document.createElement('button');
     setAttributes(deleteTaskBtn, {
         type: 'button',
         id: `task-${task.id}-delete-btn`,
         class: 'task-delete-btn',
-        'aria-label': 'Delete task'
+        'aria-label': 'Delete task',
+        'data-number': `${task.id}`
     });
 
-    deleteTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z"/></svg>`;
+    deleteTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" data-number="${task.id}" /></svg>`;
 
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 
