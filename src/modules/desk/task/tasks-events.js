@@ -28,7 +28,7 @@ const checkboxState = event => {
         taskToUpdate.update('complete', true);
         taskToUpdate.addTag('complete');
         taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'complete');
-        renderTasks(tasks, taskToUpdate.visualizedOn);
+        renderTasks(taskToUpdate.visualizedOn);
 
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
@@ -36,7 +36,7 @@ const checkboxState = event => {
         taskToUpdate.deleteTag('complete');
         taskToUpdate.addTag('inbox');
         taskToUpdate.updateTime();
-        renderTasks(tasks, 'complete');
+        renderTasks('complete');
     }
 }
 

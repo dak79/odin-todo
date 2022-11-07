@@ -1,19 +1,19 @@
 import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../../helpers';
-import { orderTaskByDate, updateTimeTasks } from './tasks';
+import { orderTaskByDate, tasks, updateTimeTasks } from './tasks';
 import { addTaskListeners } from './tasks-events';
 
-export const renderTasks = (array, type) => {
+export const renderTasks = (type) => {
     orderTaskByDate();
     updateTimeTasks();
     const section = selectNode('#desk');
-    const displayTasks = createTasksUi(array, type);
+    const displayTasks = createTasksUi(type);
     cleanNode(section);
     section.appendChild(displayTasks);
     addTaskListeners();
 }
 
-const createTasksUi = (array, type) => {
-    const todoes = createList(array, type, taskItem, 'tasks', 'task', 'task-item');
+const createTasksUi = (type) => {
+    const todoes = createList(tasks, type, taskItem, 'tasks', 'task', 'task-item');
 
     return todoes;
 }

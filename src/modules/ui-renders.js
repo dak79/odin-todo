@@ -5,7 +5,6 @@ import { renderLists } from './sidebar/lists/lists-render';
 import { renderMenu } from './sidebar/menu/menu-ui';
 import { renderTasks } from './desk/task/tasks-ui';
 import { exampleTasks } from './desk/task/tasks-example';
-import { tasks } from './desk/task/tasks';
 
 export const renderPage = () => {
     
@@ -15,5 +14,5 @@ export const renderPage = () => {
     renderLists();
     defaultList();
     exampleTasks();
-    renderTasks(tasks, 'inbox');
+    renderTasks('inbox');
 }

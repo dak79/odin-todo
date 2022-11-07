@@ -26,5 +26,5 @@ export const exampleTasks = () => {
     const todoEight = new Task('Mail', 'Send me mail please', new Date('2022-11-04'), 1, ['Take metro']);
     todoEight.add(tasks);
     
-    tasksVisualizedOn(tasks, 'inbox');
+    tasksVisualizedOn('inbox');
 }
