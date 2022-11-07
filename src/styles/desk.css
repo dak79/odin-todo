@@ -63,7 +63,7 @@ input[type="checkbox"]:checked:before {
 }
 
 input[type="checkbox"]:checked + label,
-span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.task-due-date {
+span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.due-date-wrapper {
     color: var(--amber-500);
     text-decoration: line-through;
 }

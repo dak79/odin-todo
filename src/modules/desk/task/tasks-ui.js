@@ -71,7 +71,7 @@ const taskItem = task => {
 
     wrapperDueDate.appendChild(taskDueDate);
 
-    if (task.tags.find(tag => tag === 'late')) {
+    if (task.tags.find(tag => tag === 'late') && task.complete === false) {
         const lateMsg = document.createElement('span');
         setAttributes(lateMsg, {
             id:`late-msg-${task.id}`,

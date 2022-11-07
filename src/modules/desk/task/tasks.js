@@ -32,7 +32,6 @@ export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>(first
 export const updateTimeTasks = () => {
     tasks.map(task => {
         task.updateTime()
-        console.log(task)
     });
 }
 export const tasksVisualizedOn = (array, value) => {

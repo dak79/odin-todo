@@ -41,9 +41,9 @@ class TaskProperty {
         this.tags.push(value);
     } 
 
-    deleteTag() {
-        const index = this.tags.indexOf(this)
-        this.tags.splice(index, 1)
+    deleteTag(value) {
+        const index = this.tags.findIndex(tag => tag === value);
+        if (index >= 0) this.tags.splice(index, 1);
     }
 
     updateTime() {
