@@ -47,11 +47,6 @@ class TaskBase {
 }
 
 class ListBase {
-    // static #id = 0;
-    // static #incrementId() {
-    //     this.#id++;
-    // }
-
     constructor(title) {
         this.constructor.incrementId();
         this.type = 'list';
@@ -72,16 +67,6 @@ export const MyMixin = superclass => class extends superclass {
         array.push(this);
     }
     
-    // // USED BY LIST
-    // findId(array, id) {
-    //     return array.find(element => element.id === id);
-    // }
-
-    // // USED BY LIST
-    // findName(array) {
-    //     return array.find(element => element.title.toLowerCase().trim() === this.title.toLowerCase().trim());
-    // }
-
     // USED BY LIST
     update(key, value) {
         return (key in this) ? this[key] = value : false;
