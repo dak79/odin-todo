@@ -1,4 +1,4 @@
-import { tasksRender } from '../../desk/task/tasks-render';
+import { renderTasks } from '../../desk/task/tasks-render';
 import { selectNode, cleanNode } from '../../helpers';
 import { tasks, tasksVisualizedOn, orderTaskByDate } from '../../desk/task/tasks';
 
@@ -14,5 +14,5 @@ export const showMenu = event => {
     orderTaskByDate(tasks);
     tasksVisualizedOn(tasks, menu);
 
-    tasksRender(tasks, menu);
+    renderTasks(tasks, menu);
 }

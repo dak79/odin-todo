@@ -1,6 +1,6 @@
 import { selectNodes, findItemId, selectNode } from '../../helpers';
 import { tasks } from './tasks';
-import { tasksRender } from './tasks-render';
+import { renderTasks } from './tasks-render';
 
 export const addTaskListeners = () => {
     const checkboxes = selectNodes('.tasks-checkbox');
@@ -28,8 +28,7 @@ const checkboxState = event => {
         taskToUpdate.update('complete', true);
         taskToUpdate.addTag('complete');
         taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'complete');
-        tasksRender(tasks, taskToUpdate.visualizedOn);
-        addTaskListeners();
+        renderTasks(tasks, taskToUpdate.visualizedOn);
 
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
@@ -37,8 +36,7 @@ const checkboxState = event => {
         taskToUpdate.deleteTag('complete');
         taskToUpdate.addTag('inbox');
         taskToUpdate.updateTimeTags();
-        tasksRender(tasks, 'complete');
-        addTaskListeners();
+        renderTasks(tasks, 'complete');
     }
 }
 

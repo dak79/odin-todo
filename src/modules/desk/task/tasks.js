@@ -1,6 +1,6 @@
 import { renderInbox } from '../../sidebar/menu/menu-render';
 import { Task } from './task-class';
-import { tasksRender } from './tasks-render';
+import { renderTasks } from './tasks-render';
 
 
 // Tasks database
@@ -26,8 +26,7 @@ export const exampleTasks = () => {
     todoEight.add(tasks);
     orderTaskByDate(tasks);
     tasksVisualizedOn(tasks, 'inbox')
-    tasksRender(tasks, 'inbox')
-    console.log(tasks);
+    renderTasks(tasks, 'inbox');
 }
 
 export const orderTaskByDate = array => array.sort((firstDate, secondDate) => {
