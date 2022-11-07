@@ -69,7 +69,10 @@ const editTaskListeners = nodes => {
 
 const saveEditTask = nodes => {
     const taskToUpdate = findItemId(tasks, Number(nodes[0].dataset.number));
-    taskToUpdate.update('title', nodes[1].value);
+    if (nodes[1].value !== '') {
+        taskToUpdate.update('title', nodes[1].value);
+    }
+
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
 }
 
