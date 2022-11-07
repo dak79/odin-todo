@@ -1,5 +1,5 @@
 import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
-import { orderTaskByDate, tasks, updateTimeTasks } from './tasks';
+import { orderTaskByDate, tasks, tasksVisualizedOn, updateTimeTasks } from './tasks';
 import { addTaskListeners } from './tasks-events';
 
 export const renderTasks = desk => {
@@ -10,6 +10,7 @@ export const renderTasks = desk => {
     cleanNode(section);
     section.appendChild(displayTasks);
     addTaskListeners();
+    tasksVisualizedOn(desk);
 }
 
 const createTasksUi = desk => {

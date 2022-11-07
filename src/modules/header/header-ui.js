@@ -1,6 +1,15 @@
-import { setAttributes } from "../helpers";
+import { selectNode, appendChildren, setAttributes } from '../helpers';
 
-export const createLogo = () => {
+export const renderHeader = () => {
+    const header = selectNode('#side-header');
+    const logo = createLogo();
+    const btnNewTask = createBtnNewTask();
+    const title = createTitle();
+
+    appendChildren(header, [logo, btnNewTask, title]);
+}
+
+const createLogo = () => {
     const logo = document.createElement('div');
     setAttributes(logo, {
         class: 'side-header-logo',
@@ -11,7 +20,7 @@ export const createLogo = () => {
     return logo;
 }
 
-export const createTitle = () => {
+const createTitle = () => {
     const title = document.createElement('h1');
     setAttributes(title, {
         class: 'side-title',
@@ -23,7 +32,7 @@ export const createTitle = () => {
     return title;
 }
 
-export const createBtnNewTask = () => {
+const createBtnNewTask = () => {
     const btnNewTask = document.createElement('button');
     setAttributes(btnNewTask, {
         type: 'button',

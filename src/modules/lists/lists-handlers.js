@@ -1,6 +1,6 @@
 import { findItemId, findItemName, selectNode, selectNodes } from '../helpers';
 import { lists } from './lists';
-import { List } from './list-class';
+import { List } from '../classes';
 import { newListListeners, addListenerLists, editListListeners } from './lists-listeners';
 import { newListUi, editListUi, newListNameErrorUi } from './lists-ui';
 import { renderLists } from './lists-render';
@@ -34,9 +34,10 @@ const checkListName = node => {
 }
 
 export const saveNewList = input => {
-    const newList = checkListName(input);
+    const newListTitle = checkListName(input);
     
-    if (newList) {
+    if (newListTitle) {
+        const newList = new List(newList);
         newList.add(lists);
         renderLists();
         addListenerLists();

@@ -1,6 +1,6 @@
 import { appendChildren, setAttributes } from './helpers';
 
-import { renderHeader } from './header/header-render';
+import { renderHeader } from './header/header-ui';
 import { defaultList } from './lists/lists';
 import { renderLists } from './lists/lists-render';
 import { renderMenu } from './menu/menu-ui';
@@ -8,8 +8,7 @@ import { renderTasks } from './task/tasks-ui';
 import { exampleTasks } from './task/tasks-example';
 
 export const renderPage = () => {
-    
-    createMain();
+    renderMain();
     renderHeader();
     renderMenu();
     renderLists();
@@ -18,7 +17,7 @@ export const renderPage = () => {
     renderTasks('inbox');
 }
 
-const createMain = () => {
+const renderMain = () => {
     const root = document.querySelector('#root');
     
     const main = document.createElement('main');
@@ -28,7 +27,6 @@ const createMain = () => {
     
     root.appendChild(main);
     appendChildren(main, [sidebar, desk]);
-
 }
 
 const floor = () => {

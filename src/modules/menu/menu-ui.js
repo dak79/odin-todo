@@ -1,5 +1,5 @@
 import { selectNode, createList, setAttributes } from "../helpers";
-import { menuListeners } from "./menu-listener";
+import { menuListeners } from "./menu-events";
 
 export const renderMenu = () => {
     const nav = selectNode('#side-navbar')

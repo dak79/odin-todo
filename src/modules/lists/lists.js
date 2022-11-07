@@ -1,4 +1,4 @@
-import { List } from './list-class';
+import { List } from '../classes';
 import { renderLists } from './lists-render';
 import { addListenerLists } from './lists-listeners';
 
