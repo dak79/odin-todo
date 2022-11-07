@@ -67,12 +67,29 @@ span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.task-due-date {
     color: var(--amber-500);
     text-decoration: line-through;
 }
+
 label:hover,
 input[type="checkbox"]:hover,
 .task-due-date:hover {
     cursor: pointer;
     color: var(--amber-500)
 }
+
+.due-date-wrapper {
+    grid-area: due-date;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+span.task-due-date + span.late-msg {
+    margin-left: 2rem;
+}
+
+span.late-msg svg {
+    fill: var(--amber-500)
+}
+
 
 /* Task Buttons */
 .expand-btn,
@@ -101,10 +118,6 @@ input[type="checkbox"]:hover,
 .expand-btn-down svg {
     transform: rotate(0deg);
     transition: 1s transform linear;
-}
-
-.task-due-date {
-    grid-area: due-date;
 }
 
 .task-btn-wrapper {

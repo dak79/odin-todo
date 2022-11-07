@@ -35,7 +35,7 @@ const checkboxState = event => {
         taskToUpdate.update('complete', false);
         taskToUpdate.deleteTag('complete');
         taskToUpdate.addTag('inbox');
-        taskToUpdate.updateTimeTags();
+        taskToUpdate.updateTime();
         renderTasks(tasks, 'complete');
     }
 }

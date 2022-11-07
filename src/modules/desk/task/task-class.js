@@ -50,7 +50,7 @@ class TaskProperty {
         if (TaskProperty.#isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
         if (TaskProperty.#getWeekNumber(new Date()) === TaskProperty.#getWeekNumber(this.dueDate) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');
         if ((TaskProperty.#getWeekNumber(this.dueDate) > TaskProperty.#getWeekNumber(new Date()) || !this.dueDate) && (!this.tags.find(tag => tag === 'anytime'))) this.addTag('anytime');
-        if (TaskProperty.#getWeekNumber(this.dueDate) < TaskProperty.#getWeekNumber(new Date()) || this.dueDate < new Date() && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
+        if (this.dueDate && (TaskProperty.#getWeekNumber(this.dueDate) < TaskProperty.#getWeekNumber(new Date()) || this.dueDate < new Date()) && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
     }
 }
 
