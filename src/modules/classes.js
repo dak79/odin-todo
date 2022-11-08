@@ -1,24 +1,7 @@
 import { isAfter, isToday , isThisWeek, endOfWeek, isBefore } from 'date-fns'
+
 class TaskBase {
    
-    /**
-     * 
-     * @param { date } dateOne - dueDate 
-     * @param { date } dateTwo - today 
-     * @returns 
-     */
-    static #compareDate(dateOne, dateTwo) {
-        const dateOneDay = new Date(dateOne).getDate();
-        const dateTwoDay = new Date(dateTwo).getDate();
-        const dateOneMonth = new Date(dateOne).getMonth()
-        const dateTwoMonth = new Date(dateTwo).getMonth()
-        const dateOneYear = new Date(dateOne).getFullYear()
-        const dateTwoYear = new Date(dateTwo).getFullYear()
-
-        return (dateOneYear > dateTwoYear || (dateOneYear === dateTwoYear && dateOneMonth > dateTwoMonth) || (dateOneYear === dateTwoYear && dateOneMonth === dateTwoMonth && dateOneDay > dateTwoDay)) ? 'future' :
-        (dateOneYear === dateTwoYear && dateOneMonth === dateTwoMonth && dateOneDay === dateTwoDay) ? 'present' : 'past';
-    }
-
     constructor(title, description, dueDate, priority, checklist){
         this.type = 'task';
         this.constructor.incrementId();
@@ -44,8 +27,6 @@ class TaskBase {
     }
 
     updateTime() {
-        if (!this.tags.find(tag => tag === 'inbox')) this.addTag('inbox');
-
         if (isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
 
         if (isThisWeek(this.dueDate, { weekStartsOn: 1 }) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');

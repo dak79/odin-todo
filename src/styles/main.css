@@ -76,7 +76,8 @@
 /* New List and Edit List Fields */
 .new-list-title,
 .edit-list-title,
-.edit-task-title {
+.edit-task-title,
+.new-due-date {
     font-family: 'Montserrat-700', sans-serif;
     background-color: var(--slate-200);
     color: var(--slate-700);
@@ -86,7 +87,8 @@
     line-height: 1rem;
 }
 
-.edit-task-title {
+.edit-task-title,
+.new-due-date {
     font-size: 1rem;
     padding: 0rem 0.5rem;
 }
@@ -96,7 +98,12 @@
     width: 80%;
     padding: 0.5rem 1rem;
     font-size: 2rem;
+}
 
+.new-due-date {
+    background-color: var(--slate-200);
+    color: var(--amber-500);
+    margin-right: 0.5rem;
 }
 
 .edit-list-title {

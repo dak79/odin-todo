@@ -27,5 +27,4 @@ export const exampleTasks = () => {
     todoEight.add(tasks);
     
     tasksVisualizedOn('inbox');
-    console.log(tasks);
 }

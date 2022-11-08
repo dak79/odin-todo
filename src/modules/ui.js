@@ -5,6 +5,7 @@ import { renderLists } from './lists/lists-ui';
 import { renderMenu } from './menu/menu-ui';
 import { renderTasks } from './task/tasks-ui';
 import { exampleTasks } from './task/tasks-example';
+import { updateTimeTasks } from './task/tasks';
 
 export const renderPage = () => {
     renderMain();
@@ -12,6 +13,7 @@ export const renderPage = () => {
     renderMenu();
     defaultList();
     renderLists();
+    updateTimeTasks();
     exampleTasks();
     renderTasks('inbox');
 }

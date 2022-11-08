@@ -7,10 +7,16 @@ export const addTaskListeners = () => {
     checkboxes.forEach(checkbox => checkbox.addEventListener('change', checkboxState));
 
     const expandBtns = selectNodes('.expand-btn');
-    expandBtns.forEach(btn => btn.addEventListener('click', expandTask))
+    expandBtns.forEach(btn => btn.addEventListener('click', expandTask));
 
     const dueDates = selectNodes('.task-due-date');
-    dueDates.forEach(date => date.addEventListener('click', selectDate))
+    dueDates.forEach(date => date.addEventListener('click', selectDate));
+
+    const dueDateDeleteBtns = selectNodes('.due-date-delete-btn');
+    dueDateDeleteBtns.forEach(btn => btn.addEventListener('click', deleteDueDate));
+
+    const dueDateEditBtns = selectNodes('.due-date-edit-btn');
+    dueDateEditBtns.forEach(btn => btn.addEventListener('click', editDueDate));
     
     const editBtns = selectNodes('.task-edit-btn');
     editBtns.forEach(btn => btn.addEventListener('click', editTask));
@@ -28,7 +34,9 @@ const checkboxState = event => {
         taskToUpdate.update('complete', true);
         taskToUpdate.addTag('complete');
         taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'complete');
-        setTimeout(() => renderTasks(taskToUpdate.visualizedOn), 1000);
+        
+        renderTasks(taskToUpdate.visualizedOn);
+        
     } else {
         const taskToUpdate = findItemId(tasks, Number(data));
         taskToUpdate.update('complete', false);
@@ -46,11 +54,8 @@ const expandTask = () => {
 }
 
 const selectDate = event => {
-    console.log(event.target)
-    console.log('CLICK ON SELECT DATE');
     const dueDate = selectNode(`#task-${event.target.dataset.number}-due-date`);
     const spanDueDate = selectNode(`#due-date-wrapper-${event.target.dataset.number}`);
-    console.log(dueDate.textContent)
     const input = document.createElement('input');
     setAttributes(input, {
         type: 'date',
@@ -60,27 +65,32 @@ const selectDate = event => {
     });
     addListenerNewDate(input);
     spanDueDate.replaceChild(input, dueDate);
-
-    
+    input.focus();
 }
 
 const addListenerNewDate = node => {
+    node.addEventListener('change', () => saveNewDueDate(node));
     node.addEventListener('focusout', () => saveNewDueDate(node));
     node.addEventListener('keyup', saveOnEnter);
 }
 
 const saveNewDueDate = node => {
-    console.log(node.dataset.number);
-
-    const taskToUpdate = findItemId(tasks, Number(node.dataset.number))
-    console.log(taskToUpdate);
+    const taskToUpdate = findItemId(tasks, Number(node.dataset.number));
     taskToUpdate.update('dueDate', new Date(node.value));
-    console.log(taskToUpdate);
     taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'inbox');
     taskToUpdate.updateTime();
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
-    console.log(tasks);
+}
 
+const deleteDueDate = event => {
+    const id = event.target.dataset.number;
+    const taskToDelete = findItemId(tasks, Number(id));
+    taskToDelete.update('dueDate', null);
+    renderTasks(taskToDelete.visualizedOn || 'Inbox');
+}
+
+const editDueDate = event => {
+    selectDate(event);
 }
 
 const editTask = event => {

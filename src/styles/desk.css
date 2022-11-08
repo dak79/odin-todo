@@ -90,11 +90,12 @@ span.late-msg svg {
     fill: var(--amber-500)
 }
 
-
 /* Task Buttons */
 .expand-btn,
 .task-edit-btn,
-.task-delete-btn {
+.task-delete-btn,
+.due-date-delete-btn,
+.due-date-edit-btn {
     background-color: var(--slate-700);
     fill: var(--slate-200);
     border: none;
@@ -104,7 +105,9 @@ span.late-msg svg {
 
 .expand-btn:hover,
 .task-edit-btn:hover,
-.task-delete-btn:hover
+.task-delete-btn:hover,
+.due-date-delete-btn:hover,
+.due-date-edit-btn:hover
 {
     fill: var(--amber-500);
     cursor: pointer;
