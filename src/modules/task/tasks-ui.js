@@ -65,14 +65,6 @@ const taskItem = task => {
         class: 'due-date-wrapper',
     });
 
-    const taskDueDate = document.createElement('span');
-    setAttributes(taskDueDate, {
-        id:`task-${task.id}-due-date`,
-        class: 'task-due-date',
-        'data-number': `${task.id}`
-    });
-    taskDueDate.textContent = Date.parse(task.dueDate) ? `${formatDate(task.dueDate)}` : '';
-
     if (task.dueDate) {
         const deleteDateBtn = document.createElement('button');
         setAttributes(deleteDateBtn, {
@@ -99,10 +91,19 @@ const taskItem = task => {
 
         wrapperDueDate.appendChild(editDateBtn);
     }
+    
+    const taskDueDate = document.createElement('span');
+    setAttributes(taskDueDate, {
+        id:`task-${task.id}-due-date`,
+        class: 'task-due-date',
+        'data-number': `${task.id}`
+    });
+    taskDueDate.textContent = Date.parse(task.dueDate) ? `${formatDate(task.dueDate)}` : '';
 
     wrapperDueDate.appendChild(taskDueDate);
 
     if (task.tags.find(tag => tag === 'late') && task.complete === false) {
+        taskDueDate.classList.add('late-color');
         const lateMsg = document.createElement('span');
         setAttributes(lateMsg, {
             id:`late-msg-${task.id}`,

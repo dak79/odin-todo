@@ -77,13 +77,35 @@ input[type="checkbox"]:hover,
 
 .due-date-wrapper {
     grid-area: due-date;
-    display: flex;
-    justify-content: start;
+    display: grid;
+    grid: 
+        [row1-start] "btn span date msg" 1fr [row1-end]
+        / 0.3fr 0 0.3fr 1fr;
+    justify-items: end;
     align-items: center;
 }
 
-span.task-due-date + span.late-msg {
-    margin-left: 2rem;
+.task-due-date {
+    grid-area: date;
+}
+
+.span-before-date {
+    grid-area: span;
+}
+
+.due-date-delete-btn,
+.due-date-edit-btn {
+    grid-area: btn;
+}
+
+.late-msg {
+    grid-area: msg;
+    place-self: center start;
+    margin-left: 1rem;
+}
+
+.late-color {
+    color: var(--amber-500);
 }
 
 span.late-msg svg {

@@ -54,8 +54,12 @@ const expandTask = () => {
 }
 
 const selectDate = event => {
+
+    const dueDates = selectNodes('.task-due-date');
+    dueDates.forEach(date => date.removeEventListener('click', selectDate));
+    
     const dueDate = selectNode(`#task-${event.target.dataset.number}-due-date`);
-    const spanDueDate = selectNode(`#due-date-wrapper-${event.target.dataset.number}`);
+    const spanDueDate = dueDate.parentNode;
     const input = document.createElement('input');
     setAttributes(input, {
         type: 'date',
@@ -68,15 +72,15 @@ const selectDate = event => {
     input.focus();
 }
 
-const addListenerNewDate = node => {
+const addListenerNewDate = node => { 
     node.addEventListener('change', () => saveNewDueDate(node));
-    node.addEventListener('focusout', () => saveNewDueDate(node));
-    node.addEventListener('keyup', saveOnEnter);
 }
 
 const saveNewDueDate = node => {
     const taskToUpdate = findItemId(tasks, Number(node.dataset.number));
+    
     taskToUpdate.update('dueDate', new Date(node.value));
+    console.log(taskToUpdate.dueDate);
     taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'inbox');
     taskToUpdate.updateTime();
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
@@ -86,6 +90,8 @@ const deleteDueDate = event => {
     const id = event.target.dataset.number;
     const taskToDelete = findItemId(tasks, Number(id));
     taskToDelete.update('dueDate', null);
+    taskToDelete.tags = taskToDelete.tags.filter(tag => tag === 'inbox');
+    taskToDelete.updateTime();
     renderTasks(taskToDelete.visualizedOn || 'Inbox');
 }
 
