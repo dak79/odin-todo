@@ -69,7 +69,8 @@ const taskItem = task => {
     const taskDueDate = document.createElement('span');
     setAttributes(taskDueDate, {
         id:`task-${task.id}-due-date`,
-        class: 'task-due-date'
+        class: 'task-due-date',
+        'data-number': `${task.id}`
     });
     taskDueDate.textContent = Date.parse(task.dueDate) ? `${formatDate(task.dueDate)}` : '';
     wrapperDueDate.appendChild(taskDueDate);

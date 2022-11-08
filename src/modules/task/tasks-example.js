@@ -5,7 +5,7 @@ export const exampleTasks = () => {
     const todoOne = new Task('Go to market', 'Buy fruit and vegetables', new Date('2022-11-04'), 1, ['Bananas', 'Apples', 'Oranges', 'Tomatoes', 'Potatos', 'Salad']);
     todoOne.add(tasks);
     
-    const todoTwo = new Task('Organize Meeting', 'Introduce new teammate', new Date('2022-12-15'), 2, ['Send invitations', 'Prepare short presentation']);
+    const todoTwo = new Task('Organize Meeting', 'Introduce new teammate', new Date('2022-11-10'), 2, ['Send invitations', 'Prepare short presentation']);
     todoTwo.add(tasks);
     
     const todoThree = new Task('Pay Bills', 'Pay electricity and gas bills', new Date('2022-11-6'), 3, ['Electric Bill', 'Gas Bill']);
@@ -27,4 +27,5 @@ export const exampleTasks = () => {
     todoEight.add(tasks);
     
     tasksVisualizedOn('inbox');
+    console.log(tasks);
 }

@@ -1,4 +1,4 @@
-import { selectNodes, findItemId, selectNode, edit, saveOnEnter } from '../helpers';
+import { selectNodes, findItemId, selectNode, edit, saveOnEnter, setAttributes } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
 
@@ -45,8 +45,42 @@ const expandTask = () => {
 
 }
 
-const selectDate = () => {
+const selectDate = event => {
+    console.log(event.target)
     console.log('CLICK ON SELECT DATE');
+    const dueDate = selectNode(`#task-${event.target.dataset.number}-due-date`);
+    const spanDueDate = selectNode(`#due-date-wrapper-${event.target.dataset.number}`);
+    console.log(dueDate.textContent)
+    const input = document.createElement('input');
+    setAttributes(input, {
+        type: 'date',
+        id: `new-due-date-${event.target.dataset.number}`,
+        class: 'new-due-date',
+        'data-number': `${event.target.dataset.number}`
+    });
+    addListenerNewDate(input);
+    spanDueDate.replaceChild(input, dueDate);
+
+    
+}
+
+const addListenerNewDate = node => {
+    node.addEventListener('focusout', () => saveNewDueDate(node));
+    node.addEventListener('keyup', saveOnEnter);
+}
+
+const saveNewDueDate = node => {
+    console.log(node.dataset.number);
+
+    const taskToUpdate = findItemId(tasks, Number(node.dataset.number))
+    console.log(taskToUpdate);
+    taskToUpdate.update('dueDate', new Date(node.value));
+    console.log(taskToUpdate);
+    taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'inbox');
+    taskToUpdate.updateTime();
+    renderTasks(taskToUpdate.visualizedOn || 'Inbox');
+    console.log(tasks);
+
 }
 
 const editTask = event => {

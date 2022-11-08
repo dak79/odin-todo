@@ -1,14 +1,6 @@
+import { isAfter, isToday , isThisWeek, endOfWeek, isBefore } from 'date-fns'
 class TaskBase {
    
-    static #getWeekNumber(date) {
-        const currentDate = date;
-        const startDate = date ? new Date(date.getFullYear(), 0, 1) : false;
-        const days = Math.ceil((currentDate - startDate) / (24 * 60 * 60 * 1000));
-        const weekNumber = Math.floor(days/7);
-        
-        return weekNumber; 
-    }
-
     /**
      * 
      * @param { date } dateOne - dueDate 
@@ -52,10 +44,15 @@ class TaskBase {
     }
 
     updateTime() {
-        if (TaskBase.#compareDate(this.dueDate, new Date()) === 'present' && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
-        if (TaskBase.#getWeekNumber(new Date()) === TaskBase.#getWeekNumber(this.dueDate) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');
-        if ((TaskBase.#getWeekNumber(this.dueDate) > TaskBase.#getWeekNumber(new Date()) || !this.dueDate) && (!this.tags.find(tag => tag === 'anytime'))) this.addTag('anytime');
-        if (TaskBase.#compareDate(this.dueDate, new Date()) === 'past' && (this.dueDate) && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
+        if (!this.tags.find(tag => tag === 'inbox')) this.addTag('inbox');
+
+        if (isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
+
+        if (isThisWeek(this.dueDate, { weekStartsOn: 1 }) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');
+
+        if ((isAfter(this.dueDate, endOfWeek(new Date(), { weekStartsOn: 1 })) || (!this.dueDate)) && (!this.tags.find(tag => tag === 'anytime'))) this.addTag('anytime');
+
+        if (isBefore(this.dueDate, new Date()) && (this.dueDate) && (!this.tags.find(tag => tag === 'late' || tag === 'today'))) this.addTag('late');
     }
 }
 
