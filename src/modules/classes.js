@@ -1,9 +1,5 @@
 class TaskBase {
-    static #isToday(date) {
-        const today = new Date();
-        return date ? date.toLocaleDateString() === today.toLocaleDateString() ? true : false : false;
-    }
-
+   
     static #getWeekNumber(date) {
         const currentDate = date;
         const startDate = date ? new Date(date.getFullYear(), 0, 1) : false;
@@ -11,7 +7,24 @@ class TaskBase {
         const weekNumber = Math.floor(days/7);
         
         return weekNumber; 
+    }
 
+    /**
+     * 
+     * @param { date } dateOne - dueDate 
+     * @param { date } dateTwo - today 
+     * @returns 
+     */
+    static #compareDate(dateOne, dateTwo) {
+        const dateOneDay = new Date(dateOne).getDate();
+        const dateTwoDay = new Date(dateTwo).getDate();
+        const dateOneMonth = new Date(dateOne).getMonth()
+        const dateTwoMonth = new Date(dateTwo).getMonth()
+        const dateOneYear = new Date(dateOne).getFullYear()
+        const dateTwoYear = new Date(dateTwo).getFullYear()
+
+        return (dateOneYear > dateTwoYear || (dateOneYear === dateTwoYear && dateOneMonth > dateTwoMonth) || (dateOneYear === dateTwoYear && dateOneMonth === dateTwoMonth && dateOneDay > dateTwoDay)) ? 'future' :
+        (dateOneYear === dateTwoYear && dateOneMonth === dateTwoMonth && dateOneDay === dateTwoDay) ? 'present' : 'past';
     }
 
     constructor(title, description, dueDate, priority, checklist){
@@ -39,10 +52,10 @@ class TaskBase {
     }
 
     updateTime() {
-        if (TaskBase.#isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
+        if (TaskBase.#compareDate(this.dueDate, new Date()) === 'present' && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
         if (TaskBase.#getWeekNumber(new Date()) === TaskBase.#getWeekNumber(this.dueDate) && (!this.tags.find(tag => tag === 'this-week'))) this.addTag('this-week');
         if ((TaskBase.#getWeekNumber(this.dueDate) > TaskBase.#getWeekNumber(new Date()) || !this.dueDate) && (!this.tags.find(tag => tag === 'anytime'))) this.addTag('anytime');
-        if (this.dueDate && (TaskBase.#getWeekNumber(this.dueDate) < TaskBase.#getWeekNumber(new Date()) || this.dueDate < new Date()) && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
+        if (TaskBase.#compareDate(this.dueDate, new Date()) === 'past' && (this.dueDate) && (!this.tags.find(tag => tag === 'late'))) this.addTag('late');
     }
 }
 
