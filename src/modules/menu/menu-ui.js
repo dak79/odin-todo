@@ -1,11 +1,11 @@
-import { selectNode, createList, setAttributes } from "../helpers";
-import { menuListeners } from "./menu-events";
+import { selectNode, createList, setAttributes } from '../helpers';
+import { addAppListeners } from '../listeners';
 
-export const renderMenu = () => {
+export const renderMenu = isFirstLoad => {
     const nav = selectNode('#side-navbar')
     const menu = createMenu();
     nav.appendChild(menu);
-    menuListeners();
+    if (!isFirstLoad) addAppListeners();
 }
 
 const createMenu = () => {

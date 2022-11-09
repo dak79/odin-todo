@@ -1,14 +1,15 @@
 import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
-import { orderTaskByDate, tasks, tasksVisualizedOn, updateTimeTasks } from './tasks';
-import { addTaskListeners } from './tasks-events';
+import { addAppListeners } from '../listeners';
+import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
+import { addTaskListeners } from './tasks-handlers';
 
-export const renderTasks = desk => {
+export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
     const section = selectNode('#desk');
     const displayTasks = createTasksUi(desk);
     cleanNode(section);
     section.appendChild(displayTasks);
-    addTaskListeners();
+    if (!isFirstLoad) addAppListeners();
     tasksVisualizedOn(desk);
 }
 

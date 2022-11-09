@@ -1,28 +1,21 @@
+import { addNewTask, showMenu } from './menu/menu-handlers';
+import { showList, deleteList, editList, addNewList } from './lists/lists-handlers';
+import { checkboxState, expandTask, selectDate, deleteDueDate, btnEditDueDate, editTask, deleteTask } from './task/tasks-handlers';
 export const listeners = [];
 
-// export const addListsListeners1 = () => {
-//     addListeners('.btn-lists', 'click', showList);
-//     addListeners('.svg-btns-delete', 'click', deleteList);
-//     addListeners('.svg-btns-edit', 'click', editList);
-// }
+export const addAppListeners = () => {
 
-// export const removeListListeners1 = () => {
-//     clearListeners('.btn-lists', 'click', showList);
-//     clearListeners('.svg-btns-delete', 'click', deleteList);
-//     clearListeners('.svg-btns-edit', 'click', editList);
-// }
+    // Menu
+    addListener('#btn-new-task', 'click', addNewTask);
+    addListeners('.btn-menu', 'click', showMenu);
 
-// export const addMenuListeners1 = () => {
-//     addListener('#btn-new-task', 'click', addNewTask);
-//     addListeners('.btn-menu', 'click', showMenu);
-// }
+    // Lists
+    addListeners('.btn-lists', 'click', showList);
+    addListeners('.svg-btns-delete', 'click', deleteList);
+    addListeners('.svg-btns-edit', 'click', editList);
+    addListener('#btn-new-list', 'click', addNewList);
 
-// export const removeMenuListeners1 = () => {
-//     clearListener('#btn-new-task', 'click', addNewTask);
-//     clearListeners('.btn-menu', 'click', showMenu);
-// }
-
-export const addTaskListeners1 = () => {
+    // Tasks
     addListeners('.tasks-checkbox', 'change', checkboxState);
     addListeners('.expand-btn', 'click', expandTask);
     addListeners('.task-due-date', 'click', selectDate);
@@ -30,16 +23,6 @@ export const addTaskListeners1 = () => {
     addListeners('.due-date-edit-btn', 'click', btnEditDueDate);
     addListeners('.task-edit-btn', 'click', editTask);
     addListeners('.task-delete-btn', 'click', deleteTask);
-} 
-
-export const removeTaskListeners = () => {
-    clearListeners('.tasks-checkbox', 'change', checkboxState);
-    clearListeners('.expand-btn', 'click', expandTask);
-    clearListeners('.task-due-date', 'click', selectDate);
-    clearListeners('.due-date-delete-btn', 'click', deleteDueDate);
-    clearListeners('.due-date-edit-btn', 'click', btnEditDueDate);
-    clearListeners('.task-edit-btn', 'click', editTask);
-    clearListeners('.task-delete-btn', 'click', deleteTask);
 
 }
 

@@ -6,19 +6,21 @@ import { renderMenu } from './menu/menu-ui';
 import { renderTasks } from './task/tasks-ui';
 import { exampleTasks } from './task/tasks-example';
 import { updateTimeTasks } from './task/tasks';
+import { addAppListeners } from './listeners';
 
 export const renderPage = () => {
-    renderMain();
+    pageUi();
     renderHeader();
-    renderMenu();
+    renderMenu(true);
     defaultList();
-    renderLists();
+    renderLists(true);
     updateTimeTasks();
     exampleTasks();
-    renderTasks('inbox');
+    renderTasks('inbox', true);
+    addAppListeners();
 }
 
-const renderMain = () => {
+const pageUi = () => {
     const root = document.querySelector('#root');
     
     const main = document.createElement('main');
@@ -28,6 +30,7 @@ const renderMain = () => {
     
     root.appendChild(main);
     appendChildren(main, [sidebar, desk]);
+
 }
 
 const floor = () => {
@@ -60,7 +63,7 @@ const sideHeader = () => {
     setAttributes(header, {
         class: 'side-header',
         id: 'side-header'
-    })
+    });
     
     return header;
 }
@@ -70,7 +73,7 @@ const sideNavbar = () => {
     setAttributes(nav, {
         class: 'side-navbar',
         id: 'side-navbar'
-    })
+    });
 
     return nav;
 }
@@ -80,7 +83,7 @@ const sideSectionLists = () => {
     setAttributes(section, {
         class: 'side-section-lists',
         id: 'side-section-lists'
-    })
-    
+    });
+
     return section
 }

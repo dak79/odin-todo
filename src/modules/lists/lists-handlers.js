@@ -7,30 +7,22 @@ import { edit, saveEdit, findItemId } from '../todo';
 
 import { listeners, addListeners, clearListeners, addListener } from '../listeners';
 
-export const addListsListeners = () => {
-    addListeners('.btn-lists', 'click', showList);
-    addListeners('.svg-btns-delete', 'click', deleteList);
-    addListeners('.svg-btns-edit', 'click', editList);
-    addListener('#btn-new-list', 'click', addNewList)
-}
-
-
-const showList = event => {
+export const showList = event => {
     event.stopPropagation();
    
     console.log(event.target);
 }
 
-const deleteList = (event) => {
+export const deleteList = (event) => {
     event.stopPropagation();
     const idListToDelete = event.target.dataset.number;
     const listToDelete = findItemId(lists, Number(idListToDelete))
     listToDelete.delete(lists, idListToDelete);
-    renderLists();
+    renderLists(false);
 }
 
 // Edit List
-const editList = event => {
+export const editList = event => {
 
     const nodes = edit(
         `#btn-list-${event.target.dataset.number}`,
@@ -59,8 +51,8 @@ const saveEditList = nodes => {
     
     if (newTitle) {
         saveEdit(nodes[0], lists, 'title', String(newTitle), null);
-        renderLists();
-    }
+        renderLists(false);
+    } 
 }
 
 // New List
@@ -84,8 +76,8 @@ const saveNewList = input => {
     if (newListTitle) {
         const newList = new List(newListTitle);
         newList.add(lists);
-        renderLists();
+        renderLists(false);
     } else {
-        addListsListeners();
+        //addListsListeners();
     }
 }

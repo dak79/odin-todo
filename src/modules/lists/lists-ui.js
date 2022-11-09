@@ -1,16 +1,15 @@
 import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes } from '../helpers';
 import { lists } from './lists';
-import { addListsListeners } from './lists-events';
 import { edit } from '../todo';
-import { listeners } from '../listeners';
+import { listeners, addAppListeners } from '../listeners';
 
-export const renderLists = () => {
+export const renderLists = isFirstLoad => {
     const section = selectNode('#side-section-lists');
     const displayHeader = listHeader();
     const displayLists = createListsUi();
     cleanNode(section);
     appendChildren(section, [displayHeader, displayLists]);
-    addListsListeners();
+    if (!isFirstLoad) addAppListeners();
     console.log(listeners);
 }
 

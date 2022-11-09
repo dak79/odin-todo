@@ -7,7 +7,7 @@ export const lists = [];
 
 export const checkListName = node => {
     if (String(node.value) === '') {
-        renderLists();
+        renderLists(false);
         return false;
     }
 
