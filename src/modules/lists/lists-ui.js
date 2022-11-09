@@ -1,6 +1,5 @@
-import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes } from '../helpers';
+import { createList, cleanNode, selectNode, setAttributes, appendChildren } from '../helpers';
 import { lists } from './lists';
-import { edit } from '../todo';
 import { listeners, addAppListeners } from '../listeners';
 
 export const renderLists = isFirstLoad => {

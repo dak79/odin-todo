@@ -1,19 +1,8 @@
-import { selectNodes, selectNode, saveOnEnter, setAttributes } from '../helpers';
+import { selectNodes, selectNode, saveOnEnter } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
-
 import { edit, saveEdit, findItemId } from '../todo';
-import { clearListeners, addListeners } from '../listeners';
-
-// export const addTaskListeners = () => {
-//     addListeners('.tasks-checkbox', 'change', checkboxState);
-//     addListeners('.expand-btn', 'click', expandTask);
-//     addListeners('.task-due-date', 'click', selectDate);
-//     addListeners('.due-date-delete-btn', 'click', deleteDueDate);
-//     addListeners('.due-date-edit-btn', 'click', btnEditDueDate);
-//     addListeners('.task-edit-btn', 'click', editTask);
-//     addListeners('.task-delete-btn', 'click', deleteTask);
-// } 
+import { clearListeners } from '../listeners';
 
 export const checkboxState = event => {
     const data = event.target.dataset.number;
@@ -49,12 +38,16 @@ export const selectDate = event => {
     const dueDates = selectNodes('.task-due-date');
     dueDates.forEach(date => date.removeEventListener('click', selectDate));
 
-    const date = edit(`#task-${event.target.dataset.number}-due-date`, {
-        type: 'date',
-        id: `new-due-date-${event.target.dataset.number}`,
-        class: 'new-due-date',
-        'data-number': `${event.target.dataset.number}`
-    })
+    const date = edit(
+        `#task-${event.target.dataset.number}-due-date`,
+        `#due-date-wrapper-${event.target.dataset.number}`,
+        {
+            type: 'date',
+            id: `new-due-date-${event.target.dataset.number}`,
+            class: 'new-due-date',
+            'data-number': `${event.target.dataset.number}`
+        }
+    );
     
     addListenerNewDate(date[1]);
 }
@@ -86,14 +79,17 @@ export const deleteDueDate = event => {
 
 // Edit Task
 export const editTask = event => {
-    const nodes = edit(`#checkbox-wrapper-${event.target.dataset.number} > label`, `#checkbox-wrapper-${event.target.dataset.number}`,
+    const nodes = edit(
+        `#checkbox-wrapper-${event.target.dataset.number} > label`,
+        `#checkbox-wrapper-${event.target.dataset.number}`,
         {
             type: 'text',
             id: 'edit-task-title',
             class: 'edit-task-title',
             name: 'edit-task-title',
             maxlength: 40
-        });
+        }
+    );
 
         clearListeners();
         editTaskListeners(nodes);

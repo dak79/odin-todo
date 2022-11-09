@@ -1,11 +1,9 @@
-import { selectNode, selectNodes, saveOnEnter, removeElement } from '../helpers';
+import { selectNode, saveOnEnter, removeElement } from '../helpers';
 import { lists, checkListName } from './lists';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
-
 import { edit, saveEdit, findItemId } from '../todo';
-
-import { listeners, addListeners, clearListeners, addListener } from '../listeners';
+import { clearListeners } from '../listeners';
 
 export const showList = event => {
     event.stopPropagation();
@@ -33,7 +31,8 @@ export const editList = event => {
             class: 'edit-list-title',
             name: 'edit-list-title',
             maxlength: 15
-        });
+        }
+    );
 
         removeElement(`#btns-lists-${event.target.dataset.number}`);
         

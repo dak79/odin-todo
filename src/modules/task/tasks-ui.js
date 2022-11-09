@@ -1,7 +1,6 @@
 import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
-import { addTaskListeners } from './tasks-handlers';
 
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
