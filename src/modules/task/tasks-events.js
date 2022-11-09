@@ -1,8 +1,8 @@
-import { selectNodes, findItemId, selectNode, saveOnEnter, setAttributes } from '../helpers';
+import { selectNodes, selectNode, saveOnEnter, setAttributes } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
 
-//import { edit } from '../todo';
+import { edit, saveEdit, findItemId } from '../todo';
 
 export const addTaskListeners = () => {
     const checkboxes = selectNodes('.tasks-checkbox');
@@ -80,13 +80,10 @@ const addListenerNewDate = node => {
 }
 
 const saveNewDueDate = node => {
-    const taskToUpdate = findItemId(tasks, Number(node.dataset.number));
     
-    taskToUpdate.update('dueDate', new Date(node.value));
-    taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'inbox');
-    taskToUpdate.updateTime();
+    const taskToUpdate = saveEdit(node, tasks, 'dueDate', new Date(node.value), 'inbox');
+  
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
-    node.remove();
 }
 
 // Delete due date
@@ -101,8 +98,7 @@ const deleteDueDate = event => {
 
 // Edit Task
 const editTask = event => {
-    const nodes = edit(`#checkbox-wrapper-${event.target.dataset.number} > label`, 
-        `#checkbox-wrapper-${event.target.dataset.number}`, 
+    const nodes = edit(`#checkbox-wrapper-${event.target.dataset.number} > label`,
         {
             type: 'text',
             id: 'edit-task-title',
@@ -119,11 +115,7 @@ const editTaskListeners = nodes => {
 }
 
 const saveEditTask = nodes => {
-    const taskToUpdate = findItemId(tasks, Number(nodes[0].dataset.number));
-    if (nodes[1].value !== '') {
-        taskToUpdate.update('title', nodes[1].value);
-    }
-
+    const taskToUpdate = saveEdit(nodes[0], tasks, 'title', nodes[1].value, null);
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
 }
 

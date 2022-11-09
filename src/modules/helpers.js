@@ -54,22 +54,11 @@ export const formatDate = date => {
     return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${String(year)}`;
 }
 
-export const findItemId = (array, id) => array.find(element => element.id === id);
+// export const findItemId = (array, id) => array.find(element => element.id === id);
 
-export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());
+// export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());
 
-export const edit = (textNode, parentTextNode, attrs) => {
-    const text = selectNode(`${textNode}`);
-    const parent = selectNode(`${parentTextNode}`);
-    const input = document.createElement('input');
-    const inputValue = text.textContent;
-    setAttributes(input, attrs);
-    input.value = inputValue;
-    parent.replaceChild(input, text);
-    input.focus();
 
-    return [text, input];
-}
 
 export const removeBtns = selector => {
     const btns = selectNodes(selector);

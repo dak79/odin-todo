@@ -1,6 +1,7 @@
-import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes, edit, removeBtns } from '../helpers';
+import { createList, cleanNode, selectNode, setAttributes, appendChildren, selectNodes, removeBtns } from '../helpers';
 import { lists } from './lists';
 import { addListsListeners, addNewList } from './lists-events';
+import { edit } from '../todo';
 
 export const renderLists = () => {
     const section = selectNode('#side-section-lists');
@@ -105,36 +106,6 @@ export const newListUi = event => {
     });
 
     section.appendChild(title);
-}
-
-export const newListNameErrorUi = element => {
-    element.value = 'Already exists';
-    element.classList.add('new-lists-error');
-    element.addEventListener('keydown', cancelText)
-
-    function cancelText () {
-        element.value = '';
-        element.removeEventListener('keydown', cancelText);
-        element.classList.remove('new-lists-error');
-    }
-}
-
-export const editListUi = (event) => {
-
-    removeBtns('.btns-lists');
-    btnNewListDisabled();
-
-    const nodes = edit(
-        `#btn-list-${event.target.dataset.number}`,
-        `#list-item-lists-${event.target.dataset.number}`,
-        {
-            type: 'text',
-            id: 'edit-list-title',
-            class: 'edit-list-title',
-            name: 'edit-list-title',
-            maxlength: 15
-        });
-    return nodes;
 }
 
 const btnNewListDisabled = () => {

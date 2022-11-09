@@ -1,7 +1,9 @@
-import { findItemId, findItemName, selectNode, selectNodes, saveOnEnter } from '../helpers';
-import { lists } from './lists';
+import { selectNode, selectNodes, saveOnEnter } from '../helpers';
+import { lists, checkListName } from './lists';
 import { List } from '../classes';
-import { newListUi, editListUi, newListNameErrorUi, renderLists } from './lists-ui';
+import { newListUi, renderLists } from './lists-ui';
+
+import { edit, saveEdit, findItemId } from '../todo';
 
 export const addListsListeners = () => {
     const projects = selectNodes('.btn-lists');
@@ -28,9 +30,23 @@ const deleteList = (event) => {
     renderLists();
 }
 
+// Edit List
 const editList = event => {
     event.stopPropagation();
-    const nodes = editListUi(event);
+
+    // removeBtns('.btns-lists');
+    // btnNewListDisabled();
+    
+    const nodes = edit(
+        `#btn-list-${event.target.dataset.number}`,
+        {
+            type: 'text',
+            id: 'edit-list-title',
+            class: 'edit-list-title',
+            name: 'edit-list-title',
+            maxlength: 15
+        });
+
     editListListeners(nodes);
 }
 
@@ -43,30 +59,11 @@ const saveEditList = nodes => {
     const newTitle = checkListName(nodes[1]);
     
     if (newTitle) {
-        const listToUpdate = findItemId(lists, Number(nodes[0].dataset.number));
-        listToUpdate.update('title', String(newTitle));
+        saveEdit(nodes[0], lists, 'title', String(newTitle), null);
         renderLists();
     } else {
         addListsListeners();
     }
-}
-
-const checkListName = node => {
-    if (String(node.value) === '') {
-        renderLists();
-        return false;
-    }
-
-    const newList = new List(String(node.value));
-    const listsTitles = findItemName(lists, String(node.value))
-   
-    if (listsTitles !== undefined && listsTitles.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
-        newListNameErrorUi(node);
-        node.focus();
-        return false;
-    }
-    
-    return String(node.value);
 }
 
 export const addNewList = event => {
