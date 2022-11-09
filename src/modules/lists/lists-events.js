@@ -1,20 +1,19 @@
-import { selectNode, selectNodes, saveOnEnter } from '../helpers';
+import { selectNode, selectNodes, saveOnEnter, removeElement } from '../helpers';
 import { lists, checkListName } from './lists';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
 
 import { edit, saveEdit, findItemId } from '../todo';
 
-export const addListsListeners = () => {
-    const projects = selectNodes('.btn-lists');
-    projects.forEach(project => project.addEventListener('click', showList))
+import { listeners, addListeners, clearListeners, addListener } from '../listeners';
 
-    const deleteProjects = selectNodes('.svg-btns-delete')
-    deleteProjects.forEach(btnDelete => btnDelete.addEventListener('click', deleteList));
-    
-    const editProject = selectNodes('.svg-btns-edit');
-    editProject.forEach(btnEdit => btnEdit.addEventListener('click', editList));
+export const addListsListeners = () => {
+    addListeners('.btn-lists', 'click', showList);
+    addListeners('.svg-btns-delete', 'click', deleteList);
+    addListeners('.svg-btns-edit', 'click', editList);
+    addListener('#btn-new-list', 'click', addNewList)
 }
+
 
 const showList = event => {
     event.stopPropagation();
@@ -32,13 +31,10 @@ const deleteList = (event) => {
 
 // Edit List
 const editList = event => {
-    event.stopPropagation();
 
-    // removeBtns('.btns-lists');
-    // btnNewListDisabled();
-    
     const nodes = edit(
         `#btn-list-${event.target.dataset.number}`,
+        `#list-item-lists-${event.target.dataset.number}`,
         {
             type: 'text',
             id: 'edit-list-title',
@@ -47,7 +43,10 @@ const editList = event => {
             maxlength: 15
         });
 
-    editListListeners(nodes);
+        removeElement(`#btns-lists-${event.target.dataset.number}`);
+        
+        clearListeners();
+        editListListeners(nodes);
 }
 
 const editListListeners = nodes => {
@@ -61,11 +60,10 @@ const saveEditList = nodes => {
     if (newTitle) {
         saveEdit(nodes[0], lists, 'title', String(newTitle), null);
         renderLists();
-    } else {
-        addListsListeners();
     }
 }
 
+// New List
 export const addNewList = event => {
     newListUi(event);
 

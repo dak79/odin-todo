@@ -1,14 +1,12 @@
 import { selectNode, selectNodes } from '../helpers';
 import { renderTasks } from '../task/tasks-ui';
+import { addListeners, addListener } from '../listeners';
 
 export const menuListeners = () => {
-     
-    const btnNewTask = selectNode('#btn-new-task');
-    btnNewTask.addEventListener('click', addNewTask);
-
-    const btnsMenu = selectNodes('.btn-menu');
-    btnsMenu.forEach(btn => btn.addEventListener('click', showMenu));
+    addListener('#btn-new-task', 'click', addNewTask);
+    addListeners('.btn-menu', 'click', showMenu);
 }
+
 
 const addNewTask = () => {
     console.log('CLICK NEW TASK');

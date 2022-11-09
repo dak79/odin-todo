@@ -60,9 +60,14 @@ export const formatDate = date => {
 
 
 
-export const removeBtns = selector => {
-    const btns = selectNodes(selector);
-    btns.forEach(btn => btn.remove());
+// export const removeBtns = selector => {
+//     const btns = selectNodes(selector);
+//     btns.forEach(btn => btn.remove());
+// }
+
+export const removeElement = selector => {
+    const element = document.querySelector(selector);
+    element.remove();
 }
 
 export const saveOnEnter = event => {
