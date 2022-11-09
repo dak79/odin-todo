@@ -1,6 +1,8 @@
-import { selectNodes, findItemId, selectNode, edit, saveOnEnter, setAttributes } from '../helpers';
+import { selectNodes, findItemId, selectNode, saveOnEnter, setAttributes } from '../helpers';
 import { tasks } from './tasks';
 import { renderTasks } from './tasks-ui';
+
+//import { edit } from '../todo';
 
 export const addTaskListeners = () => {
     const checkboxes = selectNodes('.tasks-checkbox');
@@ -16,7 +18,7 @@ export const addTaskListeners = () => {
     dueDateDeleteBtns.forEach(btn => btn.addEventListener('click', deleteDueDate));
 
     const dueDateEditBtns = selectNodes('.due-date-edit-btn');
-    dueDateEditBtns.forEach(btn => btn.addEventListener('click', editDueDate));
+    dueDateEditBtns.forEach(btn => btn.addEventListener('click', btnEditDueDate));
     
     const editBtns = selectNodes('.task-edit-btn');
     editBtns.forEach(btn => btn.addEventListener('click', editTask));
@@ -53,23 +55,24 @@ const expandTask = () => {
 
 }
 
+// Edit due date
 const selectDate = event => {
 
     const dueDates = selectNodes('.task-due-date');
     dueDates.forEach(date => date.removeEventListener('click', selectDate));
-    
-    const dueDate = selectNode(`#task-${event.target.dataset.number}-due-date`);
-    const spanDueDate = dueDate.parentNode;
-    const input = document.createElement('input');
-    setAttributes(input, {
+
+    const date = edit(`#task-${event.target.dataset.number}-due-date`, {
         type: 'date',
         id: `new-due-date-${event.target.dataset.number}`,
         class: 'new-due-date',
         'data-number': `${event.target.dataset.number}`
-    });
-    addListenerNewDate(input);
-    spanDueDate.replaceChild(input, dueDate);
-    input.focus();
+    })
+    
+    addListenerNewDate(date[1]);
+}
+
+const btnEditDueDate = event => {
+    selectDate(event);
 }
 
 const addListenerNewDate = node => { 
@@ -80,12 +83,13 @@ const saveNewDueDate = node => {
     const taskToUpdate = findItemId(tasks, Number(node.dataset.number));
     
     taskToUpdate.update('dueDate', new Date(node.value));
-    console.log(taskToUpdate.dueDate);
     taskToUpdate.tags = taskToUpdate.tags.filter(tag => tag === 'inbox');
     taskToUpdate.updateTime();
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
+    node.remove();
 }
 
+// Delete due date
 const deleteDueDate = event => {
     const id = event.target.dataset.number;
     const taskToDelete = findItemId(tasks, Number(id));
@@ -95,10 +99,7 @@ const deleteDueDate = event => {
     renderTasks(taskToDelete.visualizedOn || 'Inbox');
 }
 
-const editDueDate = event => {
-    selectDate(event);
-}
-
+// Edit Task
 const editTask = event => {
     const nodes = edit(`#checkbox-wrapper-${event.target.dataset.number} > label`, 
         `#checkbox-wrapper-${event.target.dataset.number}`, 
@@ -125,6 +126,8 @@ const saveEditTask = nodes => {
 
     renderTasks(taskToUpdate.visualizedOn || 'Inbox');
 }
+
+// Detelte Task
 
 const deleteTask = event => {
     const id = event.target.dataset.number;
