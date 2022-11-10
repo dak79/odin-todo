@@ -1,3 +1,4 @@
+import { btnsUi } from '../common-btns';
 import { selectNode, createList, setAttributes } from '../helpers';
 import { addAppListeners } from '../listeners';
 
@@ -14,15 +15,13 @@ const createMenu = () => {
     return menu;
 }
 
-const navBtn = (name) => {
-    const btn = document.createElement('button');
-    setAttributes(btn, {
+const navBtn = desk => {
+    const btn = btnsUi(null, 'title', desk.title, null, null, {
         type: 'button',
-        id: `btn-${name.title.replace(' ', '-').toLowerCase().trim()}`,
+        id: `btn-${desk.title.replace(' ', '-').toLowerCase().trim()}`,
         class: 'btn-menu',
-        'data-name': `${name.title.replace(' ', '-').toLowerCase().trim()}`
+        'data-name': `${desk.title.replace(' ', '-').toLowerCase().trim()}`
     });
-    btn.textContent = name.title;
-
+    
     return [btn];
 }

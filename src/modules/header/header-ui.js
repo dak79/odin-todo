@@ -1,4 +1,5 @@
 import { selectNode, appendChildren, setAttributes } from '../helpers';
+import { btnsUi } from '../common-btns';
 
 export const renderHeader = () => {
     const header = selectNode('#side-header');
@@ -33,14 +34,12 @@ const createTitle = () => {
 }
 
 const createBtnNewTask = () => {
-    const btnNewTask = document.createElement('button');
-    setAttributes(btnNewTask, {
+    const btnNewTask = btnsUi(null, 'new', '+', null, null, {
         type: 'button',
         id: 'btn-new-task',
         class: 'btn',
         'aria-label': 'Add task'
-    })
-    btnNewTask.textContent = '+';
-
+    });
+    
     return btnNewTask;
 }

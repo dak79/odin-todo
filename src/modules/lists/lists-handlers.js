@@ -2,6 +2,7 @@ import { selectNode, saveOnEnter } from '../helpers';
 import { lists, checkListName } from './lists';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
+import { clearListeners } from '../listeners';
 
 export const showList = event => {
     event.stopPropagation();
@@ -15,7 +16,7 @@ export const addNewList = event => {
 
     const newField = selectNode('#new-list-title');
     newField.focus();
-
+    clearListeners();
     newListListeners(newField);
 }
 
