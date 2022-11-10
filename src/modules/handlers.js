@@ -1,6 +1,6 @@
 import { clearListeners } from './listeners';
 import { saveOnEnter } from './helpers';
-import { editInput, saveEditInput } from './todo';
+import { editInput, findItemId, saveEditInput } from './todo';
 import { lists, checkListName } from './lists/lists';
 import { tasks } from './task/tasks';
 import { renderLists } from './lists/lists-ui';
@@ -9,7 +9,7 @@ import { renderTasks } from './task/tasks-ui';
 export const editBtns = event => {
     event.stopPropagation();
 
-    const type = event.target.dataset.type
+    const type = event.target.dataset.type;
     const nodes = (type === 'list') ? 
                     editInput(
                         `#btn-list-${ event.target.dataset.number }`,
@@ -75,4 +75,27 @@ const saveInput= (type, nodes) => {
         
         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
+}
+
+export const deleteBtns = event => {
+    event.stopPropagation();
+
+    const id = event.target.dataset.number;
+    const type = event.target.dataset.type;
+    const array = (type === 'list') ? lists : (type === 'task' || type === 'due-date') ? tasks : 0;
+    const itemToDelete = findItemId(array, Number(id));
+
+    (type === 'due-date') ? itemToDelete.update('dueDate', null) : itemToDelete.delete(array, id);
+    clearListeners();
+    
+    if (type === 'list') {
+        renderLists(false);
+    } else if (type === 'task') {
+        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
+    } else {
+        itemToDelete.tags = itemToDelete.tags.filter(tag => tag === 'inbox');
+        itemToDelete.updateTime();
+        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
+    }
+
 }

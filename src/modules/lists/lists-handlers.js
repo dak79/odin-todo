@@ -2,20 +2,11 @@ import { selectNode, saveOnEnter } from '../helpers';
 import { lists, checkListName } from './lists';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
-import { findItemId } from '../todo';
 
 export const showList = event => {
     event.stopPropagation();
    
     console.log(event.target);
-}
-  
-export const deleteList = (event) => {
-    event.stopPropagation();
-    const idListToDelete = event.target.dataset.number;
-    const listToDelete = findItemId(lists, Number(idListToDelete))
-    listToDelete.delete(lists, idListToDelete);
-    renderLists(false);
 }
 
 // New List

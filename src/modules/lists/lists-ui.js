@@ -82,7 +82,7 @@ const listsBtn = (list) => {
         class: 'btn-lists-delete',
         'aria-label': 'Button Delete List'
     });
-    btnDelete.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" id="svg-delete-${list.id}" class="svg-btns-delete" data-number="${list.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" id="svg-delete-path-${list.id}"  class="svg-btns-delete" data-number="${list.id}"/></svg>`;
+    btnDelete.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" id="svg-delete-${list.id}" class="svg-btns-delete" data-number="${list.id}" data-type="${list.type}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" id="svg-delete-path-${list.id}"  class="svg-btns-delete" data-number="${list.id}" data-type="${list.type}" /></svg>`;
     
     appendChildren(wrapper, [btnEdit, btnDelete]);
    

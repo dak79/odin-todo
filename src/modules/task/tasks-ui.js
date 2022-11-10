@@ -75,7 +75,7 @@ const taskItem = task => {
             'aria-label': 'Delete date',
             'data-number': `${task.id}`
         });
-        deleteDateBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" data-number="${task.id}" /></svg>`;
+        deleteDateBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}" data-type="due-date"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" data-number="${task.id}" data-type="due-date" /></svg>`;
         
         wrapperDueDate.appendChild(deleteDateBtn);
 
@@ -140,10 +140,11 @@ const taskItem = task => {
         id: `task-${task.id}-delete-btn`,
         class: 'task-delete-btn',
         'aria-label': 'Delete task',
-        'data-number': `${task.id}`
+        'data-number': `${task.id}`,
+        'data-type': `${task.type}`
     });
 
-    deleteTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" data-number="${task.id}" /></svg>`;
+    deleteTaskBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-number="${task.id}" data-type="${task.type}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" data-number="${task.id}" data-type="${task.type}" /></svg>`;
 
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 

@@ -28,21 +28,3 @@ export const checkboxState = event => {
 export const expandTask = () => {
     console.log('Expand task');
 }
-
-// Delete due date
-export const deleteDueDate = event => {
-    const id = event.target.dataset.number;
-    const taskToDelete = findItemId(tasks, Number(id));
-    taskToDelete.update('dueDate', null);
-    taskToDelete.tags = taskToDelete.tags.filter(tag => tag === 'inbox');
-    taskToDelete.updateTime();
-    renderTasks(taskToDelete.visualizedOn || 'Inbox', false);
-}
-
-// Detelte Task
-export const deleteTask = event => {
-    const id = event.target.dataset.number;
-    const taskToDelete = findItemId(tasks, Number(id));
-    taskToDelete.delete(tasks, id);
-    renderTasks(taskToDelete.visualizedOn || 'Inbox', false);
-}
