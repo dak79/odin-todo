@@ -1,9 +1,8 @@
-import { selectNode, saveOnEnter, removeElement } from '../helpers';
+import { selectNode, saveOnEnter } from '../helpers';
 import { lists, checkListName } from './lists';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
-import { edit, saveEdit, findItemId } from '../todo';
-import { clearListeners } from '../listeners';
+import { findItemId } from '../todo';
 
 export const showList = event => {
     event.stopPropagation();
@@ -17,34 +16,6 @@ export const deleteList = (event) => {
     const listToDelete = findItemId(lists, Number(idListToDelete))
     listToDelete.delete(lists, idListToDelete);
     renderLists(false);
-}
-
-// Edit List
-export const editList = event => {
-    event.stopPropagation();
-    
-    const nodes = edit(
-        `#btn-list-${event.target.dataset.number}`,
-        `#list-item-lists-${event.target.dataset.number}`,
-        {
-            type: 'text',
-            id: 'edit-list-title',
-            class: 'edit-list-title',
-            name: 'edit-list-title',
-            maxlength: 15
-        }
-    );
-    
-    return nodes
-}
-
-export const saveEditList = nodes => {
-    const newTitle = checkListName(nodes[1]);
-    
-    if (newTitle) {
-        saveEdit(nodes[0], lists, 'title', String(newTitle), null);
-        renderLists(false);
-    } 
 }
 
 // New List

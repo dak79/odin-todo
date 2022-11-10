@@ -6,7 +6,7 @@ import { selectNode, setAttributes } from './helpers';
  * @param { Object } attrs - Attributes for change fields.
  * @returns { Node[] } - Node to attach change fields / change field node.
  */
- export const edit = (textNode, parentNode, attrs) => {
+ export const editInput = (textNode, parentNode, attrs) => {
     const text = selectNode(`${textNode}`);
     const parent = selectNode(parentNode);
     const input = document.createElement('input');
@@ -27,7 +27,7 @@ import { selectNode, setAttributes } from './helpers';
  * @param { string|Date } newValue - New value for property.
  * @param { string } newTag - Tag to assign to item.
  */
-export const saveEdit = (node, array, propertyName, newValue, newTag) => {
+export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
     const itemToUpdate = findItemId(array, Number(node.dataset.number));
     itemToUpdate.update(propertyName, newValue);
 
