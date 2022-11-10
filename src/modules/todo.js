@@ -8,7 +8,6 @@ import { selectNode, setAttributes } from './helpers';
  */
  export const edit = (textNode, parentNode, attrs) => {
     const text = selectNode(`${textNode}`);
-    console.log(text);
     const parent = selectNode(parentNode);
     const input = document.createElement('input');
     const inputValue = text.textContent;

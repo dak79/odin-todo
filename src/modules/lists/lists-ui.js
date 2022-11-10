@@ -55,7 +55,8 @@ const listsBtn = (list) => {
         id: `btn-list-${list.id}`,
         class: 'btn-lists',
         'data-number': `${list.id}`,
-        'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`
+        'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`,
+        'data-type': `${list.type}`
     });
     btnTitle.textContent = list.title;
 
@@ -72,7 +73,7 @@ const listsBtn = (list) => {
         class: 'btn-lists-edit',
         'aria-label': 'Button Edit List'
     });
-    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" id="svg-edit-${list.id}" class="svg-btns-edit" data-number="${list.id}"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z" id="svg-edit-path-${list.id}" class="svg-btns-edit" data-number="${list.id}"/></svg>`;
+    btnEdit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" id="svg-edit-${list.id}" class="svg-btns-edit" data-number="${list.id}" data-type="${list.type}"><path d="m19.725 9.4-4.9-4.875 1.25-1.275q.75-.75 1.812-.775 1.063-.025 1.913.775l1.225 1.225q.85.8.787 1.85-.062 1.05-.812 1.8ZM18.3 10.825 7.35 21.8H2.425v-4.9L13.4 5.95Z" id="svg-edit-path-${list.id}" class="svg-btns-edit" data-number="${list.id}" data-type="${list.type}"/></svg>`;
         
     const btnDelete = document.createElement('button');
     setAttributes(btnDelete, {

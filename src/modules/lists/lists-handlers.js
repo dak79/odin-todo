@@ -10,7 +10,7 @@ export const showList = event => {
    
     console.log(event.target);
 }
-
+  
 export const deleteList = (event) => {
     event.stopPropagation();
     const idListToDelete = event.target.dataset.number;
@@ -21,7 +21,8 @@ export const deleteList = (event) => {
 
 // Edit List
 export const editList = event => {
-
+    event.stopPropagation();
+    
     const nodes = edit(
         `#btn-list-${event.target.dataset.number}`,
         `#list-item-lists-${event.target.dataset.number}`,
@@ -33,19 +34,11 @@ export const editList = event => {
             maxlength: 15
         }
     );
-
-        removeElement(`#btns-lists-${event.target.dataset.number}`);
-        
-        clearListeners();
-        editListListeners(nodes);
+    
+    return nodes
 }
 
-const editListListeners = nodes => {
-    nodes[1].addEventListener('focusout', () => saveEditList(nodes));
-    nodes[1].addEventListener('keyup', saveOnEnter);
-}
-
-const saveEditList = nodes => {
+export const saveEditList = nodes => {
     const newTitle = checkListName(nodes[1]);
     
     if (newTitle) {

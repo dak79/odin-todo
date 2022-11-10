@@ -33,12 +33,8 @@ export const expandTask = () => {
 }
 
 // Edit due date
-export const selectDate = event => {
-
-    const dueDates = selectNodes('.task-due-date');
-    dueDates.forEach(date => date.removeEventListener('click', selectDate));
-
-    const date = edit(
+export const editDate = event => {
+    const nodes = edit(
         `#task-${event.target.dataset.number}-due-date`,
         `#due-date-wrapper-${event.target.dataset.number}`,
         {
@@ -48,21 +44,13 @@ export const selectDate = event => {
             'data-number': `${event.target.dataset.number}`
         }
     );
+
+    return nodes
+}
+
+export const saveNewDueDate = nodes => {
     
-    addListenerNewDate(date[1]);
-}
-
-export const btnEditDueDate = event => {
-    selectDate(event);
-}
-
-const addListenerNewDate = node => { 
-    node.addEventListener('change', () => saveNewDueDate(node));
-}
-
-const saveNewDueDate = node => {
-    
-    const taskToUpdate = saveEdit(node, tasks, 'dueDate', new Date(node.value), 'inbox');
+    const taskToUpdate = saveEdit(nodes[0], tasks, 'dueDate', new Date(nodes[1].value), 'inbox');
   
     renderTasks(taskToUpdate.visualizedOn || 'Inbox', false);
 }
@@ -88,19 +76,12 @@ export const editTask = event => {
             class: 'edit-task-title',
             name: 'edit-task-title',
             maxlength: 40
-        }
-    );
+        });
 
-        clearListeners();
-        editTaskListeners(nodes);
+    return nodes
 }
 
-const editTaskListeners = nodes => {
-    nodes[1].addEventListener('focusout', () => saveEditTask(nodes));
-    nodes[1].addEventListener('keyup', saveOnEnter);
-}
-
-const saveEditTask = nodes => {
+export const saveEditTask = nodes => {
     const taskToUpdate = saveEdit(nodes[0], tasks, 'title', nodes[1].value, null);
     renderTasks(taskToUpdate.visualizedOn || 'Inbox', false);
 }

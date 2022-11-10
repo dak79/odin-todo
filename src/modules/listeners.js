@@ -1,6 +1,8 @@
 import { addNewTask, showMenu } from './menu/menu-handlers';
 import { showList, deleteList, editList, addNewList } from './lists/lists-handlers';
+import { editItem } from './handlers';
 import { checkboxState, expandTask, selectDate, deleteDueDate, btnEditDueDate, editTask, deleteTask } from './task/tasks-handlers';
+
 export const listeners = [];
 
 export const addAppListeners = () => {
@@ -12,16 +14,16 @@ export const addAppListeners = () => {
     // Lists
     addListeners('.btn-lists', 'click', showList);
     addListeners('.svg-btns-delete', 'click', deleteList);
-    addListeners('.svg-btns-edit', 'click', editList);
+    addListeners('.svg-btns-edit', 'click', editItem);
     addListener('#btn-new-list', 'click', addNewList);
 
     // Tasks
     addListeners('.tasks-checkbox', 'change', checkboxState);
     addListeners('.expand-btn', 'click', expandTask);
-    addListeners('.task-due-date', 'click', selectDate);
+    addListeners('.task-due-date', 'click', editItem);
     addListeners('.due-date-delete-btn', 'click', deleteDueDate);
-    addListeners('.due-date-edit-btn', 'click', btnEditDueDate);
-    addListeners('.task-edit-btn', 'click', editTask);
+    addListeners('.due-date-edit-btn', 'click', editItem);
+    addListeners('.task-edit-btn', 'click', editItem);
     addListeners('.task-delete-btn', 'click', deleteTask);
 
 }
