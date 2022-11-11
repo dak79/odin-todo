@@ -1,4 +1,4 @@
-import { btnsUi } from '../common-btns';
+import { btnsUi } from '../btns-ui';
 import { selectNode, createList, setAttributes } from '../helpers';
 import { addAppListeners } from '../listeners';
 
@@ -16,7 +16,7 @@ const createMenu = () => {
 }
 
 const navBtn = desk => {
-    const btn = btnsUi(null, 'title', desk.title, null, null, {
+    const btn = btnsUi(null, null, desk.title, null, {
         type: 'button',
         id: `btn-${desk.title.replace(' ', '-').toLowerCase().trim()}`,
         class: 'btn-menu',

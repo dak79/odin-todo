@@ -1,7 +1,7 @@
 import { createList, cleanNode, selectNode, setAttributes, appendChildren } from '../helpers';
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
-import { btnsUi } from '../common-btns';
+import { btnsUi } from '../btns-ui';
 
 export const renderLists = isFirstLoad => {
     const section = selectNode('#side-section-lists');
@@ -33,7 +33,7 @@ const listsTitle = () => {
 }
 
 const newListBtnUi = () => {
-    const btnNewList = btnsUi(null, 'new', '+', null, null, {
+    const btnNewList = btnsUi(null, null, '+', null, {
         type: 'button',
         id: 'btn-new-list',
         class: 'btn'
@@ -48,7 +48,7 @@ const createListsUi = () => {
 }
 
 const listsBtn = list => {
-    const btnTitle = btnsUi(null, 'title', list.title, null, null, {
+    const btnTitle = btnsUi(null, null, list.title, null, {
         type: 'button',
         id: `btn-list-${list.id}`,
         class: 'btn-lists',
@@ -63,7 +63,7 @@ const listsBtn = list => {
         class: 'btns-lists'
     });
     
-    const btnEdit = btnsUi(list, 'edit', null, 'edit', 'list', {
+    const btnEdit = btnsUi(list, list.type, 'edit', 'edit-list', {
         type: 'button',
         id:`btn-lists-edit-${list.id}`,
         class: 'btn-lists-edit',
@@ -72,7 +72,7 @@ const listsBtn = list => {
         'data-type': `${list.type}`
     });
     
-    const btnDelete = btnsUi(list, 'delete', null, 'delete-list', 'list', {
+    const btnDelete = btnsUi(list, list.type, 'delete', 'delete-list', {
         type: 'button',
         id:`btn-lists-delete-${list.id}`,
         class: 'btn-lists-delete',

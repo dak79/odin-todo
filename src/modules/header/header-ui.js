@@ -1,5 +1,5 @@
 import { selectNode, appendChildren, setAttributes } from '../helpers';
-import { btnsUi } from '../common-btns';
+import { btnsUi } from '../btns-ui';
 
 export const renderHeader = () => {
     const header = selectNode('#side-header');
@@ -34,7 +34,7 @@ const createTitle = () => {
 }
 
 const createBtnNewTask = () => {
-    const btnNewTask = btnsUi(null, 'new', '+', null, null, {
+    const btnNewTask = btnsUi(null, null, '+', null, {
         type: 'button',
         id: 'btn-new-task',
         class: 'btn',

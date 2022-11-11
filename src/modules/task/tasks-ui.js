@@ -1,4 +1,4 @@
-import { btnsUi } from '../common-btns';
+import { btnsUi } from '../btns-ui';
 import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
@@ -49,7 +49,7 @@ const taskItem = task => {
     })
     taskLabel.textContent = `${task.title}`;
 
-    const expandTaskBtn = btnsUi(null, 'expand', null, null, null, {
+    const expandTaskBtn = btnsUi(null, null, 'expand', null, {
         type: 'button',
         id: `task-${task.id}-expand-btn`,
         class: 'expand-btn',
@@ -66,7 +66,7 @@ const taskItem = task => {
     });
 
     if (task.dueDate) {
-        const deleteDateBtn = btnsUi(task, 'delete', null, 'due-date-delete', 'due-date', {
+        const deleteDateBtn = btnsUi(task, 'due-date', 'delete','due-date-delete', {
             type: 'button',
             id: `due-date-${task.id}-delete-btn`,
             class: 'due-date-delete-btn',
@@ -78,7 +78,7 @@ const taskItem = task => {
         wrapperDueDate.appendChild(deleteDateBtn);
 
     } else {
-        const editDateBtn = btnsUi(task, 'edit', null, 'edit-due-date', 'due-date', {
+        const editDateBtn = btnsUi(task, 'due-date', 'edit', 'edit-due-date', {
             type: 'button',
             id: `due-date-${task.id}-edit-btn`,
             class: 'due-date-edit-btn',
@@ -119,15 +119,16 @@ const taskItem = task => {
         class: 'task-btn-wrapper'
     });
 
-    const editTaskBtn = btnsUi(task, 'edit', null, 'edit-task', 'task', {
+    const editTaskBtn = btnsUi(task, task.type, 'edit', 'edit-task', {
         type: 'button',
         id: `task-${task.id}-edit-btn`,
         class: 'task-edit-btn',
         'aria-label': 'Edit task title',
-        'data-number':`${task.id}`
+        'data-number':`${task.id}`,
+        'data-type': `${task.type}`
     });
     
-    const deleteTaskBtn = btnsUi(task, 'delete', null, 'delete-task', 'task', {
+    const deleteTaskBtn = btnsUi(task, task.type, 'delete', 'delete-task', {
         type: 'button',
         id: `task-${task.id}-delete-btn`,
         class: 'task-delete-btn',
