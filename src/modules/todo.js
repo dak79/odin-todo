@@ -56,25 +56,19 @@ export const newInput = (selectorNode, selectorParentNode, attrs) => {
     return input;
 }
 
-// const newListUi = () => {
-//     const section = selectNode('#side-section-lists');
+export const deleteItem = (array, id) => {
+    const itemToDelete = findItemId(array, Number(id));
+    itemToDelete.delete(array, id);
 
-//     const title = document.createElement('input');
-//     setAttributes(title, {
-//         type: 'text',
-//         id: 'new-list-title',
-//         class: 'new-list-title',
-//         name: 'new-list-title',
-//         maxlength: 15
-//     });
+    return itemToDelete;
+}
 
-//     section.appendChild(title);
+export const updateItem = (array, id, property, newValue) => {
+    const itemToUpdate = findItemId(array, Number(id));
+    itemToUpdate.update(property, newValue);
 
-//     return title;
-// }
-
-
-
+    return itemToUpdate;
+}
 
 /**
  * 

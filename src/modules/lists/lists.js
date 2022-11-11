@@ -1,9 +1,17 @@
-import { findItemName } from '../todo';
+import { deleteItem, findItemName } from '../todo';
 import { List } from '../classes';
-import { renderLists } from './lists-ui';
+import { newListUi, renderLists } from './lists-ui';
+import { clearListeners } from '../listeners';
 
 // Lists database
 export const lists = [];
+
+export const addNewList = event => {
+    event.stopPropagation();
+    const inputField = newListUi();
+
+    return [inputField, null];
+}
 
 export const checkListName = node => {
     if (String(node.value) === '') {
@@ -33,4 +41,15 @@ const newListNameError = element => {
         element.removeEventListener('keydown', cancelText);
         element.classList.remove('new-lists-error');
     }
+}
+
+export const deleteList = event => {
+    event.stopPropagation();
+
+    const id = event.target.dataset.number;
+
+    deleteItem(lists, id);
+    clearListeners();
+    renderLists(false);
+
 }

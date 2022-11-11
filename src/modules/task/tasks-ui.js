@@ -3,7 +3,6 @@ import { appendChildren, createList, setAttributes, cleanNode, selectNode } from
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
-import { Task } from '../classes';
 import { newInput, editInput } from '../todo';
 
 export const renderTasks = (desk, isFirstLoad) => {
@@ -180,7 +179,7 @@ export const newTaskUi = newItem => {
 
 export const editTaskUi = event => {
     const type = event.target.dataset.type;
-    console.log(type);
+
     return  (type === 'task') ? 
             editInput(
                 `#checkbox-wrapper-${event.target.dataset.number} > label`,

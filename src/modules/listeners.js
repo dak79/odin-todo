@@ -1,6 +1,6 @@
-import { addNewTask, showMenu } from './menu/menu-handlers';
-import { showList, addNewList } from './lists/lists-handlers';
-import { editBtns, deleteBtns, newBtns, btnsController } from './handlers';
+import { showMenu } from './menu/menu-handlers';
+import { showList } from './lists/lists-handlers';
+import { btnsController } from './handlers';
 import { checkboxState, expandTask } from './task/tasks-handlers';
 
 export const listeners = [];

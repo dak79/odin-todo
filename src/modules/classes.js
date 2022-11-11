@@ -58,12 +58,12 @@ export const MyMixin = superclass => class extends superclass {
         array.push(this);
     }
     
-    // USED BY LIST
+    // USED BY LIST AND TASK
     update(key, value) {
         return (key in this) ? this[key] = value : false;
     }
 
-    // USED BY LIST
+    // USED BY LIST AND TASK
     delete(array) {    
         const index = array.indexOf(this);
         array.splice(index, 1);

@@ -1,4 +1,4 @@
-import { createList, cleanNode, selectNode, setAttributes, appendChildren } from '../helpers';
+import { createList, cleanNode, selectNode, setAttributes, appendChildren, removeElement } from '../helpers';
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
 import { btnsUi } from '../btns-ui';
@@ -116,6 +116,8 @@ export const editListUi = event => {
             name: 'edit-list-title', 
             maxlength: 15 
         });
+    
+        removeElement(`#btns-lists-${event.target.dataset.number}`);
         
-    return nodes
+    return nodes;
 }

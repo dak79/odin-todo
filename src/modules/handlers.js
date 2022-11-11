@@ -1,11 +1,12 @@
-import { addAppListeners, clearListeners } from './listeners';
-import { saveOnEnter, selectNode } from './helpers';
-import { editInput, findItemId, saveEditInput } from './todo';
-import { List, Task } from './classes';
-import { lists, checkListName } from './lists/lists';
-import { tasks } from './task/tasks';
-import { renderLists, newListUi, editList, editListUi } from './lists/lists-ui';
-import { editTaskUi, newTaskUi, renderTasks, taskItem } from './task/tasks-ui';
+import { clearListeners } from './listeners';
+import { saveOnEnter } from './helpers';
+import { saveEditInput } from './todo';
+import { List } from './classes';
+import { lists, checkListName, deleteList, addNewList } from './lists/lists';
+import { tasks, deleteTask, deleteDate, addNewTask } from './task/tasks';
+import { renderLists, editListUi } from './lists/lists-ui';
+import { editTaskUi, renderTasks } from './task/tasks-ui';
+
 
 export const btnsController = event => {
     event.stopPropagation();
@@ -22,102 +23,37 @@ export const btnsController = event => {
         }
 
     } else if (btn === 'delete') {
-        deleteBtns(event);
+        (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
     } else if (btn === 'new-task' || btn === 'new-list') {
-        newBtns(event);
-    }
+        const newItem = (type === 'new-list') ? addNewList(event) : (type === 'new-task') ? addNewTask(event) : 0;
 
-    
+        if (newItem) {
+            clearListeners();
+            newInputListeners(newItem[0], type, newItem[1])
+        }
+    }
+ 
 }
 
-const editBtns = event => {
-    event.stopPropagation();
+// const controllerListener = (type, nodes, newItem, callback) => {
+//     console.log(type, nodes);
+//     if (type === 'due-date') {
+//         nodes[1].addEventListener('change', () => callback(type, nodes));
+//     } else {
+//         nodes[1].addEventListener('focusout', () => callback(type, nodes, newItem));
+//         nodes[1].addEventListener('keyup', saveOnEnter);
 
-    const type = event.target.dataset.type;
-    const nodes = (type === 'list') ? 
-                    editListUi(event) : 
-                    (type === 'task') ? 
-                    editTaskUi(event)
-                        
-                        : 
-                    (type === 'due-date') ? 
-
-                    editDueDateUi(event)
-                    
-                        
-                        : 
-                    0;
-
-    if (nodes) {
-        clearListeners();
-        editListeners(type, nodes);
-    }
-}
+//     }
+// }
 
 const editListeners = (type, nodes) => {
+
+    console.log(nodes)
     if (type === 'due-date') {
         nodes[1].addEventListener('change', () => saveInput(type, nodes));
     } else {
         nodes[1].addEventListener('focusout', () => saveInput(type, nodes));
         nodes[1].addEventListener('keyup', saveOnEnter);
-    }
-}
-
-const saveInput= (type, nodes) => {
-    if (type === 'list') {
-        const newTitle = checkListName(nodes[1]);
-        if (newTitle) {
-            saveEditInput(nodes[0], lists, 'title', String(newTitle), null);
-            renderLists(false);
-        } 
-    } else if (type === 'task') {
-            const taskToUpdate = saveEditInput(nodes[0], tasks, 'title', nodes[1].value, null);
-            
-            renderTasks(taskToUpdate.visualizedOn || 'Inbox', false);
-    } else {
-        const taskToUpdate = saveEditInput(nodes[0], tasks, 'dueDate', new Date(nodes[1].value), 'inbox');
-        
-        renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
-    }
-}
-
-const deleteBtns = event => {
-    event.stopPropagation();
-
-    const id = event.target.dataset.number;
-    const type = event.target.dataset.type;
-    const array = (type === 'list') ? lists : (type === 'task' || type === 'due-date') ? tasks : 0;
-    const itemToDelete = findItemId(array, Number(id));
-
-    (type === 'due-date') ? itemToDelete.update('dueDate', null) : itemToDelete.delete(array, id);
-    clearListeners();
-    
-    if (type === 'list') {
-        renderLists(false);
-    } else if (type === 'task') {
-        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
-    } else {
-        itemToDelete.tags = itemToDelete.tags.filter(tag => tag === 'inbox');
-        itemToDelete.updateTime();
-        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
-    }
-
-}
-
-const newBtns = event => {
-    event.stopPropagation();
-
-    const type = event.target.dataset.type;
-    if (type === 'new-list') {
-        const inputField = newListUi();
-        clearListeners();
-        newInputListeners(inputField, type, null);
-    } else {
-        const newTask = new Task();
-        const inputField = newTaskUi(newTask);
-        clearListeners();
-        addAppListeners();
-        newInputListeners(inputField, type, newTask);
     }
 }
 
@@ -141,5 +77,23 @@ const saveNewInput = (input, type, newItem) => {
         newItem.update('title', input.value);
         clearListeners();
         renderTasks(newItem.visualizedOn || 'inbox', false);
+    }
+}
+
+const saveInput= (type, nodes) => {
+    if (type === 'list') {
+        const newTitle = checkListName(nodes[1]);
+        if (newTitle) {
+            saveEditInput(nodes[0], lists, 'title', String(newTitle), null);
+            renderLists(false);
+        } 
+    } else if (type === 'task') {
+            const taskToUpdate = saveEditInput(nodes[0], tasks, 'title', nodes[1].value, null);
+            
+            renderTasks(taskToUpdate.visualizedOn || 'Inbox', false);
+    } else {
+        const taskToUpdate = saveEditInput(nodes[0], tasks, 'dueDate', new Date(nodes[1].value), 'inbox');
+        
+        renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
 }
