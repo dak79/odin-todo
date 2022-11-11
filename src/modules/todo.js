@@ -38,6 +38,44 @@ export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
     return itemToUpdate
 }
 
+export const newInput = (selectorNode, selectorParentNode, attrs) => {
+    const input = document.createElement('input');
+    setAttributes(input, attrs);
+
+    const node = selectNode(selectorNode);
+    const parentNode = selectNode(selectorParentNode);
+
+    if (parentNode) {
+        parentNode.replaceChild(input, node);
+    } else {
+        node.appendChild(input)
+    }
+
+    input.focus();
+
+    return input;
+}
+
+// const newListUi = () => {
+//     const section = selectNode('#side-section-lists');
+
+//     const title = document.createElement('input');
+//     setAttributes(title, {
+//         type: 'text',
+//         id: 'new-list-title',
+//         class: 'new-list-title',
+//         name: 'new-list-title',
+//         maxlength: 15
+//     });
+
+//     section.appendChild(title);
+
+//     return title;
+// }
+
+
+
+
 /**
  * 
  * @param { array } array - Array where to perform search.
@@ -54,42 +92,3 @@ export const findItemId = (array, id) => array.find(element => element.id === id
  */
 export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());
 
-// /**
-//  * 
-//  * @param { HTMLClassSelector } selector - Elements to attach event listeners.
-//  * @param { Event.type } eventType - Type of listeners.
-//  * @param { Function } callback - Handler.
-//  */
-//  const addListeners = (selector, eventType, callback) => {
-//     document.querySelectorAll(selector).forEach(node => node.addEventListener(eventType, callback));
-// }
-
-// /**
-//  * 
-//  * @param { HTMLIdSelector } selector - Element to attach event listeners.
-//  * @param { Event.type } eventType - Type of listeners.
-//  * @param { Function } callback - Handler.
-//  */
-// const addListener = (selector, eventType, callback) => {
-//     document.querySelector(selector).addEventListener(eventType, callback);
-// }
-
-// /**
-//  * 
-//  * @param { HTMLClassSelector } selector - Elements to remove event listeners.
-//  * @param { Event.type } eventType - Type of listeners.
-//  * @param { Function } callback - Handler.
-//  */
-// export const clearListeners = (selector, eventType, callback) => {
-//     document.querySelectorAll(selector).forEach(node => node.removeEventListener(eventType, callback));
-// }
-
-// /**
-//  * 
-//  * @param { HTMLIdSelector } selector - Element to remove event listeners.
-//  * @param { Event.type } eventType - Type of listeners.
-//  * @param { Function } callback - Handler.
-//  */
-//  const clearListener = (selector, eventType, callback) => {
-//     document.querySelector(selector).removeEventListener(eventType, callback);
-// }

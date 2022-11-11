@@ -2,6 +2,7 @@ import { createList, cleanNode, selectNode, setAttributes, appendChildren } from
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
 import { btnsUi } from '../btns-ui';
+import { newInput } from '../todo';
 
 export const renderLists = isFirstLoad => {
     const section = selectNode('#side-section-lists');
@@ -88,10 +89,8 @@ const listsBtn = list => {
 }
 
 export const newListUi = () => {
-    const section = selectNode('#side-section-lists');
-
-    const title = document.createElement('input');
-    setAttributes(title, {
+    
+    const input = newInput('#side-section-lists', null, {
         type: 'text',
         id: 'new-list-title',
         class: 'new-list-title',
@@ -99,7 +98,5 @@ export const newListUi = () => {
         maxlength: 15
     });
 
-    section.appendChild(title);
-
-    return title;
+    return input;
 }

@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { Task } from '../classes';
+import { newInput } from '../todo';
 
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
@@ -152,10 +153,21 @@ export const newTaskUi = newItem => {
     });
 
     const newTaskContent = taskItem(newItem);
-    li.appendChild(newTaskContent);
+    appendChildren(li, newTaskContent);
     
     const ul = selectNode('.tasks');
     ul.prepend(li);
 
-    return li;
+    const input = newInput(
+                            `#checkbox-wrapper-${newItem.id} > label`,
+                            `#checkbox-wrapper-${newItem.id}`,
+                            {
+                                type: 'text',
+                                id: 'new-task-input',
+                                class: 'new-task-input',
+                                name: 'new-task-input',
+                                maxlength: 40
+    });
+
+    return input;
 }
