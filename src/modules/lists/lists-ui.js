@@ -36,7 +36,8 @@ const newListBtnUi = () => {
     const btnNewList = btnsUi(null, null, '+', null, {
         type: 'button',
         id: 'btn-new-list',
-        class: 'btn'
+        class: 'btn',
+        'data-type': 'new-list'
     });
 
     return btnNewList; 
@@ -86,13 +87,9 @@ const listsBtn = list => {
     return [btnTitle, wrapper];
 }
 
-export const newListUi = event => {
+export const newListUi = () => {
     const section = selectNode('#side-section-lists');
 
-    const btnNewList = event.target;
-    btnNewList.remove();
-    //removeBtns('.btns-lists')
-    
     const title = document.createElement('input');
     setAttributes(title, {
         type: 'text',
@@ -103,9 +100,6 @@ export const newListUi = event => {
     });
 
     section.appendChild(title);
-}
 
-const btnNewListDisabled = () => {
-    const btnNewList = selectNode('#btn-new-list');
-    btnNewList.removeEventListener('click', addNewList);
+    return title;
 }

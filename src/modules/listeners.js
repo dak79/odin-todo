@@ -1,6 +1,6 @@
 import { addNewTask, showMenu } from './menu/menu-handlers';
 import { showList, addNewList } from './lists/lists-handlers';
-import { editBtns, deleteBtns } from './handlers';
+import { editBtns, deleteBtns, newBtns } from './handlers';
 import { checkboxState, expandTask } from './task/tasks-handlers';
 
 export const listeners = [];
@@ -8,14 +8,14 @@ export const listeners = [];
 export const addAppListeners = () => {
 
     // Menu
-    addListener('#btn-new-task', 'click', addNewTask);
+    addListener('#btn-new-task', 'click', newBtns);
     addListeners('.btn-menu', 'click', showMenu);
 
     // Lists
     addListeners('.btn-lists', 'click', showList);
     addListeners('.svg-btns-delete', 'click', deleteBtns);
     addListeners('.svg-btns-edit', 'click', editBtns);
-    addListener('#btn-new-list', 'click', addNewList);
+    addListener('#btn-new-list', 'click', newBtns);
 
     // Tasks
     addListeners('.tasks-checkbox', 'change', checkboxState);

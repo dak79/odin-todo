@@ -1,10 +1,11 @@
-import { clearListeners } from './listeners';
-import { saveOnEnter } from './helpers';
+import { addAppListeners, clearListeners } from './listeners';
+import { saveOnEnter, selectNode } from './helpers';
 import { editInput, findItemId, saveEditInput } from './todo';
+import { List, Task } from './classes';
 import { lists, checkListName } from './lists/lists';
 import { tasks } from './task/tasks';
-import { renderLists } from './lists/lists-ui';
-import { renderTasks } from './task/tasks-ui';
+import { renderLists, newListUi } from './lists/lists-ui';
+import { newTaskUi, renderTasks, taskItem } from './task/tasks-ui';
 
 export const editBtns = event => {
     event.stopPropagation();
@@ -98,4 +99,54 @@ export const deleteBtns = event => {
         renderTasks(itemToDelete.visualizedOn || 'inbox', false);
     }
 
+}
+
+export const newBtns = event => {
+    event.stopPropagation();
+
+    console.log(event.target);
+    console.log(event.target.dataset.type);
+    const type = event.target.dataset.type;
+    if (type === 'new-list') {
+        const inputField = newListUi();
+        inputField.focus();
+        clearListeners();
+        newInputListeners(inputField, type, null);
+    } else {
+        const newTask = new Task();
+        newTaskUi(newTask);
+        clearListeners();
+        addAppListeners();
+        console.log(newTask.id);
+        const label = selectNode(`#checkbox-wrapper-${newTask.id} > label`);
+        const label1 = selectNode(`#checkbox-wrapper-${newTask.id}`);
+        const a = newListUi();
+
+        label1.replaceChild(a, label)
+        a.focus();
+        newInputListeners(a, type, newTask);
+    }
+}
+
+const newInputListeners = (node, type, newItem) => {
+    node.addEventListener('focusout', () => saveNewInput(node, type, newItem));
+    node.addEventListener('keyup', saveOnEnter);
+}
+
+const saveNewInput = (input, type, newItem) => {
+    if (type === 'new-list') {
+            const newListTitle = checkListName(input);
+        
+            if (newListTitle) {
+                const newList = new List(newListTitle);
+                newList.add(lists);
+                renderLists(false);
+            }
+    } else {
+        newItem.add(tasks);
+        newItem.update('title', input.value);
+        clearListeners();
+        renderTasks(newItem.visualizedOn || 'inbox');
+        console.log(tasks);
+    }
 }

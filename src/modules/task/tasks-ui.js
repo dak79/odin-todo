@@ -3,6 +3,7 @@ import { appendChildren, createList, setAttributes, cleanNode, selectNode } from
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
+import { Task } from '../classes';
 
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
@@ -19,7 +20,7 @@ const createTasksUi = desk => {
     return todoes;
 }
 
-const taskItem = task => {
+export const taskItem = task => {
     const wrapperCheck = document.createElement('span');
     setAttributes(wrapperCheck, {
         id: `checkbox-wrapper-${task.id}`,
@@ -44,7 +45,11 @@ const taskItem = task => {
         'data-number': `${task.id}`,
         'data-type': `${task.type}`
     })
-    taskLabel.textContent = `${task.title}`;
+    if (task.title) {
+        taskLabel.textContent = `${task.title}`;
+    } else {
+        taskLabel.textContent = '';
+    }
 
     const expandTaskBtn = btnsUi(null, null, 'expand', null, {
         type: 'button',
@@ -137,4 +142,20 @@ const taskItem = task => {
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 
     return [wrapperCheck, wrapperDueDate, wrapperBtns];
+}
+
+export const newTaskUi = newItem => {
+    const li = document.createElement('li');
+    setAttributes(li, {
+        id: `list-item-task-${newItem.id}`,
+        class: 'task-item'
+    });
+
+    const newTaskContent = taskItem(newItem);
+    li.appendChild(newTaskContent);
+    
+    const ul = selectNode('.tasks');
+    ul.prepend(li);
+
+    return li;
 }

@@ -1,7 +1,9 @@
 // Tasks database
 export const tasks = [];
 
-export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>(firstDate.dueDate !== null ? firstDate.dueDate : Infinity) - (secondDate.dueDate !== null ? secondDate.dueDate : Infinity));
+export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>
+        firstDate.dueDate - secondDate.dueDate || secondDate.id - firstDate.id
+);
 
 export const updateTimeTasks = () => tasks.map(task => task.updateTime());
 
