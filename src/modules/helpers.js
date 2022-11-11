@@ -46,14 +46,6 @@ export const selectNode = selector => document.querySelector(selector);
 export const selectNodes = selector => document.querySelectorAll(selector);
 export const cleanNode = node => node.replaceChildren();
 
-export const formatDate = date => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${String(year)}`;
-}
-
 export const removeElement = selector => {
     const element = document.querySelector(selector);
     element.remove();

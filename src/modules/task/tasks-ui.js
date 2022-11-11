@@ -1,5 +1,6 @@
 import { btnsUi } from '../btns-ui';
-import { appendChildren, createList, setAttributes, formatDate, cleanNode, selectNode } from '../helpers';
+import { appendChildren, createList, setAttributes, cleanNode, selectNode } from '../helpers';
+import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 
@@ -35,11 +36,7 @@ const taskItem = task => {
         'data-number': `${task.id}`
     });
 
-    if (task.complete === true) {
-        checkBtn.checked = true;
-    } else {
-        checkBtn.checked = false;
-    }
+    (task.complete) ? checkBtn.checked = true : checkBtn.checked = false;
 
     const taskLabel = document.createElement('label');
     setAttributes(taskLabel, {
@@ -97,7 +94,7 @@ const taskItem = task => {
         'data-number': `${task.id}`,
         'data-type': 'due-date'
     });
-    taskDueDate.textContent = Date.parse(task.dueDate) ? `${formatDate(task.dueDate)}` : '';
+    taskDueDate.textContent = Date.parse(task.dueDate) ? `${format(task.dueDate, 'dd-MM-yyyy')}` : '';
 
     wrapperDueDate.appendChild(taskDueDate);
 
