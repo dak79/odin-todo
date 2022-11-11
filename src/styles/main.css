@@ -77,7 +77,8 @@
 .new-list-title,
 .edit-list-title,
 .edit-task-title,
-.new-due-date {
+.new-due-date,
+.new-task-input {
     font-family: 'Montserrat-700', sans-serif;
     background-color: var(--slate-200);
     color: var(--slate-700);
@@ -88,11 +89,12 @@
 }
 
 .new-due-date {
-    grid-area: 1 / span 2;
+    grid-area: 1;
 }
 
 .edit-task-title,
-.new-due-date {
+.new-due-date,
+.new-task-input {
     font-size: 1rem;
     padding: 0.3rem 0.5rem;
 }
