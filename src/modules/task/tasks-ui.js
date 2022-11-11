@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { Task } from '../classes';
-import { newInput } from '../todo';
+import { newInput, editInput } from '../todo';
 
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
@@ -56,7 +56,8 @@ export const taskItem = task => {
         type: 'button',
         id: `task-${task.id}-expand-btn`,
         class: 'expand-btn',
-        'aria-label': 'Show task detail'
+        'aria-label': 'Show task detail',
+        'data-btn': 'expand'
     });
 
     appendChildren(wrapperCheck, [checkBtn, taskLabel, expandTaskBtn]);
@@ -75,7 +76,8 @@ export const taskItem = task => {
             class: 'due-date-delete-btn',
             'aria-label': 'Delete date',
             'data-number': `${task.id}`,
-            'data-type': 'due-date'
+            'data-type': 'due-date',
+            'data-btn': 'delete'
         }); 
             
         wrapperDueDate.appendChild(deleteDateBtn);
@@ -87,7 +89,8 @@ export const taskItem = task => {
             class: 'due-date-edit-btn',
             'aria-label': 'Edit date',
             'data-number': `${task.id}`,
-            'data-type': 'due-date'
+            'data-type': 'due-date',
+            'data-btn': 'edit'
         });
         
         wrapperDueDate.appendChild(editDateBtn);
@@ -98,7 +101,8 @@ export const taskItem = task => {
         id:`task-${task.id}-due-date`,
         class: 'task-due-date',
         'data-number': `${task.id}`,
-        'data-type': 'due-date'
+        'data-type': 'due-date',
+        'data-btn': 'edit'
     });
     taskDueDate.textContent = Date.parse(task.dueDate) ? `${format(task.dueDate, 'dd-MM-yyyy')}` : '';
 
@@ -128,7 +132,8 @@ export const taskItem = task => {
         class: 'task-edit-btn',
         'aria-label': 'Edit task title',
         'data-number':`${task.id}`,
-        'data-type': `${task.type}`
+        'data-type': `${task.type}`,
+        'data-btn': 'edit'
     });
     
     const deleteTaskBtn = btnsUi(task, task.type, 'delete', 'delete-task', {
@@ -137,7 +142,8 @@ export const taskItem = task => {
         class: 'task-delete-btn',
         'aria-label': 'Delete task',
         'data-number': `${task.id}`,
-        'data-type': `${task.type}`
+        'data-type': `${task.type}`,
+        'data-btn': 'delete'
     });
     
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
@@ -170,4 +176,33 @@ export const newTaskUi = newItem => {
     });
 
     return input;
+}
+
+export const editTaskUi = event => {
+    const type = event.target.dataset.type;
+    console.log(type);
+    return  (type === 'task') ? 
+            editInput(
+                `#checkbox-wrapper-${event.target.dataset.number} > label`,
+                `#checkbox-wrapper-${event.target.dataset.number}`,
+                {
+                    type: 'text',
+                    id: 'edit-task-title',
+                    class: 'edit-task-title',
+                    name: 'edit-task-title',
+                    maxlength: 40
+                }) :
+            (type === 'due-date') ? 
+            editInput(
+                `#task-${event.target.dataset.number}-due-date`,
+                `#due-date-wrapper-${event.target.dataset.number}`,
+                {
+                    type: 'date',
+                    id: `new-due-date-${event.target.dataset.number}`,
+                    class: 'new-due-date',
+                    'data-number': `${event.target.dataset.number}`
+                }) :
+            0;
+
+
 }

@@ -20,7 +20,8 @@ const navBtn = desk => {
         type: 'button',
         id: `btn-${desk.title.replace(' ', '-').toLowerCase().trim()}`,
         class: 'btn-menu',
-        'data-name': `${desk.title.replace(' ', '-').toLowerCase().trim()}`
+        'data-name': `${desk.title.replace(' ', '-').toLowerCase().trim()}`,
+        'data-btn': 'menu-title'
     });
     
     return [btn];

@@ -4,90 +4,48 @@ import { editInput, findItemId, saveEditInput } from './todo';
 import { List, Task } from './classes';
 import { lists, checkListName } from './lists/lists';
 import { tasks } from './task/tasks';
-import { renderLists, newListUi } from './lists/lists-ui';
-import { newTaskUi, renderTasks, taskItem } from './task/tasks-ui';
+import { renderLists, newListUi, editList, editListUi } from './lists/lists-ui';
+import { editTaskUi, newTaskUi, renderTasks, taskItem } from './task/tasks-ui';
 
 export const btnsController = event => {
     event.stopPropagation();
 
+    const btn = event.target.dataset.btn;
     const type = event.target.dataset.type;
 
-    const nodes = (type === 'list') ? 
-                    editInput(
-                        `#btn-list-${ event.target.dataset.number }`,
-                        `#list-item-lists-${ event.target.dataset.number }`, 
-                        { 
-                            type: 'text', 
-                            id: 'edit-list-title', 
-                            class: 'edit-list-title', 
-                            name: 'edit-list-title', 
-                            maxlength: 15 
-                        }) : 
-                    (type === 'task') ? 
-                    editInput(
-                        `#checkbox-wrapper-${event.target.dataset.number} > label`,
-                        `#checkbox-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'text',
-                            id: 'edit-task-title',
-                            class: 'edit-task-title',
-                            name: 'edit-task-title',
-                            maxlength: 40
-                        }) : 
-                    (type === 'due-date') ? 
-                    editInput(
-                        `#task-${event.target.dataset.number}-due-date`,
-                        `#due-date-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'date',
-                            id: `new-due-date-${event.target.dataset.number}`,
-                            class: 'new-due-date',
-                            'data-number': `${event.target.dataset.number}`
-                        }) : 
-                    0;
+    if (btn === 'edit') {
+        const nodes = (type === 'list') ? editListUi(event) : (type === 'task' || type === 'due-date') ? editTaskUi(event) : 0;
+        
+        if (nodes) {
+            clearListeners();
+            editListeners(type, nodes);
+        }
 
-    if (nodes) {
-        clearListeners();
-        editListeners(type, nodes);
+    } else if (btn === 'delete') {
+        deleteBtns(event);
+    } else if (btn === 'new-task' || btn === 'new-list') {
+        newBtns(event);
     }
+
+    
 }
 
-export const editBtns = event => {
+const editBtns = event => {
     event.stopPropagation();
 
     const type = event.target.dataset.type;
     const nodes = (type === 'list') ? 
-                    editInput(
-                        `#btn-list-${ event.target.dataset.number }`,
-                        `#list-item-lists-${ event.target.dataset.number }`, 
-                        { 
-                            type: 'text', 
-                            id: 'edit-list-title', 
-                            class: 'edit-list-title', 
-                            name: 'edit-list-title', 
-                            maxlength: 15 
-                        }) : 
+                    editListUi(event) : 
                     (type === 'task') ? 
-                    editInput(
-                        `#checkbox-wrapper-${event.target.dataset.number} > label`,
-                        `#checkbox-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'text',
-                            id: 'edit-task-title',
-                            class: 'edit-task-title',
-                            name: 'edit-task-title',
-                            maxlength: 40
-                        }) : 
+                    editTaskUi(event)
+                        
+                        : 
                     (type === 'due-date') ? 
-                    editInput(
-                        `#task-${event.target.dataset.number}-due-date`,
-                        `#due-date-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'date',
-                            id: `new-due-date-${event.target.dataset.number}`,
-                            class: 'new-due-date',
-                            'data-number': `${event.target.dataset.number}`
-                        }) : 
+
+                    editDueDateUi(event)
+                    
+                        
+                        : 
                     0;
 
     if (nodes) {
@@ -123,7 +81,7 @@ const saveInput= (type, nodes) => {
     }
 }
 
-export const deleteBtns = event => {
+const deleteBtns = event => {
     event.stopPropagation();
 
     const id = event.target.dataset.number;
@@ -146,7 +104,7 @@ export const deleteBtns = event => {
 
 }
 
-export const newBtns = event => {
+const newBtns = event => {
     event.stopPropagation();
 
     const type = event.target.dataset.type;

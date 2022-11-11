@@ -2,7 +2,7 @@ import { createList, cleanNode, selectNode, setAttributes, appendChildren } from
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
 import { btnsUi } from '../btns-ui';
-import { newInput } from '../todo';
+import { newInput, editInput } from '../todo';
 
 export const renderLists = isFirstLoad => {
     const section = selectNode('#side-section-lists');
@@ -38,7 +38,8 @@ const newListBtnUi = () => {
         type: 'button',
         id: 'btn-new-list',
         class: 'btn',
-        'data-type': 'new-list'
+        'data-type': 'new-list',
+        'data-btn': 'new-list'
     });
 
     return btnNewList; 
@@ -56,7 +57,8 @@ const listsBtn = list => {
         class: 'btn-lists',
         'data-number': `${list.id}`,
         'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`,
-        'data-type': `${list.type}`
+        'data-type': `${list.type}`,
+        'data-btn': 'list-title'
     });
 
     const wrapper = document.createElement('span');
@@ -71,7 +73,8 @@ const listsBtn = list => {
         class: 'btn-lists-edit',
         'aria-label': 'Button Edit List',
         'data-number': `${list.id}`,
-        'data-type': `${list.type}`
+        'data-type': `${list.type}`,
+        'data-btn': 'edit'
     });
     
     const btnDelete = btnsUi(list, list.type, 'delete', 'delete-list', {
@@ -80,7 +83,8 @@ const listsBtn = list => {
         class: 'btn-lists-delete',
         'aria-label': 'Button Delete List',
         'data-number': `${list.id}`,
-        'data-type': `${list.type}`
+        'data-type': `${list.type}`,
+        'data-btn': 'delete'
     });
     
     appendChildren(wrapper, [btnEdit, btnDelete]);
@@ -99,4 +103,19 @@ export const newListUi = () => {
     });
 
     return input;
+}
+
+export const editListUi = event => {
+    const nodes = editInput(
+        `#btn-list-${ event.target.dataset.number }`,
+        `#list-item-lists-${ event.target.dataset.number }`, 
+        { 
+            type: 'text', 
+            id: 'edit-list-title', 
+            class: 'edit-list-title', 
+            name: 'edit-list-title', 
+            maxlength: 15 
+        });
+        
+    return nodes
 }

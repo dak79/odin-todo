@@ -39,7 +39,8 @@ const createBtnNewTask = () => {
         id: 'btn-new-task',
         class: 'btn',
         'aria-label': 'Add task',
-        'data-type': 'new-task'
+        'data-type': 'new-task',
+        'data-btn': 'new-task'
     });
     
     return btnNewTask;
