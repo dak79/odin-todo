@@ -3,7 +3,6 @@ import { clearListeners, addAppListeners } from '../listeners';
 import { deleteItem, updateItem } from '../todo';
 import { renderTasks, newTaskUi } from './tasks-ui';
 import { Task } from '../classes';
-import { findItemId } from '../todo';
 
 // Tasks database
 export const tasks = [];
