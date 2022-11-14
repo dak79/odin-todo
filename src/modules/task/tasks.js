@@ -96,6 +96,7 @@ export const checkboxState = event => {
         task.addTag('inbox');
         task.updateTime();
     }
+    
     clearListeners();
     setTimeout(() => renderTasks(desk, false), 1000);   
 }
