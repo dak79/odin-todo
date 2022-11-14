@@ -4,19 +4,19 @@ import { selectNode, setAttributes } from './helpers';
  * 
  * @param { Node } textNode - Node to attach change field. 
  * @param { Object } attrs - Attributes for change fields.
- * @returns { Node[] } - Node to attach change fields / change field node.
+ * @returns { Node[] } - input node / node to update
  */
  export const editInput = (textNode, parentNode, attrs) => {
-    const text = selectNode(`${textNode}`);
+    const nodeToUpdate = selectNode(`${textNode}`);
     const parent = selectNode(parentNode);
     const input = document.createElement('input');
-    const inputValue = text.textContent;
+    const inputValue = nodeToUpdate.textContent;
     setAttributes(input, attrs);
     input.value = inputValue;
-    parent.replaceChild(input, text);
+    parent.replaceChild(input, nodeToUpdate);
     input.focus();
 
-    return [text, input];
+    return { input, output: nodeToUpdate };
 }
 
 /**

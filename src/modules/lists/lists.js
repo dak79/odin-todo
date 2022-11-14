@@ -8,27 +8,30 @@ export const lists = [];
 
 export const addNewList = event => {
     event.stopPropagation();
-    const inputField = newListUi();
 
-    return [inputField, null];
+    const instance = new List()
+    const input = newListUi();
+
+    return { input, instance };
 }
 
-export const checkListName = node => {
-    if (String(node.value) === '') {
+export const checkListName = item => {
+    console.log(item)
+    if (String(item.input.value) === '') {
         renderLists(false);
         return false;
     }
 
-    const newList = new List(String(node.value));
-    const listsTitles = findItemName(lists, String(node.value))
+    const newList = new List(String(item.input.value));
+    const listsTitles = findItemName(lists, String(item.input.value))
    
     if (listsTitles !== undefined && listsTitles.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
-        newListNameError(node);
-        node.focus();
+        newListNameError(item.input);
+        item.input.focus();
         return false;
     }
     
-    return String(node.value);
+    return String(item.input.value);
 }
 
 const newListNameError = element => {

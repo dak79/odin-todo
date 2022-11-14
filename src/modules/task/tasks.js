@@ -17,13 +17,13 @@ export const tasksVisualizedOn = value => tasks.map(task => task.visualizedOn = 
 export const addNewTask = event => {
         event.stopPropagation();
 
-        const newTask = new Task();
-        const inputField = newTaskUi(newTask);
+        const instance = new Task();
+        const input = newTaskUi(instance);
         
         clearListeners();
         addAppListeners();
 
-        return [inputField, newTask];
+        return  { input, instance }
 }
 
 export const deleteTask = event => {
