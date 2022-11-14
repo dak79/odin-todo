@@ -28,9 +28,8 @@ import { selectNode, setAttributes } from './helpers';
  * @param { string } newTag - Tag to assign to item.
  */
 export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
-    const itemToUpdate = findItemId(array, Number(node.dataset.number));
-    itemToUpdate.update(propertyName, newValue);
-
+    const itemToUpdate = updateItem(array, Number(node.dataset.number), propertyName, newValue)
+    
     if (newTag) itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === newTag);
     if (itemToUpdate.type === 'task') itemToUpdate.updateTime();
     node.remove();
@@ -38,6 +37,13 @@ export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
     return itemToUpdate
 }
 
+/**
+ * 
+ * @param { string } selectorNode - Node to replace with input field. 
+ * @param { string } selectorParentNode  - Parent of previous node.
+ * @param { Object } attrs - New input field attributes. 
+ * @returns - Input field.
+ */
 export const newInput = (selectorNode, selectorParentNode, attrs) => {
     const input = document.createElement('input');
     setAttributes(input, attrs);
@@ -56,6 +62,12 @@ export const newInput = (selectorNode, selectorParentNode, attrs) => {
     return input;
 }
 
+/**
+ * Find and delete an instance from an array
+ * @param { [] } array - Array where instance is.
+ * @param { number } id - Id instance to delete.
+ * @returns instance to delete
+ */
 export const deleteItem = (array, id) => {
     const itemToDelete = findItemId(array, Number(id));
     itemToDelete.delete(array, id);
@@ -63,6 +75,14 @@ export const deleteItem = (array, id) => {
     return itemToDelete;
 }
 
+/**
+ * Find and update instance.
+ * @param { [] } array - Array where instance is.
+ * @param { number } id - Id instance to update
+ * @param { string } property - Property to update. 
+ * @param { string } newValue - New value for property
+ * @returns Instance to update.
+ */
 export const updateItem = (array, id, property, newValue) => {
     const itemToUpdate = findItemId(array, Number(id));
     itemToUpdate.update(property, newValue);
@@ -71,7 +91,7 @@ export const updateItem = (array, id, property, newValue) => {
 }
 
 /**
- * 
+ * Find an item by id in an array.
  * @param { array } array - Array where to perform search.
  * @param { number } id - Item id to serch for. 
  * @returns { object|undefined } - Object with this id or undefined.
@@ -79,10 +99,9 @@ export const updateItem = (array, id, property, newValue) => {
 export const findItemId = (array, id) => array.find(element => element.id === id);
 
 /**
- * 
+ * Find an item by name in ana array.
  * @param { array } array - Array where to perform search.
  * @param { string } name - Item name to search for.
  * @returns { object|undefined } - Object with this name or undefind.
  */
 export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());
-

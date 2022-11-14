@@ -1,7 +1,11 @@
 import { btnsUi } from '../btns-ui';
-import { selectNode, createList, setAttributes } from '../helpers';
+import { selectNode, createList } from '../helpers';
 import { addAppListeners } from '../listeners';
 
+/**
+ * Render navigation menu.
+ * @param { boolean } isFirstLoad - Check if it is first load for page.
+ */
 export const renderMenu = isFirstLoad => {
     const nav = selectNode('#side-navbar')
     const menu = createMenu();
@@ -15,6 +19,12 @@ const createMenu = () => {
     return menu;
 }
 
+/**
+ * Create menu buttos.
+ * @param { Object } desk - Desk button.
+ * @property { string } title - Desk name. 
+ * @returns { HTMLElement } - Button
+ */
 const navBtn = desk => {
     const btn = btnsUi(null, null, desk.title, null, {
         type: 'button',

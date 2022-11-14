@@ -4,6 +4,10 @@ import { listeners, addAppListeners } from '../listeners';
 import { btnsUi } from '../btns-ui';
 import { newInput, editInput } from '../todo';
 
+/**
+ * Render Lists
+ * @param { boolean } isFirstLoad - Page first load
+ */
 export const renderLists = isFirstLoad => {
     const section = selectNode('#side-section-lists');
     const displayHeader = listHeader();
@@ -50,6 +54,11 @@ const createListsUi = () => {
     return projects;
 }
 
+/**
+ * 
+ * @param { Object } list - list instance 
+ * @returns - Ui for a list instance
+ */
 const listsBtn = list => {
     const btnTitle = btnsUi(null, null, list.title, null, {
         type: 'button',
@@ -105,6 +114,11 @@ export const newListUi = () => {
     return input;
 }
 
+/**
+ * Edit list
+ * @param { event } event 
+ * @return { Node } nodes for change list title Ui.
+ */
 export const editListUi = event => {
     const nodes = editInput(
         `#btn-list-${ event.target.dataset.number }`,

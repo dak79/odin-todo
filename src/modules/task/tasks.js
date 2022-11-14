@@ -6,14 +6,34 @@ import { Task } from '../classes';
 // Tasks database
 export const tasks = [];
 
+/**
+ * Sort tasks array by due date and id (when due dat is the same).
+ * @returns sorted array.
+ */
 export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>
         firstDate.dueDate - secondDate.dueDate || secondDate.id - firstDate.id
 );
 
+/**
+ * Update array tags according to due date (and new due date).
+ * @returns Updated array.
+ */
 export const updateTimeTasks = () => tasks.map(task => task.updateTime());
 
+/**
+ * Update task.visualizedOn property.
+ * @param { string } value - Desk name
+ * @returns Desk where task is visualized.
+ */
 export const tasksVisualizedOn = value => tasks.map(task => task.visualizedOn = value);
 
+/**
+ * Add new task
+ * @param { event } event 
+ * @returns { Object } New task data.
+ * @property { Node } input - Input node for update.
+ * @property { Object } instance - New task instance.
+ */
 export const addNewTask = event => {
         event.stopPropagation();
 
@@ -26,6 +46,10 @@ export const addNewTask = event => {
         return  { input, instance }
 }
 
+/**
+ * Delete task.
+ * @param { event } event 
+ */
 export const deleteTask = event => {
         event.stopPropagation();
 
@@ -35,6 +59,10 @@ export const deleteTask = event => {
         renderTasks(itemToDelete.visualizedOn || 'inbox', false);
 }
 
+/**
+ * Delete due date.
+ * @param { event } event 
+ */
 export const deleteDate = event => {
         event.stopPropagation();
 

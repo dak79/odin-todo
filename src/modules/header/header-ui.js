@@ -1,6 +1,9 @@
 import { selectNode, appendChildren, setAttributes } from '../helpers';
 import { btnsUi } from '../btns-ui';
 
+/**
+ * Render header.
+ */
 export const renderHeader = () => {
     const header = selectNode('#side-header');
     const logo = createLogo();

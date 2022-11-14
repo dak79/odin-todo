@@ -6,7 +6,10 @@ import { tasks, deleteTask, deleteDate, addNewTask } from './task/tasks';
 import { renderLists, editListUi } from './lists/lists-ui';
 import { editTaskUi, renderTasks } from './task/tasks-ui';
 
-
+/**
+ * Controller for buttons
+ * @param { event } event 
+ */
 export const btnsController = event => {
     event.stopPropagation();
 
@@ -42,6 +45,14 @@ const controllerListener = (newData, type, callback) => {
     
 }
 
+/**
+ * Save new item or update an old one.
+ * @param { Object } newItem - New item to save.
+ * @property { Node } input - New item input node.
+ * @property { Node } output - New item output node.
+ * @property { Object } instance - New item instance: list|task. 
+ * @param { string } type - Button type that fired the event. 
+ */
 const saveInput = (newItem, type) => {
     if (type === 'list' || type === 'new-list') {
         const newTitle = checkListName(newItem);

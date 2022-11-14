@@ -5,6 +5,11 @@ import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { newInput, editInput } from '../todo';
 
+/**
+ * Render tasks
+ * @param { Node } desk - Which desk render
+ * @param { boolean } isFirstLoad - Check if it is first load for page
+ */
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
     const section = selectNode('#desk');
@@ -20,7 +25,18 @@ const createTasksUi = desk => {
     return todoes;
 }
 
-export const taskItem = task => {
+/**
+ * Task Ui
+ * @param { Object } task - Task instance.
+ * @property { number } id - Task id.
+ * @property { string } type - Task type.
+ * @property { string } title - Task title.
+ * @property { boolean } complete - Is task complete?
+ * @property { Date } dueDate - Task due date.
+ * @property { [] } tags - Task tags. 
+ * @returns { Node } Task node.
+ */
+const taskItem = task => {
     const wrapperCheck = document.createElement('span');
     setAttributes(wrapperCheck, {
         id: `checkbox-wrapper-${task.id}`,
@@ -150,6 +166,12 @@ export const taskItem = task => {
     return [wrapperCheck, wrapperDueDate, wrapperBtns];
 }
 
+/**
+ * New task Ui
+ * @param { Object } newItem - Task instance.
+ * @property { number } id - Task.id.
+ * @returns { Node } - Input for new task.
+ */
 export const newTaskUi = newItem => {
     const li = document.createElement('li');
     setAttributes(li, {
@@ -177,6 +199,11 @@ export const newTaskUi = newItem => {
     return input;
 }
 
+/**
+ * Edit task Ui.
+ * @param { event } event 
+ * @returns { Node } - Input for edit task
+ */
 export const editTaskUi = event => {
     const type = event.target.dataset.type;
 
@@ -202,6 +229,4 @@ export const editTaskUi = event => {
                     'data-number': `${event.target.dataset.number}`
                 }) :
             0;
-
-
 }

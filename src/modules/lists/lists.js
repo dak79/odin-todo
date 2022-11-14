@@ -6,6 +6,13 @@ import { clearListeners } from '../listeners';
 // Lists database
 export const lists = [];
 
+/**
+ * New list
+ * @param { event } event 
+ * @returns { Object } - Data for new list. 
+ * @property { Node } input - Input node.
+ * @property { Object } instance - New list instance. 
+ */
 export const addNewList = event => {
     event.stopPropagation();
 
@@ -15,8 +22,13 @@ export const addNewList = event => {
     return { input, instance };
 }
 
+/**
+ * List name validation.
+ * @param { Object } item - Item to check
+ * @property { input } input - Node with new list title.
+ * @returns { false|string} false if title is not valid | Valid title
+ */
 export const checkListName = item => {
-    console.log(item)
     if (String(item.input.value) === '') {
         renderLists(false);
         return false;
@@ -34,6 +46,10 @@ export const checkListName = item => {
     return String(item.input.value);
 }
 
+/**
+ * Invalid list name.
+ * @param { HTMLElement } element - input field 
+ */
 const newListNameError = element => {
     element.value = 'Already exists';
     element.classList.add('new-lists-error');
@@ -46,6 +62,10 @@ const newListNameError = element => {
     }
 }
 
+/**
+ * Delete List
+ * @param { event } event 
+ */
 export const deleteList = event => {
     event.stopPropagation();
 
@@ -54,5 +74,4 @@ export const deleteList = event => {
     deleteItem(lists, id);
     clearListeners();
     renderLists(false);
-
 }

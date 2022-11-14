@@ -78,13 +78,3 @@ export const clearListeners = () => {
     listeners.splice(0);
    
 }
-
-/**
- * 
- * @param { HTMLIdSelector } selector - Element to remove event listeners.
- * @param { Event.type } eventType - Type of listeners.
- * @param { Function } callback - Handler.
- */
- const clearListener = (selector, eventType, callback) => {
-    document.querySelector(selector).removeEventListener(eventType, callback);
-}
