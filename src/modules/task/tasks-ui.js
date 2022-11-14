@@ -3,7 +3,7 @@ import { appendChildren, createList, setAttributes, cleanNode, selectNode } from
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
-import { newInput, editInput } from '../todo';
+import { newInput, editInput, findItemId } from '../todo';
 
 /**
  * Render tasks
@@ -69,11 +69,12 @@ const taskItem = task => {
         taskLabel.textContent = '';
     }
 
-    const expandTaskBtn = btnsUi(null, 'expand-task', 'expand', null, {
+    const expandTaskBtn = btnsUi(task, 'expand-task', 'expand', null, {
         type: 'button',
         id: `task-${task.id}-expand-btn`,
         class: 'expand-btn',
         'aria-label': 'Show task detail',
+        'data-number': `${task.id}`,
         'data-btn': 'expand',
         'data-type': 'expand-task'
     });
@@ -232,4 +233,83 @@ export const editTaskUi = event => {
                     'data-number': `${event.target.dataset.number}`
                 }) :
             0;
+}
+
+export const expandTaskUi = (event, task) => {
+
+    const wrapper = document.createElement('div');
+    setAttributes(wrapper, {
+        id: `expand-wrapper-${event.target.dataset.number}`,
+        class: 'expand-wrapper'
+    })
+    
+    const descriptionWrapper = document.createElement('div');
+    setAttributes(descriptionWrapper, {
+        id: `description-wrapper-${event.target.dataset.number}`,
+        class: 'description-wrapper'
+    })
+    
+    const labelDescription = document.createElement('label');
+    setAttributes(labelDescription, {
+        for: `description-area-${event.target.dataset.number}`,
+        class: 'descrition-label'
+    });
+    labelDescription.textContent = 'Description: ';
+
+    const descriptionText = document.createElement('textarea');
+    setAttributes(descriptionText, {
+        id: `description-text-${event.target.dataset.number}`,
+        class: 'description-text',
+        rows: '1',
+        cols: '20'
+    });
+
+    if (task.description) descriptionText.value = task.description;
+    appendChildren(descriptionWrapper, [labelDescription, descriptionText]);
+
+    const checklistWrapper = document.createElement('div');
+    setAttributes(checklistWrapper, {
+        id: `checklist-wrapper-${event.target.dataset.number}`,
+        class: 'checklist-wrapper'
+    });
+
+    const priorityWrapper = document.createElement('div');
+    setAttributes(priorityWrapper, {
+        id: `priority-wrapper-${event.target.dataset.number}`,
+        class: 'priority-wrapper'
+    });
+    const fieldset = document.createElement('fieldset');
+    const legend = document.createElement('legend');
+    legend.textContent = 'Priority:';
+
+    const radiosWrapper = document.createElement('div');
+    
+    const lowWrapper = document.createElement('div');
+    const radioLow = document.createElement('input');
+    const radioLowLabel = document.createElement('label');
+    appendChildren(lowWrapper, [radioLow, radioLowLabel]);
+    
+    const mediumWrapper = document.createElement('div');
+    const radioMedium = document.createElement('input');
+    const radioMediumLabel = document.createElement('label');
+    appendChildren(mediumWrapper, [radioMedium, radioMediumLabel]);
+    
+    const highWrapper = document.createElement('div');
+    const radioHigh = document.createElement('input');
+    const radioHighLabel = document.createElement('label');
+    appendChildren(highWrapper, [radioHigh, radioHighLabel]);
+
+    appendChildren(radiosWrapper, [lowWrapper, mediumWrapper, highWrapper]);
+    appendChildren(fieldset, [legend, radiosWrapper]);
+    priorityWrapper.appendChild(fieldset);
+
+    const tagsWrapper = document.createElement('div');
+    setAttributes(tagsWrapper, {
+        id: `tags-wrapper-${event.target.dataset.number}`,
+        class: 'tags-wrapper'
+    });
+
+    appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
+
+    return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper};
 }

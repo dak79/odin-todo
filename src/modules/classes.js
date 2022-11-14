@@ -9,6 +9,7 @@ class TaskBase {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.expanded = false;
         this.complete = false;
         this.tags = ['inbox'];
         this.updateTime();

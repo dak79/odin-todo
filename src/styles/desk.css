@@ -16,6 +16,7 @@
     color: var(--slate-200);
     background-color: var(--slate-700);
     border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
 }
 
 .checkbox-wrapper {
@@ -117,6 +118,57 @@ span.late-msg svg {
     fill: var(--amber-500)
 }
 
+.expand-wrapper {
+    grid-area: 2 / span 2;
+    padding: 0.5rem;
+    background-color: var(--slate-600);
+    border-radius: 0 15px 0 0;
+    display: grid;
+        grid: 
+            [row1-start] "description checklist" 1fr [row1-end]
+            [row2-start] "priority checklist" 1fr [row2-end]
+            [row3-start] "tags checklist" 1fr [row3-end]
+            /1fr 1fr;
+    gap: 10px;
+    
+    border: 2px solid var(--slate-500);
+}
+
+.description-wrapper {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;  
+}
+
+.descrition-label {
+    padding: 1rem;
+}
+
+.description-text {
+    padding: 0.5rem 0.3rem;
+    resize: none;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.priority-wrapper {
+    grid-area: priority;
+}
+
+.priority-wrapper fieldset {
+    border: none;
+    padding: 1rem;
+}
+
+.tags-wrapper {
+    grid-area: tags;
+}
+
+.checklist-wrapper {
+    grid-area: checklist;
+}
+
+
 /* Task Buttons */
 .expand-btn,
 .task-edit-btn,
@@ -141,14 +193,14 @@ span.late-msg svg {
     cursor: pointer;
 }
 
-.expand-btn-up svg {
+.expand-btn-up svg.svg-expand {
     transform: rotate(180deg); 
-    transition: 1s transform linear;
+    transition: 0.2s transform linear;
 }
 
-.expand-btn-down svg {
+.expand-btn-down svg.svg-expand {
     transform: rotate(0deg);
-    transition: 1s transform linear;
+    transition: 0.2s transform linear;
 }
 
 .task-btn-wrapper {

@@ -78,14 +78,15 @@
 .edit-list-title,
 .edit-task-title,
 .new-due-date,
-.new-task-input {
+.new-task-input,
+.description-text {
     font-family: 'Montserrat-700', sans-serif;
     background-color: var(--slate-200);
     color: var(--slate-700);
     border-radius: 15px;
     outline-color: var(--amber-500);
     caret-color: var(--amber-500);
-    line-height: 1rem;
+    
 }
 
 .new-due-date {
@@ -97,6 +98,7 @@
 .new-task-input {
     font-size: 1rem;
     padding: 0.3rem 0.5rem;
+    line-height: 1rem;
 }
 
 .new-list-title,
@@ -104,18 +106,21 @@
     width: 80%;
     padding: 0.5rem 1rem;
     font-size: 2rem;
+    line-height: 1rem;
 }
 
 .new-due-date {
     background-color: var(--slate-200);
     color: var(--amber-500);
     margin-right: 0.5rem;
+    line-height: 1rem;
 }
 
 .edit-list-title {
     grid-area: 1 / 1 / 1 / span 2;
     margin-bottom: 0.5rem;
     z-index: 1;
+    line-height: 1rem;
 }
 
 .new-list-title {

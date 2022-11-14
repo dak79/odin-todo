@@ -1,7 +1,7 @@
 import { selectNode } from '../helpers';
 import { clearListeners, addAppListeners } from '../listeners';
-import { deleteItem, updateItem } from '../todo';
-import { renderTasks, newTaskUi } from './tasks-ui';
+import { findItemId, deleteItem, updateItem } from '../todo';
+import { renderTasks, newTaskUi, expandTaskUi } from './tasks-ui';
 import { Task } from '../classes';
 
 // Tasks database
@@ -102,5 +102,21 @@ export const checkboxState = event => {
 }
 
 export const expandTask = event => {
-        console.log('Expand task');
-    }
+        console.log(event.target);
+        const task = findItemId(tasks, Number(event.target.dataset.number));
+        task.expanded = task.expanded ? false : true;
+        const hook = selectNode(`#list-item-task-${event.target.dataset.number}`);
+
+        if (task.expanded) {
+                hook.classList.remove('expand-btn-down');
+                hook.classList.add('expand-btn-up');
+                const nodes = expandTaskUi(event, task);
+                hook.appendChild(nodes.wrapper);
+                
+        } else {
+                hook.classList.remove('expand-btn-up');
+                hook.classList.add('expand-btn-down');
+                const expandedSection = selectNode(`#expand-wrapper-${event.target.dataset.number}`);
+                expandedSection.remove();
+        }        
+}
