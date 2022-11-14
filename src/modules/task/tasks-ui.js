@@ -50,7 +50,9 @@ const taskItem = task => {
         class: 'tasks-checkbox',
         name: `task-checkbox-${task.id}`,
         'aria-label': 'Not done/Done check field',
-        'data-number': `${task.id}`
+        'data-number': `${task.id}`,
+        'data-type': 'checkbox-state',
+        'data-btn': 'checkbox'
     });
 
     (task.complete) ? checkBtn.checked = true : checkBtn.checked = false;

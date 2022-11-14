@@ -1,7 +1,6 @@
-import { showMenu } from './menu/menu-handlers';
 import { showList } from './lists/lists-handlers';
 import { btnsController } from './handlers';
-import { checkboxState, expandTask } from './task/tasks-handlers';
+import { expandTask } from './task/tasks-handlers';
 
 export const listeners = [];
 
@@ -9,7 +8,7 @@ export const addAppListeners = () => {
 
     // Menu
     addListener('#btn-new-task', 'click', btnsController);
-    addListeners('.btn-menu', 'click', showMenu);
+    addListeners('.btn-menu', 'click', btnsController);
 
     // Lists
     addListeners('.btn-lists', 'click', showList);
@@ -18,7 +17,7 @@ export const addAppListeners = () => {
     addListener('#btn-new-list', 'click', btnsController);
 
     // Tasks
-    addListeners('.tasks-checkbox', 'change', checkboxState);
+    addListeners('.tasks-checkbox', 'change', btnsController);
     addListeners('.expand-btn', 'click', expandTask);
     addListeners('.task-due-date', 'click', btnsController);
     addListeners('.due-date-delete-btn', 'click', btnsController);

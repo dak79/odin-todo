@@ -1,7 +1,9 @@
+import { selectNode } from '../helpers';
 import { clearListeners, addAppListeners } from '../listeners';
 import { deleteItem, updateItem } from '../todo';
 import { renderTasks, newTaskUi } from './tasks-ui';
 import { Task } from '../classes';
+import { findItemId } from '../todo';
 
 // Tasks database
 export const tasks = [];
@@ -73,4 +75,28 @@ export const deleteDate = event => {
         itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === 'inbox');
         itemToUpdate.updateTime();
         renderTasks(itemToUpdate.visualizedOn || 'inbox', false);
+}
+
+/**
+ * Checkbox State
+ * @param { event } event 
+ */
+export const checkboxState = event => {
+    const data = event.target.dataset.number;
+    const checkbox = selectNode(`#task-checkbox-${data}`);
+
+    const isCompleted = checkbox.checked ? true : false;
+    const task = updateItem(tasks, Number(data), 'complete', isCompleted);
+    const desk = isCompleted ? task.visualizedOn : 'complete';
+    
+    if (isCompleted) {
+        task.addTag('complete');
+        task.tags = task.tags.filter(tag => tag === 'complete');
+    } else {
+        task.deleteTag('complete');
+        task.addTag('inbox');
+        task.updateTime();
+    }
+    
+    setTimeout(() => renderTasks(desk, false), 1000);   
 }

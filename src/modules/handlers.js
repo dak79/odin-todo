@@ -2,7 +2,8 @@ import { clearListeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { saveEditInput } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
-import { tasks, deleteTask, deleteDate, addNewTask } from './task/tasks';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState } from './task/tasks';
+import { showMenu } from './menu/menu';
 import { renderLists, editListUi } from './lists/lists-ui';
 import { editTaskUi, renderTasks } from './task/tasks-ui';
 
@@ -12,12 +13,17 @@ import { editTaskUi, renderTasks } from './task/tasks-ui';
  */
 export const btnsController = event => {
     event.stopPropagation();
-
+    
     const btn = event.target.dataset.btn;
     const type = event.target.dataset.type;
 
+    console.log(btn, type);
     if (btn === 'delete') {
         (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
+    } else if (btn === 'title') {
+        showMenu(event);
+    } else if (btn === 'checkbox') {
+        checkboxState(event);
     } else {
         const newItem = (btn === 'edit') ? 
                             (type === 'list') ? editListUi(event) : 
