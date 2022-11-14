@@ -100,3 +100,7 @@ export const checkboxState = event => {
     clearListeners();
     setTimeout(() => renderTasks(desk, false), 1000);   
 }
+
+export const expandTask = event => {
+        console.log('Expand task');
+    }

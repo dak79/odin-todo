@@ -2,7 +2,7 @@ import { clearListeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { saveEditInput } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState } from './task/tasks';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask } from './task/tasks';
 import { showMenu } from './menu/menu';
 import { renderLists, editListUi } from './lists/lists-ui';
 import { editTaskUi, renderTasks } from './task/tasks-ui';
@@ -24,6 +24,8 @@ export const btnsController = event => {
         showMenu(event);
     } else if (btn === 'checkbox') {
         checkboxState(event);
+    } else if (btn === 'expand') {
+        expandTask(event);
     } else {
         const newItem = (btn === 'edit') ? 
                             (type === 'list') ? editListUi(event) : 

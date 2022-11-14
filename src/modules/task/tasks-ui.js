@@ -69,12 +69,13 @@ const taskItem = task => {
         taskLabel.textContent = '';
     }
 
-    const expandTaskBtn = btnsUi(null, null, 'expand', null, {
+    const expandTaskBtn = btnsUi(null, 'expand-task', 'expand', null, {
         type: 'button',
         id: `task-${task.id}-expand-btn`,
         class: 'expand-btn',
         'aria-label': 'Show task detail',
-        'data-btn': 'expand'
+        'data-btn': 'expand',
+        'data-type': 'expand-task'
     });
 
     appendChildren(wrapperCheck, [checkBtn, taskLabel, expandTaskBtn]);
