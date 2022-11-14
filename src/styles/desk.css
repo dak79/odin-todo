@@ -23,7 +23,7 @@
     display: grid;
     grid: 
         [row1-start] "check label expand" 1fr [row1-end]
-        /1fr 2fr 1fr;
+        /0.5fr 2fr 0.5fr;
     align-items: center;
 }
 
@@ -73,6 +73,10 @@ input[type="checkbox"]:hover,
 .task-due-date:hover {
     cursor: pointer;
     color: var(--amber-500)
+}
+
+.expand-btn {
+    grid-area: expand;
 }
 
 .due-date-wrapper {
@@ -125,6 +129,7 @@ span.late-msg svg {
     padding: 0.5rem 0.5rem;
     max-width: 100%;
 }
+
 
 .expand-btn:hover,
 .task-edit-btn:hover,

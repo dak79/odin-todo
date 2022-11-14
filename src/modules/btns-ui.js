@@ -20,7 +20,7 @@ export const btnsUi = (type, dataType, textContent, idPrefix, attrs) => {
     } else  if (textContent === 'delete') {
         btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" id="svg-${idPrefix}-${type.id}" class="svg-btns-delete" data-number="${type.id}" data-type="${dataType}" data-btn="${textContent}"><path d="M6.675 22.15q-1.4 0-2.4-.987-1-.988-1-2.413V6.225H1.7v-3.4h6.7v-1.65h7.175v1.65H22.3v3.4h-1.575V18.75q0 1.425-.987 2.413-.988.987-2.413.987Zm1.675-5.125h2.825V7.95H8.35Zm4.5 0h2.825V7.95H12.85Z" id="svg-${idPrefix}-path-${type.id}" class="svg-btns-delete" data-number="${type.id}" data-type="${dataType}" data-btn="${textContent}" /></svg>`;
     } else if (textContent === 'expand') {
-        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-btn="${textContent}><path d="m12 16.35-7-7 2.4-2.375 4.6 4.6 4.6-4.6L19 9.35Z" data-btn="${textContent}"/></svg>`;
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" data-btn="${textContent}"><path d="m12 16.35-7-7 2.4-2.375 4.6 4.6 4.6-4.6L19 9.35Z" data-btn="${textContent}"/></svg>`;
     } else {
         btn.textContent = textContent;
     }
