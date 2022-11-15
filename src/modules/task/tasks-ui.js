@@ -372,6 +372,34 @@ export const expandTaskUi = (event, task) => {
         class: 'tags-wrapper'
     });
 
+    const tagsLabel = document.createElement('label');
+    setAttributes(tagsLabel, {
+        for: `task-tags-${task.id}`,
+        class: 'task-tags-label'
+    });
+    tagsLabel.textContent = 'Lists:';
+
+    const tagsSelect = document.createElement('select');
+    setAttributes(tagsSelect, {
+        id: `task-tags-${task.id}`,
+        class: 'task-tags',
+        name: 'tags'
+    });
+
+    const option = document.createElement('option');
+    setAttributes(option, {
+        value: ""
+    });
+    option.textContent = 'Add to list';
+    tagsSelect.appendChild(option);
+
+
+    appendChildren(tagsWrapper, [tagsLabel, tagsSelect]);
+
+    
+
+
+
     const checklistWrapper = document.createElement('div');
     setAttributes(checklistWrapper, {
         id: `checklist-wrapper-${task.id}`,

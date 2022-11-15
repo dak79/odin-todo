@@ -3,9 +3,9 @@
     grid-area: navbar;
     display: grid;
     grid:
-        [row1-start] "header" 0.5fr [row1-end] 
-        [row2-start] "menu" 1fr [row2-end] 
-        [row4-start] "lists" 2.5fr [row4-end] 
+        [row1-start] "header" 7rem [row1-end] 
+        [row2-start] "menu" 20rem [row2-end] 
+        [row4-start] "lists" 1fr [row4-end] 
         / 1fr;
     gap: 20px;
     background-color: var(--slate-700);
@@ -151,8 +151,6 @@ div#side-header-logo svg {
 #btn-new-list {
     grid-area: btn;
 }
-
-
 
 /* New List and Edit List Fields Buttons */
 .btn-lists-edit,

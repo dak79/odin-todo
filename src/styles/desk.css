@@ -125,13 +125,14 @@ span.late-msg svg {
     border-radius: 0 15px 0 0;
     display: grid;
         grid: 
-            [row1-start] "description checklist" 1fr [row1-end]
-            [row2-start] "priority checklist" 1fr [row2-end]
-            [row3-start] "tags checklist" 1fr [row3-end]
+            [row1-start] "description checklist" 7rem [row1-end]
+            [row2-start] "priority checklist" 4rem [row2-end]
+            [row3-start] "tags checklist" 2rem [row3-end]
             /1fr 1fr;
     gap: 10px;
     
     border: 2px solid var(--slate-500);
+    
 }
 
 .description-wrapper {
@@ -140,7 +141,8 @@ span.late-msg svg {
     flex-direction: column;  
 }
 
-.descrition-label {
+.descrition-label, 
+.task-tags-label {
     padding: 1rem;
 }
 
