@@ -118,7 +118,8 @@ div#side-header-logo svg {
     grid-area: title;
 }
 
-.btn {
+.btn,
+.checklist-add-item-btn {
     color: var(--slate-700);
     background-color: var(--slate-200);
     box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
@@ -127,7 +128,22 @@ div#side-header-logo svg {
     border-radius: 50%;
 }
 
-.btn:active {
+.btn {
+    width: 4rem;
+    height: 4rem;
+}
+
+.checklist-add-item-btn {
+    font-family: 'Montserrat-700', sans-serif;
+    border: none;
+    color: var(--slate-700);
+    width: 2rem;
+    height: 2rem;
+
+}
+
+.btn:active,
+.checklist-add-item-btn:active {
     color: var(--amber-500);
     background-color: var(--slate-300);
     transform: translateY(5px);
@@ -135,12 +151,14 @@ div#side-header-logo svg {
 
 .btn-menu:hover,
 .btn-lists:hover,
-.btn:hover {
+.btn:hover,
+.checklist-add-item-btn:hover {
     color: var(--amber-500);
     cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover,
+.checklist-add-item-btn:hover {
     box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
 }
 

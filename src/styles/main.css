@@ -1,33 +1,15 @@
 @import './sidebar.css';
 @import './desk.css';
 
-/* Montserrat Regular - Latin from Google Fonts Helper */
-@font-face {
-    font-family: 'Montserrat';
-    font-display: swap;
-    font-style: normal;
-    font-weight: 400;
-    src: url('../assets/fonts/montserrat-v25-latin-regular.eot');
-    src: local(''),
-        url('../assets/fonts/montserrat-v25-latin-regular.eot?#iefix') format('embedded-opentype'),
-        url('../assets/fonts/montserrat-v25-latin-regular.woff2') format('woff2'),url('../assets/fonts/montserrat-v25-latin-regular.woff') format('woff'),
-        url('../assets/fonts/montserrat-v25-latin-regular.ttf') format('truetype'),
-        url('../assets/fonts/montserrat-v25-latin-regular.svg#Montserrat') format('svg');
-}
-
 /* Montserrat 700 - Latin from Google Font Helper */
 @font-face {
     font-family: 'Montserrat-700';
     font-display: swap;
     font-style: normal;
     font-weight: 700;
-    src: url('../assets/fonts/montserrat-v25-latin-700.eot');
-    src: local(''),
-        url('../assets/fonts/montserrat-v25-latin-700.eot?#iefix') format('embedded-opentype'),
+    src:
         url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
-        url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff'),
-        url('../assets/fonts/montserrat-v25-latin-700.ttf') format('truetype'),
-        url('../assets/fonts/montserrat-v25-latin-700.svg#Montserrat') format('svg'); 
+        url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff')
 }
 
 :root {
@@ -57,11 +39,14 @@
 }
 
 /* Reset */
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 /* Layout */
 .container {

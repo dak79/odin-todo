@@ -1,4 +1,4 @@
-import { selectNode } from '../helpers';
+import { selectNode, selectNodes } from '../helpers';
 import { clearListeners, addAppListeners } from '../listeners';
 import { findItemId, deleteItem, updateItem } from '../todo';
 import { renderTasks, newTaskUi, expandTaskUi } from './tasks-ui';
@@ -110,13 +110,13 @@ export const expandTask = event => {
         if (task.expanded) {
                 hook.classList.remove('expand-btn-down');
                 hook.classList.add('expand-btn-up');
-                const nodes = expandTaskUi(event, task);
+                const nodes = expandTaskUi(task);
                 hook.appendChild(nodes.wrapper);
                 
         } else {
                 hook.classList.remove('expand-btn-up');
                 hook.classList.add('expand-btn-down');
-                const expandedSection = selectNode(`#expand-wrapper-${event.target.dataset.number}`);
+                const expandedSection = selectNodes(`#expand-wrapper-${event.target.dataset.number}`);
                 expandedSection.remove();
         }        
 }

@@ -60,6 +60,7 @@ const taskItem = task => {
     const taskLabel = document.createElement('label');
     setAttributes(taskLabel, {
         for: `task-checkbox-${task.id}`,
+        class: 'task-checkbox-label',
         'data-number': `${task.id}`,
         'data-type': `${task.type}`
     })
@@ -127,6 +128,12 @@ const taskItem = task => {
 
     wrapperDueDate.appendChild(taskDueDate);
 
+    const wrapperMsg = document.createElement('span');
+    setAttributes(wrapperMsg, {
+        id: `task-msg-wrapper-${task.id}`,
+        class: 'task-msg-wrapper'
+    });
+
     if (task.tags.find(tag => tag === 'late') && task.complete === false) {
         taskDueDate.classList.add('late-color');
         const lateMsg = document.createElement('span');
@@ -136,7 +143,31 @@ const taskItem = task => {
         });
         lateMsg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M-.225 21.825 12 .7l12.225 21.125ZM12 18.175q.525 0 .887-.363.363-.362.363-.887 0-.5-.363-.863-.362-.362-.887-.362-.5 0-.875.362-.375.363-.375.863 0 .525.375.887.375.363.875.363Zm-1.125-3.125h2.25v-4.775h-2.25Z"/></svg>`;
 
-        wrapperDueDate.appendChild(lateMsg);
+        wrapperMsg.appendChild(lateMsg);
+    }
+
+    if (task.priority === 'low') {
+        const lowPriority = document.createElement('span');
+        setAttributes(lowPriority, {
+            id: `low-priority-${task.id}`,
+            class: 'low-priority'
+        });
+
+        lowPriority.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M7.725 21.75 5.85 19.9l1.25-1.225Q4.325 18.6 2.337 16.5.35 14.4.35 11.45q0-3 2.125-5.113Q4.6 4.225 7.6 4.225h4.575v3.4H7.6q-1.625 0-2.737 1.113Q3.75 9.85 3.75 11.45q0 1.525.963 2.612Q5.675 15.15 7 15.3h.025L5.85 14.125l1.875-1.85 4.725 4.75Zm6.45-3.05v-3.4h9.45v3.4Zm0-5.525v-3.4h9.45v3.4Zm0-5.55v-3.4h9.45v3.4Z"/></svg>`
+
+        wrapperMsg.appendChild(lowPriority);
+    }
+
+    if (task.priority === 'high') {
+        const highPriority = document.createElement('span');
+        setAttributes(highPriority, {
+            id: `high-priority-${task.id}`,
+            class: 'high-priority'
+        });
+
+        highPriority.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 22.8q-1.25 0-2.137-.887-.888-.888-.888-2.138t.888-2.138q.887-.887 2.137-.887t2.137.9q.888.9.888 2.15t-.888 2.125Q13.25 22.8 12 22.8Zm-2.675-8.1V1.4h5.35v13.3Z"/></svg>`
+
+        wrapperMsg.appendChild(highPriority);
     }
 
     const wrapperBtns = document.createElement('span');
@@ -167,7 +198,7 @@ const taskItem = task => {
     
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 
-    return [wrapperCheck, wrapperDueDate, wrapperBtns];
+    return [wrapperCheck, wrapperDueDate, wrapperMsg, wrapperBtns];
 }
 
 /**
@@ -235,12 +266,18 @@ export const editTaskUi = event => {
             0;
 }
 
-export const expandTaskUi = (event, task) => {
+export const expandTaskUi = (task) => {
 
     const wrapper = document.createElement('div');
     setAttributes(wrapper, {
         id: `expand-wrapper-${task.id}`,
-        class: 'expand-wrapper'
+        class: `expand-wrapper wrappers-${task.id}`
+    })
+
+    const wrapperExtra = document.createElement('div');
+    setAttributes(wrapperExtra, {
+        id: `extra-wrapper-${task.id}`,
+        class: `extra-wrapper wrappers-${task.id}`
     })
     
     const descriptionWrapper = document.createElement('div');
@@ -272,9 +309,9 @@ export const expandTaskUi = (event, task) => {
         id: `priority-wrapper-${task.id}`,
         class: 'priority-wrapper'
     });
-    const fieldset = document.createElement('fieldset');
-    const legend = document.createElement('legend');
-    legend.textContent = 'Priority:';
+    const fieldsetRadio = document.createElement('fieldset');
+    const legendRadio = document.createElement('legend');
+    legendRadio.textContent = 'Priority:';
 
     const radiosWrapper = document.createElement('div');
     setAttributes(radiosWrapper, {
@@ -354,8 +391,8 @@ export const expandTaskUi = (event, task) => {
     
 
     appendChildren(radiosWrapper, [lowWrapper, mediumWrapper, highWrapper]);
-    appendChildren(fieldset, [legend, radiosWrapper]);
-    priorityWrapper.appendChild(fieldset);
+    appendChildren(fieldsetRadio, [legendRadio, radiosWrapper]);
+    priorityWrapper.appendChild(fieldsetRadio);
 
     if(task.priority) {
         if (task.priority === 'low') radioLow.checked = true;
@@ -390,23 +427,77 @@ export const expandTaskUi = (event, task) => {
     setAttributes(option, {
         value: ""
     });
-    option.textContent = 'Add to list';
+    option.textContent = '-- Choose list --';
     tagsSelect.appendChild(option);
-
 
     appendChildren(tagsWrapper, [tagsLabel, tagsSelect]);
 
-    
-
-
-
+    if (task.tags.length) {
+        task.tags.map(tag => {
+            // if (tag !== 'inbox' && tag !== 'today' && tag !== 'this-week' && tag !== 'anytime' && tag !== 'complete' && tag !== 'late') {
+                // }
+                tagsSelect.options.add(new Option(tag, tag))
+        });
+    }
     const checklistWrapper = document.createElement('div');
     setAttributes(checklistWrapper, {
         id: `checklist-wrapper-${task.id}`,
         class: 'checklist-wrapper'
     });
 
+    const fieldsetCheck = document.createElement('fieldset');
+    const legendCheck = document.createElement('legend');
+    legendCheck.textContent = 'Checklist:';
+    
+    const addItemBtn = document.createElement('button');
+    setAttributes(addItemBtn, {
+        type: 'button',
+        id: `checklist-add-item-btn-${task.id}`,
+        class: 'checklist-add-item-btn'
+    })
+    addItemBtn.textContent  = '+';
+    
+    const listWrapper = document.createElement('div');
+    setAttributes(listWrapper, {
+        id: `list-wrapper-${task.id}`,
+        class: 'list-wrapper'
+    })
+
+    if (task.checklist) {
+        task.checklist.map((item, index) => {
+            const itemWrapper = document.createElement('div');
+            setAttributes(itemWrapper, {
+                id: `checklist-item-wrapper-${task.id}`,
+                class: 'checklist-item-wrapper'
+            })
+            const check = document.createElement('input');
+            setAttributes(check, {
+                type: 'checkbox',
+                id: `checklist-item-${task.id}-${index}`,
+                class: 'checklist-item',
+                name: 'checklist-item'
+            })
+        
+            const checkLabel = document.createElement('label');
+            setAttributes(checkLabel, {
+                for: `checklist-item-${task.id}-${index}`,
+                class: 'checklist-item-label'
+            })
+            checkLabel.textContent = item;
+            appendChildren(itemWrapper, [check, checkLabel])
+            listWrapper.appendChild(itemWrapper);
+        })
+    }
+
+
+    
+    appendChildren(fieldsetCheck, [legendCheck, addItemBtn, listWrapper])
+
+
+    checklistWrapper.appendChild(fieldsetCheck);
+
+
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
-    return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper};
+    return { wrapper, extend: wrapperExtra, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper};
 }

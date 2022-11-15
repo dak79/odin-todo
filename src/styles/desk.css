@@ -6,8 +6,8 @@
 .task-item {
     display: grid;
     grid: 
-        [row1-start] "check due-date btns" 1fr [row1-end]
-        / 2fr 2fr 1fr;
+        [row1-start] "check due-date msg btns" 1fr [row1-end]
+        / 2fr 1fr 1fr 1fr;
     gap: 10px;
     align-items: center;
     margin: 1rem;
@@ -24,8 +24,9 @@
     display: grid;
     grid: 
         [row1-start] "check label expand" 1fr [row1-end]
-        /0.5fr 2fr 0.5fr;
+        /0.2fr 2fr 0.5fr;
     align-items: center;
+    gap: 20px;
 }
 
 .checkbox-wrapper button {
@@ -76,16 +77,23 @@ input[type="checkbox"]:hover,
     color: var(--amber-500)
 }
 
+.tasks-checkbox {
+    grid-area: check;
+}
+.task-checkbox-label {
+    grid-area: label;
+}
 .expand-btn {
     grid-area: expand;
 }
+
 
 .due-date-wrapper {
     grid-area: due-date;
     display: grid;
     grid: 
-        [row1-start] "btn date msg" 1fr [row1-end]
-        / 0.1fr 0.5fr 1.5fr;
+        [row1-start] "btn date" 1fr [row1-end]
+        / 4em 10em;
     justify-items: end;
     align-items: center;
 }
@@ -104,10 +112,18 @@ input[type="checkbox"]:hover,
     grid-area: btn;
 }
 
-.late-msg {
+.task-msg-wrapper {
     grid-area: msg;
-    place-self: center start;
-    margin-left: 1rem;
+    display: grid;
+    grid: 
+        "late priority" 1fr
+        / 3em 3em;
+    gap: 20px;
+    align-items: center;
+}
+
+.late-msg {
+    grid-area: late;
 }
 
 .late-color {
@@ -118,31 +134,43 @@ span.late-msg svg {
     fill: var(--amber-500)
 }
 
-.expand-wrapper {
-    grid-area: 2 / span 2;
-    padding: 0.5rem;
-    background-color: var(--slate-600);
-    border-radius: 0 15px 0 0;
-    display: grid;
-        grid: 
-            [row1-start] "description checklist" 7rem [row1-end]
-            [row2-start] "priority checklist" 4rem [row2-end]
-            [row3-start] "tags checklist" 2rem [row3-end]
-            /1fr 1fr;
-    gap: 10px;
-    
-    border: 2px solid var(--slate-500);
+.low-priority {
+    grid-area: priority;
+    fill: var(--slate-400);
     
 }
 
-.description-wrapper {
+.high-priority {
+    grid-area: priority;
+    fill: var(--amber-500);
+}
+
+.expand-wrapper {
+    grid-area: 2 / span 4;
+    padding: 0.5rem;
+    background-color: var(--slate-600);
+    border-radius: 0 0 15px 15px;
+    display: grid;
+        grid: 
+            [row1-start] "description description checklist" 5rem [row1-end]
+            [row2-start] "priority tags checklist" 4rem [row2-end]
+            /1fr 0.5fr 1fr;
+    gap: 10px;
+    border: 2px solid var(--slate-500);
+    align-items: flex-start;    
+}
+
+.description-wrapper,
+.checklist-wrapper {
     grid-area: description;
     display: flex;
     flex-direction: column;  
+    gap: 10px
 }
 
-.descrition-label, 
-.task-tags-label {
+
+
+.description-label {
     padding: 1rem;
 }
 
@@ -188,6 +216,7 @@ input[type="radio"] {
     border: 0.15em solid currentColor;
     border-radius: 50%;
     transform: translateY(-0.075em); 
+    outline-color: var(--amber-500);
 }
 
 input[type="radio"]::before {
@@ -204,12 +233,86 @@ input[type="radio"]:checked::before {
     transform: scale(1);
 }
 
+input[type="radio"]:focus,
+.task-tags:focus {
+    outline: max(2px, 0.15em) solid var(--amber-500);
+}
+
 .tags-wrapper {
     grid-area: tags;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+}
+
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 0 1em 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.task-tags {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    border: 1px solid var(--slate-700);
+    border-radius: 15px;
+    padding: 0.25em 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: var(--slate-200);
+    color: var(--slate-700);
 }
 
 .checklist-wrapper {
     grid-area: checklist;
+    max-height: 100%;
+}
+
+.list-wrapper {
+    grid-area: list;
+    max-height: 100%;
+    min-width: 100%;
+    overflow-y: auto;
+}
+
+.checklist-wrapper fieldset {
+    border: none;
+    padding: 1rem;
+    display: grid;
+    grid: 
+        "addBtn list" 8em
+        /4em 1fr;
+        align-items: center;
+        justify-items: start;
+
+    gap: 10px;  
+    align-items: flex-start;
+}
+
+.checklist-add-item-btn {
+    grid-area: addBtn;
+}
+
+.checklist-item-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 2em;
 }
 
 
