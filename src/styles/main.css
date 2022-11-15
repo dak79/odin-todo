@@ -1,6 +1,29 @@
-@import './sidebar.css';
+
 @import './desk.css';
 
+/* 
+ * INDEX 
+ * 1. Fonts.
+ * 2. Root.
+ * 3. Reset.
+ * 4. Main.
+ * 5. Headers:
+ *      a. NavBar Header.
+ * 6. NavBar: Logo.
+ * 7. Titles.
+ * 8. Menus:
+ *      a. NavBar Menu.
+ *      b. Lists Menu.
+
+
+
+
+
+ * 99. SVG:
+ *      a. Logo SVG.
+ */
+
+ /* 1. Fonts */
 /* Montserrat 700 - Latin from Google Font Helper */
 @font-face {
     font-family: 'Montserrat-700';
@@ -12,6 +35,7 @@
         url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff')
 }
 
+/* 2. Root */
 :root {
     /* Base Color: Tailwind Palette - Slate */
     --slate-50: #f8fafc;
@@ -36,9 +60,13 @@
     --amber-700: #b45309;
     --amber-800: #92400e;
     --amber-900: #78350f;
+
+    --gap-small: 1em;
+    --gap-medium: 1.5em;
+    --gap-big: 2em;
 }
 
-/* Reset */
+/* 3. Reset */
 *,
 *::before,
 *::after {
@@ -48,7 +76,7 @@
 }
 
 
-/* Layout */
+/* 4. Main */
 .container {
     display: grid;
     grid: 
@@ -57,6 +85,109 @@
     height: 100vh;
     width: 100vw;
 }
+
+.desk {
+    grid-area: desk;
+    background-color: var(--slate-200);
+}
+
+.navbar {
+    grid-area: navbar;
+    display: grid;
+    grid:
+        [row1-start] "header" 7rem [row1-end] 
+        [row2-start] "menu" 20rem [row2-end] 
+        [row4-start] "lists" 1fr [row4-end] 
+        / 1fr;
+    gap: var(--gap-medium);
+    background-color: var(--slate-700);
+    font-family: 'Montserrat-700', sans-serif;
+    color: var(--slate-200);
+}
+
+/* 5. Headers */
+.headers {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 2fr;
+    justify-items: start;
+    align-items: center;
+    gap: var(--gap-small);
+    width: 100%; 
+}
+
+/* a. NavBar Header */
+#nav-header {
+    grid-area: header;
+}
+
+/* 6. NavBar: Logo */
+.nav-logo {
+    grid-area: 1 / 1 / 1 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 7. Titles */
+.titles {
+    grid-area: 1 / 3 / 1 / 4;
+    color: var(--slate-200);
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+/* 8. Menus */
+.menu, 
+.section-lists {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-medium);
+
+}
+
+/* a. NavBar Menu */
+.nav-menu {
+    grid-area: menu;
+}
+
+/* b. Lists Menu */
+.section-lists {
+    grid-area: lists;
+}
+
+
+
+
+/* 12. Lists: Items */
+.lists-items {
+    display: grid;
+    grid:
+        [row1-start] "title btns" 1fr [row1-end]
+        / 2fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+
+
+/* 99. SVG */
+/* a. Logo SVG */
+.nav-logo svg {
+    fill: var(--amber-500);
+    width: 7rem;
+    height: 7rem;
+    padding: 1rem;;
+}
+
+
+
+/* DA QUA!!!!*/
+
 
 /* New List and Edit List Fields */
 .new-list-title,
@@ -115,4 +246,104 @@
 .new-lists-error {
     color: var(--amber-500);
     background-color: var(--slate-300);
+}
+
+/* Buttons NavBar */
+.btns-lists {
+    grid-area: btns;
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+}
+
+.btn-menu,
+.btn-lists,
+.btn {
+    font-family: 'Montserrat-700', sans-serif;
+    border: none;
+    color: var(--slate-200);
+    background-color: var(--slate-700);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.btn-lists {
+    grid-area: title;
+}
+
+.btn,
+.checklist-add-item-btn {
+    color: var(--slate-700);
+    background-color: var(--slate-200);
+    box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.btn {
+    width: 4rem;
+    height: 4rem;
+}
+
+.checklist-add-item-btn {
+    font-family: 'Montserrat-700', sans-serif;
+    border: none;
+    color: var(--slate-700);
+    width: 2rem;
+    height: 2rem;
+
+}
+
+.btn:active,
+.checklist-add-item-btn:active {
+    color: var(--amber-500);
+    background-color: var(--slate-300);
+    transform: translateY(5px);
+}
+
+.btn-menu:hover,
+.btn-lists:hover,
+.btn:hover,
+.checklist-add-item-btn:hover {
+    color: var(--amber-500);
+    cursor: pointer;
+}
+
+.btn:hover,
+.checklist-add-item-btn:hover {
+    box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
+}
+
+#btn-new-task {
+    grid-area: 1 / 2 / 1 / 3;
+}
+
+#btn-new-list {
+    grid-area: 1 / 2 / 1 / 3;
+}
+
+/* New List and Edit List Fields Buttons */
+.btn-lists-edit,
+.btn-lists-delete {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+    background-color: var(--slate-700);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-lists-edit {
+    margin-right: 1rem;
+}
+
+button.btn-lists-edit svg,
+button.btn-lists-delete svg {
+    fill: var(--slate-200);
+}
+
+button.btn-lists-edit svg:hover,
+button.btn-lists-delete svg:hover {
+    fill: var(--amber-500);
 }

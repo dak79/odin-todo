@@ -7,7 +7,7 @@ import { addAppListeners } from '../listeners';
  * @param { boolean } isFirstLoad - Check if it is first load for page.
  */
 export const renderMenu = isFirstLoad => {
-    const nav = selectNode('#side-navbar')
+    const nav = selectNode('#nav-menu')
     const menu = createMenu();
     nav.appendChild(menu);
     if (!isFirstLoad) addAppListeners();

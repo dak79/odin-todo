@@ -45,10 +45,8 @@ const floor = () => {
 
 const side = () => {
     const section = document.createElement('section');
-    setAttributes(section, {
-        id: 'navbar',
-        class: 'navbar'
-    })
+    section.classList.add('navbar');
+   
     const header = sideHeader();
     const navbar = sideNavbar();
     const sectionList = sideSectionLists();
@@ -61,8 +59,8 @@ const side = () => {
 const sideHeader = () => {
     const header = document.createElement('header');
     setAttributes(header, {
-        class: 'side-header',
-        id: 'side-header'
+        class: 'headers',
+        id: 'nav-header'
     });
     
     return header;
@@ -71,8 +69,8 @@ const sideHeader = () => {
 const sideNavbar = () => {
     const nav = document.createElement('nav');
     setAttributes(nav, {
-        class: 'side-navbar',
-        id: 'side-navbar'
+        class: 'nav-menu',
+        id: 'nav-menu'
     });
 
     return nav;
@@ -81,8 +79,8 @@ const sideNavbar = () => {
 const sideSectionLists = () => {
     const section = document.createElement('section');
     setAttributes(section, {
-        class: 'side-section-lists',
-        id: 'side-section-lists'
+        class: 'section-lists',
+        id: 'section-lists'
     });
 
     return section

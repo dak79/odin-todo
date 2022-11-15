@@ -9,7 +9,7 @@ import { newInput, editInput } from '../todo';
  * @param { boolean } isFirstLoad - Page first load
  */
 export const renderLists = isFirstLoad => {
-    const section = selectNode('#side-section-lists');
+    const section = selectNode('#section-lists');
     const displayHeader = listHeader();
     const displayLists = createListsUi();
     cleanNode(section);
@@ -20,7 +20,7 @@ export const renderLists = isFirstLoad => {
 
 const listHeader = () => {
     const header = document.createElement('header');
-    header.classList.add('lists-header');
+    header.classList.add('headers');
     const title = listsTitle();
     const newListBtn = newListBtnUi();
 
@@ -31,7 +31,7 @@ const listHeader = () => {
 
 const listsTitle = () => {
     const title = document.createElement('h2');
-    title.classList.add('lists-title');
+    title.classList.add('titles');
     title.textContent = 'Lists';
 
     return title;
@@ -50,7 +50,7 @@ const newListBtnUi = () => {
 }
 
 const createListsUi = () => {
-    const projects = createList(lists, 'list', listsBtn, 'lists','lists', 'lists-items');
+    const projects = createList(lists, 'list', listsBtn, 'menu','lists', 'lists-items');
     return projects;
 }
 
@@ -103,7 +103,7 @@ const listsBtn = list => {
 
 export const newListUi = () => {
     
-    const input = newInput('#side-section-lists', null, {
+    const input = newInput('#section-lists', null, {
         type: 'text',
         id: 'new-list-title',
         class: 'new-list-title',

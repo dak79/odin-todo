@@ -1,7 +1,3 @@
-.desk {
-    grid-area: desk;
-    background-color: var(--slate-200);
-}
 
 .task-item {
     display: grid;
