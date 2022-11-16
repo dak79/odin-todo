@@ -14,24 +14,33 @@ export const appendChildren = (parent, children) => children.forEach(child => pa
  */
 export const setAttributes = (element, attributes) => Object.keys(attributes).forEach(attr => element.setAttribute(attr, attributes[attr]));
 
+
+
 /**
- * Create a list
- * @param { Array.String } itemTitles - Create li textContent
- * @param { Function } itemsType - Create different nested HTML in li elements
- * @param { String } className - Ul class
- * @returns { Node } An unordered list
+ * Create an unordered list
+ * @param { [] } array - Array with items to transform in unordered list 
+ * @param { string } desk - Where ul is created. 
+ * @param { Function } itemsType - Create li content.
+ * @param { string } ulClassName - Class for ul element.
+ * @param { string } liIdPrefix - Prefix for id of each li element.
+ * @param { string|[] } liClassName - Class or classes for each li elements. 
+ * @returns { Nodes } - Unordered list.
  */
- export const createList = (array, type, itemsType, ulClassName, liIdPrefix, liClassName) => {
+ export const createList = (array, desk, itemsType, ulClassName, liIdPrefix, liClassName) => {
     const list = document.createElement('ul');
     list.classList.add(ulClassName);
     
     array.forEach(item => {
-        const listType = item.tags.find(tag => tag === type);
+        const listType = item.tags.find(tag => tag === desk);
         if (listType) {
             const listItem = document.createElement('li');
     
             listItem.id = `list-item-${liIdPrefix}-${item.id}`;
-            listItem.classList.add(liClassName);
+            if (typeof liClassName === 'string'){
+                listItem.classList.add(liClassName);
+            } else {
+                liClassName.forEach(className => listItem.classList.add(className));
+            }
             const arrayContents = itemsType(item);
     
             arrayContents.forEach(content => listItem.appendChild(content));

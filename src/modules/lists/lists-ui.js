@@ -50,7 +50,7 @@ const newListBtnUi = () => {
 }
 
 const createListsUi = () => {
-    const projects = createList(lists, 'list', listsBtn, 'menu','lists', 'lists-items');
+    const projects = createList(lists, 'list', listsBtn, 'menu','lists', ['lists-items', 'items']);
     return projects;
 }
 

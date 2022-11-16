@@ -21,7 +21,7 @@ export const renderTasks = (desk, isFirstLoad) => {
 }
 
 const createTasksUi = desk => {
-    const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', 'task-item');
+    const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', ['task-item', 'items']);
     return todoes;
 }
 
@@ -60,7 +60,7 @@ const taskItem = task => {
     const taskLabel = document.createElement('label');
     setAttributes(taskLabel, {
         for: `task-checkbox-${task.id}`,
-        class: 'task-checkbox-label',
+        class: 'task-checkbox-labels',
         'data-number': `${task.id}`,
         'data-type': `${task.type}`
     })
@@ -211,7 +211,7 @@ export const newTaskUi = newItem => {
     const li = document.createElement('li');
     setAttributes(li, {
         id: `list-item-task-${newItem.id}`,
-        class: 'task-item'
+        class: 'task-item items'
     });
 
     const newTaskContent = taskItem(newItem);
@@ -271,7 +271,7 @@ export const expandTaskUi = (task) => {
     const wrapper = document.createElement('div');
     setAttributes(wrapper, {
         id: `expand-wrapper-${task.id}`,
-        class: `expand-wrapper wrappers-${task.id}`
+        class: `expand-wrapper wrappers-${task.id} items`
     })
 
     const wrapperExtra = document.createElement('div');
@@ -288,8 +288,8 @@ export const expandTaskUi = (task) => {
     
     const labelDescription = document.createElement('label');
     setAttributes(labelDescription, {
-        for: `description-area-${task.id}`,
-        class: 'descrition-label'
+        for: `description-text-${task.id}`,
+        class: 'description-label'
     });
     labelDescription.textContent = 'Description: ';
 
@@ -439,13 +439,15 @@ export const expandTaskUi = (task) => {
                 tagsSelect.options.add(new Option(tag, tag))
         });
     }
+
     const checklistWrapper = document.createElement('div');
-    setAttributes(checklistWrapper, {
-        id: `checklist-wrapper-${task.id}`,
-        class: 'checklist-wrapper'
+    checklistWrapper.classList.add('checklist-wrapper')
+    const checklistFieldset = document.createElement('fieldset');
+    setAttributes(checklistFieldset, {
+        id: `checklist-fieldset-${task.id}`,
+        class: 'checklist-fieldset'
     });
 
-    const fieldsetCheck = document.createElement('fieldset');
     const legendCheck = document.createElement('legend');
     legendCheck.textContent = 'Checklist:';
     
@@ -458,10 +460,6 @@ export const expandTaskUi = (task) => {
     addItemBtn.textContent  = '+';
     
     const listWrapper = document.createElement('div');
-    setAttributes(listWrapper, {
-        id: `list-wrapper-${task.id}`,
-        class: 'list-wrapper'
-    })
 
     if (task.checklist) {
         task.checklist.map((item, index) => {
@@ -490,12 +488,8 @@ export const expandTaskUi = (task) => {
     }
 
 
-    
-    appendChildren(fieldsetCheck, [legendCheck, addItemBtn, listWrapper])
-
-
-    checklistWrapper.appendChild(fieldsetCheck);
-
+    appendChildren(checklistWrapper, [addItemBtn, checklistFieldset]);
+    appendChildren(checklistFieldset, [legendCheck, listWrapper])
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 

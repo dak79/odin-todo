@@ -116,7 +116,7 @@ export const expandTask = event => {
         } else {
                 hook.classList.remove('expand-btn-up');
                 hook.classList.add('expand-btn-down');
-                const expandedSection = selectNodes(`#expand-wrapper-${event.target.dataset.number}`);
+                const expandedSection = selectNode(`#expand-wrapper-${event.target.dataset.number}`);
                 expandedSection.remove();
         }        
 }

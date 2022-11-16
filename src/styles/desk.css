@@ -1,147 +1,26 @@
 
-.task-item {
-    display: grid;
-    grid: 
-        [row1-start] "check due-date msg btns" 1fr [row1-end]
-        / 2fr 1fr 1fr 1fr;
-    gap: 10px;
-    align-items: center;
-    margin: 1rem;
-    list-style: none;
-    font-family: 'Montserrat-700', sans-serif;
-    color: var(--slate-200);
-    background-color: var(--slate-700);
-    border-radius: 15px;
-    box-shadow: 5px 5px 5px rgba(148, 163, 184, 0.4);
-}
-
-.checkbox-wrapper {
-    grid-area: check;
-    display: grid;
-    grid: 
-        [row1-start] "check label expand" 1fr [row1-end]
-        /0.2fr 2fr 0.5fr;
-    align-items: center;
-    gap: 20px;
-}
-
-.checkbox-wrapper button {
-    place-self: start;
-}
-
-/* Task Checkbox */
-input[type="checkbox"] {
-    appearance: none;
-    margin: 0;
-    background-color: #fff;
-    font: inherit;
-    background-color: var(--slate-200);
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid var(--slate-200);
-    border-radius: 3px;
-    transform: translateY(-0.075em);
-    transform: translateX(1em);
-    display: grid;
-    place-content: center;
-}
-
-input[type="checkbox"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-out;
-    box-shadow: inset 1em 1em var(--amber-500);
-    border-radius: 3px;
-}
-
-input[type="checkbox"]:checked:before {
-    transform: scale(1);   
-}
-
-input[type="checkbox"]:checked + label,
-span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.due-date-wrapper {
-    color: var(--amber-500);
-    text-decoration: line-through;
-}
-
-label:hover,
-input[type="checkbox"]:hover,
-.task-due-date:hover {
-    cursor: pointer;
-    color: var(--amber-500)
-}
-
-.tasks-checkbox {
-    grid-area: check;
-}
-.task-checkbox-label {
-    grid-area: label;
-}
 .expand-btn {
     grid-area: expand;
 }
 
-
-.due-date-wrapper {
-    grid-area: due-date;
-    display: grid;
-    grid: 
-        [row1-start] "btn date" 1fr [row1-end]
-        / 4em 10em;
-    justify-items: end;
-    align-items: center;
+/* QUESTO è un BOTTONE di checklist add checklist */
+.checklist-add-item-btn {
+    /* grid-area: addBtn;
+    place-self: start; */
+    /* width: 2em;
+    height: 2em; */
+    flex: none;
 }
 
-.task-due-date {
-    grid-area: date;
-    place-self: center;
-}
-
-.span-before-date {
-    grid-area: span;
-}
-
+/* Questo è un bottone di due date */
 .due-date-delete-btn,
 .due-date-edit-btn {
     grid-area: btn;
 }
 
-.task-msg-wrapper {
-    grid-area: msg;
-    display: grid;
-    grid: 
-        "late priority" 1fr
-        / 3em 3em;
-    gap: 20px;
-    align-items: center;
-}
 
-.late-msg {
-    grid-area: late;
-}
 
-.late-color {
-    color: var(--amber-500);
-}
-
-span.late-msg svg {
-    fill: var(--amber-500)
-}
-
-.low-priority {
-    grid-area: priority;
-    fill: var(--slate-400);
-    
-}
-
-.high-priority {
-    grid-area: priority;
-    fill: var(--amber-500);
-}
-
-.expand-wrapper {
+/* .expand-wrapper {
     grid-area: 2 / span 4;
     padding: 0.5rem;
     background-color: var(--slate-600);
@@ -154,10 +33,9 @@ span.late-msg svg {
     gap: 10px;
     border: 2px solid var(--slate-500);
     align-items: flex-start;    
-}
+} */
 
-.description-wrapper,
-.checklist-wrapper {
+/* .description-wrapper {
     grid-area: description;
     display: flex;
     flex-direction: column;  
@@ -271,46 +149,7 @@ select::-ms-expand {
     line-height: 1.1;
     background-color: var(--slate-200);
     color: var(--slate-700);
-}
-
-.checklist-wrapper {
-    grid-area: checklist;
-    max-height: 100%;
-}
-
-.list-wrapper {
-    grid-area: list;
-    max-height: 100%;
-    min-width: 100%;
-    overflow-y: auto;
-}
-
-.checklist-wrapper fieldset {
-    border: none;
-    padding: 1rem;
-    display: grid;
-    grid: 
-        "addBtn list" 8em
-        /4em 1fr;
-        align-items: center;
-        justify-items: start;
-
-    gap: 10px;  
-    align-items: flex-start;
-}
-
-.checklist-add-item-btn {
-    grid-area: addBtn;
-}
-
-.checklist-item-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    gap: 2em;
-}
-
+} */
 
 /* Task Buttons */
 .expand-btn,
@@ -347,6 +186,6 @@ select::-ms-expand {
 }
 
 .task-btn-wrapper {
-    grid-area: btns;
+    grid-area: 1 / 4 / 1 / 5;
     place-self: center;
 }
