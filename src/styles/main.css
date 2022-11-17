@@ -188,7 +188,7 @@
     display: grid;
     align-items: center;
     color: var(--slate-200);
-    gap: var(--gap-small); 
+    gap: var(--gap-small);
 }
 
 /* a. Lists Item */
@@ -206,7 +206,6 @@
     background-color: var(--slate-700);
     border-radius: var(--radius-standard);
     box-shadow: var(--shadow-grey);
-    padding: 0.3em 0.5em;
 }
 
 .expand-wrapper {
@@ -543,7 +542,7 @@ select::-ms-expand {
 .svg-btns {
     background-color: var(--slate-700);
     fill: var(--slate-200);
-    margin-right: 0.5em;
+    padding: 0.5em 0.5em;
 }
 
 /* Active */
