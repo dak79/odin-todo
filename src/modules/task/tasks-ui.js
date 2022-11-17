@@ -73,7 +73,7 @@ const taskItem = task => {
     const expandTaskBtn = btnsUi(task, 'expand-task', 'expand', null, {
         type: 'button',
         id: `task-${task.id}-expand-btn`,
-        class: 'expand-btn',
+        class: 'btns expand-btn svg-btns',
         'aria-label': 'Show task detail',
         'data-number': `${task.id}`,
         'data-btn': 'expand',
@@ -93,7 +93,7 @@ const taskItem = task => {
         const deleteDateBtn = btnsUi(task, 'due-date', 'delete','due-date-delete', {
             type: 'button',
             id: `due-date-${task.id}-delete-btn`,
-            class: 'due-date-delete-btn',
+            class: 'btns due-date-delete-btn svg-btns',
             'aria-label': 'Delete date',
             'data-number': `${task.id}`,
             'data-type': 'due-date',
@@ -106,7 +106,7 @@ const taskItem = task => {
         const editDateBtn = btnsUi(task, 'due-date', 'edit', 'edit-due-date', {
             type: 'button',
             id: `due-date-${task.id}-edit-btn`,
-            class: 'due-date-edit-btn',
+            class: 'btns due-date-edit-btn svg-btns',
             'aria-label': 'Edit date',
             'data-number': `${task.id}`,
             'data-type': 'due-date',
@@ -179,7 +179,7 @@ const taskItem = task => {
     const editTaskBtn = btnsUi(task, task.type, 'edit', 'edit-task', {
         type: 'button',
         id: `task-${task.id}-edit-btn`,
-        class: 'task-edit-btn',
+        class: 'btns task-edit-btn svg-btns',
         'aria-label': 'Edit task title',
         'data-number':`${task.id}`,
         'data-type': `${task.type}`,
@@ -189,7 +189,7 @@ const taskItem = task => {
     const deleteTaskBtn = btnsUi(task, task.type, 'delete', 'delete-task', {
         type: 'button',
         id: `task-${task.id}-delete-btn`,
-        class: 'task-delete-btn',
+        class: 'btns task-delete-btn svg-btns',
         'aria-label': 'Delete task',
         'data-number': `${task.id}`,
         'data-type': `${task.type}`,
@@ -221,15 +221,16 @@ export const newTaskUi = newItem => {
     ul.prepend(li);
 
     const input = newInput(
-                            `#checkbox-wrapper-${newItem.id} > label`,
-                            `#checkbox-wrapper-${newItem.id}`,
-                            {
-                                type: 'text',
-                                id: 'new-task-input',
-                                class: 'new-task-input',
-                                name: 'new-task-input',
-                                maxlength: 40
-    });
+                    `#checkbox-wrapper-${newItem.id} > label`,
+                    `#checkbox-wrapper-${newItem.id}`,
+                    {
+                        type: 'text',
+                        id: 'new-task-input',
+                        class: 'input-text',
+                        name: 'new-task-input',
+                        maxlength: 40
+                    }
+    );
 
     return input;
 }
@@ -241,29 +242,35 @@ export const newTaskUi = newItem => {
  */
 export const editTaskUi = event => {
     const type = event.target.dataset.type;
+    const id = event.target.dataset.number;
 
-    return  (type === 'task') ? 
-            editInput(
-                `#checkbox-wrapper-${event.target.dataset.number} > label`,
-                `#checkbox-wrapper-${event.target.dataset.number}`,
-                {
-                    type: 'text',
-                    id: 'edit-task-title',
-                    class: 'edit-task-title',
-                    name: 'edit-task-title',
-                    maxlength: 40
-                }) :
-            (type === 'due-date') ? 
-            editInput(
-                `#task-${event.target.dataset.number}-due-date`,
-                `#due-date-wrapper-${event.target.dataset.number}`,
-                {
-                    type: 'date',
-                    id: `new-due-date-${event.target.dataset.number}`,
-                    class: 'new-due-date',
-                    'data-number': `${event.target.dataset.number}`
-                }) :
-            0;
+    const input =  (type === 'task') ? 
+                    editInput(
+                        `#checkbox-wrapper-${event.target.dataset.number} > label`,
+                        `#checkbox-wrapper-${event.target.dataset.number}`,
+                        {
+                            type: 'text',
+                            id: 'edit-task-title',
+                            class: 'input-text',
+                            name: 'edit-task-title',
+                            maxlength: 40
+                        }) :
+                    (type === 'due-date') ? 
+                    editInput(
+                        `#task-${event.target.dataset.number}-due-date`,
+                        `#due-date-wrapper-${event.target.dataset.number}`,
+                        {
+                            type: 'date',
+                            id: `new-due-date-${event.target.dataset.number}`,
+                            class: 'new-due-date input-text',
+                            'data-number': `${event.target.dataset.number}`
+                        }) :
+                    0;
+    
+    const btn = selectNode(`#${type}-${id}-edit-btn`);
+    btn.classList.add('svg-active');
+
+    return input;
 }
 
 export const expandTaskUi = (task) => {
@@ -282,21 +289,21 @@ export const expandTaskUi = (task) => {
     
     const descriptionWrapper = document.createElement('div');
     setAttributes(descriptionWrapper, {
-        id: `description-wrapper-${task.id}`,
-        class: 'description-wrapper'
+        id: `task-description-wrapper-${task.id}`,
+        class: 'task-description-wrapper'
     })
     
     const labelDescription = document.createElement('label');
     setAttributes(labelDescription, {
-        for: `description-text-${task.id}`,
-        class: 'description-label'
+        for: `task-description-text-${task.id}`,
+        class: 'task-description-label'
     });
     labelDescription.textContent = 'Description: ';
 
     const descriptionText = document.createElement('textarea');
     setAttributes(descriptionText, {
-        id: `description-text-${task.id}`,
-        class: 'description-text',
+        id: `task-description-text-${task.id}`,
+        class: 'task-description-text input-text',
         rows: '1',
         cols: '20'
     });
@@ -454,8 +461,8 @@ export const expandTaskUi = (task) => {
     const addItemBtn = document.createElement('button');
     setAttributes(addItemBtn, {
         type: 'button',
-        id: `checklist-add-item-btn-${task.id}`,
-        class: 'checklist-add-item-btn'
+        id: `checklist-add-btn-${task.id}`,
+        class: 'btns round-btns round-btns-small'
     })
     addItemBtn.textContent  = '+';
     

@@ -52,13 +52,13 @@ export const checkListName = item => {
  */
 const newListNameError = element => {
     element.value = 'Already exists';
-    element.classList.add('new-lists-error');
+    element.classList.add('input-text-lists-error');
     element.addEventListener('keydown', cancelText)
 
     function cancelText () {
         element.value = '';
         element.removeEventListener('keydown', cancelText);
-        element.classList.remove('new-lists-error');
+        element.classList.remove('input-text-lists-error');
     }
 }
 

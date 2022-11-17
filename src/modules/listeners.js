@@ -7,13 +7,13 @@ export const addAppListeners = () => {
 
     // Menu
     addListener('#btn-new-task', 'click', btnsController);
-    addListeners('.btn-menu', 'click', btnsController);
+    addListeners('.menu-btns', 'click', btnsController);
 
     // Lists
-    addListeners('.btn-lists', 'click', showList);
+    addListeners('.lists-btns', 'click', showList);
     addListeners('.svg-btns-delete', 'click', btnsController);
     addListeners('.svg-btns-edit', 'click', btnsController);
-    addListener('#btn-new-list', 'click', btnsController);
+    addListener('#btn-new-lists', 'click', btnsController);
 
     // Tasks
     addListeners('.tasks-checkbox', 'change', btnsController);

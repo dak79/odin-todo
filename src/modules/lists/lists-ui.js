@@ -40,8 +40,8 @@ const listsTitle = () => {
 const newListBtnUi = () => {
     const btnNewList = btnsUi(null, null, '+', null, {
         type: 'button',
-        id: 'btn-new-list',
-        class: 'btn',
+        id: 'btn-new-lists',
+        class: 'btns round-btns round-btns-big',
         'data-type': 'new-list',
         'data-btn': 'new-list'
     });
@@ -63,7 +63,7 @@ const listsBtn = list => {
     const btnTitle = btnsUi(null, null, list.title, null, {
         type: 'button',
         id: `btn-list-${list.id}`,
-        class: 'btn-lists',
+        class: 'btns lists-btns text-btns',
         'data-number': `${list.id}`,
         'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`,
         'data-type': `${list.type}`,
@@ -79,7 +79,7 @@ const listsBtn = list => {
     const btnEdit = btnsUi(list, list.type, 'edit', 'edit-list', {
         type: 'button',
         id:`btn-lists-edit-${list.id}`,
-        class: 'btn-lists-edit',
+        class: 'btns svg-btns',
         'aria-label': 'Button Edit List',
         'data-number': `${list.id}`,
         'data-type': `${list.type}`,
@@ -89,7 +89,7 @@ const listsBtn = list => {
     const btnDelete = btnsUi(list, list.type, 'delete', 'delete-list', {
         type: 'button',
         id:`btn-lists-delete-${list.id}`,
-        class: 'btn-lists-delete',
+        class: 'btns svg-btns',
         'aria-label': 'Button Delete List',
         'data-number': `${list.id}`,
         'data-type': `${list.type}`,
@@ -106,7 +106,7 @@ export const newListUi = () => {
     const input = newInput('#section-lists', null, {
         type: 'text',
         id: 'new-list-title',
-        class: 'new-list-title',
+        class: 'input-text input-text-lists',
         name: 'new-list-title',
         maxlength: 15
     });
@@ -126,7 +126,7 @@ export const editListUi = event => {
         { 
             type: 'text', 
             id: 'edit-list-title', 
-            class: 'edit-list-title', 
+            class: 'input-text input-text-lists', 
             name: 'edit-list-title', 
             maxlength: 15 
         });

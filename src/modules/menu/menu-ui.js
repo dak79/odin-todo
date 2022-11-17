@@ -29,7 +29,7 @@ const navBtn = desk => {
     const btn = btnsUi(null, null, desk.title, null, {
         type: 'button',
         id: `btn-${desk.title.replace(' ', '-').toLowerCase().trim()}`,
-        class: 'btn-menu',
+        class: 'btns menu-btns text-btns',
         'data-name': `${desk.title.replace(' ', '-').toLowerCase().trim()}`,
         'data-type': 'menu-title',
         'data-btn': 'title'
