@@ -281,11 +281,7 @@ export const expandTaskUi = (task) => {
         class: `expand-wrapper wrappers-${task.id} items`
     })
 
-    const wrapperExtra = document.createElement('div');
-    setAttributes(wrapperExtra, {
-        id: `extra-wrapper-${task.id}`,
-        class: `extra-wrapper wrappers-${task.id}`
-    })
+   
 
     const descriptionWrapper = document.createElement('div');
     setAttributes(descriptionWrapper, {
@@ -411,7 +407,7 @@ export const expandTaskUi = (task) => {
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
-    return { wrapper, extend: wrapperExtra, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper};
+    return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper };
 }
 
 /**
