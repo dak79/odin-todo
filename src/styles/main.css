@@ -297,7 +297,7 @@ input[type="checkbox"]:hover + label,
 
 input[type="checkbox"]:focus,
 input[type="radio"]:focus {
-    background-color: var(--amber-300);
+    background-color: var(--amber-200);
 }
 
 /* a. Task Checkbox */
@@ -513,7 +513,6 @@ select::-ms-expand {
     font-weight: 700;
     border: none;
     outline: none;
-
 }
 
 .round-btns {
