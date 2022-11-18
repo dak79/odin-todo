@@ -354,43 +354,45 @@ const checkAndRadioUi = (object, type, legendText, array, radioGroup, defaultChe
         class: `${nameValue}s-wrapper`
     });
 
-    array.forEach((item, index) => {
-        if (typeof item !== 'string') String(item);
-
-        nameValue = (type === 'checkbox') ? 'checklist-item' : type;
-
-        const group = document.createElement('div');
-        setAttributes(group, {
-            id: `${nameValue}-wrapper-${object.id}-${index}`,
-            class: `${nameValue}-wrapper`
-        });
-
-        const label = document.createElement('label');
-        setAttributes(label, {
-            for: `${nameValue}-${object.id}-${index}`,
-        });
-        label.textContent = item.charAt(0).toUpperCase() + item.slice(1);
-
-        const input = document.createElement('input');
-        setAttributes(input, {
-            type: `${type}`,
-            id: `${nameValue}-${object.id}-${index}`,
-            name: type === 'radio' ? `${radioGroup}-${object.id}` : 'checklist-item',
-            value: type === 'radio' ? `${item}` : `checklist-item-${object.id}-${index}`
-        });
-
-        appendChildren(group, [input, label]);
-        
-        if (type === 'radio') {
-            if (object.priority) {
-                if (object.priority === item) input.checked = true;
-            } else {
-                if (item === defaultChecked) input.checked = true;
-            }
-        }
+    if (array) {
+        array.forEach((item, index) => {
+            if (typeof item !== 'string') String(item);
     
-        wrapper.appendChild(group);
-    });
+            nameValue = (type === 'checkbox') ? 'checklist-item' : type;
+    
+            const group = document.createElement('div');
+            setAttributes(group, {
+                id: `${nameValue}-wrapper-${object.id}-${index}`,
+                class: `${nameValue}-wrapper`
+            });
+    
+            const label = document.createElement('label');
+            setAttributes(label, {
+                for: `${nameValue}-${object.id}-${index}`,
+            });
+            label.textContent = item.charAt(0).toUpperCase() + item.slice(1);
+    
+            const input = document.createElement('input');
+            setAttributes(input, {
+                type: `${type}`,
+                id: `${nameValue}-${object.id}-${index}`,
+                name: type === 'radio' ? `${radioGroup}-${object.id}` : 'checklist-item',
+                value: type === 'radio' ? `${item}` : `checklist-item-${object.id}-${index}`
+            });
+    
+            appendChildren(group, [input, label]);
+            
+            if (type === 'radio') {
+                if (object.priority) {
+                    if (object.priority === item) input.checked = true;
+                } else {
+                    if (item === defaultChecked) input.checked = true;
+                }
+            }
+        
+            wrapper.appendChild(group);
+        });
+    }
 
     appendChildren(fieldset, [legend, wrapper]);
 
