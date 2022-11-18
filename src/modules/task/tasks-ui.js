@@ -63,7 +63,7 @@ const taskItem = task => {
         class: 'task-checkbox-labels',
         'data-number': `${task.id}`,
         'data-type': `${task.type}`
-    })
+    });
     if (task.title) {
         taskLabel.textContent = `${task.title}`;
     } else {
