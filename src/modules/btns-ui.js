@@ -3,7 +3,7 @@ import { setAttributes } from './helpers';
 /**
  * Buttons UI
  * @param { {}|null } type - define if svg attrs are stored in an object or no * svg text content.
- * @param { string } dataType - define the value of svg data-type attrs
+ * @param { string|null } dataType - define the value of svg data-type attrs
  * @param { ('edit'|'delete'|'expand'|string) } textContent - define if the 
  * text content is a preset svg or a string.
  * @param { string|null } idPrefix - part of svg id value.

@@ -273,7 +273,7 @@ export const editTaskUi = event => {
     return input;
 }
 
-export const expandTaskUi = (task) => {
+export const expandTaskUi = task => {
 
     const wrapper = document.createElement('div');
     setAttributes(wrapper, {
@@ -281,32 +281,15 @@ export const expandTaskUi = (task) => {
         class: `expand-wrapper wrappers-${task.id} items`
     })
 
-   
-
     const descriptionWrapper = document.createElement('div');
     setAttributes(descriptionWrapper, {
         id: `task-description-wrapper-${task.id}`,
         class: 'task-description-wrapper'
     })
+
+    const description = descriptionAndTagsUi(task, 'Description:', 'description', 1, 25)
+    appendChildren(descriptionWrapper, description);
     
-    const labelDescription = document.createElement('label');
-    setAttributes(labelDescription, {
-        for: `task-description-text-${task.id}`,
-        class: 'task-description-label'
-    });
-    labelDescription.textContent = 'Description: ';
-
-    const descriptionText = document.createElement('textarea');
-    setAttributes(descriptionText, {
-        id: `task-description-text-${task.id}`,
-        class: 'task-description-text input-text',
-        rows: '1',
-        cols: '20'
-    });
-
-    if (task.description) descriptionText.value = task.description;
-    appendChildren(descriptionWrapper, [labelDescription, descriptionText]);
-
     const priorityWrapper = document.createElement('div');
     setAttributes(priorityWrapper, {
         id: `priority-wrapper-${task.id}`,
@@ -323,50 +306,20 @@ export const expandTaskUi = (task) => {
         class: 'tags-wrapper'
     });
 
-    const tagsLabel = document.createElement('label');
-    setAttributes(tagsLabel, {
-        for: `task-tags-${task.id}`,
-        class: 'task-tags-label'
-    });
-    tagsLabel.textContent = 'Lists:';
-
-    const tagsSelect = document.createElement('select');
-    setAttributes(tagsSelect, {
-        id: `task-tags-${task.id}`,
-        class: 'task-tags',
-        name: 'tags'
-    });
-
-    const option = document.createElement('option');
-    setAttributes(option, {
-        value: ""
-    });
-    option.textContent = '-- Choose list --';
-    tagsSelect.appendChild(option);
-
-    appendChildren(tagsWrapper, [tagsLabel, tagsSelect]);
-
-    if (task.tags.length) {
-        task.tags.map(tag => {
-            // if (tag !== 'inbox' && tag !== 'today' && tag !== 'this-week' && tag !== 'anytime' && tag !== 'complete' && tag !== 'late') {
-                // }
-                tagsSelect.options.add(new Option(tag, tag))
-        });
-    }
+    const tags = descriptionAndTagsUi(task, 'Lists:', 'tags', null, null);
+    appendChildren(tagsWrapper, tags);
 
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
     
-    const addItemBtn = document.createElement('button');
-    setAttributes(addItemBtn, {
+    const checkListBtn = btnsUi(null, null, '+', null, {
         type: 'button',
         id: `checklist-add-btn-${task.id}`,
         class: 'btns round-btns round-btns-small'
-    })
-    addItemBtn.textContent  = '+';
-
+    });
+    
     const checklist = checkAndRadioUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);    
-    appendChildren(checklistWrapper, [addItemBtn, checklist]);
+    appendChildren(checklistWrapper, [checkListBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
@@ -374,7 +327,7 @@ export const expandTaskUi = (task) => {
 }
 
 /**
- * 
+ * Create checklist and priority Ui.
  * @param { Object } object - Object for retriving data.
  * @param { 'radio'|'checkbox' } type - Radio Button or Checkbox.
  * @param { string } legendText - Legend text content.
@@ -442,4 +395,59 @@ const checkAndRadioUi = (object, type, legendText, array, radioGroup, defaultChe
     appendChildren(fieldset, [legend, wrapper]);
 
     return fieldset;
+}
+
+/**
+ * Create description and tags Ui.
+ * @param { Object } object - Object for retriving data.
+ * @param { string } labelText - Label Text Content 
+ * @param { string } prefix - For Id, Class, Name attributes.
+ * @param { number|null } rows - Textarea rows.
+ * @param { number|null } cols - Textarea cols.
+ * @returns { Node[] } Array with label and select|textarea nodes.
+ */
+const descriptionAndTagsUi = (object, labelText, prefix, rows, cols) => {
+    const label = document.createElement('label');
+    setAttributes(label, {
+        for: `${object.type}-${prefix}-${object.id}`,
+        class: `${object.type}-${prefix}-label`
+    });
+    label.textContent = labelText;
+
+    if (prefix === 'tags') {
+        const select = document.createElement('select');
+        setAttributes(select, {
+            id: `${object.type}-${prefix}-${object.id}`,
+            class: `${object.type}-${prefix}`,
+            name: `${prefix}`
+        });
+        
+        const option = document.createElement('option');
+        setAttributes(option, {
+            value: ""
+        });
+        option.textContent = '-- Choose list --';
+        select.appendChild(option);
+        
+        object.tags.forEach(tag => {
+            // if (tag !== 'inbox' && tag !== 'today' && tag !== 'this-week' && tag !== 'anytime' && tag !== 'complete' && tag !== 'late') {
+                // }
+            select.options.add(new Option(tag, tag))
+        });
+        
+        return [label, select];
+    
+    } else {
+        const textarea = document.createElement('textarea');
+        setAttributes(textarea, {
+            id: `${object.type}-${prefix}-${object.id}`,
+            class: `${object.type}-${prefix}-text input-text`,
+            rows: `${rows}`,
+            cols: `${cols}`
+        });
+
+        if (object.description) textarea.value = object.description;
+        
+        return [label, textarea];
+    }
 }
