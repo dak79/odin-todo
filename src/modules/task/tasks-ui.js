@@ -45,16 +45,10 @@ const taskItem = task => {
 
     const checkbox = checkboxAndRadioUi(task, 'checkbox', 'checkbox', null, null, null, 'Done/Not Done Checkbox field');
 
-    const expandTaskBtn = btnsUi(task, 'expand-task', 'expand', null, {
-        type: 'button',
-        id: `task-${task.id}-expand-btn`,
-        class: 'btns expand-btn svg-btns',
-        'aria-label': 'Show task detail',
-        'data-number': `${task.id}`,
-        'data-btn': 'expand',
-        'data-type': 'expand-task'
-    });
+   
 
+    const expandTaskBtn = btnsUi(task, 'task', 'expand', 'btns expand-btn svg-btns', 'Show task details', 'expand-task', 'expand');
+    
     appendChildren(wrapperCheck, checkbox);
     wrapperCheck.appendChild(expandTaskBtn);
 
@@ -66,28 +60,12 @@ const taskItem = task => {
     });
 
     if (task.dueDate) {
-        const deleteDateBtn = btnsUi(task, 'due-date', 'delete','due-date-delete', {
-            type: 'button',
-            id: `due-date-${task.id}-delete-btn`,
-            class: 'btns due-date-delete-btn svg-btns',
-            'aria-label': 'Delete date',
-            'data-number': `${task.id}`,
-            'data-type': 'due-date',
-            'data-btn': 'delete'
-        }); 
-            
+        const deleteDateBtn = btnsUi(task, 'due-date', 'delete', 'btns due-date-delete-btn svg-btns', 'Delete Date', 'due-date', 'delete');
+             
         wrapperDueDate.appendChild(deleteDateBtn);
 
     } else {
-        const editDateBtn = btnsUi(task, 'due-date', 'edit', 'edit-due-date', {
-            type: 'button',
-            id: `due-date-${task.id}-edit-btn`,
-            class: 'btns due-date-edit-btn svg-btns',
-            'aria-label': 'Edit date',
-            'data-number': `${task.id}`,
-            'data-type': 'due-date',
-            'data-btn': 'edit'
-        });
+        const editDateBtn = btnsUi(task, 'due-date', 'edit', 'btns due-date-edit-btn svg-btns', 'Edit Date', 'due-date', 'edit');
         
         wrapperDueDate.appendChild(editDateBtn);
     }
@@ -152,25 +130,9 @@ const taskItem = task => {
         class: 'task-btn-wrapper'
     });
 
-    const editTaskBtn = btnsUi(task, task.type, 'edit', 'edit-task', {
-        type: 'button',
-        id: `task-${task.id}-edit-btn`,
-        class: 'btns task-edit-btn svg-btns',
-        'aria-label': 'Edit task title',
-        'data-number':`${task.id}`,
-        'data-type': `${task.type}`,
-        'data-btn': 'edit'
-    });
+    const editTaskBtn = btnsUi(task, 'task', 'edit', 'btns task-edit-btn svg-btns', `Edit Task: ${task.title}`, task.type, 'edit'); 
     
-    const deleteTaskBtn = btnsUi(task, task.type, 'delete', 'delete-task', {
-        type: 'button',
-        id: `task-${task.id}-delete-btn`,
-        class: 'btns task-delete-btn svg-btns',
-        'aria-label': 'Delete task',
-        'data-number': `${task.id}`,
-        'data-type': `${task.type}`,
-        'data-btn': 'delete'
-    });
+    const deleteTaskBtn = btnsUi(task, 'task', 'delete', 'btns task-delete-btn svg-btns', `Delete Task: ${task.title}`, task.type, 'delete');
     
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 
@@ -215,12 +177,19 @@ export const expandTaskUi = task => {
 
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
-    
-    const checkListBtn = btnsUi(null, null, '+', null, {
-        type: 'button',
-        id: `checklist-add-btn-${task.id}`,
-        class: 'btns round-btns round-btns-small'
-    });
+             // // EXPAND BTNS: TASK
+//  const expandTaskBtn = btnsUi(object=task|list|menu, name='task'|'due-date'|lists|menu|'checklist', type='expand'|'delete'|'edit'|'title'|'new', classNames = [], ariaLabel, dataType='expand-task', textContent='expand'|'delete'|'edit',
+
+//      id: (object) ? `${name}-${type}-btn-${object.id}` : ${type}-${name}-btn,
+//     
+//     class: `${classNames}`,
+//      'aria-label': `${ariaLabel}`,
+//      'data-number': (object) ? `${object.id}` : 0,
+//      'data-btn': ${type},
+//      'data-type': `${dataType}`,
+//      if (type === 'title') 'data-name': `${object.title.replace(' ', '-').toLowerCase().trim()}`
+// });
+    const checkListBtn = btnsUi(null, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
     
     const checklist = checklistAndPriorityUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);    
     appendChildren(checklistWrapper, [checkListBtn, checklist]);
@@ -453,7 +422,7 @@ export const editTaskUi = event => {
                         }) :
                     0;
     
-    const btn = selectNode(`#${type}-${id}-edit-btn`);
+    const btn = selectNode(`#${type}-edit-btn-${id}`);
     btn.classList.add('svg-active');
 
     return input;

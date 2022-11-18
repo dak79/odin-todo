@@ -6,14 +6,14 @@ export const listeners = [];
 export const addAppListeners = () => {
 
     // Menu
-    addListener('#btn-new-task', 'click', btnsController);
+    addListener('#new-task-btn', 'click', btnsController);
     addListeners('.menu-btns', 'click', btnsController);
 
     // Lists
     addListeners('.lists-btns', 'click', showList);
     addListeners('.svg-btns-delete', 'click', btnsController);
     addListeners('.svg-btns-edit', 'click', btnsController);
-    addListener('#btn-new-lists', 'click', btnsController);
+    addListener('#new-lists-btn', 'click', btnsController);
 
     // Tasks
     addListeners('.tasks-checkbox', 'change', btnsController);

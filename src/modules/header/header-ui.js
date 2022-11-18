@@ -30,14 +30,7 @@ const createTitle = () => {
 }
 
 const createBtnNewTask = () => {
-    const btnNewTask = btnsUi(null, null, '+', null, {
-        type: 'button',
-        id: 'btn-new-task',
-        class: 'btns round-btns round-btns-big',
-        'aria-label': 'Add task',
-        'data-type': 'new-task',
-        'data-btn': 'new-task'
-    });
+    const btnNewTask = btnsUi(null, 'task', 'new', 'btns round-btns round-btns-big', 'Add Task', 'new-task', '+');
     
     return btnNewTask;
 }

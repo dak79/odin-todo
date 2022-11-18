@@ -38,13 +38,7 @@ const listsTitle = () => {
 }
 
 const newListBtnUi = () => {
-    const btnNewList = btnsUi(null, null, '+', null, {
-        type: 'button',
-        id: 'btn-new-lists',
-        class: 'btns round-btns round-btns-big',
-        'data-type': 'new-list',
-        'data-btn': 'new-list'
-    });
+    const btnNewList = btnsUi(null, 'lists', 'new', 'btns round-btns round-btns-big', 'Add a new list for your project', 'new-list', '+');
 
     return btnNewList; 
 }
@@ -60,15 +54,7 @@ const createListsUi = () => {
  * @returns - Ui for a list instance
  */
 const listsBtn = list => {
-    const btnTitle = btnsUi(null, null, list.title, null, {
-        type: 'button',
-        id: `btn-list-${list.id}`,
-        class: 'btns lists-btns text-btns',
-        'data-number': `${list.id}`,
-        'data-name': `${list.title.toLowerCase().replaceAll(' ', '-').trim()}`,
-        'data-type': `${list.type}`,
-        'data-btn': 'list-title'
-    });
+    const btnTitle = btnsUi(list, 'lists', 'title', 'btns lists-btns text-btns', `List title button: ${list.title}`, list.type, list.title);
 
     const wrapper = document.createElement('span');
     setAttributes(wrapper, {
@@ -76,25 +62,9 @@ const listsBtn = list => {
         class: 'btns-lists'
     });
     
-    const btnEdit = btnsUi(list, list.type, 'edit', 'edit-list', {
-        type: 'button',
-        id:`btn-lists-edit-${list.id}`,
-        class: 'btns svg-btns',
-        'aria-label': 'Button Edit List',
-        'data-number': `${list.id}`,
-        'data-type': `${list.type}`,
-        'data-btn': 'edit'
-    });
+    const btnEdit = btnsUi(list, 'lists', 'edit', 'btns svg-btns svg-btns-edit', `Button Edit List: ${list.title}`, list.type, 'edit');
     
-    const btnDelete = btnsUi(list, list.type, 'delete', 'delete-list', {
-        type: 'button',
-        id:`btn-lists-delete-${list.id}`,
-        class: 'btns svg-btns',
-        'aria-label': 'Button Delete List',
-        'data-number': `${list.id}`,
-        'data-type': `${list.type}`,
-        'data-btn': 'delete'
-    });
+    const btnDelete = btnsUi(list, 'lists', 'delete', 'btns svg-btns svg-btns-delete', `Button Delete List: ${list.title}`, list.type, 'delete');
     
     appendChildren(wrapper, [btnEdit, btnDelete]);
    
@@ -121,7 +91,7 @@ export const newListUi = () => {
  */
 export const editListUi = event => {
     const nodes = editInput(
-        `#btn-list-${ event.target.dataset.number }`,
+        `#lists-title-btn-${ event.target.dataset.number }`,
         `#list-item-lists-${ event.target.dataset.number }`, 
         { 
             type: 'text', 

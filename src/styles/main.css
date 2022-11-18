@@ -557,6 +557,7 @@ select::-ms-expand {
 .btns:focus {
     cursor: pointer;
     fill: var(--amber-500);
+    color: var(--amber-500);
 }
 
 .round-btns:hover,
@@ -573,11 +574,11 @@ select::-ms-expand {
     grid-area: btns;    
 }
 
-#btn-new-task {
+#new-task-btn {
     grid-area: 1 / 2 / 1 / 3;
 }
 
-#btn-new-lists {
+#new-lists-btn {
     grid-area: 1 / 2 / 1 / 3;
 }
 

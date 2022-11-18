@@ -4,6 +4,7 @@ import { saveEditInput } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
 import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask } from './task/tasks';
 import { showMenu } from './menu/menu';
+import { showList } from './lists/lists-handlers';
 import { renderLists, editListUi } from './lists/lists-ui';
 import { editTaskUi, renderTasks } from './task/tasks-ui';
 
@@ -21,7 +22,11 @@ export const btnsController = event => {
     if (btn === 'delete') {
         (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
     } else if (btn === 'title') {
-        showMenu(event);
+        if (type === 'menu-title') {
+            showMenu(event);
+        } else {
+            showList(event);
+        }
     } else if (btn === 'checkbox') {
         checkboxState(event);
     } else if (btn === 'expand') {

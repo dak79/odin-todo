@@ -13,8 +13,36 @@ export const renderMenu = isFirstLoad => {
     if (!isFirstLoad) addAppListeners();
 }
 
+const menuArr = [
+    {   
+        id: 1,
+        title: 'Inbox',
+        tags:['menu']
+    },
+    {
+        id: 2,
+        title: 'Today',
+        tags:['menu']
+    },
+    {
+        id: 3,
+        title: 'This Week',
+        tags:['menu']
+    },
+    {
+        id: 4,
+        title: 'Anytime',
+        tags:['menu']
+    },
+    {
+        id: 5,
+        title: 'Complete',
+        tags:['menu']
+    }
+]
+
 const createMenu = () => {
-    const menu = createList([{id: 1, title: 'Inbox', tags:['menu']}, {id: 2, title: 'Today', tags:['menu']}, {id: 3, title: 'This Week', tags:['menu']}, {id: 4, title: 'Anytime', tags:['menu']}, {id: 5, title: 'Complete', tags:['menu']}], 'menu', navBtn, 'menu', 'menu', 'menu-items');
+    const menu = createList(menuArr, 'menu', navBtn, 'menu', 'menu', 'menu-items');
 
     return menu;
 }
@@ -26,14 +54,7 @@ const createMenu = () => {
  * @returns { HTMLElement } - Button
  */
 const navBtn = desk => {
-    const btn = btnsUi(null, null, desk.title, null, {
-        type: 'button',
-        id: `btn-${desk.title.replace(' ', '-').toLowerCase().trim()}`,
-        class: 'btns menu-btns text-btns',
-        'data-name': `${desk.title.replace(' ', '-').toLowerCase().trim()}`,
-        'data-type': 'menu-title',
-        'data-btn': 'title'
-    });
+    const btn = btnsUi(desk, 'menu', 'title', 'btns menu-btns text-btns', `Menu Button: ${desk.title}`, 'menu-title', desk.title);
     
     return [btn];
 }
