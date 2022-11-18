@@ -313,9 +313,9 @@ export const expandTaskUi = (task) => {
         class: 'priority-wrapper'
     });
 
-    const fieldsetRadio = createRadioBtn(task, 'Priority:', ['low', 'medium', 'high'], 'priority', 'medium')
+    const radio = checkAndRadioUi(task, 'radio', 'Priority:', ['low', 'medium', 'high'], 'priority', 'medium');
 
-    priorityWrapper.appendChild(fieldsetRadio);
+    priorityWrapper.appendChild(radio);
 
     const tagsWrapper = document.createElement('div');
     setAttributes(tagsWrapper, {
@@ -356,14 +356,6 @@ export const expandTaskUi = (task) => {
 
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
-    const checklistFieldset = document.createElement('fieldset');
-    setAttributes(checklistFieldset, {
-        id: `checklist-fieldset-${task.id}`,
-        class: 'checklist-fieldset'
-    });
-
-    const legendCheck = document.createElement('legend');
-    legendCheck.textContent = 'Checklist:';
     
     const addItemBtn = document.createElement('button');
     setAttributes(addItemBtn, {
@@ -372,38 +364,9 @@ export const expandTaskUi = (task) => {
         class: 'btns round-btns round-btns-small'
     })
     addItemBtn.textContent  = '+';
-    
-    const listWrapper = document.createElement('div');
 
-    if (task.checklist) {
-        task.checklist.map((item, index) => {
-            const itemWrapper = document.createElement('div');
-            setAttributes(itemWrapper, {
-                id: `checklist-item-wrapper-${task.id}`,
-                class: 'checklist-item-wrapper'
-            })
-            const check = document.createElement('input');
-            setAttributes(check, {
-                type: 'checkbox',
-                id: `checklist-item-${task.id}-${index}`,
-                class: 'checklist-item',
-                name: 'checklist-item'
-            })
-        
-            const checkLabel = document.createElement('label');
-            setAttributes(checkLabel, {
-                for: `checklist-item-${task.id}-${index}`,
-                class: 'checklist-item-label'
-            })
-            checkLabel.textContent = item;
-            appendChildren(itemWrapper, [check, checkLabel])
-            listWrapper.appendChild(itemWrapper);
-        })
-    }
-
-
-    appendChildren(checklistWrapper, [addItemBtn, checklistFieldset]);
-    appendChildren(checklistFieldset, [legendCheck, listWrapper])
+    const checklist = checkAndRadioUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);    
+    appendChildren(checklistWrapper, [addItemBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
@@ -412,111 +375,71 @@ export const expandTaskUi = (task) => {
 
 /**
  * 
- * @param { Object } item - Object for r etriving data
+ * @param { Object } object - Object for retriving data.
+ * @param { 'radio'|'checkbox' } type - Radio Button or Checkbox.
  * @param { string } legendText - Legend text content.
- * @param { string[] } radioNames - Buttons name.
- * @param { string } radioGroup - Name attribute 
- * @param { string|null } defaultChecked - Set checked button by default or null.
- * @returns { Node } A fieldset with radio buttons. 
+ * @param { string[] } array - Radio names or Checklist label.
+ * @param { string|null } radioGroup - Name attribute for Radio Buttons.
+ * @param { string|null } defaultChecked - Set checked button by default or null for Radio Buttons.
+ * @returns { Node } A fieldset with radio buttons or checkboxes. 
  */
-const createRadioBtn = (item, legendText, radioNames, radioGroup, defaultChecked) => {
-
-    const fieldset = document.createElement('fieldset');
-    const legend = document.createElement('legend');
-    legend.textContent = legendText;
+const checkAndRadioUi = (object, type, legendText, array, radioGroup, defaultChecked) => {
+    let nameValue = (type === 'checkbox') ? 'checklist' : type;
     
-    const radiosGroup = document.createElement('div');
-    setAttributes(radiosGroup, {
-        id: `radios-wrapper-${item.id}`,
-        class: 'radios-wrapper'
+    const fieldset = document.createElement('fieldset');
+    setAttributes(fieldset, {
+        id: `${nameValue}-fieldset-${object.id}`,
+        class: `${nameValue}-fieldset`
     });
 
-    radioNames.forEach(btn => {
-        if (typeof btn !== 'string') String(btn);
+    const legend = document.createElement('legend');
+    legend.textContent = legendText;
+
+    const wrapper = document.createElement('div');
+    setAttributes(wrapper, {
+        id: `${nameValue}s-wrapper-${object.id}`,
+        class: `${nameValue}s-wrapper`
+    });
+
+    array.forEach((item, index) => {
+        if (typeof item !== 'string') String(item);
+
+        nameValue = (type === 'checkbox') ? 'checklist-item' : type;
 
         const group = document.createElement('div');
         setAttributes(group, {
-            id: `radio-${btn}-wrapper-${item.id}`,
-            class: 'radio-wrapper'
+            id: `${nameValue}-wrapper-${object.id}-${index}`,
+            class: `${nameValue}-wrapper`
         });
 
         const label = document.createElement('label');
         setAttributes(label, {
-            for: `radio-${btn}-btn-${item.id}`,
-            class: 'radio-label'
+            for: `${nameValue}-${object.id}-${index}`,
         });
-        label.textContent = btn.charAt(0).toUpperCase() + btn.slice(1);
+        label.textContent = item.charAt(0).toUpperCase() + item.slice(1);
 
-        const radio = document.createElement('input');
-        setAttributes(radio, {
-            type: 'radio',
-            id: `radio-${btn}-btn-${item.id}`,
-            class: 'radio-btns',
-            name: `${radioGroup}-${item.id}`,
-            value: `${btn}`
+        const input = document.createElement('input');
+        setAttributes(input, {
+            type: `${type}`,
+            id: `${nameValue}-${object.id}-${index}`,
+            name: type === 'radio' ? `${radioGroup}-${object.id}` : 'checklist-item',
+            value: type === 'radio' ? `${item}` : `checklist-item-${object.id}-${index}`
         });
-        appendChildren(group, [radio, label]);
+
+        appendChildren(group, [input, label]);
         
-        if(item.priority) {
-            if (item.priority === btn) radio.checked = true;
-        } else {
-           if (btn === defaultChecked) radio.checked = true;
+        if (type === 'radio') {
+            if (object.priority) {
+                if (object.priority === item) input.checked = true;
+            } else {
+                if (item === defaultChecked) input.checked = true;
+            }
         }
     
-        radiosGroup.appendChild(group);
+        wrapper.appendChild(group);
     });
 
-    appendChildren(fieldset, [legend, radiosGroup]);
+    appendChildren(fieldset, [legend, wrapper]);
 
     return fieldset;
-}
-
-const checkListABADIBA = () => {
-    const checklistWrapper = document.createElement('div');
-    checklistWrapper.classList.add('checklist-wrapper')
-    const checklistFieldset = document.createElement('fieldset');
-    setAttributes(checklistFieldset, {
-        id: `checklist-fieldset-${task.id}`,
-        class: 'checklist-fieldset'
-    });
-
-    const legendCheck = document.createElement('legend');
-    legendCheck.textContent = 'Checklist:';
-    
-    const addItemBtn = document.createElement('button');
-    setAttributes(addItemBtn, {
-        type: 'button',
-        id: `checklist-add-btn-${task.id}`,
-        class: 'btns round-btns round-btns-small'
-    })
-    addItemBtn.textContent  = '+';
-    
-    const listWrapper = document.createElement('div');
-
-    if (task.checklist) {
-        task.checklist.map((item, index) => {
-            const itemWrapper = document.createElement('div');
-            setAttributes(itemWrapper, {
-                id: `checklist-item-wrapper-${task.id}`,
-                class: 'checklist-item-wrapper'
-            })
-            const check = document.createElement('input');
-            setAttributes(check, {
-                type: 'checkbox',
-                id: `checklist-item-${task.id}-${index}`,
-                class: 'checklist-item',
-                name: 'checklist-item'
-            })
-        
-            const checkLabel = document.createElement('label');
-            setAttributes(checkLabel, {
-                for: `checklist-item-${task.id}-${index}`,
-                class: 'checklist-item-label'
-            })
-            checkLabel.textContent = item;
-            appendChildren(itemWrapper, [check, checkLabel])
-            listWrapper.appendChild(itemWrapper);
-        });
-}
-
 }
