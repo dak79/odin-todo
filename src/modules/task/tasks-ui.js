@@ -45,8 +45,6 @@ const taskItem = task => {
 
     const checkbox = checkboxAndRadioUi(task, 'checkbox', 'checkbox', null, null, null, 'Done/Not Done Checkbox field');
 
-   
-
     const expandTaskBtn = btnsUi(task, 'task', 'expand', 'btns expand-btn svg-btns', 'Show task details', 'expand-task', 'expand');
     
     appendChildren(wrapperCheck, checkbox);
@@ -177,21 +175,11 @@ export const expandTaskUi = task => {
 
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
-             // // EXPAND BTNS: TASK
-//  const expandTaskBtn = btnsUi(object=task|list|menu, name='task'|'due-date'|lists|menu|'checklist', type='expand'|'delete'|'edit'|'title'|'new', classNames = [], ariaLabel, dataType='expand-task', textContent='expand'|'delete'|'edit',
-
-//      id: (object) ? `${name}-${type}-btn-${object.id}` : ${type}-${name}-btn,
-//     
-//     class: `${classNames}`,
-//      'aria-label': `${ariaLabel}`,
-//      'data-number': (object) ? `${object.id}` : 0,
-//      'data-btn': ${type},
-//      'data-type': `${dataType}`,
-//      if (type === 'title') 'data-name': `${object.title.replace(' ', '-').toLowerCase().trim()}`
-// });
-    const checkListBtn = btnsUi(null, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
+   
+    const checkListBtn = btnsUi(task, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
     
-    const checklist = checklistAndPriorityUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);    
+    const checklist = checklistAndPriorityUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);
+    
     appendChildren(checklistWrapper, [checkListBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
@@ -281,8 +269,18 @@ const checklistAndPriorityUi = (object, type, legendText, array, radioGroup, def
             });
 
             const checkbox = checkboxAndRadioUi(object, type, name, item, index, radioGroup, (type === 'checkbox') ? 'Done / Not Done checklist check button' : `${item} Radio Button`);
-        
+            
             appendChildren(group, checkbox);
+            
+            if (type === 'checkbox') {
+                console.log(array, object)
+
+                const btnEditChecklist = btnsUi(object, 'checklist', 'edit', 'btns checklist-edit-btn svg-btns', `Edit checklist: ${object.checklist[index]}`, 'checklist', 'edit', index);
+    
+                const btnDeleteChecklist = btnsUi(object, 'checklist', 'delete', 'btns checklist-delete-btn svg-btns', `Delete checklist: ${object.checklist[index]}`, 'checklist', 'delete', index);
+                appendChildren(group, [btnEditChecklist, btnDeleteChecklist])
+            }
+        
             
             if (type === 'radio') {
                 if (object.priority) {

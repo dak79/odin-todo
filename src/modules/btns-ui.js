@@ -9,13 +9,15 @@ import { setAttributes } from './helpers';
  * @param { string } ariaLabel - Aria-label value. 
  * @param { string } dataType - Data-type value. 
  * @param { 'expand'|'delete'|'edit'|string } textContent - Button text content.
+ * @param { number|null } index - For sub-lists buttons like checklist delete and edit.
  * @returns { node } - A button.
  */
-export const btnsUi = (object, name, type, classNames, ariaLabel, dataType, textContent) => {
+export const btnsUi = (object, name, type, classNames, ariaLabel, dataType, textContent, index) => {
     const btn = document.createElement('button');
     setAttributes(btn, {
         type: 'button',
-        id: (object) ? `${name}-${type}-btn-${object.id}` : `${type}-${name}-btn`,
+        id: (object) ? (name === 'checklist' && type !== 'new') ? `${name}-${type}-btn-${object.id}-${index}` : `${name}-${type}-btn-${object.id}` :
+        `${type}-${name}-btn`,
         class: `${classNames}`,
         'aria-label': `${ariaLabel}`,
         'data-number': (object) ? `${object.id}` : 0,

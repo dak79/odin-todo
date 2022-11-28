@@ -1,5 +1,5 @@
 import { selectNode, selectNodes } from '../helpers';
-import { clearListeners, addAppListeners } from '../listeners';
+import { clearListeners, addAppListeners, addExpandListener } from '../listeners';
 import { findItemId, deleteItem, updateItem } from '../todo';
 import { renderTasks, newTaskUi, expandTaskUi } from './tasks-ui';
 import { Task } from '../classes';
@@ -112,6 +112,7 @@ export const expandTask = event => {
                 hook.classList.add('expand-btn-up');
                 const nodes = expandTaskUi(task);
                 hook.appendChild(nodes.wrapper);
+                addExpandListener(event);
                 
         } else {
                 hook.classList.remove('expand-btn-up');

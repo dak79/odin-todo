@@ -98,3 +98,27 @@ const saveInput = (newItem, type) => {
         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
 }
+
+export const saveNewDescription = () => {
+    console.log('new description');
+}
+
+export const priorityValue = () => {
+    console.log('new value');
+}
+
+export const newTags = () => {
+    console.log('add new tag');
+}
+
+export const addNewCheck = () => {
+    console.log('add new check');
+}
+
+export const editChecklist = () => {
+    console.log('edit checklist');
+}
+
+export const deleteChecklist = () => {
+    console.log('delete checklist item')
+}
