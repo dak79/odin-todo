@@ -1,7 +1,7 @@
 import { deleteItem, findItemName } from '../todo';
 import { List } from '../classes';
 import { newListUi, renderLists } from './lists-ui';
-import { clearListeners } from '../listeners';
+import { clearListeners, listeners } from '../listeners';
 
 // Lists database
 export const lists = [];
@@ -72,6 +72,6 @@ export const deleteList = event => {
     const id = event.target.dataset.number;
 
     deleteItem(lists, id);
-    clearListeners();
+    clearListeners(listeners);
     renderLists(false);
 }

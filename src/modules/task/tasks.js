@@ -1,5 +1,5 @@
 import { selectNode, selectNodes } from '../helpers';
-import { clearListeners, addAppListeners, addExpandListener } from '../listeners';
+import { clearListeners, addAppListeners, addExpandListener, listeners } from '../listeners';
 import { findItemId, deleteItem, updateItem } from '../todo';
 import { renderTasks, newTaskUi, expandTaskUi } from './tasks-ui';
 import { Task } from '../classes';
@@ -41,7 +41,7 @@ export const addNewTask = event => {
         const instance = new Task();
         const input = newTaskUi(instance);
         
-        clearListeners();
+        clearListeners(listeners);
         addAppListeners();
 
         return  { input, instance }
@@ -56,7 +56,7 @@ export const deleteTask = event => {
 
         const id = event.target.dataset.number;
         const itemToDelete = deleteItem(tasks, id);
-        clearListeners();
+        clearListeners(listeners);
         renderTasks(itemToDelete.visualizedOn || 'inbox', false);
 }
 
@@ -70,7 +70,7 @@ export const deleteDate = event => {
         const id = event.target.dataset.number;
 
         const itemToUpdate = updateItem(tasks, id, 'dueDate', null);
-        clearListeners();
+        clearListeners(listeners);
         itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === 'inbox');
         itemToUpdate.updateTime();
         renderTasks(itemToUpdate.visualizedOn || 'inbox', false);
@@ -97,7 +97,7 @@ export const checkboxState = event => {
         task.updateTime();
     }
     
-    clearListeners();
+    clearListeners(listeners);
     setTimeout(() => renderTasks(desk, false), 1000);   
 }
 

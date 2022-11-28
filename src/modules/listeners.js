@@ -2,41 +2,42 @@ import { showList } from './lists/lists-handlers';
 import { btnsController, saveNewDescription, priorityValue, newTags, addNewCheck, editChecklist, deleteChecklist } from './handlers';
 
 export const listeners = [];
+export const expandListeners = [];
 
 export const addAppListeners = () => {
 
     // Menu
-    addListener('#new-task-btn', 'click', btnsController);
-    addListeners('.menu-btns', 'click', btnsController);
+    addListener(listeners, '#new-task-btn', 'click', btnsController);
+    addListeners(listeners, '.menu-btns', 'click', btnsController);
 
     // Lists
-    addListeners('.lists-btns', 'click', showList);
-    addListeners('.svg-btns-delete', 'click', btnsController);
-    addListeners('.svg-btns-edit', 'click', btnsController);
-    addListener('#new-lists-btn', 'click', btnsController);
+    addListeners(listeners, '.lists-btns', 'click', showList);
+    addListeners(listeners, '.svg-btns-delete', 'click', btnsController);
+    addListeners(listeners, '.svg-btns-edit', 'click', btnsController);
+    addListener(listeners, '#new-lists-btn', 'click', btnsController);
 
     // Tasks
-    addListeners('.tasks-checkbox', 'change', btnsController);
-    addListeners('.expand-btn', 'click', btnsController);
-    addListeners('.task-due-date', 'click', btnsController);
-    addListeners('.due-date-delete-btn', 'click', btnsController);
-    addListeners('.due-date-edit-btn', 'click', btnsController);
-    addListeners('.task-edit-btn', 'click', btnsController);
-    addListeners('.task-delete-btn', 'click', btnsController);
+    addListeners(listeners, '.tasks-checkbox', 'change', btnsController);
+    addListeners(listeners, '.expand-btn', 'click', btnsController);
+    addListeners(listeners, '.task-due-date', 'click', btnsController);
+    addListeners(listeners, '.due-date-delete-btn', 'click', btnsController);
+    addListeners(listeners, '.due-date-edit-btn', 'click', btnsController);
+    addListeners(listeners, '.task-edit-btn', 'click', btnsController);
+    addListeners(listeners, '.task-delete-btn', 'click', btnsController);
 }
 
 export const addExpandListener = event => {
     console.log(event.target.dataset.number)
-    addListener(`#task-description-${event.target.dataset.number}`, 'focusout', saveNewDescription);
+    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'focusout', saveNewDescription);
 
-    addListeners(`input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', priorityValue);
+    addListeners(expandListeners, `input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', priorityValue);
 
-    addListener(`#task-tags-${event.target.dataset.number}`, 'change', newTags);
+    addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', newTags);
 
-    addListener(`#checklist-new-btn-${event.target.dataset.number}`, 'click', addNewCheck);
+    addListener(expandListeners, `#checklist-new-btn-${event.target.dataset.number}`, 'click', addNewCheck);
 
-    addListeners('.checklist-edit-btn', 'click', editChecklist);
-    addListeners('.checklist-delete-btn', 'click', deleteChecklist);
+    addListeners(expandListeners, '.checklist-edit-btn', 'click', editChecklist);
+    addListeners(expandListeners, '.checklist-delete-btn', 'click', deleteChecklist);
 
 
 }
@@ -48,7 +49,7 @@ export const addExpandListener = event => {
  * @param { Event.type } eventType - Type of listeners.
  * @param { Function } callback - Handler.
  */
-export const addListeners = (selector, eventType, callback) => {
+export const addListeners = (array, selector, eventType, callback) => {
     document.querySelectorAll(selector).forEach(node => {
         node.addEventListener(eventType, callback);
         const listener = {
@@ -57,7 +58,7 @@ export const addListeners = (selector, eventType, callback) => {
             eventType,
             callback
         };
-        listeners.push(listener);
+        array.push(listener);
     });
 }
 
@@ -67,7 +68,7 @@ export const addListeners = (selector, eventType, callback) => {
  * @param { Event.type } eventType - Type of listeners.
  * @param { Function } callback - Handler.
  */
-export const addListener = (selector, eventType, callback) => {
+export const addListener = (array, selector, eventType, callback) => {
     const node = document.querySelector(selector)
     node.addEventListener(eventType, callback);
     const listener = {
@@ -76,7 +77,7 @@ export const addListener = (selector, eventType, callback) => {
         eventType,
         callback
     }
-    listeners.push(listener);
+    array.push(listener);
 }
 
 /**
@@ -85,11 +86,11 @@ export const addListener = (selector, eventType, callback) => {
  * @param { Event.type } eventType - Type of listeners.
  * @param { Function } callback - Handler.
  */
-export const clearListeners = () => {
-    console.log(listeners);
-    listeners.forEach(listener => {
+export const clearListeners = array => {
+    console.log(array);
+    array.forEach(listener => {
         listener.node.removeEventListener(listener.eventType, listener.callback); 
     })
-    listeners.splice(0);
+    array.splice(0);
    
 }

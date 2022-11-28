@@ -1,4 +1,4 @@
-import { clearListeners } from './listeners';
+import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { saveEditInput } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
@@ -41,7 +41,7 @@ export const btnsController = event => {
                             (type === 'new-task') ? addNewTask(event) : 
                             0;
         if (newItem) {
-            clearListeners();
+            clearListeners(listeners);
             controllerListener(newItem, type, saveInput);
         }
     } 
@@ -77,7 +77,7 @@ const saveInput = (newItem, type) => {
                 newItem.instance.add(lists);
             }
 
-            clearListeners();
+            clearListeners(listeners);
             renderLists(false);
         } 
     
@@ -89,7 +89,7 @@ const saveInput = (newItem, type) => {
             task.update('title', newItem.input.value);
         }
 
-        clearListeners();
+        clearListeners(listeners);
         renderTasks(task.visualizedOn || 'inbox', false);
 
     } else {
