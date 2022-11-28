@@ -482,6 +482,10 @@ select::-ms-expand {
     font-size: 1rem;
 }
 
+#new-task-input {
+    min-width: 80%;
+}
+
 #edit-task-title {
     flex: 1 1 0;
     max-width: 80%;

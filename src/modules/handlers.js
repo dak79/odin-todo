@@ -31,7 +31,7 @@ export const btnsController = event => {
         checkboxState(event);
     } else if (btn === 'expand') {
         expandTask(event);
-    } else if (btn === 'edit') {
+    } else if (btn === 'edit' || btn === 'new') {
         const newItem = (btn === 'edit') ? 
                             (type === 'list') ? editListUi(event) : 
                             (type === 'task' || type === 'due-date') ? editTaskUi(event) :
