@@ -1,7 +1,7 @@
 import { selectNode, selectNodes } from '../helpers';
 import { clearListeners, addAppListeners, addExpandListener, listeners } from '../listeners';
 import { findItemId, deleteItem, updateItem } from '../todo';
-import { renderTasks, newTaskUi, expandTaskUi } from './tasks-ui';
+import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './tasks-ui';
 import { Task } from '../classes';
 
 // Tasks database
@@ -121,3 +121,20 @@ export const expandTask = event => {
                 expandedSection.remove();
         }        
 }
+
+export const saveNewDescription = event => {
+        updateItem(tasks, Number(event.target.dataset.number), 'description', String(event.target.value))
+    
+        console.log(tasks);
+        
+}
+
+export const priorityValue = event => {
+        console.log(event.target.value, event.target.dataset.number);
+        updateItem(tasks, Number(event.target.dataset.number), 'priority', String(event.target.value));
+
+        const task = findItemId(tasks, Number(event.target.dataset.number));
+
+        updatePriorityUi(task, `#task-msg-wrapper-${event.target.dataset.number}`, true);
+
+    }

@@ -1,8 +1,8 @@
 import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
-import { saveEditInput } from './todo';
+import { findItemId, saveEditInput, updateItem } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask } from './task/tasks';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue } from './task/tasks';
 import { showMenu } from './menu/menu';
 import { showList } from './lists/lists-handlers';
 import { renderLists, editListUi } from './lists/lists-ui';
@@ -31,7 +31,7 @@ export const btnsController = event => {
         checkboxState(event);
     } else if (btn === 'expand') {
         expandTask(event);
-    } else {
+    } else if (btn === 'edit') {
         const newItem = (btn === 'edit') ? 
                             (type === 'list') ? editListUi(event) : 
                             (type === 'task' || type === 'due-date') ? editTaskUi(event) :
@@ -44,7 +44,13 @@ export const btnsController = event => {
             clearListeners(listeners);
             controllerListener(newItem, type, saveInput);
         }
-    } 
+    } else if (btn === 'radio') {
+        priorityValue(event);
+    }
+    
+    if (type === 'description') {
+        saveNewDescription(event);
+    }
 }
 
 const controllerListener = (newData, type, callback) => {
@@ -97,14 +103,6 @@ const saveInput = (newItem, type) => {
         
         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
-}
-
-export const saveNewDescription = () => {
-    console.log('new description');
-}
-
-export const priorityValue = () => {
-    console.log('new value');
 }
 
 export const newTags = () => {

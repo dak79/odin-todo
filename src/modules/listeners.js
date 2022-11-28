@@ -1,5 +1,6 @@
 import { showList } from './lists/lists-handlers';
 import { btnsController, saveNewDescription, priorityValue, newTags, addNewCheck, editChecklist, deleteChecklist } from './handlers';
+import { saveOnEnter } from './helpers';
 
 export const listeners = [];
 export const expandListeners = [];
@@ -28,9 +29,10 @@ export const addAppListeners = () => {
 
 export const addExpandListener = event => {
     console.log(event.target.dataset.number)
-    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'focusout', saveNewDescription);
+    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'focusout', btnsController);
+    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'keyup', saveOnEnter);
 
-    addListeners(expandListeners, `input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', priorityValue);
+    addListeners(expandListeners, `input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', btnsController);
 
     addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', newTags);
 

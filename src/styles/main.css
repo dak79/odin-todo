@@ -487,10 +487,6 @@ select::-ms-expand {
     max-width: 80%;
 }
 
-.task-description-text {
-    resize: none;   
-}
-
 .task-description-wrapper {
     grid-area: 1 / 1 / 2 / 2;
     display: flex;
