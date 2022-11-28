@@ -1,6 +1,6 @@
 import { selectNode, selectNodes } from '../helpers';
 import { clearListeners, addAppListeners, addExpandListener, listeners } from '../listeners';
-import { findItemId, deleteItem, updateItem } from '../todo';
+import { findItemId, deleteItem, updateItem, findItemName } from '../todo';
 import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './tasks-ui';
 import { Task } from '../classes';
 
@@ -138,3 +138,19 @@ export const priorityValue = event => {
         updatePriorityUi(task, `#task-msg-wrapper-${event.target.dataset.number}`, true);
 
     }
+
+export const newTags = event => {
+        const task = findItemId(tasks, Number(event.target.dataset.number))
+        const newTag = String(event.target.value).toLowerCase().trim();
+        const exists = findItemName(task.tags, newTag);
+
+        if (!exists) {
+                task.addTag(newTag);
+                updateNewTagUi(event, task, newTag);
+        }
+    }
+
+export const updateNewTagUi = (event, task, tag) => {
+        const label = selectNode(`label[for='task-tags-${task.id}']`);
+        label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `;
+}

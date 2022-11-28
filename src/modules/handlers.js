@@ -2,11 +2,11 @@ import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { findItemId, saveEditInput, updateItem } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue } from './task/tasks';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './task/tasks';
 import { showMenu } from './menu/menu';
 import { showList } from './lists/lists-handlers';
 import { renderLists, editListUi } from './lists/lists-ui';
-import { editTaskUi, renderTasks } from './task/tasks-ui';
+import { editTaskUi, renderTasks, updateTagsUi } from './task/tasks-ui';
 
 /**
  * Controller for buttons
@@ -51,6 +51,11 @@ export const btnsController = event => {
     if (type === 'description') {
         saveNewDescription(event);
     }
+
+    if (type === 'tags') {
+        newTags(event);
+
+    }
 }
 
 const controllerListener = (newData, type, callback) => {
@@ -78,9 +83,11 @@ const saveInput = (newItem, type) => {
         if (newTitle) {
             if (type === 'list') {
                 saveEditInput(newItem.output, lists, 'title', String(newTitle), null);
+                updateTagsUi(null);
             } else {
                 newItem.instance.update('title', String(newTitle))
                 newItem.instance.add(lists);
+                updateTagsUi(null);
             }
 
             clearListeners(listeners);
@@ -103,10 +110,6 @@ const saveInput = (newItem, type) => {
         
         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
-}
-
-export const newTags = () => {
-    console.log('add new tag');
 }
 
 export const addNewCheck = () => {

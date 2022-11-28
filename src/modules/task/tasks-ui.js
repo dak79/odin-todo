@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { newInput, editInput } from '../todo';
+import { lists } from '../lists/lists';
 
 /**
  * Render tasks
@@ -293,11 +294,14 @@ const descriptionAndTagsUi = (object, labelText, prefix) => {
     label.textContent = labelText;
 
     if (prefix === 'tags') {
+        object.tags.forEach(tag => label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `);
         const select = document.createElement('select');
         setAttributes(select, {
             id: `${object.type}-${prefix}-${object.id}`,
             class: `${object.type}-${prefix}`,
-            name: `${prefix}`
+            name: `${prefix}`,
+            'data-number': `${object.id}`,
+            'data-type': `${prefix}`
         });
         
         const option = document.createElement('option');
@@ -306,13 +310,9 @@ const descriptionAndTagsUi = (object, labelText, prefix) => {
         });
         option.textContent = '-- Choose list --';
         select.appendChild(option);
-        
-        object.tags.forEach(tag => {
-            // if (tag !== 'inbox' && tag !== 'today' && tag !== 'this-week' && tag !== 'anytime' && tag !== 'complete' && tag !== 'late') {
-                // }
-            select.options.add(new Option(tag, tag))
-        });
-        
+
+        updateTagsUi(select);
+         
         return [label, select];
     
     } else {
@@ -434,5 +434,19 @@ export const updatePriorityUi = (task, wrapperMsg, isChanging) => {
         highPriority.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 22.8q-1.25 0-2.137-.887-.888-.888-.888-2.138t.888-2.138q.887-.887 2.137-.887t2.137.9q.888.9.888 2.15t-.888 2.125Q13.25 22.8 12 22.8Zm-2.675-8.1V1.4h5.35v13.3Z"/></svg>`
 
         wrapperMsg.appendChild(highPriority);
+    }
+}
+
+export const updateTagsUi = select => {
+    if (!select) select = selectNode(`select[name='tags']`);
+
+    if (select) {
+        lists.map(list => {
+            console.log(select.options);
+            let opti = Array.from(select.options).map(opt => opt.text);
+            console.log(opti);
+    
+            if(!opti.includes(list.title)) select.options.add(new Option(list.title, list.title))
+        });
     }
 }

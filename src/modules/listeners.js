@@ -34,7 +34,7 @@ export const addExpandListener = event => {
 
     addListeners(expandListeners, `input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', btnsController);
 
-    addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', newTags);
+    addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', btnsController);
 
     addListener(expandListeners, `#checklist-new-btn-${event.target.dataset.number}`, 'click', addNewCheck);
 

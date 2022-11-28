@@ -99,9 +99,12 @@ export const updateItem = (array, id, property, newValue) => {
 export const findItemId = (array, id) => array.find(element => element.id === id);
 
 /**
- * Find an item by name in ana array.
+ * Find an item by name in an array.
  * @param { array } array - Array where to perform search.
  * @param { string } name - Item name to search for.
  * @returns { object|undefined } - Object with this name or undefind.
  */
-export const findItemName = (array, name) => array.find(element => element.title.toLowerCase().trim() === name.toLowerCase().trim());
+export const findItemName = (array, name) => array.find(element => (element.type === 'list') ? element.title.toLowerCase().trim() === name.toLowerCase().trim() : element.toLowerCase().trim() === name.toLowerCase().trim());
+
+
+
