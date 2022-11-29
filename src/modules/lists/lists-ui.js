@@ -1,7 +1,7 @@
 import { createList, cleanNode, selectNode, setAttributes, appendChildren, removeElement } from '../helpers';
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
-import { btnsUi } from '../btns-ui';
+import { btnsUi } from '../ui/btns-ui';
 import { newInput, editInput } from '../todo';
 
 /**

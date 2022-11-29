@@ -1,5 +1,5 @@
 import { checkboxUi } from './checkbox-ui';
-import { appendChildren, setAttributes } from './helpers';
+import { appendChildren, setAttributes } from '../helpers';
 import { btnsUi } from './btns-ui';
 /**
  * 

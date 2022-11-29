@@ -4,7 +4,6 @@ import { findItemId, saveEditInput, updateItem } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists/lists';
 import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './task/tasks';
 import { showMenu } from './menu/menu';
-import { showList } from './lists/lists-handlers';
 import { renderLists, editListUi } from './lists/lists-ui';
 import { editTaskUi, renderTasks, updateTagsUi } from './task/tasks-ui';
 

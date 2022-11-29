@@ -1,5 +1,5 @@
 import './styles/main.css';
 
-import('./modules/ui').then((module) => {
+import('./modules/todo-ui').then((module) => {
     module.renderPage();
 })

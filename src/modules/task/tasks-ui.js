@@ -1,13 +1,13 @@
-import { btnsUi } from '../btns-ui';
+import { btnsUi } from '../ui/btns-ui';
 import { appendChildren, createList, setAttributes, cleanNode, selectNode } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { newInput, editInput } from '../todo';
 import { lists } from '../lists/lists';
-import { checkboxUi } from '../checkbox-ui';
-import { checklistUi } from '../checklist-ui';
-import { radioUi } from '../radio-ui';
+import { checkboxUi } from '../ui/checkbox-ui';
+import { checklistUi } from '../ui/checklist-ui';
+import { radioUi } from '../ui/radio-ui';
 
 /**
  * Render tasks

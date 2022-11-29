@@ -1,4 +1,4 @@
-import { appendChildren, setAttributes } from './helpers';
+import { appendChildren, setAttributes } from '../helpers';
 
 /**
  * Radio buttons and priority UI.

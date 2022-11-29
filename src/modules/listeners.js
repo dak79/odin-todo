@@ -1,4 +1,3 @@
-import { showList } from './lists/lists-handlers';
 import { btnsController, saveNewDescription, priorityValue, newTags, addNewCheck, editChecklist, deleteChecklist } from './handlers';
 import { saveOnEnter } from './helpers';
 import { add } from 'date-fns';

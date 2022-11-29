@@ -1,4 +1,4 @@
-import { setAttributes } from './helpers';
+import { setAttributes } from '../helpers';
 
 /**
  * Create a Checkbox UI

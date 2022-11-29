@@ -1,10 +1,10 @@
 import { appendChildren, setAttributes } from './helpers';
-import { renderHeader } from './header/header-ui';
-import { defaultList } from './lists/lists-default';
+import { renderHeader } from './ui/header-ui';
+import { defaultList } from './default/lists-default';
 import { renderLists } from './lists/lists-ui';
 import { renderMenu } from './menu/menu-ui';
 import { renderTasks } from './task/tasks-ui';
-import { exampleTasks } from './task/tasks-example';
+import { exampleTasks } from './default/tasks-example';
 import { tasks, updateTimeTasks } from './task/tasks';
 import { addAppListeners } from './listeners';
 

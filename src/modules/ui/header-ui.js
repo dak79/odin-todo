@@ -1,5 +1,5 @@
 import { selectNode, appendChildren, setAttributes } from '../helpers';
-import { btnsUi } from '../btns-ui';
+import { btnsUi } from './btns-ui';
 
 /**
  * Render header.
