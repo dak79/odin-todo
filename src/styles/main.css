@@ -468,7 +468,7 @@ select::-ms-expand {
 }
 
 /* a. Input Text Lists */
-.input-text-lists {
+#list-new {
     width: 80%;
     max-height: 80%;
     font-size: 1.5rem;
@@ -479,21 +479,22 @@ select::-ms-expand {
     background-color: var(--slate-300);
 }
 
-#edit-list-title {
+#list-edit {
     grid-area: 1 /1 / 2 / 3;
+    font-size: 1.5rem;
 }
 
 /* b. Input Text Task */
-#edit-task-title,
-#new-task-input {
+#task-edit,
+#task-new {
     font-size: 1rem;
 }
 
-#new-task-input {
+#task-new {
     min-width: 80%;
 }
 
-#edit-task-title {
+#task-edit {
     flex: 1 1 0;
     max-width: 80%;
 }

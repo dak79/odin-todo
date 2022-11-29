@@ -17,9 +17,9 @@ export const addNewList = event => {
     event.stopPropagation();
 
     const instance = new List()
-    const input = newListUi();
+    const input = newListUi(instance);
 
-    return { input, instance };
+    return { node: input, instance };
 }
 
 /**
@@ -29,21 +29,21 @@ export const addNewList = event => {
  * @returns { false|string} false if title is not valid | Valid title
  */
 export const checkListName = item => {
-    if (String(item.input.value) === '') {
+    if (String(item.node.value) === '') {
         renderLists(false);
         return false;
     }
 
-    const newList = new List(String(item.input.value));
-    const listsTitles = findItemName(lists, String(item.input.value))
+    const newList = new List(String(item.node.value));
+    const listsTitles = findItemName(lists, String(item.node.value))
    
     if (listsTitles !== undefined && listsTitles.title.toLowerCase().trim() === newList.title.toLowerCase().trim() || newList.title === 'Already exists') {
-        newListNameError(item.input);
-        item.input.focus();
+        newListNameError(item.node);
+        item.node.focus();
         return false;
     }
     
-    return String(item.input.value);
+    return String(item.node.value);
 }
 
 /**

@@ -28,6 +28,7 @@ import { selectNode, setAttributes } from './helpers';
  * @param { string } newTag - Tag to assign to item.
  */
 export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
+    console.log(node);
     const itemToUpdate = updateItem(array, Number(node.dataset.number), propertyName, newValue)
     
     if (newTag) itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === newTag);
@@ -37,30 +38,7 @@ export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
     return itemToUpdate
 }
 
-/**
- * 
- * @param { string } selectorNode - Node to replace with input field. 
- * @param { string } selectorParentNode  - Parent of previous node.
- * @param { Object } attrs - New input field attributes. 
- * @returns - Input field.
- */
-export const newInput = (selectorNode, selectorParentNode, attrs) => {
-    const input = document.createElement('input');
-    setAttributes(input, attrs);
 
-    const node = selectNode(selectorNode);
-    const parentNode = selectNode(selectorParentNode);
-
-    if (parentNode) {
-        parentNode.replaceChild(input, node);
-    } else {
-        node.appendChild(input)
-    }
-
-    input.focus();
-
-    return input;
-}
 
 /**
  * Find and delete an instance from an array

@@ -3,11 +3,12 @@ import { appendChildren, createList, setAttributes, cleanNode, selectNode } from
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
-import { newInput, editInput } from '../todo';
+import { editInput } from '../todo';
 import { lists } from '../lists/lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
+import { textInputUi, populateDescription, appendTextInput } from '../ui/text-input-ui'
 
 /**
  * Render tasks
@@ -133,7 +134,8 @@ export const expandTaskUi = task => {
         class: 'task-description-wrapper'
     })
 
-    const description = descriptionAndTagsUi(task, 'Description:', 'description');
+    const description = textInputUi(task, 'description', true, 40);
+    
     appendChildren(descriptionWrapper, description);
     
     const priorityWrapper = document.createElement('div');
@@ -164,8 +166,6 @@ export const expandTaskUi = task => {
     appendChildren(checklistWrapper, [checkListBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
-
-    console.log(tasks);
 
     return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper };
 }
@@ -208,22 +208,7 @@ const descriptionAndTagsUi = (object, labelText, prefix) => {
          
         return [label, select];
     
-    } else {
-        const input = document.createElement('input');
-        setAttributes(input, {
-            type: 'text',
-            id: `${object.type}-${prefix}-${object.id}`,
-            class: `input-text`,
-            'data-number':  `${object.id}`,
-            'data-type': 'description'
-        });
-
-        console.log(object.description);
-
-        if (object.description) input.value = object.description;
-        
-        return [label, input];
-    }
+    } 
 }
 
 /**
@@ -245,17 +230,9 @@ export const newTaskUi = newItem => {
     const ul = selectNode('.tasks');
     ul.prepend(li);
 
-    const input = newInput(
-                    `#checkbox-wrapper-${newItem.id} > label`,
-                    `#checkbox-wrapper-${newItem.id}`,
-                    {
-                        type: 'text',
-                        id: 'new-task-input',
-                        class: 'input-text',
-                        name: 'new-task-input',
-                        maxlength: 40
-                    }
-    );
+    const input = textInputUi(newItem, 'new', false, 40);
+    
+    appendTextInput(`#checkbox-wrapper-${newItem.id} > label`, `#checkbox-wrapper-${newItem.id}`, input, false)
 
     return input;
 }
@@ -270,16 +247,9 @@ export const editTaskUi = event => {
     const id = event.target.dataset.number;
 
     const input =  (type === 'task') ? 
-                    editInput(
-                        `#checkbox-wrapper-${event.target.dataset.number} > label`,
-                        `#checkbox-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'text',
-                            id: 'edit-task-title',
-                            class: 'input-text',
-                            name: 'edit-task-title',
-                            maxlength: 40
-                        }) :
+                    textInputUi({type, id}, 'edit', false, 40)
+    
+                    :
                     (type === 'due-date') ? 
                     editInput(
                         `#task-${event.target.dataset.number}-due-date`,
@@ -291,6 +261,7 @@ export const editTaskUi = event => {
                             'data-number': `${event.target.dataset.number}`
                         }) :
                     0;
+    appendTextInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true);
     
     const btn = selectNode(`#${type}-edit-btn-${id}`);
     btn.classList.add('svg-active');

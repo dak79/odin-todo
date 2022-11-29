@@ -2,7 +2,7 @@ import { createList, cleanNode, selectNode, setAttributes, appendChildren, remov
 import { lists } from './lists';
 import { listeners, addAppListeners } from '../listeners';
 import { btnsUi } from '../ui/btns-ui';
-import { newInput, editInput } from '../todo';
+import { textInputUi, appendTextInput } from '../ui/text-input-ui'
 
 /**
  * Render Lists
@@ -71,16 +71,11 @@ const listsBtn = list => {
     return [btnTitle, wrapper];
 }
 
-export const newListUi = () => {
-    
-    const input = newInput('#section-lists', null, {
-        type: 'text',
-        id: 'new-list-title',
-        class: 'input-text input-text-lists',
-        name: 'new-list-title',
-        maxlength: 15
-    });
+export const newListUi = object => {
 
+    const input = textInputUi(object, 'new', false, 15);
+    appendTextInput('#section-lists', null, input, false);
+    
     return input;
 }
 
@@ -90,18 +85,10 @@ export const newListUi = () => {
  * @return { Node } nodes for change list title Ui.
  */
 export const editListUi = event => {
-    const nodes = editInput(
-        `#lists-title-btn-${ event.target.dataset.number }`,
-        `#list-item-lists-${ event.target.dataset.number }`, 
-        { 
-            type: 'text', 
-            id: 'edit-list-title', 
-            class: 'input-text input-text-lists', 
-            name: 'edit-list-title', 
-            maxlength: 15 
-        });
+    const input = textInputUi({type: 'list'}, 'edit', false, 15);
+    const nodes = appendTextInput(`#lists-title-btn-${event.target.dataset.number}`, `#list-item-lists-${event.target.dataset.number}`, input, true);
     
-        removeElement(`#btns-lists-${event.target.dataset.number}`);
+    removeElement(`#btns-lists-${event.target.dataset.number}`);
         
     return nodes;
 }

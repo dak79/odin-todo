@@ -26,19 +26,28 @@ export const btnsController = event => {
         checkboxState(event);
     } else if (btn === 'expand') {
         expandTask(event);
-    } else if (btn === 'edit' || btn === 'new') {
-        const newItem = (btn === 'edit') ? 
-                            (type === 'list') ? editListUi(event) : 
-                            (type === 'task' || type === 'due-date') ? editTaskUi(event) :
-                            0 
-                            :
-                            (type === 'new-list') ? addNewList(event) : 
-                            (type === 'new-task') ? addNewTask(event) : 
-                            0;
+    // } else if (btn === 'edit' || btn === 'new') {
+    //     const newItem = (btn === 'edit') ? 
+    //                         (type === 'list') ? editListUi(event) : 
+    //                         (type === 'task' || type === 'due-date') ? editTaskUi(event) :
+    //                         0 
+    //                         :
+    //                         (type === 'new-list') ? addNewList(event) : 
+    //                         (type === 'new-task') ? addNewTask(event) : 
+    //                         0;
+    //     if (newItem) {
+    //         clearListeners(listeners);
+    //         controllerListener(newItem, type, saveInput);
+    //     }
+    } else if (btn === 'new') {
+        const newItem = (type === 'new-task')  ? addNewTask(event) : addNewList(event);
+
+        console.log(newItem);
         if (newItem) {
             clearListeners(listeners);
-            controllerListener(newItem, type, saveInput);
+            controllerListener(newItem, type, saveInput)
         }
+    
     } else if (btn === 'radio') {
         priorityValue(event);
     } else if (btn === 'item') {
@@ -55,13 +64,13 @@ export const btnsController = event => {
 
 }
 
-const controllerListener = (newData, type, callback) => {
-    console.log(newData, type);
+const controllerListener = (newItem, type, callback) => {
+    console.log(newItem, type);
     if (type === 'due-date') {
-        newData.input.addEventListener('change', () => callback(newData, type));
+        newItem.addEventListener('change', () => callback(newItem, type));
     } else {
-        newData.input.addEventListener('focusout', () => callback(newData, type));
-        newData.input.addEventListener('keyup', saveOnEnter);
+        newItem.node.addEventListener('focusout', () => callback(newItem, type));
+        newItem.node.addEventListener('keyup', saveOnEnter);
     }
     
 }
@@ -75,39 +84,69 @@ const controllerListener = (newData, type, callback) => {
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
-    if (type === 'list' || type === 'new-list') {
-        const newTitle = checkListName(newItem);
-        if (newTitle) {
-            if (type === 'list') {
-                saveEditInput(newItem.output, lists, 'title', String(newTitle), null);
-                updateTagsUi(null);
-            } else {
-                newItem.instance.update('title', String(newTitle))
-                newItem.instance.add(lists);
-                updateTagsUi(null);
-            }
-
+    console.log(newItem, type);
+    if (type === 'new-task') {
+        newItem.instance.add(tasks);
+        newItem.instance.update('title', newItem.node.value);
+        renderTasks(newItem.visualizedOn || 'inbox', false);
+    } else {
+        const newList = checkListName(newItem);
+        
+        if (newList) {
+            newItem.instance.add(lists);
+            newItem.instance.update('title', String(newList));
+            updateTagsUi(null);
+    
             clearListeners(listeners);
             renderLists(false);
-        } 
-    
-    } else if (type === 'task' || type === 'new-task') {
-        const task = (type === 'task') ? saveEditInput(newItem.output, tasks, 'title', newItem.input.value, null) : newItem.instance;
-
-        if (type === 'new-task') {
-            task.add(tasks);
-            task.update('title', newItem.input.value);
         }
-
-        clearListeners(listeners);
-        renderTasks(task.visualizedOn || 'inbox', false);
-
-    } else {
-        const taskToUpdate = saveEditInput(newItem.output, tasks, 'dueDate', new Date(newItem.input.value), 'inbox');
-        
-        renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
 }
+
+
+    //     if (type === 'list' || type === 'new-list') {
+//         const newTitle = checkListName(newItem);
+//         if (newTitle) {
+//             if (type === 'list') {
+//                 saveEditInput(newItem.output, lists, 'title', String(newTitle), null);
+//                 updateTagsUi(null);
+//             } 
+//             
+
+//             clearListeners(listeners);
+//             renderLists(false);
+//         } 
+    
+//     } else if (type === 'task' || type === 'new-task') {
+//         console.log(newItem.dataset.number);
+
+//         if (type === 'task') {
+//             console.log('task');
+//         } else {
+//             console.log('no task')
+//             console.log(Number(newItem.dataset.number))
+//             console.log(findItemId(tasks, Number(newItem.dataset.number)))
+//             console.log(newItem);
+//         }
+//         const task = (type === 'task') ? saveEditInput(newItem, tasks, 'title', newItem.value, null) : findItemId(tasks, Number(newItem.dataset.number));
+
+//         console.log(task);
+
+//         if (type === 'new-task') {
+//             task.add(tasks);
+//             task.update('title', newItem.value);
+//         }
+
+//         clearListeners(listeners);
+//         renderTasks(task.visualizedOn || 'inbox', false);
+
+//     } else {
+//         const taskToUpdate = saveEditInput(newItem.output, tasks, 'dueDate', new Date(newItem.input.value), 'inbox');
+        
+//         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
+//     }
+// }
+
 export const checklistChecked = () => {
     console.log('checked');
 }

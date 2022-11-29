@@ -44,7 +44,7 @@ export const addNewTask = event => {
         clearListeners(listeners);
         addAppListeners();
 
-        return  { input, instance }
+        return {node: input, instance}
 }
 
 /**

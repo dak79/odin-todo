@@ -58,7 +58,7 @@ class ChecklistBase {
     }
 }
 
-export const MyMixin = superclass => class extends superclass {
+const MyMixin = superclass => class extends superclass {
     static id = 0;
     static incrementId() {
         this.id++;
@@ -93,5 +93,13 @@ export class Task extends MyMixin(TaskBase) {
 export class Checklist extends MyMixin(ChecklistBase) {
     constructor(...args) {
         super(...args);
+    }
+}
+
+export class Menu {
+    constructor(id, title) {
+        this.id = id;
+        this.title = title;
+        this.tags = ['menu'];
     }
 }
