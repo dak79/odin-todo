@@ -1,9 +1,12 @@
 import { checkboxUi } from './checkbox-ui';
 import { appendChildren, setAttributes } from './helpers';
 import { btnsUi } from './btns-ui';
-
-// object = task
-// name = checklist
+/**
+ * 
+ * @param { Object } object - Object for retriving data. 
+ * @param { string } name - Part of ids and classes atributes value's.  
+ * @returns { node } Return a fieldset with a checkbox in it.
+ */
 export const checklistUi = (object, name) => {
     const fieldset = document.createElement('fieldset');
     setAttributes(fieldset, {
@@ -51,22 +54,3 @@ export const checklistUi = (object, name) => {
 
     return fieldset;
 }
-
-
-
-
-
-
-
-/**
- * Create checklist and priority Ui.
- * @param { Object } object - Object for retriving data.
- * @param { 'radio'|'checkbox' } type - Radio Button or Checkbox field.
- * @param { string } legendText - Legend text content.
- * @param { string[] } array - Radio names or Checklist label.
- * @param { string|null } radioGroup - Name attribute value's for Radio Buttons.
- * @param { string|null } defaultChecked - Set checked button by default or null for Radio Buttons.
- * @returns { Node } A fieldset with radio buttons or checkboxes. 
- */
-
-        

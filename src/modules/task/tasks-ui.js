@@ -7,6 +7,7 @@ import { newInput, editInput } from '../todo';
 import { lists } from '../lists/lists';
 import { checkboxUi } from '../checkbox-ui';
 import { checklistUi } from '../checklist-ui';
+import { radioUi } from '../radio-ui';
 
 /**
  * Render tasks
@@ -141,8 +142,9 @@ export const expandTaskUi = task => {
         class: 'priority-wrapper'
     });
 
-    const radio = checklistAndPriorityUi(task, 'radio', 'Priority:', ['low', 'medium', 'high'], 'priority', 'medium');
-
+    // const radio = checklistAndPriorityUi(task, 'radio', 'Priority:', ['low', 'medium', 'high'], 'priority', 'medium');
+    
+    const radio = radioUi(task, 'radio', `Priority: `, ['low', 'medium', 'high']);
     priorityWrapper.appendChild(radio);
 
     const tagsWrapper = document.createElement('div');
