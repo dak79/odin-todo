@@ -12,7 +12,7 @@ export const addAppListeners = () => {
     addListeners(listeners, '.menu-btns', 'click', btnsController);
 
     // Lists
-    addListeners(listeners, '.lists-btns', 'click', showList);
+    addListeners(listeners, '.lists-btns', 'click', btnsController);
     addListeners(listeners, '.svg-btns-delete', 'click', btnsController);
     addListeners(listeners, '.svg-btns-edit', 'click', btnsController);
     addListener(listeners, '#new-lists-btn', 'click', btnsController);

@@ -22,11 +22,7 @@ export const btnsController = event => {
     if (btn === 'delete') {
         (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
     } else if (btn === 'title') {
-        if (type === 'menu-title') {
-            showMenu(event);
-        } else {
-            showList(event);
-        }
+        showMenu(event);
     } else if (btn === 'checkbox') {
         checkboxState(event);
     } else if (btn === 'expand') {
@@ -54,8 +50,8 @@ export const btnsController = event => {
 
     if (type === 'tags') {
         newTags(event);
-
     }
+
 }
 
 const controllerListener = (newData, type, callback) => {

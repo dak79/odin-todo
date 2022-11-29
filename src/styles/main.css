@@ -335,12 +335,19 @@ input[type="radio"]:focus {
 }
 
 .checklist-item-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 5fr 3fr;
+    align-items: center;
+    justify-content: start;
+    gap: var(--gap-small);
+}
+
+.checklist-btns-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
-    gap: var(--gap-medium);
-    margin-bottom: 0.5em;
+    justify-content: end;
+    
 }
 
 /* c. Priority Radio Buttons */
@@ -607,4 +614,11 @@ select::-ms-expand {
 .task-btn-wrapper {
     grid-area: 1 / 4 / 1 / 5;
     place-self: center;
+}
+
+.checklist-edit-btn,
+.checklist-delete-btn {
+    
+    height: 3em;
+    background-color: var(--slate-600);
 }

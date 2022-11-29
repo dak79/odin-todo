@@ -149,7 +149,7 @@ export const expandTaskUi = task => {
         class: 'tags-wrapper'
     });
 
-    const tags = descriptionAndTagsUi(task, 'Lists:', 'tags', null, null);
+    const tags = descriptionAndTagsUi(task, `Lists: `, 'tags', null, null);
     appendChildren(tagsWrapper, tags);
 
     const checklistWrapper = document.createElement('div');
@@ -253,11 +253,17 @@ const checklistAndPriorityUi = (object, type, legendText, array, radioGroup, def
             
             if (type === 'checkbox') {
                 console.log(array, object)
+                const checklistBtnsWrapper = document.createElement('span');
+                setAttributes(checklistBtnsWrapper, {
+                    id: `${name}-btns-wrapper-${object.id}-${index}`,
+                    class: 'checklist-btns-wrapper'
+                });
 
                 const btnEditChecklist = btnsUi(object, 'checklist', 'edit', 'btns checklist-edit-btn svg-btns', `Edit checklist: ${object.checklist[index]}`, 'checklist', 'edit', index);
     
                 const btnDeleteChecklist = btnsUi(object, 'checklist', 'delete', 'btns checklist-delete-btn svg-btns', `Delete checklist: ${object.checklist[index]}`, 'checklist', 'delete', index);
-                appendChildren(group, [btnEditChecklist, btnDeleteChecklist])
+                appendChildren(checklistBtnsWrapper, [btnEditChecklist, btnDeleteChecklist])
+                group.appendChild(checklistBtnsWrapper);
             }
         
             
@@ -294,7 +300,7 @@ const descriptionAndTagsUi = (object, labelText, prefix) => {
     label.textContent = labelText;
 
     if (prefix === 'tags') {
-        object.tags.forEach(tag => label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `);
+        object.tags.forEach(tag => label.textContent += `${(tag.charAt(0).toUpperCase() + tag.slice(1)).replace('', ` - `)}`);
         const select = document.createElement('select');
         setAttributes(select, {
             id: `${object.type}-${prefix}-${object.id}`,
