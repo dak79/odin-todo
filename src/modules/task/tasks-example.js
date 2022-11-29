@@ -1,8 +1,8 @@
-import { Task } from '../classes';
+import { Checklist, Task } from '../classes';
 import { tasks, tasksVisualizedOn } from './tasks';
 
 export const exampleTasks = () => {
-    const todoOne = new Task('Go to market', 'Buy fruit and vegetables', new Date('2022-11-04'), 'low', ['Bananas', 'Apples', 'Oranges', 'Tomatoes', 'Potatos', 'Salad', 'Carrots', 'Onions']);
+    const todoOne = new Task('Go to market', 'Buy fruit and vegetables', new Date('2022-11-04'), 'low', [new Checklist('Bananas'), new Checklist('Apples'), new Checklist('Oranges'), new Checklist('Tomatoes'), new Checklist('Potatos'), new Checklist('Salad'), new Checklist('Carrots'), new Checklist('Onions')]);
     todoOne.add(tasks);
     
     const todoTwo = new Task('Organize Meeting', 'Introduce new teammate', new Date('2022-11-10'), 'medium', ['Send invitations', 'Prepare short presentation']);
@@ -14,7 +14,7 @@ export const exampleTasks = () => {
     const todoFour = new Task('ToDo App', 'The Odin Project To Do App', new Date('2023-7-8'), 'low', ['Code Design', 'Classes', 'Ui', 'Logic', 'Set up webpack']);
     todoFour.add(tasks);
 
-    const todoFive = new Task('Passport - Date null control', 'Kaya Passport', null, 'low', ['Print Document', 'Send document by mail']);
+    const todoFive = new Task('Passport - Date null control', 'Kaya Passport', null, 'low', [new Checklist('Print Document'), new Checklist('Send document by mail')]);
     todoFive.add(tasks);
 
     const todoSix = new Task('Call Police - In late control', 'Driving Licence', new Date('2022-10-28'), 'medium', ['Print Document', 'Send document by mail', 'Bring document to police']);

@@ -48,23 +48,30 @@ class ListBase {
     }
 }
 
+class ChecklistBase {
+    constructor(title) {
+        this.constructor.incrementId();
+        this.type= 'checklist';
+        this.id = this.constructor.id;
+        this.title = title;
+        this.complete = false;
+    }
+}
+
 export const MyMixin = superclass => class extends superclass {
     static id = 0;
     static incrementId() {
         this.id++;
     }
 
-    // USED BY LIST AND TASK
     add(array) {
         array.push(this);
     }
     
-    // USED BY LIST AND TASK
     update(key, value) {
         return (key in this) ? this[key] = value : false;
     }
 
-    // USED BY LIST AND TASK
     delete(array) {    
         const index = array.indexOf(this);
         array.splice(index, 1);
@@ -78,6 +85,12 @@ export class List extends MyMixin(ListBase) {
 }
 
 export class Task extends MyMixin(TaskBase) {
+    constructor(...args) {
+        super(...args);
+    }
+}
+
+export class Checklist extends MyMixin(ChecklistBase) {
     constructor(...args) {
         super(...args);
     }

@@ -5,6 +5,7 @@ import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { newInput, editInput } from '../todo';
 import { lists } from '../lists/lists';
+import { checkboxUi } from '../checkbox-ui';
 
 /**
  * Render tasks
@@ -44,7 +45,9 @@ const taskItem = task => {
         class: 'checkbox-wrapper',
     });
 
-    const checkbox = checkboxAndRadioUi(task, 'checkbox', 'checkbox', null, null, null, 'Done/Not Done Checkbox field');
+    // const checkbox = checkboxAndRadioUi(task, 'checkbox', 'checkbox', null, null, null, 'Done/Not Done Checkbox field');
+
+    const checkbox = checkboxUi(task, 'checkbox', 'Task done or not done');
 
     const expandTaskBtn = btnsUi(task, 'task', 'expand', 'btns expand-btn svg-btns', 'Show task details', 'expand-task', 'expand');
     
@@ -191,6 +194,8 @@ export const expandTaskUi = task => {
     'data-btn': `${type}`
     });
 
+    console.log(object);
+
     const label = document.createElement('label');
     setAttributes(label, {
         for: (name === 'checkbox') ? `${object.type}-${type}-${object.id}` : `${name}-${object.id}-${index}`,
@@ -199,7 +204,9 @@ export const expandTaskUi = task => {
         'data-type': `${object.type}`
     });
 
-    (arrayItem) ? label.textContent = arrayItem.charAt(0).toUpperCase() + arrayItem.slice(1) : (object.title) ? label.textContent = `${object.title}` : label.textContent = '';
+    // (arrayItem) ? label.textContent = arrayItem.charAt(0).toUpperCase() + arrayItem.slice(1) : (object.title) ? label.textContent = `${object.title}` : label.textContent = '';
+    (arrayItem) ? label.textContent = arrayItem : (object.title) ? label.textContent = `${object.title}` : label.textContent = '';
+    // (object.title) ? label.textContent = `${object.title}` : label.textContent = '';
     
     (object.complete) ? input.checked = true : input.checked = false;
 
@@ -247,7 +254,8 @@ const checklistAndPriorityUi = (object, type, legendText, array, radioGroup, def
                 class: `${name}-wrapper`
             });
 
-            const checkbox = checkboxAndRadioUi(object, type, name, item, index, radioGroup, (type === 'checkbox') ? 'Done / Not Done checklist check button' : `${item} Radio Button`);
+            console.log(object.checklist)
+            const checkbox = checkboxAndRadioUi(object.checklist, type, name, item, index, radioGroup, (type === 'checkbox') ? 'Done / Not Done checklist check button' : `${item} Radio Button`);
             
             appendChildren(group, checkbox);
             
