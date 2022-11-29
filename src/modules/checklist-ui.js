@@ -1,4 +1,56 @@
+import { checkboxUi } from './checkbox-ui';
+import { appendChildren, setAttributes } from './helpers';
+import { btnsUi } from './btns-ui';
 
+// object = task
+// name = checklist
+export const checklistUi = (object, name) => {
+    const fieldset = document.createElement('fieldset');
+    setAttributes(fieldset, {
+        id: `${name}-fieldset-${object.id}`,
+        class: `${name}-fieldset`
+    });
+
+    const legend = document.createElement('legend');
+    legend.textContent = `${name.charAt(0).toUpperCase() + name.slice(1)}: `;
+
+    const wrapper = document.createElement('div');
+    setAttributes(wrapper, {
+        id: `${name}-wrapper-${object.id}`,
+        class: `${name}s-wrapper`
+    });
+
+    object.checklist.map((item, index) => {
+
+        const group = document.createElement('div');
+        setAttributes(group, {
+                id: `${name}-item-wrapper-${object.id}-${index}`,
+                class: `${name}-item-wrapper`
+            });
+
+        const checkbox = checkboxUi(item, 'item', 'Checklist item done or not done');
+
+        appendChildren(group, checkbox);
+
+        const btnsWrapper = document.createElement('span');
+        setAttributes(btnsWrapper, {
+            id: `${item.type}-btns-wrapper-${item.id}`,
+            class: `${item.type}-btns-wrapper`
+        });
+
+        const btnEditChecklist = btnsUi(item, 'checklist', 'edit', 'btns checklist-edit-btn svg-btns', `Edit checklist: ${item.title}`, 'checklist', 'edit', index);
+
+        const btnDeleteChecklist = btnsUi(item, 'checklist', 'delete', 'btns checklist-delete-btn svg-btns', `Delete checklist: ${item.title}`, 'checklist', 'delete', index);
+        appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist])
+        group.appendChild(btnsWrapper);
+
+        wrapper.appendChild(group);
+    });
+    
+    appendChildren(fieldset, [legend, wrapper]);
+
+    return fieldset;
+}
 
 
 
@@ -16,71 +68,5 @@
  * @param { string|null } defaultChecked - Set checked button by default or null for Radio Buttons.
  * @returns { Node } A fieldset with radio buttons or checkboxes. 
  */
- const checklistAndPriorityUi = (object, type, legendText, array, radioGroup, defaultChecked) => {
 
-    let name = (type === 'checkbox') ? 'checklist' : type;
-    
-    const fieldset = document.createElement('fieldset');
-    setAttributes(fieldset, {
-        id: `${name}-fieldset-${object.id}`,
-        class: `${name}-fieldset`
-    });
-
-    const legend = document.createElement('legend');
-    legend.textContent = legendText;
-
-    const wrapper = document.createElement('div');
-    setAttributes(wrapper, {
-        id: `${name}s-wrapper-${object.id}`,
-        class: `${name}s-wrapper`
-    });
-
-    if (array) {
-        array.forEach((item, index) => {
-            if (typeof item !== 'string') String(item);
-    
-            name = (type === 'checkbox') ? 'checklist-item' : type;
-    
-            const group = document.createElement('div');
-            setAttributes(group, {
-                id: `${name}-wrapper-${object.id}-${index}`,
-                class: `${name}-wrapper`
-            });
-
-            console.log(object.checklist)
-            const checkbox = checkboxAndRadioUi(object.checklist, type, name, item, index, radioGroup, (type === 'checkbox') ? 'Done / Not Done checklist check button' : `${item} Radio Button`);
-            
-            appendChildren(group, checkbox);
-            
-            if (type === 'checkbox') {
-                console.log(array, object)
-                const checklistBtnsWrapper = document.createElement('span');
-                setAttributes(checklistBtnsWrapper, {
-                    id: `${name}-btns-wrapper-${object.id}-${index}`,
-                    class: 'checklist-btns-wrapper'
-                });
-
-                const btnEditChecklist = btnsUi(object, 'checklist', 'edit', 'btns checklist-edit-btn svg-btns', `Edit checklist: ${object.checklist[index]}`, 'checklist', 'edit', index);
-    
-                const btnDeleteChecklist = btnsUi(object, 'checklist', 'delete', 'btns checklist-delete-btn svg-btns', `Delete checklist: ${object.checklist[index]}`, 'checklist', 'delete', index);
-                appendChildren(checklistBtnsWrapper, [btnEditChecklist, btnDeleteChecklist])
-                group.appendChild(checklistBtnsWrapper);
-            }
         
-            
-            if (type === 'radio') {
-                if (object.priority) {
-                    if (object.priority === item) checkbox[0].checked = true;
-                } else {
-                    if (item === defaultChecked) checkbox[0].checked = true;
-                }
-            }
-
-            wrapper.appendChild(group);
-        });
-    }
-
-    appendChildren(fieldset, [legend, wrapper]);
-
-    return fieldset;
-}

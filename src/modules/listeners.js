@@ -1,6 +1,7 @@
 import { showList } from './lists/lists-handlers';
 import { btnsController, saveNewDescription, priorityValue, newTags, addNewCheck, editChecklist, deleteChecklist } from './handlers';
 import { saveOnEnter } from './helpers';
+import { add } from 'date-fns';
 
 export const listeners = [];
 export const expandListeners = [];
@@ -37,6 +38,8 @@ export const addExpandListener = event => {
     addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', btnsController);
 
     addListener(expandListeners, `#checklist-new-btn-${event.target.dataset.number}`, 'click', addNewCheck);
+
+    addListeners(expandListeners, `[data-type='item-state']`, 'change', btnsController)
 
     addListeners(expandListeners, '.checklist-edit-btn', 'click', editChecklist);
     addListeners(expandListeners, '.checklist-delete-btn', 'click', deleteChecklist);

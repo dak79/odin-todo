@@ -6,6 +6,7 @@ import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
 import { newInput, editInput } from '../todo';
 import { lists } from '../lists/lists';
 import { checkboxUi } from '../checkbox-ui';
+import { checklistUi } from '../checklist-ui';
 
 /**
  * Render tasks
@@ -44,8 +45,6 @@ const taskItem = task => {
         id: `checkbox-wrapper-${task.id}`,
         class: 'checkbox-wrapper',
     });
-
-    // const checkbox = checkboxAndRadioUi(task, 'checkbox', 'checkbox', null, null, null, 'Done/Not Done Checkbox field');
 
     const checkbox = checkboxUi(task, 'checkbox', 'Task done or not done');
 
@@ -160,11 +159,13 @@ export const expandTaskUi = task => {
    
     const checkListBtn = btnsUi(task, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
     
-    const checklist = checklistAndPriorityUi(task, 'checkbox', 'Checklist:', task.checklist, null, null);
+    const checklist = checklistUi(task, 'checklist');
     
     appendChildren(checklistWrapper, [checkListBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
+
+    console.log(tasks);
 
     return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper };
 }

@@ -42,6 +42,8 @@ export const btnsController = event => {
         }
     } else if (btn === 'radio') {
         priorityValue(event);
+    } else if (btn === 'item') {
+        checklistChecked(event);
     }
     
     if (type === 'description') {
@@ -107,7 +109,9 @@ const saveInput = (newItem, type) => {
         renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
     }
 }
-
+export const checklistChecked = () => {
+    console.log('checked');
+}
 export const addNewCheck = () => {
     console.log('add new check');
 }
