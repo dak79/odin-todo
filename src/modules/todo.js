@@ -1,46 +1,6 @@
 import { selectNode, setAttributes } from './helpers';
 
 /**
- * 
- * @param { Node } textNode - Node to attach change field. 
- * @param { Object } attrs - Attributes for change fields.
- * @returns { Node[] } - input node / node to update
- */
- export const editInput = (textNode, parentNode, attrs) => {
-    const nodeToUpdate = selectNode(`${textNode}`);
-    const parent = selectNode(parentNode);
-    const input = document.createElement('input');
-    const inputValue = nodeToUpdate.textContent;
-    setAttributes(input, attrs);
-    input.value = inputValue;
-    parent.replaceChild(input, nodeToUpdate);
-    input.focus();
-
-    return { input, output: nodeToUpdate };
-}
-
-/**
- * 
- * @param { node } node - Node to update. 
- * @param { array } array - Array where item to update is.
- * @param { string } propertyName - Property to update.
- * @param { string|Date } newValue - New value for property.
- * @param { string } newTag - Tag to assign to item.
- */
-export const saveEditInput = (node, array, propertyName, newValue, newTag) => {
-    console.log(node);
-    const itemToUpdate = updateItem(array, Number(node.dataset.number), propertyName, newValue)
-    
-    if (newTag) itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === newTag);
-    if (itemToUpdate.type === 'task') itemToUpdate.updateTime();
-    node.remove();
-
-    return itemToUpdate
-}
-
-
-
-/**
  * Find and delete an instance from an array
  * @param { [] } array - Array where instance is.
  * @param { number } id - Id instance to delete.

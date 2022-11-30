@@ -8,7 +8,7 @@ import { lists } from '../lists/lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
-import { textInputUi, populateDescription, appendTextInput } from '../ui/text-input-ui'
+import { textInputUi, populateDescription, appendTextInput, dateInputUi } from '../ui/text-input-ui'
 
 /**
  * Render tasks
@@ -246,27 +246,14 @@ export const editTaskUi = event => {
     const type = event.target.dataset.type;
     const id = event.target.dataset.number;
 
-    const input =  (type === 'task') ? 
-                    textInputUi({type, id}, 'edit', false, 40)
-    
-                    :
-                    (type === 'due-date') ? 
-                    editInput(
-                        `#task-${event.target.dataset.number}-due-date`,
-                        `#due-date-wrapper-${event.target.dataset.number}`,
-                        {
-                            type: 'date',
-                            id: `new-due-date-${event.target.dataset.number}`,
-                            class: 'new-due-date input-text',
-                            'data-number': `${event.target.dataset.number}`
-                        }) :
-                    0;
-    appendTextInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true);
-    
+    const input =  (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
+
+    const newInput = (type === 'task') ? appendTextInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendTextInput(`#task-${id}-due-date`, null, input, true);
+ 
     const btn = selectNode(`#${type}-edit-btn-${id}`);
     btn.classList.add('svg-active');
 
-    return input;
+    return newInput;
 }
 
 export const updatePriorityUi = (task, wrapperMsg, isChanging) => {

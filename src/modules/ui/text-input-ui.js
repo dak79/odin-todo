@@ -48,13 +48,25 @@ export const appendTextInput = (selectorNode, selectorParentNode, input, isEdit)
     
     if (isEdit) {
         input.value = node.textContent;
+        const id = node.dataset.number
         
-        return { input, output: node }
+        return { node: input, id }
     }
 
     return input;
 }
 
+export const dateInputUi = (object) => {
+    const input = document.createElement('input');
+    setAttributes(input, {
+        type: 'date',
+        id: `new-due-date-${object.id}`,
+        class: 'new-due-date input-text',
+        'data-number': `${object.id}`
+    });
+
+    return input;
+}
 
 /**
  * 

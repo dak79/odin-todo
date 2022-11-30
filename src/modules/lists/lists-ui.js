@@ -87,7 +87,7 @@ export const newListUi = object => {
 export const editListUi = event => {
     const input = textInputUi({type: 'list'}, 'edit', false, 15);
     const nodes = appendTextInput(`#lists-title-btn-${event.target.dataset.number}`, `#list-item-lists-${event.target.dataset.number}`, input, true);
-    
+ 
     removeElement(`#btns-lists-${event.target.dataset.number}`);
         
     return nodes;
