@@ -1,11 +1,11 @@
 import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { findItemId, saveEditInput, updateItem } from './todo';
-import { lists, checkListName, deleteList, addNewList } from './lists/lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './task/tasks';
-import { showMenu } from './menu/menu';
-import { renderLists, editListUi } from './lists/lists-ui';
-import { editTaskUi, renderTasks, updateTagsUi } from './task/tasks-ui';
+import { lists, checkListName, deleteList, addNewList } from './lists';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './tasks';
+import { showMenu } from './menu';
+import { renderLists, editListUi } from './ui/lists-ui';
+import { editTaskUi, renderTasks, updateTagsUi } from './ui/tasks-ui';
 
 /**
  * Controller for buttons

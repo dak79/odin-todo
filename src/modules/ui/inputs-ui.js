@@ -34,7 +34,7 @@ export const populateDescription = (object, input) => {
     if (object.description) input.value = object.description;
 }
 
-export const appendTextInput = (selectorNode, selectorParentNode, input, isEdit) => {
+export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => {
     const node = selectNode(selectorNode);
     const parentNode = selectNode(selectorParentNode);
 
@@ -66,23 +66,4 @@ export const dateInputUi = (object) => {
     });
 
     return input;
-}
-
-/**
- * 
- * @param { Node } textNode - Node to attach change field. 
- * @param { Object } attrs - Attributes for change fields.
- * @returns { Node[] } - input node / node to update
- */
- const editInput = (textNode, parentNode, attrs) => {
-    //const nodeToUpdate = selectNode(`${textNode}`);
-    //const parent = selectNode(parentNode);
-    const input = document.createElement('input');
-    const inputValue = nodeToUpdate.textContent;
-    setAttributes(input, attrs);
-    input.value = inputValue;
-    //parent.replaceChild(input, nodeToUpdate);
-    input.focus();
-
-    return { input, output: nodeToUpdate };
 }

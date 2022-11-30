@@ -1,5 +1,5 @@
-import { renderTasks } from '../task/tasks-ui';
-import { clearListeners, listeners } from '../listeners';
+import { renderTasks } from './ui/tasks-ui';
+import { clearListeners, listeners } from './listeners';
 
 export const showMenu = event => {
     const menu = event.target.dataset.name;

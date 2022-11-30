@@ -1,11 +1,11 @@
 import { appendChildren, setAttributes } from './helpers';
 import { renderHeader } from './ui/header-ui';
 import { defaultList } from './default/lists-default';
-import { renderLists } from './lists/lists-ui';
-import { renderMenu } from './menu/menu-ui';
-import { renderTasks } from './task/tasks-ui';
+import { renderLists } from './ui/lists-ui';
+import { renderMenu } from './ui/menu-ui';
+import { renderTasks } from './ui/tasks-ui';
 import { exampleTasks } from './default/tasks-example';
-import { tasks, updateTimeTasks } from './task/tasks';
+import { tasks, updateTimeTasks } from './tasks';
 import { addAppListeners } from './listeners';
 
 export const renderPage = () => {

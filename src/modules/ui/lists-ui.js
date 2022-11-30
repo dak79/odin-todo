@@ -1,8 +1,8 @@
 import { createList, cleanNode, selectNode, setAttributes, appendChildren, removeElement } from '../helpers';
-import { lists } from './lists';
-import { listeners, addAppListeners } from '../listeners';
-import { btnsUi } from '../ui/btns-ui';
-import { textInputUi, appendTextInput } from '../ui/text-input-ui'
+import { lists } from '../lists';
+import { listeners, addAppListeners, clearListeners } from '../listeners';
+import { btnsUi } from './btns-ui';
+import { textInputUi, appendInput } from './inputs-ui'
 
 /**
  * Render Lists
@@ -14,8 +14,10 @@ export const renderLists = isFirstLoad => {
     const displayLists = createListsUi();
     cleanNode(section);
     appendChildren(section, [displayHeader, displayLists]);
-    if (!isFirstLoad) addAppListeners();
-    console.log(listeners);
+    if (!isFirstLoad) {
+        clearListeners(listeners);
+        addAppListeners()
+    }
 }
 
 const listHeader = () => {
@@ -49,7 +51,7 @@ const createListsUi = () => {
 }
 
 /**
- * 
+ * List Ui
  * @param { Object } list - list instance 
  * @returns - Ui for a list instance
  */
@@ -71,22 +73,27 @@ const listsBtn = list => {
     return [btnTitle, wrapper];
 }
 
+/**
+ * New List Ui
+ * @param { Object } object - Object for retriving data. 
+ * @returns { node } An input field for new list.
+ */
 export const newListUi = object => {
 
     const input = textInputUi(object, 'new', false, 15);
-    appendTextInput('#section-lists', null, input, false);
+    appendInput('#section-lists', null, input, false);
     
     return input;
 }
 
 /**
- * Edit list
- * @param { event } event 
- * @return { Node } nodes for change list title Ui.
+ * Edit List Ui
+ * @param { Event } event 
+ * @returns { {Node, Number} } Node for retriving new value and id for update the instance
  */
 export const editListUi = event => {
     const input = textInputUi({type: 'list'}, 'edit', false, 15);
-    const nodes = appendTextInput(`#lists-title-btn-${event.target.dataset.number}`, `#list-item-lists-${event.target.dataset.number}`, input, true);
+    const nodes = appendInput(`#lists-title-btn-${event.target.dataset.number}`, `#list-item-lists-${event.target.dataset.number}`, input, true);
  
     removeElement(`#btns-lists-${event.target.dataset.number}`);
         

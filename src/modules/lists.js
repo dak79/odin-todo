@@ -1,7 +1,7 @@
-import { deleteItem, findItemName } from '../todo';
-import { List } from '../classes';
-import { newListUi, renderLists } from './lists-ui';
-import { clearListeners, listeners } from '../listeners';
+import { deleteItem, findItemName } from './todo';
+import { List } from './classes';
+import { newListUi, renderLists } from './ui/lists-ui';
+import { clearListeners, listeners } from './listeners';
 
 // Lists database
 export const lists = [];

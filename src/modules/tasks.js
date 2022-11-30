@@ -1,8 +1,8 @@
-import { selectNode, selectNodes } from '../helpers';
-import { clearListeners, addAppListeners, addExpandListener, listeners } from '../listeners';
-import { findItemId, deleteItem, updateItem, findItemName } from '../todo';
-import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './tasks-ui';
-import { Task } from '../classes';
+import { selectNode, selectNodes } from './helpers';
+import { clearListeners, addAppListeners, addExpandListener, listeners } from './listeners';
+import { findItemId, deleteItem, updateItem, findItemName } from './todo';
+import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './ui/tasks-ui';
+import { Task } from './classes';
 
 // Tasks database
 export const tasks = [];

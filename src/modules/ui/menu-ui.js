@@ -1,4 +1,4 @@
-import { btnsUi } from '../ui/btns-ui';
+import { btnsUi } from './btns-ui';
 import { selectNode, createList } from '../helpers';
 import { addAppListeners } from '../listeners';
 import { Menu } from '../classes';

@@ -2,13 +2,13 @@ import { btnsUi } from '../ui/btns-ui';
 import { appendChildren, createList, setAttributes, cleanNode, selectNode } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
-import { orderTaskByDate, tasks, tasksVisualizedOn } from './tasks';
+import { orderTaskByDate, tasks, tasksVisualizedOn } from '../tasks';
 import { editInput } from '../todo';
-import { lists } from '../lists/lists';
+import { lists } from '../lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
-import { textInputUi, populateDescription, appendTextInput, dateInputUi } from '../ui/text-input-ui'
+import { textInputUi, populateDescription, appendInput, dateInputUi } from '../ui/inputs-ui'
 
 /**
  * Render tasks
@@ -232,7 +232,7 @@ export const newTaskUi = newItem => {
 
     const input = textInputUi(newItem, 'new', false, 40);
     
-    appendTextInput(`#checkbox-wrapper-${newItem.id} > label`, `#checkbox-wrapper-${newItem.id}`, input, false)
+    appendInput(`#checkbox-wrapper-${newItem.id} > label`, `#checkbox-wrapper-${newItem.id}`, input, false)
 
     return input;
 }
@@ -248,7 +248,7 @@ export const editTaskUi = event => {
 
     const input =  (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
 
-    const newInput = (type === 'task') ? appendTextInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendTextInput(`#task-${id}-due-date`, null, input, true);
+    const newInput = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
  
     const btn = selectNode(`#${type}-edit-btn-${id}`);
     btn.classList.add('svg-active');

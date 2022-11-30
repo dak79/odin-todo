@@ -1,5 +1,5 @@
 import { List } from '../classes';
-import { lists } from '../lists/lists';
+import { lists } from '../lists';
 
 export const defaultList = () => {
     const life = new List('Life');
