@@ -123,18 +123,6 @@ export const expandTask = event => {
         }        
 }
 
-export const saveNewDescription = event => {
-        const task = findItemId(tasks, Numeber(event.target.dataset.number));
-        task.update('description', String(event.target.value));      
-}
-
-export const priorityValue = event => {
-        const task = findItemId(tasks, Number(event.target.dataset.number));
-        task.update('priority', String(event.target.value));
-
-        updatePriorityUi(task, `#task-msg-wrapper-${event.target.dataset.number}`, true);
-}
-
 export const newTags = event => {
         const task = findItemId(tasks, Number(event.target.dataset.number))
         const newTag = String(event.target.value).toLowerCase().trim();

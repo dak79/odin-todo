@@ -2,10 +2,10 @@ import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
 import { findItemId } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './tasks';
+import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, newTags } from './tasks';
 import { showMenu } from './menu';
 import { renderLists, editListUi } from './ui/lists-ui';
-import { editTaskUi, renderTasks, updateTagsUi } from './ui/tasks-ui';
+import { editTaskUi, renderTasks, updatePriorityUi, updateTagsUi } from './ui/tasks-ui';
 
 /**
  * Controller for buttons
@@ -16,8 +16,10 @@ export const btnsController = event => {
     
     const btn = event.target.dataset.btn;
     const type = event.target.dataset.type;
+    const id = event.target.dataset.number;
+    const value = event.target.value;
 
-    console.log(btn, type);
+    console.log(btn, type, id, value);
     if (btn === 'delete') {
         (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
     } 
@@ -53,7 +55,10 @@ export const btnsController = event => {
     }
     
     if (btn === 'radio') {
-        priorityValue(event);
+        const task = findItemId(tasks, Number(id));
+        task.update('priority', String(value));
+        updatePriorityUi(task, `#task-msg-wrapper-${id}`, true);
+        console.log(task.priority)
     } 
     
     if (btn === 'item') {
@@ -61,13 +66,17 @@ export const btnsController = event => {
     }
     
     if (type === 'description') {
-        saveNewDescription(event);
+        const newItem = {
+            instance: findItemId(tasks, Number(id)),
+            value: String(value)
+        }
+
+        saveInput(newItem, type);
     }
 
     if (type === 'tags') {
         newTags(event);
     }
-
 }
 
 const controllerListener = (newItem, type) => {
@@ -113,7 +122,10 @@ const saveInput = (newItem, type) => {
         renderTasks(newItem.visualizedOn || 'inbox', false);
     } 
 
-    
+    if (type === 'description') {
+        newItem.instance.update('description', newItem.value);  
+    }
+
     if (type === 'new-list' || type === 'list') {
         const newList = checkListName(newItem);
 

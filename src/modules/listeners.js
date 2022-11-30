@@ -27,22 +27,22 @@ export const addAppListeners = () => {
 }
 
 export const addExpandListener = event => {
-    console.log(event.target.dataset.number)
-    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'focusout', btnsController);
-    addListener(expandListeners, `#task-description-${event.target.dataset.number}`, 'keyup', saveOnEnter);
+    const id = event.target.dataset.number
+    console.log(id)
+    
+    addListener(expandListeners, `#task-description-${id}`, 'focusout', btnsController);
+    addListener(expandListeners, `#task-description-${id}`, 'keyup', saveOnEnter);
 
-    addListeners(expandListeners, `input[type='radio'][name='priority-${event.target.dataset.number}']`, 'change', btnsController);
+    addListeners(expandListeners, `input[type='radio'][name='priority-${id}']`, 'change', btnsController);
 
-    addListener(expandListeners, `#task-tags-${event.target.dataset.number}`, 'change', btnsController);
+    addListener(expandListeners, `#task-tags-${id}`, 'change', btnsController);
 
-    addListener(expandListeners, `#checklist-new-btn-${event.target.dataset.number}`, 'click', addNewCheck);
+    addListener(expandListeners, `#checklist-new-btn-${id}`, 'click', addNewCheck);
 
     addListeners(expandListeners, `[data-type='item-state']`, 'change', btnsController)
 
     addListeners(expandListeners, '.checklist-edit-btn', 'click', editChecklist);
     addListeners(expandListeners, '.checklist-delete-btn', 'click', deleteChecklist);
-
-
 }
 
 
