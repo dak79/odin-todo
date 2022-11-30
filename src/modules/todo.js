@@ -1,5 +1,3 @@
-import { selectNode, setAttributes } from './helpers';
-
 /**
  * Find and delete an instance from an array
  * @param { [] } array - Array where instance is.
@@ -11,21 +9,6 @@ export const deleteItem = (array, id) => {
     itemToDelete.delete(array, id);
 
     return itemToDelete;
-}
-
-/**
- * Find and update instance.
- * @param { [] } array - Array where instance is.
- * @param { number } id - Id instance to update
- * @param { string } property - Property to update. 
- * @param { string } newValue - New value for property
- * @returns Instance to update.
- */
-export const updateItem = (array, id, property, newValue) => {
-    const itemToUpdate = findItemId(array, Number(id));
-    itemToUpdate.update(property, newValue);
-
-    return itemToUpdate;
 }
 
 /**

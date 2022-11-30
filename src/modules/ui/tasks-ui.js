@@ -3,12 +3,11 @@ import { appendChildren, createList, setAttributes, cleanNode, selectNode } from
 import { format } from 'date-fns';
 import { addAppListeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from '../tasks';
-import { editInput } from '../todo';
 import { lists } from '../lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
-import { textInputUi, populateDescription, appendInput, dateInputUi } from '../ui/inputs-ui'
+import { textInputUi, appendInput, dateInputUi } from '../ui/inputs-ui'
 
 /**
  * Render tasks

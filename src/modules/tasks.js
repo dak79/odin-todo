@@ -1,6 +1,6 @@
-import { selectNode, selectNodes } from './helpers';
+import { selectNode } from './helpers';
 import { clearListeners, addAppListeners, addExpandListener, listeners } from './listeners';
-import { findItemId, deleteItem, updateItem, findItemName } from './todo';
+import { findItemId, deleteItem, findItemName } from './todo';
 import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './ui/tasks-ui';
 import { Task } from './classes';
 
@@ -69,7 +69,8 @@ export const deleteDate = event => {
 
         const id = event.target.dataset.number;
 
-        const itemToUpdate = updateItem(tasks, id, 'dueDate', null);
+        const itemToUpdate = findItemId(tasks, Number(id));
+        itemToUpdate.update('dueDate', null);
         clearListeners(listeners);
         itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === 'inbox');
         itemToUpdate.updateTime();
@@ -81,11 +82,12 @@ export const deleteDate = event => {
  * @param { event } event 
  */
 export const checkboxState = event => {
-    const data = event.target.dataset.number;
-    const checkbox = selectNode(`#task-checkbox-${data}`);
+    const id = event.target.dataset.number;
+    const checkbox = selectNode(`#task-checkbox-${id}`);
 
     const isCompleted = checkbox.checked ? true : false;
-    const task = updateItem(tasks, Number(data), 'complete', isCompleted);
+    const task = findItemId(tasks, Numeber(id));
+    task.update('complete', isCompleted);
     const desk = isCompleted ? task.visualizedOn : 'complete';
     
     if (isCompleted) {
@@ -102,7 +104,6 @@ export const checkboxState = event => {
 }
 
 export const expandTask = event => {
-        console.log(event.target);
         const task = findItemId(tasks, Number(event.target.dataset.number));
         task.expanded = task.expanded ? false : true;
         const hook = selectNode(`#list-item-task-${event.target.dataset.number}`);
@@ -123,21 +124,16 @@ export const expandTask = event => {
 }
 
 export const saveNewDescription = event => {
-        updateItem(tasks, Number(event.target.dataset.number), 'description', String(event.target.value))
-    
-        console.log(tasks);
-        
+        const task = findItemId(tasks, Numeber(event.target.dataset.number));
+        task.update('description', String(event.target.value));      
 }
 
 export const priorityValue = event => {
-        console.log(event.target.value, event.target.dataset.number);
-        updateItem(tasks, Number(event.target.dataset.number), 'priority', String(event.target.value));
-
         const task = findItemId(tasks, Number(event.target.dataset.number));
+        task.update('priority', String(event.target.value));
 
         updatePriorityUi(task, `#task-msg-wrapper-${event.target.dataset.number}`, true);
-
-    }
+}
 
 export const newTags = event => {
         const task = findItemId(tasks, Number(event.target.dataset.number))
@@ -150,7 +146,7 @@ export const newTags = event => {
         }
     }
 
-export const updateNewTagUi = (event, task, tag) => {
+const updateNewTagUi = (event, task, tag) => {
         const label = selectNode(`label[for='task-tags-${task.id}']`);
         label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `;
 }

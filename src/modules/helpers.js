@@ -14,8 +14,6 @@ export const appendChildren = (parent, children) => children.forEach(child => pa
  */
 export const setAttributes = (element, attributes) => Object.keys(attributes).forEach(attr => element.setAttribute(attr, attributes[attr]));
 
-
-
 /**
  * Create an unordered list
  * @param { [] } array - Array with items to transform in unordered list 

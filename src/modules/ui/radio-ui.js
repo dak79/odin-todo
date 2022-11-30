@@ -70,7 +70,7 @@ export const radioUi = (object, name, legendText, radioLabels) => {
  * @param { node } label - Label to update.
  * @param { node } input - Input 
  */
-export const populateRadio = (object, label, input) => {
+const populateRadio = (object, label, input) => {
     if (object.priority) {
         if (object.priority === label) {
             input.checked = true;

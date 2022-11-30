@@ -1,6 +1,6 @@
 import { clearListeners, listeners } from './listeners';
 import { saveOnEnter } from './helpers';
-import { findItemId, saveEditInput, updateItem } from './todo';
+import { findItemId } from './todo';
 import { lists, checkListName, deleteList, addNewList } from './lists';
 import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, saveNewDescription, priorityValue, newTags } from './tasks';
 import { showMenu } from './menu';

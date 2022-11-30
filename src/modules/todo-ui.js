@@ -5,7 +5,7 @@ import { renderLists } from './ui/lists-ui';
 import { renderMenu } from './ui/menu-ui';
 import { renderTasks } from './ui/tasks-ui';
 import { exampleTasks } from './default/tasks-example';
-import { tasks, updateTimeTasks } from './tasks';
+import { updateTimeTasks } from './tasks';
 import { addAppListeners } from './listeners';
 
 export const renderPage = () => {

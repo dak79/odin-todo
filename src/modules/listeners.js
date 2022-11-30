@@ -1,6 +1,5 @@
-import { btnsController, saveNewDescription, priorityValue, newTags, addNewCheck, editChecklist, deleteChecklist } from './handlers';
+import { btnsController, addNewCheck, editChecklist, deleteChecklist } from './handlers';
 import { saveOnEnter } from './helpers';
-import { add } from 'date-fns';
 
 export const listeners = [];
 export const expandListeners = [];

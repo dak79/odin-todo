@@ -30,8 +30,16 @@ export const textInputUi = (object, name, withLabel ,maxLength) => {
     return input;
 }
 
-export const populateDescription = (object, input) => {
-    if (object.description) input.value = object.description;
+export const dateInputUi = (object) => {
+    const input = document.createElement('input');
+    setAttributes(input, {
+        type: 'date',
+        id: `new-due-date-${object.id}`,
+        class: 'new-due-date input-text',
+        'data-number': `${object.id}`
+    });
+
+    return input;
 }
 
 export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => {
@@ -56,14 +64,6 @@ export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => 
     return input;
 }
 
-export const dateInputUi = (object) => {
-    const input = document.createElement('input');
-    setAttributes(input, {
-        type: 'date',
-        id: `new-due-date-${object.id}`,
-        class: 'new-due-date input-text',
-        'data-number': `${object.id}`
-    });
-
-    return input;
+const populateDescription = (object, input) => {
+    if (object.description) input.value = object.description;
 }
