@@ -1,6 +1,5 @@
 import { findItemId, findItemName, selectNode } from './helpers';
 import { addExpandListener } from './listeners';
-import { deleteItem } from './todo';
 import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
 import { Task } from './classes';
 
@@ -45,35 +44,7 @@ export const addNewTask = event => {
 }
 
 /**
- * Delete task.
- * @param { event } event 
- */
-export const deleteTask = event => {
-        event.stopPropagation();
-
-        const id = event.target.dataset.number;
-        const itemToDelete = deleteItem(tasks, id);
-        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
-}
-
-/**
- * Delete due date.
- * @param { event } event 
- */
-export const deleteDate = event => {
-        event.stopPropagation();
-
-        const id = event.target.dataset.number;
-
-        const itemToUpdate = findItemId(tasks, Number(id));
-        itemToUpdate.update('dueDate', null);
-        itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === 'inbox');
-        itemToUpdate.updateTime();
-        renderTasks(itemToUpdate.visualizedOn || 'inbox', false);
-}
-
-/**
- * Checkbox State
+ * Checkbox State.
  * @param { event } event 
  */
 export const checkboxState = event => {

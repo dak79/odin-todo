@@ -48,7 +48,7 @@ export const dateInputUi = object => {
         class: 'new-due-date input-text',
         'data-number': `${object.id}`
     });
-textInputUi()
+
     return input;
 }
 

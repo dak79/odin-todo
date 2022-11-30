@@ -250,8 +250,10 @@ export const newTaskUi = newItem => {
  * @returns { Node } - Input for edit task
  */
 export const editTaskUi = event => {
+    console.log(event.target)
     const type = event.target.dataset.type;
     const id = event.target.dataset.number;
+
 
     const input =  (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
 

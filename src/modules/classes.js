@@ -36,6 +36,13 @@ class TaskBase {
 
         if (isBefore(this.dueDate, new Date()) && (this.dueDate) && (!this.tags.find(tag => tag === 'late' || tag === 'today'))) this.addTag('late');
     }
+
+    deleteTimeTags() {
+        this.tags.map(tag => { 
+            if (tag === 'today' || tag === 'this-week' || tag === 'anytime' || tag === 'late') this.deleteTag(tag);
+        })
+
+    }
 }
 
 class ListBase {

@@ -1,4 +1,3 @@
-import { deleteItem } from './todo';
 import { List } from './classes';
 import { newListUi, renderLists } from './ui/lists-ui';
 import { findItemName } from './helpers';
@@ -60,17 +59,4 @@ const newListNameError = element => {
         element.removeEventListener('keydown', cancelText);
         element.classList.remove('input-text-lists-error');
     }
-}
-
-/**
- * Delete List
- * @param { event } event 
- */
-export const deleteList = event => {
-    event.stopPropagation();
-
-    const id = event.target.dataset.number;
-
-    deleteItem(lists, id);
-    renderLists(false);
 }

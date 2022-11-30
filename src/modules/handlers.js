@@ -1,6 +1,6 @@
 import { saveOnEnter, findItemId } from './helpers';
-import { lists, checkListName, deleteList, addNewList } from './lists';
-import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, newTags } from './tasks';
+import { lists, checkListName, addNewList } from './lists';
+import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi, updateTagsUi } from './ui/tasks-ui';
 
@@ -19,7 +19,7 @@ export const eventController = event => {
 
     console.log(btn, type, id, value, desk);
     if (btn === 'delete') {
-        (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
+        deleteItem(event, id, type);
     } 
     
     if (btn === 'title') {
@@ -107,9 +107,7 @@ const saveInput = (newItem, type) => {
                 taskToUpdate.update('title', String(newItem.node.value));
             } else {
                 taskToUpdate.update('dueDate', new Date(newItem.node.value));
-                taskToUpdate.tags.map(tag => {
-                    if (tag === 'today' || tag === 'this-week' || tag === 'anytime' || tag === 'late') taskToUpdate.deleteTag(tag);
-                })
+                taskToUpdate.deleteTimeTags();
                 taskToUpdate.updateTime();
             }
         }
@@ -138,6 +136,28 @@ const saveInput = (newItem, type) => {
             updateTagsUi(null);
             renderLists(false);
         }
+    }
+}
+
+const deleteItem = (event, id, type) => {
+    event.stopPropagation();
+    const array = (type === 'list') ? lists : tasks
+    const itemToDelete = findItemId(array, Number(id));
+   
+    if (type === 'task' || type === 'list') {
+        itemToDelete.delete(array);
+    }
+
+    if (type === 'due-date') {
+        itemToDelete.update('dueDate', null);
+        itemToDelete.deleteTimeTags();
+        itemToDelete.updateTime();
+    }
+
+    if (type === 'list') {
+        renderLists(false);
+    } else {
+        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
     }
 }
 
