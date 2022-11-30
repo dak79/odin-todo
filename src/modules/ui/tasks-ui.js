@@ -7,6 +7,7 @@ import { lists } from '../lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
+import { tagsUi } from './select-ui';
 import { textInputUi, appendInput, dateInputUi } from '../ui/inputs-ui'
 
 /**
@@ -160,7 +161,7 @@ export const expandTaskUi = task => {
         class: 'tags-wrapper'
     });
 
-    const tags = descriptionAndTagsUi(task, `Lists: `, 'tags', null, null);
+    const tags = tagsUi(task, 'tags', `Lists: `);
     appendChildren(tagsWrapper, tags);
 
     const checklistWrapper = document.createElement('div');
@@ -175,47 +176,6 @@ export const expandTaskUi = task => {
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
     return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper };
-}
-
-
-/**
- * Create description and tags Ui.
- * @param { {} } object - Object for retriving data.
- * @param { string } labelText - Label Text Content 
- * @param { string } prefix - For Id, Class, Name attributes.
- * @returns { Node[] } Array with label and select|input nodes.
- */
-const descriptionAndTagsUi = (object, labelText, prefix) => {
-    const label = document.createElement('label');
-    setAttributes(label, {
-        for: `${object.type}-${prefix}-${object.id}`,
-        class: `${object.type}-${prefix}-label`
-    });
-    label.textContent = labelText;
-
-    if (prefix === 'tags') {
-        object.tags.forEach(tag => label.textContent += `${(tag.charAt(0).toUpperCase() + tag.slice(1)).replace('', ` - `)}`);
-        const select = document.createElement('select');
-        setAttributes(select, {
-            id: `${object.type}-${prefix}-${object.id}`,
-            class: `${object.type}-${prefix}`,
-            name: `${prefix}`,
-            'data-number': `${object.id}`,
-            'data-type': `${prefix}`
-        });
-        
-        const option = document.createElement('option');
-        setAttributes(option, {
-            value: ""
-        });
-        option.textContent = '-- Choose list --';
-        select.appendChild(option);
-
-        updateTagsUi(select);
-         
-        return [label, select];
-    
-    } 
 }
 
 /**
@@ -250,7 +210,7 @@ export const newTaskUi = newItem => {
  * @returns { Node } - Input for edit task
  */
 export const editTaskUi = (id, type) => {
-    
+
     const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
 
     const newInput = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
