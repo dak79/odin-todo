@@ -249,13 +249,9 @@ export const newTaskUi = newItem => {
  * @param { event } event 
  * @returns { Node } - Input for edit task
  */
-export const editTaskUi = event => {
-    console.log(event.target)
-    const type = event.target.dataset.type;
-    const id = event.target.dataset.number;
-
-
-    const input =  (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
+export const editTaskUi = (id, type) => {
+    
+    const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
 
     const newInput = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
  

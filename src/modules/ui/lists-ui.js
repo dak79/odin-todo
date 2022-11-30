@@ -91,11 +91,12 @@ export const newListUi = object => {
  * @param { Event } event 
  * @returns { {Node, Number} } Node for retriving new value and id for update the instance
  */
-export const editListUi = event => {
-    const input = textInputUi({type: 'list'}, 'edit', false, 15);
-    const nodes = appendInput(`#lists-title-btn-${event.target.dataset.number}`, `#list-item-lists-${event.target.dataset.number}`, input, true);
+export const editListUi = (id, type) => {
+    console.log(type)
+    const input = textInputUi({type}, 'edit', false, 15);
+    const nodes = appendInput(`#lists-title-btn-${id}`, `#list-item-lists-${id}`, input, true);
  
-    removeElement(`#btns-lists-${event.target.dataset.number}`);
+    removeElement(`#btns-lists-${id}`);
         
     return nodes;
 }

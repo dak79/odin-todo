@@ -27,11 +27,11 @@ export const eventController = event => {
     } 
     
     if (btn === 'checkbox') {
-        checkboxState(event);
+        checkboxState(id);
     } 
     
     if (btn === 'expand') {
-        expandTask(event);
+        expandTask(id);
     }
 
     if (btn === 'new') {
@@ -41,7 +41,7 @@ export const eventController = event => {
     }
 
     if (btn === 'edit') {
-        const newItem = (type === 'list') ? editListUi(event) : editTaskUi(event);
+        const newItem = (type === 'list') ? editListUi(id, type) : editTaskUi(id, type);
 
         if (newItem) newInputListeners(newItem, type)  
     }
@@ -94,7 +94,6 @@ const newInputListeners = (newItem, type) => {
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
-    console.log(newItem, type);
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);

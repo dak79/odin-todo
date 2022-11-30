@@ -26,10 +26,8 @@ export const addAppListeners = () => {
     addListeners(listeners, '.task-delete-btn', 'click', eventController);
 }
 
-export const addExpandListener = event => {
-    const id = event.target.dataset.number
-    console.log(id)
-    
+export const addExpandListener = id => {
+
     addListener(expandListeners, `#task-description-${id}`, 'focusout', eventController);
     addListener(expandListeners, `#task-description-${id}`, 'keyup', saveOnEnter);
 

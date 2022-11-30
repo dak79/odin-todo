@@ -45,10 +45,9 @@ export const addNewTask = event => {
 
 /**
  * Checkbox State.
- * @param { event } event 
+ * @param { number } id - Task id. 
  */
-export const checkboxState = event => {
-    const id = event.target.dataset.number;
+export const checkboxState = id => {
     const checkbox = selectNode(`#task-checkbox-${id}`);
 
     const isCompleted = checkbox.checked ? true : false;
@@ -58,7 +57,8 @@ export const checkboxState = event => {
     
     if (isCompleted) {
         task.addTag('complete');
-        task.tags = task.tags.filter(tag => tag === 'complete');
+        task.deleteTag('inbox');
+        task.deleteTimeTags();
     } else {
         task.deleteTag('complete');
         task.addTag('inbox');
@@ -70,11 +70,10 @@ export const checkboxState = event => {
 
 /**
  * Expand task.
- * @param { event } event 
+ * @param { number } id - Task id. 
  */
-export const expandTask = event => {
-        const id = event.target.dataset.number;
-
+export const expandTask = id => {
+        
         const task = findItemId(tasks, Number(id));
         task.expanded = task.expanded ? false : true;
         const hook = selectNode(`#list-item-task-${id}`);
@@ -84,7 +83,7 @@ export const expandTask = event => {
                 hook.classList.add('expand-btn-up');
                 const nodes = expandTaskUi(task);
                 hook.appendChild(nodes.wrapper);
-                addExpandListener(event);
+                addExpandListener(id);
                 
         } else {
                 hook.classList.remove('expand-btn-up');
