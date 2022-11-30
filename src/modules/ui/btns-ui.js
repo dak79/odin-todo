@@ -2,7 +2,7 @@ import { setAttributes } from '../helpers';
  
 /**
  * 
- * @param { {}|null } object - Object for retriving data: task, list, menu.
+ * @param { {}|null } object - Object for retriving data.
  * @param { 'task'|'due-date'|'lists'|'menu'|'checklist' } name - Part of id's value.
  * @param { 'expand'|'delete'|'edit'|'title'|'new' } type - Button type. 
  * @param { string } classNames - Class or space-separated list of classes

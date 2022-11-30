@@ -1,17 +1,14 @@
 import { btnsUi } from './btns-ui';
 import { selectNode, createList } from '../helpers';
-import { addAppListeners } from '../listeners';
 import { Menu } from '../classes';
 
 /**
  * Render navigation menu.
- * @param { boolean } isFirstLoad - Check if it is first load for page.
  */
-export const renderMenu = isFirstLoad => {
+export const renderMenu = () => {
     const nav = selectNode('#nav-menu')
     const menu = createMenu();
     nav.appendChild(menu);
-    if (!isFirstLoad) addAppListeners();
 }
 
 const createMenu = () => {
@@ -22,7 +19,7 @@ const createMenu = () => {
 
 /**
  * Create menu buttons.
- * @param { Object } desk - Desk button.
+ * @param { {} } desk - Desk button.
  * @property { string } title - Desk name. 
  * @returns { HTMLElement } - Button
  */

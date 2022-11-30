@@ -1,31 +1,29 @@
-import { clearListeners, listeners } from './listeners';
-import { saveOnEnter } from './helpers';
-import { findItemId } from './todo';
+import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, deleteList, addNewList } from './lists';
 import { tasks, deleteTask, deleteDate, addNewTask, checkboxState, expandTask, newTags } from './tasks';
-import { showMenu } from './menu';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi, updateTagsUi } from './ui/tasks-ui';
 
 /**
- * Controller for buttons
+ * Controller for events.
  * @param { event } event 
  */
-export const btnsController = event => {
+export const eventController = event => {
     event.stopPropagation();
     
     const btn = event.target.dataset.btn;
     const type = event.target.dataset.type;
     const id = event.target.dataset.number;
     const value = event.target.value;
+    const desk = event.target.dataset.name;
 
-    console.log(btn, type, id, value);
+    console.log(btn, type, id, value, desk);
     if (btn === 'delete') {
         (type === 'list') ? deleteList(event) : (type === 'task') ? deleteTask(event) : (type === 'due-date') ? deleteDate(event) : 0;
     } 
     
     if (btn === 'title') {
-        showMenu(event);
+        renderTasks(desk, false);
     } 
     
     if (btn === 'checkbox') {
@@ -37,28 +35,21 @@ export const btnsController = event => {
     }
 
     if (btn === 'new') {
-        const newItem = (type === 'new-task')  ? addNewTask(event) : addNewList(event);
+        const newItem = (type === 'new-task') ? addNewTask(event) : addNewList(event);
 
-        if (newItem) {
-            clearListeners(listeners);
-            controllerListener(newItem, type)
-        }
+        if (newItem) newInputListeners(newItem, type) 
     }
 
     if (btn === 'edit') {
         const newItem = (type === 'list') ? editListUi(event) : editTaskUi(event);
 
-        if (newItem) {
-            clearListeners(listeners);
-            controllerListener(newItem, type)
-        }
+        if (newItem) newInputListeners(newItem, type)  
     }
     
     if (btn === 'radio') {
         const task = findItemId(tasks, Number(id));
         task.update('priority', String(value));
         updatePriorityUi(task, `#task-msg-wrapper-${id}`, true);
-        console.log(task.priority)
     } 
     
     if (btn === 'item') {
@@ -79,8 +70,12 @@ export const btnsController = event => {
     }
 }
 
-const controllerListener = (newItem, type) => {
-    console.log(newItem, type);
+/**
+ * Add listeners to new input fields
+ * @param { {} } newItem - Object for retriving data. 
+ * @param { string } type - Value of data-type 
+ */
+const newInputListeners = (newItem, type) => {
     if (type === 'due-date') {
         newItem.node.addEventListener('change', () => saveInput(newItem, type));
     } else {
@@ -91,11 +86,11 @@ const controllerListener = (newItem, type) => {
 }
 
 /**
- * Save new item or update an old one.
- * @param { Object } newItem - New item to save.
- * @property { Node } input - New item input node.
- * @property { Node } output - New item output node.
- * @property { Object } instance - New item instance: list|task. 
+ * Save or update new input text or input date.
+ * @param { {} } newItem - New item to save.
+ * @property { Node } node - New item input node.
+ * @property { Object } instance - New item instance. 
+ * @property { number } id - New item instance id.
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
@@ -141,7 +136,6 @@ const saveInput = (newItem, type) => {
             }
             
             updateTagsUi(null);
-            clearListeners(listeners);
             renderLists(false);
         }
     }

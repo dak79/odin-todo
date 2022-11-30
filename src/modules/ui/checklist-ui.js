@@ -2,8 +2,8 @@ import { checkboxUi } from './checkbox-ui';
 import { appendChildren, setAttributes } from '../helpers';
 import { btnsUi } from './btns-ui';
 /**
- * 
- * @param { Object } object - Object for retriving data. 
+ * Create checklist Ui
+ * @param { {} } object - Object for retriving data. 
  * @param { string } name - Part of ids and classes atributes value's.  
  * @returns { node } Return a fieldset with a checkbox in it.
  */

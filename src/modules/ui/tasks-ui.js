@@ -1,7 +1,7 @@
 import { btnsUi } from '../ui/btns-ui';
 import { appendChildren, createList, setAttributes, cleanNode, selectNode } from '../helpers';
 import { format } from 'date-fns';
-import { addAppListeners } from '../listeners';
+import { addAppListeners, clearListeners, listeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from '../tasks';
 import { lists } from '../lists';
 import { checkboxUi } from '../ui/checkbox-ui';
@@ -20,7 +20,10 @@ export const renderTasks = (desk, isFirstLoad) => {
     const displayTasks = createTasksUi(desk);
     cleanNode(section);
     section.appendChild(displayTasks);
-    if (!isFirstLoad) addAppListeners();
+    if (!isFirstLoad) {
+        clearListeners(listeners);
+        addAppListeners();
+    }
     tasksVisualizedOn(desk);
 }
 
@@ -31,7 +34,7 @@ const createTasksUi = desk => {
 
 /**
  * Task Ui
- * @param { Object } task - Task instance.
+ * @param { {}} task - Task instance.
  * @property { number } id - Task id.
  * @property { string } type - Task type.
  * @property { string } title - Task title.
@@ -119,6 +122,11 @@ const taskItem = task => {
     return [wrapperCheck, wrapperDueDate, wrapperMsg, wrapperBtns];
 }
 
+/**
+ * Create expanded section for task
+ * @param { {} } task Object task for retriving data. 
+ * @returns { Node{} } - An object with all nodes of expanded section of tasks.
+ */
 export const expandTaskUi = task => {
 
     const wrapper = document.createElement('div');
@@ -172,7 +180,7 @@ export const expandTaskUi = task => {
 
 /**
  * Create description and tags Ui.
- * @param { Object } object - Object for retriving data.
+ * @param { {} } object - Object for retriving data.
  * @param { string } labelText - Label Text Content 
  * @param { string } prefix - For Id, Class, Name attributes.
  * @returns { Node[] } Array with label and select|input nodes.
@@ -212,7 +220,7 @@ const descriptionAndTagsUi = (object, labelText, prefix) => {
 
 /**
  * New task Ui
- * @param { Object } newItem - Task instance.
+ * @param { {} } newItem - Task instance.
  * @property { number } id - Task.id.
  * @returns { Node } - Input for new task.
  */
@@ -287,6 +295,11 @@ export const updatePriorityUi = (task, wrapperMsg, isChanging) => {
     }
 }
 
+
+/**
+ * Populate and update task tags
+ * @param { Node } select - Select HTMLElement
+ */
 export const updateTagsUi = select => {
     if (!select) select = selectNode(`select[name='tags']`);
 

@@ -1,5 +1,5 @@
 /**
- * 
+ * Append multiple child to a parent node.
  * @param { Node } parent 
  * @param { Array.Node } children 
  * @returns - Append all children
@@ -7,9 +7,9 @@
 export const appendChildren = (parent, children) => children.forEach(child => parent.appendChild(child));
 
 /**
- * 
- * @param { HTML element } element 
- * @param { Object } attributes 
+ * Set multiple attributes for an HTML element.
+ * @param { HTMLElement } element 
+ * @param { {} } attributes 
  * @returns - Set attributes to given element
  */
 export const setAttributes = (element, attributes) => Object.keys(attributes).forEach(attr => element.setAttribute(attr, attributes[attr]));
@@ -48,6 +48,22 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
     
     return list;
 }
+
+/**
+ * Find an item by id in an array.
+ * @param { array } array - Array where to perform search.
+ * @param { number } id - Item id to serch for. 
+ * @returns { object|undefined } - Object with this id or undefined.
+ */
+export const findItemId = (array, id) => array.find(element => element.id === id);
+
+/**
+ * Find an item by name in an array.
+ * @param { array } array - Array where to perform search.
+ * @param { string } name - Item name to search for.
+ * @returns { object|undefined } - Object with this name or undefind.
+ */
+export const findItemName = (array, name) => array.find(element => (element.type === 'list') ? element.title.toLowerCase().trim() === name.toLowerCase().trim() : element.toLowerCase().trim() === name.toLowerCase().trim());
 
 export const selectNode = selector => document.querySelector(selector);
 export const selectNodes = selector => document.querySelectorAll(selector);

@@ -1,9 +1,14 @@
 import { setAttributes, selectNode } from '../helpers';
 
-
-// object = task
-// name = description
-export const textInputUi = (object, name, withLabel ,maxLength) => {
+/**
+ * Create a text input field
+ * @param { {} } object - Object for retriving data. 
+ * @param { string } name - Part of ids and data-type values. 
+ * @param { boolean } withLabel - Create  / Do not create a label. 
+ * @param { number } maxLength - Max Length attribute value's.
+ * @returns { node|node[] } - An input field|a label and an input field.
+ */
+export const textInputUi = (object, name, withLabel, maxLength) => {
     const input = document.createElement('input');
         setAttributes(input, {
             type: 'text',
@@ -30,7 +35,12 @@ export const textInputUi = (object, name, withLabel ,maxLength) => {
     return input;
 }
 
-export const dateInputUi = (object) => {
+/**
+ * Create a date input.
+ * @param { {} } object - Object for retriving data.
+ * @returns { Node } - A date input.
+ */
+export const dateInputUi = object => {
     const input = document.createElement('input');
     setAttributes(input, {
         type: 'date',
@@ -38,10 +48,18 @@ export const dateInputUi = (object) => {
         class: 'new-due-date input-text',
         'data-number': `${object.id}`
     });
-
+textInputUi()
     return input;
 }
 
+/**
+ * Append new text or date input node and if is an edit, populate it.
+ * @param { Node } selectorNode - Node with a new child node|Node to replace
+ * @param { Node } selectorParentNode - Parent od SelectorNode in case of replacement.
+ * @param { Node } input - New input field. 
+ * @param { boolean } isEdit - Update / not update of one input field
+ * @returns 
+ */
 export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => {
     const node = selectNode(selectorNode);
     const parentNode = selectNode(selectorParentNode);
@@ -64,6 +82,11 @@ export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => 
     return input;
 }
 
+/**
+ * Populate task description field
+ * @param { {} } object - Object for retriving data. 
+ * @param { node } input - Node containing value. 
+ */
 const populateDescription = (object, input) => {
     if (object.description) input.value = object.description;
 }

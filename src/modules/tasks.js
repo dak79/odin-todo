@@ -1,7 +1,7 @@
-import { selectNode } from './helpers';
-import { clearListeners, addAppListeners, addExpandListener, listeners } from './listeners';
-import { findItemId, deleteItem, findItemName } from './todo';
-import { renderTasks, newTaskUi, expandTaskUi, updatePriorityUi } from './ui/tasks-ui';
+import { findItemId, findItemName, selectNode } from './helpers';
+import { addExpandListener } from './listeners';
+import { deleteItem } from './todo';
+import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
 import { Task } from './classes';
 
 // Tasks database
@@ -31,9 +31,9 @@ export const tasksVisualizedOn = value => tasks.map(task => task.visualizedOn = 
 /**
  * Add new task
  * @param { event } event 
- * @returns { Object } New task data.
- * @property { Node } input - Input node for update.
- * @property { Object } instance - New task instance.
+ * @property { Node } node - Input node for update.
+ * @property { {} } instance - New task instance.
+ * @returns { {} } New task data.
  */
 export const addNewTask = event => {
         event.stopPropagation();
@@ -41,9 +41,6 @@ export const addNewTask = event => {
         const instance = new Task();
         const input = newTaskUi(instance);
         
-        clearListeners(listeners);
-        addAppListeners();
-
         return {node: input, instance}
 }
 
@@ -56,7 +53,6 @@ export const deleteTask = event => {
 
         const id = event.target.dataset.number;
         const itemToDelete = deleteItem(tasks, id);
-        clearListeners(listeners);
         renderTasks(itemToDelete.visualizedOn || 'inbox', false);
 }
 
@@ -71,7 +67,6 @@ export const deleteDate = event => {
 
         const itemToUpdate = findItemId(tasks, Number(id));
         itemToUpdate.update('dueDate', null);
-        clearListeners(listeners);
         itemToUpdate.tags = itemToUpdate.tags.filter(tag => tag === 'inbox');
         itemToUpdate.updateTime();
         renderTasks(itemToUpdate.visualizedOn || 'inbox', false);
@@ -86,7 +81,7 @@ export const checkboxState = event => {
     const checkbox = selectNode(`#task-checkbox-${id}`);
 
     const isCompleted = checkbox.checked ? true : false;
-    const task = findItemId(tasks, Numeber(id));
+    const task = findItemId(tasks, Number(id));
     task.update('complete', isCompleted);
     const desk = isCompleted ? task.visualizedOn : 'complete';
     
@@ -99,14 +94,19 @@ export const checkboxState = event => {
         task.updateTime();
     }
     
-    clearListeners(listeners);
     setTimeout(() => renderTasks(desk, false), 1000);   
 }
 
+/**
+ * Expand task.
+ * @param { event } event 
+ */
 export const expandTask = event => {
-        const task = findItemId(tasks, Number(event.target.dataset.number));
+        const id = event.target.dataset.number;
+
+        const task = findItemId(tasks, Number(id));
         task.expanded = task.expanded ? false : true;
-        const hook = selectNode(`#list-item-task-${event.target.dataset.number}`);
+        const hook = selectNode(`#list-item-task-${id}`);
 
         if (task.expanded) {
                 hook.classList.remove('expand-btn-down');
@@ -118,7 +118,7 @@ export const expandTask = event => {
         } else {
                 hook.classList.remove('expand-btn-up');
                 hook.classList.add('expand-btn-down');
-                const expandedSection = selectNode(`#expand-wrapper-${event.target.dataset.number}`);
+                const expandedSection = selectNode(`#expand-wrapper-${id}`);
                 if (expandedSection) expandedSection.remove();
         }        
 }
@@ -130,11 +130,11 @@ export const newTags = event => {
 
         if (!exists) {
                 task.addTag(newTag);
-                updateNewTagUi(event, task, newTag);
+                updateNewTagUi(task, newTag);
         }
     }
 
-const updateNewTagUi = (event, task, tag) => {
+const updateNewTagUi = (task, tag) => {
         const label = selectNode(`label[for='task-tags-${task.id}']`);
         label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `;
 }

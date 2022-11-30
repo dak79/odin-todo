@@ -2,7 +2,7 @@ import { appendChildren, setAttributes } from '../helpers';
 
 /**
  * Radio buttons and priority UI.
- * @param { Object } object - Object for retriving information. 
+ * @param { {} } object - Object for retriving information. 
  * @param { string } name - Part of ids, classes, names value.
  * @param { string } legendText - Legend text value.
  * @param { ['low', 'medium', 'high'] } radioLabels - Radio button text.
@@ -66,7 +66,7 @@ export const radioUi = (object, name, legendText, radioLabels) => {
 
 /**
  * Populate Radio Buttons.
- * @param { Object } object - Object for retriving informations.
+ * @param { {} } object - Object for retriving informations.
  * @param { node } label - Label to update.
  * @param { node } input - Input 
  */

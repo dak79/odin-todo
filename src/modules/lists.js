@@ -1,7 +1,7 @@
-import { deleteItem, findItemName } from './todo';
+import { deleteItem } from './todo';
 import { List } from './classes';
 import { newListUi, renderLists } from './ui/lists-ui';
-import { clearListeners, listeners } from './listeners';
+import { findItemName } from './helpers';
 
 // Lists database
 export const lists = [];
@@ -9,9 +9,9 @@ export const lists = [];
 /**
  * New list
  * @param { event } event 
- * @returns { Object } - Data for new list. 
- * @property { Node } input - Input node.
- * @property { Object } instance - New list instance. 
+ * @property { Node } node - Input node.
+ * @property { {} } instance - New list instance. 
+ * @returns { {} } - Data for new list: input node and new list instance. 
  */
 export const addNewList = event => {
     event.stopPropagation();
@@ -25,7 +25,7 @@ export const addNewList = event => {
 /**
  * List name validation.
  * @param { Object } item - Item to check
- * @property { input } input - Node with new list title.
+ * @property { input } node - Node with new list title.
  * @returns { false|string} false if title is not valid | Valid title
  */
 export const checkListName = item => {
@@ -72,6 +72,5 @@ export const deleteList = event => {
     const id = event.target.dataset.number;
 
     deleteItem(lists, id);
-    clearListeners(listeners);
     renderLists(false);
 }

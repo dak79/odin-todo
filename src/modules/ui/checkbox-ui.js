@@ -2,7 +2,7 @@ import { setAttributes } from '../helpers';
 
 /**
  * Create a Checkbox UI
- * @param { Object } object - Object for retriving data. 
+ * @param { {} } object - Object for retriving data. 
  * @param { string } name - Value for composing ids, classes, names, data-type, data-btn attributes
  * @param { string } ariaLabel - Content of aria-label 
  * @returns { Node[] } - Array with input and label for checkboxes
@@ -34,7 +34,7 @@ export const checkboxUi = (object, name, ariaLabel) => {
 
 /**
  * Populate checkboxes
- * @param { Object } object - Object for retrivin informations. 
+ * @param { {} } object - Object for retrivin informations. 
  * @param { node } input - Input field type checkbox to update. 
  * @param { node } label - Label to update.
  */

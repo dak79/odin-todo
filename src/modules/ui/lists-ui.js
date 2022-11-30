@@ -52,7 +52,7 @@ const createListsUi = () => {
 
 /**
  * List Ui
- * @param { Object } list - list instance 
+ * @param { {} } list - list instance 
  * @returns - Ui for a list instance
  */
 const listsBtn = list => {
@@ -75,7 +75,7 @@ const listsBtn = list => {
 
 /**
  * New List Ui
- * @param { Object } object - Object for retriving data. 
+ * @param { {} } object - Object for retriving data. 
  * @returns { node } An input field for new list.
  */
 export const newListUi = object => {

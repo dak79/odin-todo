@@ -11,7 +11,7 @@ import { addAppListeners } from './listeners';
 export const renderPage = () => {
     pageUi();
     renderHeader();
-    renderMenu(true);
+    renderMenu();
     defaultList();
     renderLists(true);
     updateTimeTasks();
