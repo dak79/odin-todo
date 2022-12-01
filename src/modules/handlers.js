@@ -24,6 +24,7 @@ export const eventController = event => {
     } 
     
     if (btn === 'title') {
+        console.log(desk);
         renderTasks(desk, false);
     } 
     
@@ -38,7 +39,7 @@ export const eventController = event => {
     if (btn === 'new') {
         const newItem = (type === 'new-task') ? addNewTask(event) : addNewList(event);
 
-        if (newItem) newInputListeners(newItem, type) 
+        if (newItem) newInputListeners(newItem, type, desk) 
     }
 
     if (btn === 'edit') {
@@ -76,11 +77,11 @@ export const eventController = event => {
  * @param { {} } newItem - Object for retriving data. 
  * @param { string } type - Value of data-type 
  */
-const newInputListeners = (newItem, type) => {
+const newInputListeners = (newItem, type, desk) => {
     if (type === 'due-date') {
         newItem.node.addEventListener('change', () => saveInput(newItem, type));
     } else {
-        newItem.node.addEventListener('focusout', () => saveInput(newItem, type));
+        newItem.node.addEventListener('focusout', () => saveInput(newItem, type, desk));
         newItem.node.addEventListener('keyup', saveOnEnter);
     }
     
@@ -94,11 +95,13 @@ const newInputListeners = (newItem, type) => {
  * @property { number } id - New item instance id.
  * @param { string } type - Button type that fired the event. 
  */
-const saveInput = (newItem, type) => {
+const saveInput = (newItem, type, desk) => {
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
             newItem.instance.update('title', newItem.node.value);
+            console.log(desk);
+            renderTasks(newItem.instance.visualizedOn || 'inbox', false);
         }
 
         if (type === 'task' || type === 'due-date') {
@@ -110,9 +113,10 @@ const saveInput = (newItem, type) => {
                 taskToUpdate.deleteTimeTags();
                 taskToUpdate.updateTime();
             }
+            renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
         }
 
-        renderTasks(newItem.visualizedOn || 'inbox', false);
+        
     } 
 
     if (type === 'description') {

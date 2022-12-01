@@ -190,6 +190,7 @@ export const newTaskUi = newItem => {
         id: `list-item-task-${newItem.id}`,
         class: 'task-item items'
     });
+    console.log(newItem);
 
     const newTaskContent = taskItem(newItem);
     appendChildren(li, newTaskContent);
