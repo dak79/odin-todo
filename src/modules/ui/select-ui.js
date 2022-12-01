@@ -94,23 +94,3 @@ const addTagsLabel = (object, label, labelText) => {
     const tagsLabel = object.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(' - ');
     label.textContent = `${labelText} ${tagsLabel}`;
 }
-
-/////////////////////// LAVORA SU NEW TAGS //////////////////////
-export const newTagsLabel = (task, tag) => {
-    const label = selectNode(`label[for='task-tags-${task.id}']`);
-
-    console.log(tag, task.tags);
-    // console.log(label.textContent)
-    // const a = label.textContent;
-    // console.log(typeof a, a);
-    // const re = /\s*(?:;|$)\s*/;
-    // console.log(a.toLowerCase().trim().split(' '))
-    if(task.tags.includes(tag)) {
-
-        label.textContent += ` - ${(tag.charAt(0).toUpperCase() + tag.slice(1))}`;
-    } else {
-        console.log('NOO')
-        label.textContent -= ` - ${(tag.charAt(0).toUpperCase() + tag.slice(1))}`;
-
-    }
-}

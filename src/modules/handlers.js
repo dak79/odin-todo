@@ -131,7 +131,7 @@ const saveInput = (newItem, type) => {
             if (type === 'list') {
                 const listToUpdate = findItemId(lists, Number(newItem.id));
                 tasks.map(task => {
-                    if (task.tags.includes(String(listToUpdate.title.toLowerCase().trim()))) task.updateTag(listToUpdate.title.toLowerCase().trim(), String(newList));
+                    if (task.tags.includes(String(listToUpdate.title.toLowerCase().trim()))) task.updateTag(listToUpdate.title.toLowerCase().trim(), String(newList).toLocaleLowerCase().trim());
                 })
                 listToUpdate.update('title', String(newList));
             }

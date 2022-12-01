@@ -105,6 +105,8 @@ export const newTags = (event, id, value) => {
         const newTag = String(value).toLocaleLowerCase().trim();
         const select = event.target;
 
+        console.log(task.tags);
+
         if(!task.tags.includes(newTag)) {
                 task.addTag(newTag);
         } else {
