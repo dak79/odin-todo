@@ -2,7 +2,8 @@ import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
 import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
-import { editTaskUi, renderTasks, updatePriorityUi, updateTagsUi } from './ui/tasks-ui';
+import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
+import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
 
 /**
  * Controller for events.
@@ -66,7 +67,7 @@ export const eventController = event => {
     }
 
     if (type === 'tags') {
-        newTags(event);
+        newTags(event, id, value);
     }
 }
 
@@ -129,10 +130,14 @@ const saveInput = (newItem, type) => {
             
             if (type === 'list') {
                 const listToUpdate = findItemId(lists, Number(newItem.id));
+                tasks.map(task => {
+                    if (task.tags.includes(String(listToUpdate.title.toLowerCase().trim()))) task.updateTag(listToUpdate.title.toLowerCase().trim(), String(newList));
+                })
                 listToUpdate.update('title', String(newList));
             }
             
-            updateTagsUi(null);
+            updateTagsOptions(null);
+            updateTagsLabel(null, null, null);
             renderLists(false);
         }
     }
@@ -154,6 +159,11 @@ const deleteItem = (event, id, type) => {
     }
 
     if (type === 'list') {
+        tasks.map(task => {
+            if (task.tags.includes(String(itemToDelete.title.toLowerCase().trim()))) task.deleteTag(itemToDelete.title.toLowerCase().trim());
+        })
+        updateTagsOptions(null);
+        updateTagsLabel(null, null, null);
         renderLists(false);
     } else {
         renderTasks(itemToDelete.visualizedOn || 'inbox', false);

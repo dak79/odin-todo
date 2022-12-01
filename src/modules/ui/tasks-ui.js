@@ -161,7 +161,7 @@ export const expandTaskUi = task => {
         class: 'tags-wrapper'
     });
 
-    const tags = tagsUi(task, 'tags', `Lists: `);
+    const tags = tagsUi(task, 'tags', `Lists:`);
     appendChildren(tagsWrapper, tags);
 
     const checklistWrapper = document.createElement('div');
@@ -250,24 +250,5 @@ export const updatePriorityUi = (task, wrapperMsg, isChanging) => {
         highPriority.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 22.8q-1.25 0-2.137-.887-.888-.888-.888-2.138t.888-2.138q.887-.887 2.137-.887t2.137.9q.888.9.888 2.15t-.888 2.125Q13.25 22.8 12 22.8Zm-2.675-8.1V1.4h5.35v13.3Z"/></svg>`
 
         wrapperMsg.appendChild(highPriority);
-    }
-}
-
-
-/**
- * Populate and update task tags
- * @param { Node } select - Select HTMLElement
- */
-export const updateTagsUi = select => {
-    if (!select) select = selectNode(`select[name='tags']`);
-
-    if (select) {
-        lists.map(list => {
-            console.log(select.options);
-            let opti = Array.from(select.options).map(opt => opt.text);
-            console.log(opti);
-    
-            if(!opti.includes(list.title)) select.options.add(new Option(list.title, list.title))
-        });
     }
 }

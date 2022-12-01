@@ -27,6 +27,11 @@ class TaskBase {
         if (index >= 0) this.tags.splice(index, 1);
     }
 
+    updateTag(value, newValue) {
+        const index = this.tags.findIndex(tag => tag === value);
+        if (index >= 0) this.tags.splice(index, 1, newValue);
+    }
+
     updateTime() {
         if (isToday(this.dueDate) && (!this.tags.find(tag => tag === 'today'))) this.addTag('today');
 

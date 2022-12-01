@@ -2,6 +2,7 @@ import { findItemId, findItemName, selectNode } from './helpers';
 import { addExpandListener } from './listeners';
 import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
 import { Task } from './classes';
+import { newTagsLabel, tagsUi, updateTagsLabel } from './ui/select-ui';
 
 // Tasks database
 export const tasks = [];
@@ -93,18 +94,26 @@ export const expandTask = id => {
         }        
 }
 
-export const newTags = event => {
-        const task = findItemId(tasks, Number(event.target.dataset.number))
-        const newTag = String(event.target.value).toLowerCase().trim();
-        const exists = findItemName(task.tags, newTag);
+/**
+ * Update tags when selected.
+ * @param { event } event 
+ * @param { number } id - Task id. 
+ * @param { string } value - Selected value.
+ */
+export const newTags = (event, id, value) => {
+        const task = findItemId(tasks, Number(id));
+        const newTag = String(value).toLocaleLowerCase().trim();
+        const select = event.target;
 
-        if (!exists) {
+        if(!task.tags.includes(newTag)) {
                 task.addTag(newTag);
-                updateNewTagUi(task, newTag);
+        } else {
+                task.deleteTag(newTag);
         }
-    }
 
-const updateNewTagUi = (task, tag) => {
-        const label = selectNode(`label[for='task-tags-${task.id}']`);
-        label.textContent += ` ${(tag.charAt(0).toUpperCase() + tag.slice(1))} - `;
+        updateTagsLabel(null, null, null);
+        select.selectedIndex = 0;
+        select.blur();
 }
+
+

@@ -1,7 +1,9 @@
-import { setAttributes } from '../helpers';
+import { setAttributes, selectNode, selectNodes, findItemId } from '../helpers';
+import { lists } from '../lists';
+import { tasks } from '../tasks';
 
 /**
- * 
+ * Create tags ui.
  * @param { {} } object - Object for retriving data. 
  * @param { string } name - Part of value of ids, classes, name and data-type attributes.  
  * @param { string } labelText - label.textContent value. 
@@ -11,9 +13,10 @@ export const tagsUi = (object, name, labelText) => {
     const label = document.createElement('label');
     setAttributes(label, {
         for: `${object.type}-${name}-${object.id}`,
-        class: `${object.type}-${name}-labels`
+        class: `${object.type}-${name}-labels`,
+        'data-number': `${object.id}`
     });
-    label.textContent = labelText;
+    updateTagsLabel(object, label, labelText);
 
     const select = document.createElement('select');
     setAttributes(select, {
@@ -23,35 +26,91 @@ export const tagsUi = (object, name, labelText) => {
         'data-number': `${object.id}`,
         'data-type': `${name}`
     });
-
-    const option = document.createElement('option');
-    option.setAttribute('value', '');
-    option.textContent = '-- Choose list --';
-    select.appendChild(option);
-
-    //updateTagsUi(select);
+    updateTagsOptions(select);
 
     return [label, select]
 }
 
 /**
- * Populate and update task tags
- * @param { Node } select - Select HTMLElement
+ * Populate and update select options.
+ * @param { Node|Node[]|null } select - Select node | select nodes | null.
  */
- const updateTagsUi = select => {
-    // Update label
-    object.tags.forEach(tag => label.textContent += `${(tag.charAt(0).toUpperCase() + tag.slice(1)).replace('', ` - `)}`);
-    
-    // update selectTags
-    if (!select) select = selectNode(`select[name='tags']`);
+ export const updateTagsOptions = select => {
+    if (!select) {
+        select = selectNodes(`select[name='tags']`);
+        select.forEach(box => addSelectOptions(box));
+    } else {
+        addSelectOptions(select);
+    }  
+}
+
+/**
+ * Add select options to select element.
+ * @param { Node|Node[]|null } select - Select node | select nodes | null. 
+ */
+const addSelectOptions = select => {
+    while (select.options.length > 0){
+        select.remove(0)
+    }
 
     if (select) {
+        select.options.add(new Option('--Choose List--', ''));
         lists.map(list => {
-            console.log(select.options);
             let opti = Array.from(select.options).map(opt => opt.text);
-            console.log(opti);
-    
+              
             if(!opti.includes(list.title)) select.options.add(new Option(list.title, list.title))
         });
+    }
+}
+
+/**
+ * Populate and update tags labels.
+ * @param { {}|null} object - Object for retriving data. 
+ * @param { Node|Node[]|null} label - Label node | label nodes | null
+ * @param { string|null} labelText 
+ */
+export const updateTagsLabel = (object, label, labelText) =>{
+    if (!label) {
+        label = selectNodes('.task-tags-labels');
+        label.forEach(label => {
+            const id = label.dataset.number;
+            const task = findItemId(tasks, Number(id));
+            addTagsLabel(task, label, `List:`);
+        });    
+    } else {
+        addTagsLabel(object, label, labelText)
+    }
+}
+
+/**
+ * Add tags labels
+ * @param { {}|null} object - Object for retriving data. 
+ * @param { Node|Node[]|null} label - Label node | label nodes | null
+ * @param { string|null} labelText 
+ */
+const addTagsLabel = (object, label, labelText) => {
+    label.textContent = '';
+
+    const tagsLabel = object.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(' - ');
+    label.textContent = `${labelText} ${tagsLabel}`;
+}
+
+/////////////////////// LAVORA SU NEW TAGS //////////////////////
+export const newTagsLabel = (task, tag) => {
+    const label = selectNode(`label[for='task-tags-${task.id}']`);
+
+    console.log(tag, task.tags);
+    // console.log(label.textContent)
+    // const a = label.textContent;
+    // console.log(typeof a, a);
+    // const re = /\s*(?:;|$)\s*/;
+    // console.log(a.toLowerCase().trim().split(' '))
+    if(task.tags.includes(tag)) {
+
+        label.textContent += ` - ${(tag.charAt(0).toUpperCase() + tag.slice(1))}`;
+    } else {
+        console.log('NOO')
+        label.textContent -= ` - ${(tag.charAt(0).toUpperCase() + tag.slice(1))}`;
+
     }
 }
