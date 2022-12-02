@@ -1,5 +1,5 @@
 import { Checklist, Task } from '../classes';
-import { tasks, tasksVisualizedOn } from '../tasks';
+import { tasks } from '../tasks';
 
 export const exampleTasks = () => {
     const todoOne = new Task('Go to market', 'Buy fruit and vegetables', new Date('2022-11-04'), 'low', [new Checklist('Bananas'), new Checklist('Apples'), new Checklist('Oranges'), new Checklist('Tomatoes'), new Checklist('Potatos'), new Checklist('Salad'), new Checklist('Carrots'), new Checklist('Onions')]);
@@ -26,5 +26,4 @@ export const exampleTasks = () => {
     const todoEight = new Task('Mail', 'Send me mail please', new Date('2022-12-08'), 'high', [new Checklist('Take metro')]);
     todoEight.add(tasks);
     
-    tasksVisualizedOn('inbox');
 }

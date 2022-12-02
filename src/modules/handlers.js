@@ -1,6 +1,6 @@
 import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, checkboxState, expandTask, newTags, tasksVisualizedOn } from './tasks';
+import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';

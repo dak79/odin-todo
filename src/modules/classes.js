@@ -13,7 +13,6 @@ class TaskBase {
         this.complete = false;
         this.tags = ['inbox'];
         this.updateTime();
-        // this.visualizedOn = '';
         this.priority = priority;
         this.checklist = checklist;
     }  

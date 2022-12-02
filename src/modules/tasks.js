@@ -23,13 +23,6 @@ export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) =>
 export const updateTimeTasks = () => tasks.map(task => task.updateTime());
 
 /**
- * Update task.visualizedOn property.
- * @param { string } value - Desk name
- * @returns Desk where task is visualized.
- */
-export const tasksVisualizedOn = value => tasks.map(task => task.visualizedOn = value);
-
-/**
  * Add new task
  * @param { event } event 
  * @property { Node } node - Input node for update.
