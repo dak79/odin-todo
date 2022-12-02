@@ -584,7 +584,7 @@ select::-ms-expand {
     grid-area: 1 / 2 / 1 / 3;
 }
 
-#new-lists-btn {
+#new-list-btn {
     grid-area: 1 / 2 / 1 / 3;
 }
 

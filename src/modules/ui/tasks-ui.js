@@ -1,4 +1,4 @@
-import { btnsUi } from '../ui/btns-ui';
+import { btnsUi, newBtn } from '../ui/btns-ui';
 import { appendChildren, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners, clearListeners, listeners } from '../listeners';
@@ -168,7 +168,7 @@ export const expandTaskUi = task => {
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
    
-    const checkListBtn = btnsUi(task, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
+    const checkListBtn = newBtn({id: task.id, type: 'checklist'}, 'new', ['btns', 'round-btns', 'round-btns-small'], 'Add new item to checklist');
     
     const checklist = checklistUi(task, 'checklist');
     appendChildren(checklistWrapper, [checkListBtn, checklist]);

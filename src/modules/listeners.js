@@ -14,7 +14,7 @@ export const addAppListeners = () => {
     addListeners(listeners, '.lists-btns', 'click', eventController);
     addListeners(listeners, '.svg-btns-delete', 'click', eventController);
     addListeners(listeners, '.svg-btns-edit', 'click', eventController);
-    addListener(listeners, '#new-lists-btn', 'click', eventController);
+    addListener(listeners, '#new-list-btn', 'click', eventController);
 
     // Tasks
     addListeners(listeners, '.tasks-checkbox', 'change', eventController);
@@ -35,7 +35,7 @@ export const addExpandListener = id => {
 
     addListener(expandListeners, `#task-tags-${id}`, 'change', eventController);
 
-    addListener(expandListeners, `#checklist-new-btn-${id}`, 'click', addNewCheck);
+    addListener(expandListeners, `#new-checklist-${id}-btn`, 'click', addNewCheck);
 
     addListeners(expandListeners, `[data-type='item-state']`, 'change', eventController)
 

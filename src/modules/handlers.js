@@ -101,8 +101,11 @@ const saveInput = (newItem, type) => {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
             newItem.instance.update('title', newItem.node.value);
-            newItem.instance.addTag(currentDesk[0]);
-            if (currentDesk[0] === 'today') newItem.instance.update('dueDate', new Date());
+            if (!newItem.instance.tags.includes(currentDesk[0])) newItem.instance.addTag(currentDesk[0]);
+            if (currentDesk[0] === 'today') {
+                newItem.instance.deleteTimeTags();
+                newItem.instance.update('dueDate', new Date())};
+                console.log(newItem.instance.tags);
             renderTasks(currentDesk[0], false);
         }
 

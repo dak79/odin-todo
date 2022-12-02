@@ -110,6 +110,7 @@ export class Checklist extends MyMixin(ChecklistBase) {
 export class Menu {
     constructor(id, title) {
         this.id = id;
+        this.type = 'menu';
         this.title = title;
         this.tags = ['menu'];
     }

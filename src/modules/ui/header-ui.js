@@ -1,5 +1,5 @@
-import { selectNode, appendChildren, setAttributes } from '../helpers';
-import { btnsUi } from './btns-ui';
+import { selectNode, appendChildren } from '../helpers';
+import { newBtn } from './btns-ui';
 
 /**
  * Render header.
@@ -7,7 +7,7 @@ import { btnsUi } from './btns-ui';
 export const renderHeader = () => {
     const header = selectNode('#nav-header');
     const logo = createLogo();
-    const btnNewTask = createBtnNewTask();
+    const btnNewTask = newBtn({type: 'task'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new task');
     const title = createTitle();
 
     appendChildren(header, [logo, btnNewTask, title]);
@@ -27,10 +27,4 @@ const createTitle = () => {
     title.textContent = 'ToDo';
 
     return title;
-}
-
-const createBtnNewTask = () => {
-    const btnNewTask = btnsUi(null, 'task', 'new', 'btns round-btns round-btns-big', 'Add Task', 'new-task', '+');
-    
-    return btnNewTask;
 }

@@ -1,7 +1,7 @@
 import { cleanNode, selectNode, setAttributes, appendChildren, removeElement, createUl, createLi } from '../helpers';
 import { lists } from '../lists';
 import { listeners, addAppListeners, clearListeners } from '../listeners';
-import { btnsUi } from './btns-ui';
+import { btnsUi, newBtn, titleBtn } from './btns-ui';
 import { textInputUi, appendInput } from './inputs-ui'
 
 /**
@@ -30,7 +30,7 @@ const listHeader = () => {
     const header = document.createElement('header');
     header.classList.add('headers');
     const title = listsTitle();
-    const newListBtn = newListBtnUi();
+    const newListBtn = newBtn({type: 'list'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new list')
 
     appendChildren(header, [newListBtn, title]);
 
@@ -45,19 +45,14 @@ const listsTitle = () => {
     return title;
 }
 
-const newListBtnUi = () => {
-    const btnNewList = btnsUi(null, 'lists', 'new', 'btns round-btns round-btns-big', 'Add a new list for your project', 'new-list', '+');
-
-    return btnNewList; 
-}
-
 /**
  * List Ui
  * @param { {} } list - list instance 
  * @returns - Ui for a list instance
  */
 const listsBtn = list => {
-    const btnTitle = btnsUi(list, 'lists', 'title', 'btns lists-btns text-btns', `List title button: ${list.title}`, list.type, list.title);
+    
+    const btnTitle = titleBtn(list, 'title', ['btns', 'lists-btns', 'text-btns'], `List title button: ${list.title}`);
 
     const wrapper = document.createElement('span');
     setAttributes(wrapper, {
@@ -95,7 +90,7 @@ export const newListUi = object => {
 export const editListUi = (id, type) => {
     console.log(type)
     const input = textInputUi({type}, 'edit', false, 15);
-    const nodes = appendInput(`#lists-title-btn-${id}`, `#list-item-lists-${id}`, input, true);
+    const nodes = appendInput(`#title-list-${id}-btn`, `#list-item-lists-${id}`, input, true);
  
     removeElement(`#btns-lists-${id}`);
         

@@ -38,3 +38,47 @@ export const btnsUi = (object, name, type, classNames, ariaLabel, dataType, text
 
     return btn;
 }
+
+// name = new
+// object = newTask(type: task), newList(type: list), checklist object
+// classes = [] of class name
+export const newBtn = (object, name, classes, ariaLabel) => {
+    const button = document.createElement('button');
+    setAttributes(button, {
+        type: 'button',
+        id: (object.type === 'task' || object.type === 'list') ? `${name}-${object.type}-btn` : `${name}-${object.type}-${object.id}-btn`,
+        'aria-label': `${ariaLabel}`,
+        'data-btn': `${name}`,
+        'data-type': `${name}-${object.type}`
+
+    })
+    button.classList.add(...classes);
+
+    if (object.type === 'checklist') button.setAttribute('data-number', object.id);
+
+    button.textContent = '+';
+
+    return button;
+}
+
+// name = title
+// object = (menu = object.id, object.type= menu, list= object.id, object.type=list)
+// classes = [] of class value
+export const titleBtn = (object, name, classes, ariaLabel) => {
+    const button = document.createElement('button');
+    setAttributes(button, {
+        type: 'button',
+        id: `${name}-${object.type}-${object.id}-btn`,
+        'aria-label': `${ariaLabel}`,
+        'data-number': `${object.id}`,
+        'data-btn': `${name}`,
+        'data-name': `${object.title.toLowerCase().trim().replace(' ', '-')}`
+    });
+    button.classList.add(...classes);
+
+    button.textContent = `${object.title}`
+
+    return button;
+}
+
+
