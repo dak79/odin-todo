@@ -1,4 +1,4 @@
-import { setAttributes, selectNode, selectNodes, findItemId } from '../helpers';
+import { setAttributes, selectNodes, findItemId } from '../helpers';
 import { lists } from '../lists';
 import { tasks } from '../tasks';
 

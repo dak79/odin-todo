@@ -1,8 +1,8 @@
-import { findItemId, findItemName, selectNode } from './helpers';
+import { findItemId, selectNode } from './helpers';
 import { addExpandListener } from './listeners';
 import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
 import { Task } from './classes';
-import { newTagsLabel, tagsUi, updateTagsLabel } from './ui/select-ui';
+import { updateTagsLabel } from './ui/select-ui';
 import { currentDesk } from './menu';
 
 // Tasks database
