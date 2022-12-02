@@ -171,14 +171,9 @@ export const expandTaskUi = task => {
    
     const checkListBtn = btnsUi(task, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
     
-    if (task.checklist) {
-        const checklist = checklistUi(task, 'checklist');
-        appendChildren(checklistWrapper, [checkListBtn, checklist]);
-    } else {
-        checklistWrapper.appendChild(checkListBtn);
-    }
+    const checklist = checklistUi(task, 'checklist');
+    appendChildren(checklistWrapper, [checkListBtn, checklist]);
     
-
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 
     return { wrapper, description: descriptionWrapper, priority: priorityWrapper, tags: tagsWrapper, checklist: checklistWrapper };

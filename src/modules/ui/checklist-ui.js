@@ -23,6 +23,14 @@ export const checklistUi = (object, name) => {
         class: `${name}s-wrapper`
     });
 
+    if (object.checklist) populateChecklist(object, name, wrapper);
+
+    appendChildren(fieldset, [legend, wrapper]);
+
+    return fieldset;
+}
+
+const populateChecklist = (object, name, wrapper) => {
     object.checklist.map((item, index) => {
 
         const group = document.createElement('div');
@@ -49,10 +57,4 @@ export const checklistUi = (object, name) => {
 
         wrapper.appendChild(group);
     });
-    
-    appendChildren(fieldset, [legend, wrapper]);
-
-    return fieldset;
 }
-
-
