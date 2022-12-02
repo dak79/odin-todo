@@ -3,6 +3,7 @@ import { addExpandListener } from './listeners';
 import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
 import { Task } from './classes';
 import { newTagsLabel, tagsUi, updateTagsLabel } from './ui/select-ui';
+import { currentDesk } from './menu';
 
 // Tasks database
 export const tasks = [];
@@ -54,7 +55,6 @@ export const checkboxState = id => {
     const isCompleted = checkbox.checked ? true : false;
     const task = findItemId(tasks, Number(id));
     task.update('complete', isCompleted);
-    const desk = isCompleted ? task.visualizedOn : 'complete';
     
     if (isCompleted) {
         task.addTag('complete');
@@ -66,7 +66,7 @@ export const checkboxState = id => {
         task.updateTime();
     }
     
-    setTimeout(() => renderTasks(desk, false), 1000);   
+    setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
 }
 
 /**

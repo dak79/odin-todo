@@ -1,5 +1,5 @@
 import { btnsUi } from '../ui/btns-ui';
-import { appendChildren, createList, setAttributes, cleanNode, selectNode } from '../helpers';
+import { appendChildren, createList, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners, clearListeners, listeners } from '../listeners';
 import { orderTaskByDate, tasks, tasksVisualizedOn } from '../tasks';
@@ -18,24 +18,26 @@ import { textInputUi, appendInput, dateInputUi } from '../ui/inputs-ui'
 export const renderTasks = (desk, isFirstLoad) => {
     orderTaskByDate();
     const section = selectNode('#desk');
-    const displayTasks = createTasksUi(desk);
+    const ul = createUl('tasks');
+
+    tasks.map(task => {
+        if (task.tags.includes(desk)) {
+            const node = createLi(task, ['task-item', 'items'], taskItem);
+            ul.appendChild(node);
+        }
+    });
+
     cleanNode(section);
-    section.appendChild(displayTasks);
+    section.appendChild(ul);
     if (!isFirstLoad) {
         clearListeners(listeners);
         addAppListeners();
     }
-    tasksVisualizedOn(desk);
-}
-
-const createTasksUi = desk => {
-    const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', ['task-item', 'items']);
-    return todoes;
 }
 
 /**
  * Task Ui
- * @param { {}} task - Task instance.
+ * @param { {} } task - Task instance.
  * @property { number } id - Task id.
  * @property { string } type - Task type.
  * @property { string } title - Task title.
@@ -169,9 +171,13 @@ export const expandTaskUi = task => {
    
     const checkListBtn = btnsUi(task, 'checklist', 'new', 'btns round-btns round-btns-small', 'Add new item to checklist', 'checklist', '+');
     
-    const checklist = checklistUi(task, 'checklist');
+    if (task.checklist) {
+        const checklist = checklistUi(task, 'checklist');
+        appendChildren(checklistWrapper, [checkListBtn, checklist]);
+    } else {
+        checklistWrapper.appendChild(checkListBtn);
+    }
     
-    appendChildren(checklistWrapper, [checkListBtn, checklist]);
 
     appendChildren(wrapper, [descriptionWrapper, priorityWrapper, tagsWrapper, checklistWrapper]);
 

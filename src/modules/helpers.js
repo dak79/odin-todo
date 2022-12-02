@@ -29,24 +29,60 @@ export const setAttributes = (element, attributes) => Object.keys(attributes).fo
     list.classList.add(ulClassName);
     
     array.forEach(item => {
-        const listType = item.tags.find(tag => tag === desk);
-        if (listType) {
-            const listItem = document.createElement('li');
+        // const listType = item.tags.find(tag => tag === desk);
+        // if (listType) {
+        //     const listItem = document.createElement('li');
     
-            listItem.id = `list-item-${liIdPrefix}-${item.id}`;
-            if (typeof liClassName === 'string'){
-                listItem.classList.add(liClassName);
-            } else {
-                liClassName.forEach(className => listItem.classList.add(className));
-            }
-            const arrayContents = itemsType(item);
+        //     listItem.id = `list-item-${liIdPrefix}-${item.id}`;
+        //     if (typeof liClassName === 'string'){
+        //         listItem.classList.add(liClassName);
+        //     } else {
+        //         liClassName.forEach(className => listItem.classList.add(className));
+        //     }
+        //     const arrayContents = itemsType(item);
     
-            arrayContents.forEach(content => listItem.appendChild(content));
-            list.appendChild(listItem);
+        //     arrayContents.forEach(content => listItem.appendChild(content));
+        //     list.appendChild(listItem);
+        // }
+        
+        const listItem = document.createElement('li');
+
+        listItem.id = `list-item-${liIdPrefix}-${item.id}`;
+        if (typeof liClassName === 'string'){
+            listItem.classList.add(liClassName);
+        } else {
+            liClassName.forEach(className => listItem.classList.add(className));
         }
+        const arrayContents = itemsType(item);
+
+        arrayContents.forEach(content => listItem.appendChild(content));
+        list.appendChild(listItem);
+        
     });
     
     return list;
+}
+
+//const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', ['task-item', 'items']);
+// ulClassName = 'tasks'
+export const createUl = (ulClass) => {
+    const ul = document.createElement('ul');
+    ul.classList.add(ulClass);
+    return ul
+}
+
+// Object = task instance.
+// liClasses = ['task-item', 'items']
+// liPopulate = taskItem
+export const createLi = (object, liClasses, item) => {
+    const li = document.createElement('li');
+    li.id = `list-item-${object.type}-${object.id}`;
+    li.classList.add(...liClasses);
+
+    const liContent = item(object);
+    appendChildren(li, liContent);
+
+    return li
 }
 
 /**

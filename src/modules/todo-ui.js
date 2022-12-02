@@ -7,6 +7,7 @@ import { renderTasks } from './ui/tasks-ui';
 import { exampleTasks } from './default/tasks-example';
 import { updateTimeTasks } from './tasks';
 import { addAppListeners } from './listeners';
+import { currentDesk } from './menu';
 
 export const renderPage = () => {
     pageUi();
@@ -16,7 +17,7 @@ export const renderPage = () => {
     renderLists(true);
     updateTimeTasks();
     exampleTasks();
-    renderTasks('inbox', true);
+    renderTasks(currentDesk[0], true);
     addAppListeners();
 }
 

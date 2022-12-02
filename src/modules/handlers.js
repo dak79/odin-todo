@@ -1,9 +1,10 @@
 import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
+import { tasks, addNewTask, checkboxState, expandTask, newTags, tasksVisualizedOn } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
+import { currentDesk, updateCurrentDesk } from './menu';
 
 /**
  * Controller for events.
@@ -24,8 +25,8 @@ export const eventController = event => {
     } 
     
     if (btn === 'title') {
-        console.log(desk);
-        renderTasks(desk, false);
+        updateCurrentDesk(desk);
+        renderTasks(currentDesk[0], false);
     } 
     
     if (btn === 'checkbox') {
@@ -39,7 +40,7 @@ export const eventController = event => {
     if (btn === 'new') {
         const newItem = (type === 'new-task') ? addNewTask(event) : addNewList(event);
 
-        if (newItem) newInputListeners(newItem, type, desk) 
+        if (newItem) newInputListeners(newItem, type) 
     }
 
     if (btn === 'edit') {
@@ -77,11 +78,11 @@ export const eventController = event => {
  * @param { {} } newItem - Object for retriving data. 
  * @param { string } type - Value of data-type 
  */
-const newInputListeners = (newItem, type, desk) => {
+const newInputListeners = (newItem, type) => {
     if (type === 'due-date') {
         newItem.node.addEventListener('change', () => saveInput(newItem, type));
     } else {
-        newItem.node.addEventListener('focusout', () => saveInput(newItem, type, desk));
+        newItem.node.addEventListener('focusout', () => saveInput(newItem, type));
         newItem.node.addEventListener('keyup', saveOnEnter);
     }
     
@@ -95,13 +96,14 @@ const newInputListeners = (newItem, type, desk) => {
  * @property { number } id - New item instance id.
  * @param { string } type - Button type that fired the event. 
  */
-const saveInput = (newItem, type, desk) => {
+const saveInput = (newItem, type) => {
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
             newItem.instance.update('title', newItem.node.value);
-            console.log(desk);
-            renderTasks(newItem.instance.visualizedOn || 'inbox', false);
+            newItem.instance.addTag(currentDesk[0]);
+            if (currentDesk[0] === 'today') newItem.instance.update('dueDate', new Date());
+            renderTasks(currentDesk[0], false);
         }
 
         if (type === 'task' || type === 'due-date') {
@@ -113,7 +115,7 @@ const saveInput = (newItem, type, desk) => {
                 taskToUpdate.deleteTimeTags();
                 taskToUpdate.updateTime();
             }
-            renderTasks(taskToUpdate.visualizedOn || 'inbox', false);
+            renderTasks(currentDesk[0], false);
         }
 
         
@@ -170,7 +172,7 @@ const deleteItem = (event, id, type) => {
         updateTagsLabel(null, null, null);
         renderLists(false);
     } else {
-        renderTasks(itemToDelete.visualizedOn || 'inbox', false);
+        renderTasks(currentDesk[0], false);
     }
 }
 
