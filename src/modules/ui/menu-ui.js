@@ -1,5 +1,5 @@
 import { btnsUi } from './btns-ui';
-import { selectNode, createList } from '../helpers';
+import { selectNode, createLi, createUl } from '../helpers';
 import { Menu } from '../classes';
 
 /**
@@ -7,14 +7,14 @@ import { Menu } from '../classes';
  */
 export const renderMenu = () => {
     const nav = selectNode('#nav-menu')
-    const menu = createMenu();
-    nav.appendChild(menu);
-}
+    const menuItems = [new Menu(1, 'Inbox'), new Menu(2, 'Today'), new Menu(3, 'This Week'), new Menu(4, 'Anytime'), new Menu(5, 'Complete')];
 
-const createMenu = () => {
-    const menu = createList([new Menu(1, 'Inbox'), new Menu(2, 'Today'), new Menu(3, 'This Week'), new Menu(4, 'Anytime'), new Menu(5, 'Complete')], 'menu', navBtn, 'menu', 'menu', 'menu-items');
-
-    return menu;
+    const ul = createUl('menu');
+    menuItems.map(item => {
+        const node = createLi(item, ['menu-items'], navBtn);
+        ul.appendChild(node);    
+    });
+    nav.appendChild(ul);
 }
 
 /**

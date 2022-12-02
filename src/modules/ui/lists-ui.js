@@ -1,4 +1,4 @@
-import { createList, cleanNode, selectNode, setAttributes, appendChildren, removeElement } from '../helpers';
+import { cleanNode, selectNode, setAttributes, appendChildren, removeElement, createUl, createLi } from '../helpers';
 import { lists } from '../lists';
 import { listeners, addAppListeners, clearListeners } from '../listeners';
 import { btnsUi } from './btns-ui';
@@ -10,10 +10,16 @@ import { textInputUi, appendInput } from './inputs-ui'
  */
 export const renderLists = isFirstLoad => {
     const section = selectNode('#section-lists');
+
     const displayHeader = listHeader();
-    const displayLists = createListsUi();
+    const ul = createUl('menu');
+    lists.map(list => {
+        const node = createLi(list, ['lists-items', 'items'], listsBtn);
+        ul.appendChild(node);    
+    });
+
     cleanNode(section);
-    appendChildren(section, [displayHeader, displayLists]);
+    appendChildren(section, [displayHeader, ul]);
     if (!isFirstLoad) {
         clearListeners(listeners);
         addAppListeners()
@@ -43,11 +49,6 @@ const newListBtnUi = () => {
     const btnNewList = btnsUi(null, 'lists', 'new', 'btns round-btns round-btns-big', 'Add a new list for your project', 'new-list', '+');
 
     return btnNewList; 
-}
-
-const createListsUi = () => {
-    const projects = createList(lists, 'list', listsBtn, 'menu','lists', ['lists-items', 'items']);
-    return projects;
 }
 
 /**

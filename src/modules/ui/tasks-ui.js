@@ -1,9 +1,8 @@
 import { btnsUi } from '../ui/btns-ui';
-import { appendChildren, createList, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
+import { appendChildren, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners, clearListeners, listeners } from '../listeners';
 import { orderTaskByDate, tasks } from '../tasks';
-import { lists } from '../lists';
 import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';

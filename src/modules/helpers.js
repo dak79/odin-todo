@@ -15,65 +15,24 @@ export const appendChildren = (parent, children) => children.forEach(child => pa
 export const setAttributes = (element, attributes) => Object.keys(attributes).forEach(attr => element.setAttribute(attr, attributes[attr]));
 
 /**
- * Create an unordered list
- * @param { [] } array - Array with items to transform in unordered list 
- * @param { string } desk - Where ul is created. 
- * @param { Function } itemsType - Create li content.
- * @param { string } ulClassName - Class for ul element.
- * @param { string } liIdPrefix - Prefix for id of each li element.
- * @param { string|[] } liClassName - Class or classes for each li elements. 
- * @returns { Nodes } - Unordered list.
+ * Create an ul.
+ * @param { string } ulClass - Class attribute value 
+ * @returns { Node } - An ul element.
  */
- export const createList = (array, desk, itemsType, ulClassName, liIdPrefix, liClassName) => {
-    const list = document.createElement('ul');
-    list.classList.add(ulClassName);
-    
-    array.forEach(item => {
-        // const listType = item.tags.find(tag => tag === desk);
-        // if (listType) {
-        //     const listItem = document.createElement('li');
-    
-        //     listItem.id = `list-item-${liIdPrefix}-${item.id}`;
-        //     if (typeof liClassName === 'string'){
-        //         listItem.classList.add(liClassName);
-        //     } else {
-        //         liClassName.forEach(className => listItem.classList.add(className));
-        //     }
-        //     const arrayContents = itemsType(item);
-    
-        //     arrayContents.forEach(content => listItem.appendChild(content));
-        //     list.appendChild(listItem);
-        // }
-        
-        const listItem = document.createElement('li');
-
-        listItem.id = `list-item-${liIdPrefix}-${item.id}`;
-        if (typeof liClassName === 'string'){
-            listItem.classList.add(liClassName);
-        } else {
-            liClassName.forEach(className => listItem.classList.add(className));
-        }
-        const arrayContents = itemsType(item);
-
-        arrayContents.forEach(content => listItem.appendChild(content));
-        list.appendChild(listItem);
-        
-    });
-    
-    return list;
-}
-
-//const todoes = createList(tasks, desk, taskItem, 'tasks', 'task', ['task-item', 'items']);
-// ulClassName = 'tasks'
 export const createUl = (ulClass) => {
     const ul = document.createElement('ul');
     ul.classList.add(ulClass);
+    
     return ul
 }
 
-// Object = task instance.
-// liClasses = ['task-item', 'items']
-// liPopulate = taskItem
+/**
+ * Create a li element.
+ * @param { {} } object - Object for retriving data. 
+ * @param { string[] } liClasses - Single/multiple class attribute value. 
+ * @param { function } item - Function for create li content.
+ * @returns { Node } - A li element.
+ */
 export const createLi = (object, liClasses, item) => {
     const li = document.createElement('li');
     li.id = `list-item-${object.type}-${object.id}`;
