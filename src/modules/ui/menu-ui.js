@@ -19,12 +19,12 @@ const createMenu = () => {
 
 /**
  * Create menu buttons.
- * @param { {} } desk - Desk button.
- * @property { string } title - Desk name. 
+ * @param { {} } menu - menu button.
+ * @property { string } title - menu name. 
  * @returns { HTMLElement } - Button
  */
-const navBtn = desk => {
-    const btn = btnsUi(desk, 'menu', 'title', 'btns menu-btns text-btns', `Menu Button: ${desk.title}`, 'menu-title', desk.title);
+const navBtn = menu => {
+    const btn = btnsUi(menu, 'menu', 'title', 'btns menu-btns text-btns', `Menu Button: ${menu.title}`, 'menu-title', menu.title);
     
     return [btn];
 }
