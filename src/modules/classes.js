@@ -23,12 +23,12 @@ class TaskBase {
 
     deleteTag(value) {
         const index = this.tags.findIndex(tag => tag === value);
-        if (index >= 0) this.tags.splice(index, 1);
+        if (index !== -1) this.tags.splice(index, 1);
     }
 
     updateTag(value, newValue) {
         const index = this.tags.findIndex(tag => tag === value);
-        if (index >= 0) this.tags.splice(index, 1, newValue);
+        if (index !== -1) this.tags.splice(index, 1, newValue);
     }
 
     updateTime() {
@@ -42,10 +42,10 @@ class TaskBase {
     }
 
     deleteTimeTags() {
-        this.tags.map(tag => { 
-            if (tag === 'today' || tag === 'this-week' || tag === 'anytime' || tag === 'late') this.deleteTag(tag);
-        })
-
+        if (this.tags.includes('today')) this.deleteTag('today')
+        if (this.tags.includes('this-week')) this.deleteTag('this-week')
+        if (this.tags.includes('anytime')) this.deleteTag('anytime')
+        if (this.tags.includes('late')) this.deleteTag('late')
     }
 }
 

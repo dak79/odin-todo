@@ -91,6 +91,6 @@ export const updateTagsLabel = (object, label, labelText) =>{
 const addTagsLabel = (object, label, labelText) => {
     label.textContent = '';
 
-    const tagsLabel = object.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(' - ');
+    const tagsLabel = object.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ')).join(' - ');
     label.textContent = `${labelText} ${tagsLabel}`;
 }

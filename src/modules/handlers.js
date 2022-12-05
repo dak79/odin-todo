@@ -1,6 +1,6 @@
 import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
+import { tasks, addNewTask, checkboxState, expandTask, newTags, updateTimeTasks } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
@@ -101,11 +101,14 @@ const saveInput = (newItem, type) => {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
             newItem.instance.update('title', newItem.node.value);
-            if (!newItem.instance.tags.includes(currentDesk[0])) newItem.instance.addTag(currentDesk[0]);
+
+            if (!newItem.instance.tags.includes(currentDesk[0])) newItem.instance.addTag(String(currentDesk[0]));
+            
             if (currentDesk[0] === 'today') {
                 newItem.instance.deleteTimeTags();
-                newItem.instance.update('dueDate', new Date())};
-                console.log(newItem.instance.tags);
+                newItem.instance.update('dueDate', new Date())
+            };
+
             renderTasks(currentDesk[0], false);
         }
 
@@ -114,10 +117,11 @@ const saveInput = (newItem, type) => {
             if (type === 'task') {
                 taskToUpdate.update('title', String(newItem.node.value));
             } else {
-                taskToUpdate.update('dueDate', new Date(newItem.node.value));
                 taskToUpdate.deleteTimeTags();
+                taskToUpdate.update('dueDate', new Date(newItem.node.value));
                 taskToUpdate.updateTime();
             }
+
             renderTasks(currentDesk[0], false);
         }
 
@@ -170,10 +174,12 @@ const deleteItem = (event, id, type) => {
     if (type === 'list') {
         tasks.map(task => {
             if (task.tags.includes(String(itemToDelete.title.toLowerCase().trim()))) task.deleteTag(itemToDelete.title.toLowerCase().trim());
-        })
+        });
+
         updateTagsOptions(null);
         updateTagsLabel(null, null, null);
         renderLists(false);
+        renderTasks(currentDesk[0], false);
     } else {
         renderTasks(currentDesk[0], false);
     }

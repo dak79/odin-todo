@@ -12,7 +12,7 @@ export const btnsUi = (object, name, classes, ariaLabel) => {
     const button = document.createElement('button');
     setAttributes(button, {
         type: 'button',
-        id: (object.type === 'task' || object.type === 'list') ? `${name}-${object.type}-btn` : `${name}-${object.type}-${object.id}-btn`,
+        id: (name === 'new' && (object.type === 'task' || object.type === 'list')) ? `${name}-${object.type}-btn` : `${name}-${object.type}-${object.id}-btn`,
         'aria-label': `${ariaLabel}`,
         'data-btn': `${name}`,
     })
