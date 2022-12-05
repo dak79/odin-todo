@@ -167,7 +167,7 @@ export const expandTaskUi = task => {
     appendChildren(tagsWrapper, tags);
 
     const checklistWrapper = document.createElement('div');
-    checklistWrapper.classList.add('checklist-wrapper')
+    checklistWrapper.classList.add('checklist-wrapper');
    
     const checkListBtn = btnsUi({id: task.id, type: 'checklist'}, 'new', ['btns', 'round-btns', 'round-btns-small'], 'Add new item to checklist');
     
@@ -191,8 +191,7 @@ export const newTaskUi = newItem => {
         id: `list-item-task-${newItem.id}`,
         class: 'task-item items'
     });
-    console.log(newItem);
-
+   
     const newTaskContent = taskItem(newItem);
     appendChildren(li, newTaskContent);
     
@@ -201,7 +200,7 @@ export const newTaskUi = newItem => {
 
     const input = textInputUi(newItem, 'new', false, 40);
     
-    appendInput(`#checkbox-wrapper-${newItem.id} > label`, `#checkbox-wrapper-${newItem.id}`, input, false)
+    appendInput(`#checkbox-wrapper-${newItem.id} > label`, `#checkbox-wrapper-${newItem.id}`, input, false);
 
     return input;
 }

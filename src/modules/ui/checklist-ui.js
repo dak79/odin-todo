@@ -39,7 +39,7 @@ const populateChecklist = (object, name, wrapper) => {
                 class: `${name}-item-wrapper`
             });
 
-        const checkbox = checkboxUi({id: `${object.id}-${index}`, type: `${item.type}`, title: item.title}, 'item', 'Checklist item done or not done')
+        const checkbox = checkboxUi({id: `${object.id}-${index}`, type: `${item.type}`, title: item.title}, 'item', 'Checklist item done or not done');
 
         appendChildren(group, checkbox);
 

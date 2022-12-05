@@ -1,6 +1,6 @@
 import { saveOnEnter, findItemId } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, checkboxState, expandTask, newTags, updateTimeTasks } from './tasks';
+import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
@@ -19,7 +19,6 @@ export const eventController = event => {
     const value = event.target.value;
     const desk = event.target.dataset.name;
 
-    console.log(btn, type, id, value, desk);
     if (btn === 'delete') {
         deleteItem(event, id, type);
     } 
@@ -40,13 +39,13 @@ export const eventController = event => {
     if (btn === 'new') {
         const newItem = (type === 'new-task') ? addNewTask(event) : addNewList(event);
 
-        if (newItem) newInputListeners(newItem, type) 
+        if (newItem) newInputListeners(newItem, type);
     }
 
     if (btn === 'edit') {
         const newItem = (type === 'list') ? editListUi(id, type) : editTaskUi(id, type);
 
-        if (newItem) newInputListeners(newItem, type)  
+        if (newItem) newInputListeners(newItem, type); 
     }
     
     if (btn === 'radio') {
@@ -84,8 +83,7 @@ const newInputListeners = (newItem, type) => {
     } else {
         newItem.node.addEventListener('focusout', () => saveInput(newItem, type));
         newItem.node.addEventListener('keyup', saveOnEnter);
-    }
-    
+    }  
 }
 
 /**
@@ -106,7 +104,7 @@ const saveInput = (newItem, type) => {
             
             if (currentDesk[0] === 'today') {
                 newItem.instance.deleteTimeTags();
-                newItem.instance.update('dueDate', new Date())
+                newItem.instance.update('dueDate', new Date());
             };
 
             renderTasks(currentDesk[0], false);
@@ -123,9 +121,7 @@ const saveInput = (newItem, type) => {
             }
 
             renderTasks(currentDesk[0], false);
-        }
-
-        
+        }  
     } 
 
     if (type === 'description') {
@@ -158,7 +154,7 @@ const saveInput = (newItem, type) => {
 
 const deleteItem = (event, id, type) => {
     event.stopPropagation();
-    const array = (type === 'list') ? lists : tasks
+    const array = (type === 'list') ? lists : tasks;
     const itemToDelete = findItemId(array, Number(id));
    
     if (type === 'task' || type === 'list') {
@@ -197,5 +193,5 @@ export const editChecklist = () => {
 }
 
 export const deleteChecklist = () => {
-    console.log('delete checklist item')
+    console.log('delete checklist item');
 }

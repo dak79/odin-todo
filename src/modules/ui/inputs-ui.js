@@ -67,14 +67,14 @@ export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => 
     if (parentNode) {
         parentNode.replaceChild(input, node);
     } else {
-        node.appendChild(input)
+        node.appendChild(input);
     }
     
     input.focus();
     
     if (isEdit) {
         input.value = node.textContent;
-        const id = node.dataset.number
+        const id = node.dataset.number;
         
         return { node: input, id }
     }

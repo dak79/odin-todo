@@ -22,7 +22,7 @@ export const renderLists = isFirstLoad => {
     appendChildren(section, [displayHeader, ul]);
     if (!isFirstLoad) {
         clearListeners(listeners);
-        addAppListeners()
+        addAppListeners();
     }
 }
 
@@ -30,7 +30,7 @@ const listHeader = () => {
     const header = document.createElement('header');
     header.classList.add('headers');
     const title = listsTitle();
-    const newListBtn = btnsUi({type: 'list'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new list')
+    const newListBtn = btnsUi({type: 'list'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new list');
 
     appendChildren(header, [newListBtn, title]);
 

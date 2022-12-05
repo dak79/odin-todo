@@ -23,7 +23,7 @@ export const createUl = (ulClass) => {
     const ul = document.createElement('ul');
     ul.classList.add(ulClass);
     
-    return ul
+    return ul;
 }
 
 /**
@@ -41,7 +41,7 @@ export const createLi = (object, liClasses, item) => {
     const liContent = item(object);
     appendChildren(li, liContent);
 
-    return li
+    return li;
 }
 
 /**

@@ -39,7 +39,7 @@ const floor = () => {
     setAttributes(section, {
         class: 'desk',
         id:'desk'
-    })
+    });
 
     return section;
 }
@@ -84,5 +84,5 @@ const sideSectionLists = () => {
         id: 'section-lists'
     });
 
-    return section
+    return section;
 }

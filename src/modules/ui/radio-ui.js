@@ -77,7 +77,7 @@ const populateRadio = (object, label, input) => {
         } 
     } else {
         if (label === 'medium') {
-            input.checked = true
+            input.checked = true;
         }
     }
 }

@@ -15,7 +15,7 @@ export const lists = [];
 export const addNewList = event => {
     event.stopPropagation();
 
-    const instance = new List()
+    const instance = new List();
     const input = newListUi(instance);
 
     return { node: input, instance };
@@ -52,7 +52,7 @@ export const checkListName = item => {
 const newListNameError = element => {
     element.value = 'Already exists';
     element.classList.add('input-text-lists-error');
-    element.addEventListener('keydown', cancelText)
+    element.addEventListener('keydown', cancelText);
 
     function cancelText () {
         element.value = '';

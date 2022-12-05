@@ -25,5 +25,4 @@ export const exampleTasks = () => {
 
     const todoEight = new Task('Mail', 'Send me mail please', new Date('2022-12-08'), 'high', [new Checklist('Take metro')]);
     todoEight.add(tasks);
-    
 }

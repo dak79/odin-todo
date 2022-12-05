@@ -24,7 +24,7 @@ export const renderMenu = () => {
  * @returns { HTMLElement } - Button
  */
 const navBtn = menu => {
-    const btn = btnsUi(menu, 'title', ['btns', 'menu-btns', 'text-btns'], `Menu button: ${menu.title}`)
+    const btn = btnsUi(menu, 'title', ['btns', 'menu-btns', 'text-btns'], `Menu button: ${menu.title}`);
 
     return [btn];
 }

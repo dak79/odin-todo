@@ -28,7 +28,7 @@ export const tagsUi = (object, name, labelText) => {
     });
     updateTagsOptions(select);
 
-    return [label, select]
+    return [label, select];
 }
 
 /**
@@ -50,7 +50,7 @@ export const tagsUi = (object, name, labelText) => {
  */
 const addSelectOptions = select => {
     while (select.options.length > 0){
-        select.remove(0)
+        select.remove(0);
     }
 
     if (select) {
@@ -58,7 +58,7 @@ const addSelectOptions = select => {
         lists.map(list => {
             let opti = Array.from(select.options).map(opt => opt.text);
               
-            if(!opti.includes(list.title)) select.options.add(new Option(list.title, list.title))
+            if(!opti.includes(list.title)) select.options.add(new Option(list.title, list.title));
         });
     }
 }
@@ -78,7 +78,7 @@ export const updateTagsLabel = (object, label, labelText) =>{
             addTagsLabel(task, label, `List:`);
         });    
     } else {
-        addTagsLabel(object, label, labelText)
+        addTagsLabel(object, label, labelText);
     }
 }
 

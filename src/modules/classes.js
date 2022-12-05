@@ -42,10 +42,10 @@ class TaskBase {
     }
 
     deleteTimeTags() {
-        if (this.tags.includes('today')) this.deleteTag('today')
-        if (this.tags.includes('this-week')) this.deleteTag('this-week')
-        if (this.tags.includes('anytime')) this.deleteTag('anytime')
-        if (this.tags.includes('late')) this.deleteTag('late')
+        if (this.tags.includes('today')) this.deleteTag('today');
+        if (this.tags.includes('this-week')) this.deleteTag('this-week');
+        if (this.tags.includes('anytime')) this.deleteTag('anytime');
+        if (this.tags.includes('late')) this.deleteTag('late');
     }
 }
 

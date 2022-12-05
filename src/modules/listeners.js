@@ -88,7 +88,6 @@ export const addListener = (array, selector, eventType, callback) => {
  * @param { [] } array - Storage of all event listener to remove. 
  */
 export const clearListeners = array => {
-    console.log(array);
     array.forEach(listener => {
         listener.node.removeEventListener(listener.eventType, listener.callback); 
     })
