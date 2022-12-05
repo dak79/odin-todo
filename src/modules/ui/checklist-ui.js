@@ -39,19 +39,20 @@ const populateChecklist = (object, name, wrapper) => {
                 class: `${name}-item-wrapper`
             });
 
-        const checkbox = checkboxUi(item, 'item', 'Checklist item done or not done');
+        const checkbox = checkboxUi({id: `${object.id}-${index}`, type: `${item.type}`, title: item.title}, 'item', 'Checklist item done or not done')
 
         appendChildren(group, checkbox);
 
         const btnsWrapper = document.createElement('span');
         setAttributes(btnsWrapper, {
-            id: `${item.type}-btns-wrapper-${item.id}`,
+            id: `${item.type}-btns-wrapper-${object.id}-${index}`,
             class: `${item.type}-btns-wrapper`
         });
 
-        const btnEditChecklist = btnsUi(item, 'checklist', 'edit', 'btns checklist-edit-btn svg-btns', `Edit checklist: ${item.title}`, 'checklist', 'edit', index);
-
-        const btnDeleteChecklist = btnsUi(item, 'checklist', 'delete', 'btns checklist-delete-btn svg-btns', `Delete checklist: ${item.title}`, 'checklist', 'delete', index);
+        const btnEditChecklist = btnsUi({id: `${object.id}-${index}`, type: `${item.type}`}, 'edit', ['btns', 'checklist-edit-btn', 'svg-btns'], 'Edit this checklist item');
+        
+        const btnDeleteChecklist = btnsUi({id: `${object.id}-${index}`, type: `${item.type}`}, 'delete', ['btns', 'checklist-delete-btn', 'svg-btns'], 'Delete this checklist item');
+        
         appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist])
         group.appendChild(btnsWrapper);
 

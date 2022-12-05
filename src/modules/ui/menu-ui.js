@@ -1,4 +1,4 @@
-import { titleBtn } from './btns-ui';
+import { btnsUi } from './btns-ui';
 import { selectNode, createLi, createUl } from '../helpers';
 import { Menu } from '../classes';
 
@@ -24,8 +24,7 @@ export const renderMenu = () => {
  * @returns { HTMLElement } - Button
  */
 const navBtn = menu => {
-    const btn = titleBtn(menu, 'title', ['btns', 'menu-btns', 'text-btns'], `Menu button: ${menu.title}`)
-    // const btn = btnsUi( menu, 'menu', 'title', 'btns menu-btns text-btns', `Menu Button: ${menu.title}`, 'menu-title', menu.title);
-    
+    const btn = btnsUi(menu, 'title', ['btns', 'menu-btns', 'text-btns'], `Menu button: ${menu.title}`)
+
     return [btn];
 }

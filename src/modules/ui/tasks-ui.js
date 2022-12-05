@@ -1,4 +1,4 @@
-import { btnsUi, newBtn } from '../ui/btns-ui';
+import { btnsUi } from '../ui/btns-ui';
 import { appendChildren, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
 import { format } from 'date-fns';
 import { addAppListeners, clearListeners, listeners } from '../listeners';
@@ -54,7 +54,7 @@ const taskItem = task => {
 
     const checkbox = checkboxUi(task, 'checkbox', 'Task done or not done');
 
-    const expandTaskBtn = btnsUi(task, 'task', 'expand', 'btns expand-btn svg-btns', 'Show task details', 'expand-task', 'expand');
+    const expandTaskBtn = btnsUi(task, 'expand', ['btns', 'expand-btn', 'svg-btns'], 'Show task details');
     
     appendChildren(wrapperCheck, checkbox);
     wrapperCheck.appendChild(expandTaskBtn);
@@ -67,12 +67,12 @@ const taskItem = task => {
     });
 
     if (task.dueDate) {
-        const deleteDateBtn = btnsUi(task, 'due-date', 'delete', 'btns due-date-delete-btn svg-btns', 'Delete Date', 'due-date', 'delete');
+        const deleteDateBtn = btnsUi({id: task.id, type: 'due-date'}, 'delete', ['btns','due-date-delete-btn', 'svg-btns'], 'Delete date');
              
         wrapperDueDate.appendChild(deleteDateBtn);
 
     } else {
-        const editDateBtn = btnsUi(task, 'due-date', 'edit', 'btns due-date-edit-btn svg-btns', 'Edit Date', 'due-date', 'edit');
+        const editDateBtn = btnsUi({id: task.id, type: 'due-date'}, 'edit', ['btns', 'due-date-edit-btn', 'svg-btns'], 'Edit date');
         
         wrapperDueDate.appendChild(editDateBtn);
     }
@@ -115,9 +115,10 @@ const taskItem = task => {
         class: 'task-btn-wrapper'
     });
 
-    const editTaskBtn = btnsUi(task, 'task', 'edit', 'btns task-edit-btn svg-btns', `Edit Task: ${task.title}`, task.type, 'edit'); 
+    const editTaskBtn = btnsUi(task, 'edit', ['btns', 'task-edit-btn', 'svg-btns'], `Edit task: ${task.title}`);
     
-    const deleteTaskBtn = btnsUi(task, 'task', 'delete', 'btns task-delete-btn svg-btns', `Delete Task: ${task.title}`, task.type, 'delete');
+    
+    const deleteTaskBtn = btnsUi(task, 'delete', ['btns', 'task-delete-btn', 'svg-btns'], `Delete task: ${task.title}`);
     
     appendChildren(wrapperBtns, [editTaskBtn, deleteTaskBtn]);
 
@@ -168,7 +169,7 @@ export const expandTaskUi = task => {
     const checklistWrapper = document.createElement('div');
     checklistWrapper.classList.add('checklist-wrapper')
    
-    const checkListBtn = newBtn({id: task.id, type: 'checklist'}, 'new', ['btns', 'round-btns', 'round-btns-small'], 'Add new item to checklist');
+    const checkListBtn = btnsUi({id: task.id, type: 'checklist'}, 'new', ['btns', 'round-btns', 'round-btns-small'], 'Add new item to checklist');
     
     const checklist = checklistUi(task, 'checklist');
     appendChildren(checklistWrapper, [checkListBtn, checklist]);
@@ -216,7 +217,7 @@ export const editTaskUi = (id, type) => {
 
     const newInput = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
  
-    const btn = selectNode(`#${type}-edit-btn-${id}`);
+    const btn = selectNode(`#edit-${type}-${id}-btn`);
     btn.classList.add('svg-active');
 
     return newInput;

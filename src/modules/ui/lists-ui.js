@@ -1,7 +1,7 @@
 import { cleanNode, selectNode, setAttributes, appendChildren, removeElement, createUl, createLi } from '../helpers';
 import { lists } from '../lists';
 import { listeners, addAppListeners, clearListeners } from '../listeners';
-import { btnsUi, newBtn, titleBtn } from './btns-ui';
+import { btnsUi } from './btns-ui';
 import { textInputUi, appendInput } from './inputs-ui'
 
 /**
@@ -30,7 +30,7 @@ const listHeader = () => {
     const header = document.createElement('header');
     header.classList.add('headers');
     const title = listsTitle();
-    const newListBtn = newBtn({type: 'list'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new list')
+    const newListBtn = btnsUi({type: 'list'}, 'new', ['btns', 'round-btns', 'round-btns-big'], 'Add new list')
 
     appendChildren(header, [newListBtn, title]);
 
@@ -52,17 +52,17 @@ const listsTitle = () => {
  */
 const listsBtn = list => {
     
-    const btnTitle = titleBtn(list, 'title', ['btns', 'lists-btns', 'text-btns'], `List title button: ${list.title}`);
+    const btnTitle = btnsUi(list, 'title', ['btns', 'lists-btns', 'text-btns'], `List title button: ${list.title}`);
 
     const wrapper = document.createElement('span');
     setAttributes(wrapper, {
         id: `btns-lists-${list.id}`,
         class: 'btns-lists'
     });
-    
-    const btnEdit = btnsUi(list, 'lists', 'edit', 'btns svg-btns svg-btns-edit', `Button Edit List: ${list.title}`, list.type, 'edit');
-    
-    const btnDelete = btnsUi(list, 'lists', 'delete', 'btns svg-btns svg-btns-delete', `Button Delete List: ${list.title}`, list.type, 'delete');
+
+    const btnEdit = btnsUi(list, 'edit', ['btns', 'svg-btns', 'svg-btns-edit'], `Edit list: ${list.title}`);
+
+    const btnDelete = btnsUi(list, 'delete', ['btns', 'svg-btns', 'svg-btns-delete'], `Delete list: ${list.title}`);
     
     appendChildren(wrapper, [btnEdit, btnDelete]);
    
@@ -90,7 +90,7 @@ export const newListUi = object => {
 export const editListUi = (id, type) => {
     console.log(type)
     const input = textInputUi({type}, 'edit', false, 15);
-    const nodes = appendInput(`#title-list-${id}-btn`, `#list-item-lists-${id}`, input, true);
+    const nodes = appendInput(`#title-list-${id}-btn`, `#list-item-list-${id}`, input, true);
  
     removeElement(`#btns-lists-${id}`);
         
