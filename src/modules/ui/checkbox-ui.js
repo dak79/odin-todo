@@ -7,11 +7,15 @@ import { setAttributes } from '../helpers';
  * @param { string } ariaLabel - Content of aria-label 
  * @returns { Node[] } - Array with input and label for checkboxes
  */
+
+// name = checkbox || checklist
+// object.type = task || item
+// object.id = 5 || 5-0
 export const checkboxUi = (object, name, ariaLabel) => {
     const input = document.createElement('input');
     setAttributes(input, {
     type: 'checkbox',
-    id: `${object.type}-${name}-${object.id}`,
+    id: `${name}-${object.type}-${object.id}`,
     class: `${object.type}s-${name}`,
     name: `${object.type}-${name}-${object.id}`,
     'aria-label': `${ariaLabel}`,
@@ -22,7 +26,7 @@ export const checkboxUi = (object, name, ariaLabel) => {
 
     const label = document.createElement('label');
     setAttributes(label, {
-        for: `${object.type}-${name}-${object.id}`,
+        for: `${name}-${object.type}-${object.id}`,
         class: `${object.type}-${name}-labels`,
         'data-number': `${object.id}`
     });

@@ -37,7 +37,7 @@ export const addExpandListener = id => {
 
     addListener(expandListeners, `#new-checklist-${id}-btn`, 'click', addNewCheck);
 
-    addListeners(expandListeners, `[data-type='item-state']`, 'change', eventController)
+    addListeners(expandListeners, `.items-checklist`, 'change', eventController)
 
     addListeners(expandListeners, '.checklist-edit-btn', 'click', editChecklist);
     addListeners(expandListeners, '.checklist-delete-btn', 'click', deleteChecklist);

@@ -41,25 +41,25 @@ export const addNewTask = event => {
  * Checkbox State.
  * @param { number } id - Task id. 
  */
-export const checkboxState = id => {
-    const checkbox = selectNode(`#task-checkbox-${id}`);
+// export const checkboxState = id => {
+//     const checkbox = selectNode(`#task-checkbox-${id}`);
 
-    const isCompleted = checkbox.checked ? true : false;
-    const task = findItemId(tasks, Number(id));
-    task.update('complete', isCompleted);
+//     const isCompleted = checkbox.checked ? true : false;
+//     const task = findItemId(tasks, Number(id));
+//     task.update('complete', isCompleted);
     
-    if (isCompleted) {
-        task.addTag('complete');
-        task.deleteTag('inbox');
-        task.deleteTimeTags();
-    } else {
-        task.deleteTag('complete');
-        task.addTag('inbox');
-        task.updateTime();
-    }
+//     if (isCompleted) {
+//         task.addTag('complete');
+//         task.deleteTag('inbox');
+//         task.deleteTimeTags();
+//     } else {
+//         task.deleteTag('complete');
+//         task.addTag('inbox');
+//         task.updateTime();
+//     }
     
-    setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
-}
+//     setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
+// }
 
 /**
  * Expand task.

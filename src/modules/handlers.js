@@ -1,6 +1,6 @@
-import { saveOnEnter, findItemId } from './helpers';
+import { saveOnEnter, findItemId, selectNode } from './helpers';
 import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, checkboxState, expandTask, newTags } from './tasks';
+import { tasks, addNewTask, expandTask, newTags } from './tasks';
 import { renderLists, editListUi } from './ui/lists-ui';
 import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
@@ -28,8 +28,8 @@ export const eventController = event => {
         renderTasks(currentDesk[0], false);
     } 
     
-    if (btn === 'checkbox') {
-        checkboxState(id);
+    if (btn === 'checkbox' || btn === 'checklist') {
+        checkboxState(id, type, btn, value, desk);
     } 
     
     if (btn === 'expand') {
@@ -53,10 +53,6 @@ export const eventController = event => {
         task.update('priority', String(value));
         updatePriorityUi(task, `#task-msg-wrapper-${id}`, true);
     } 
-    
-    if (btn === 'item') {
-        checklistChecked(event);
-    }
     
     if (type === 'description') {
         const newItem = {
@@ -181,9 +177,36 @@ const deleteItem = (event, id, type) => {
     }
 }
 
-export const checklistChecked = () => {
-    console.log('checked');
+/**
+ * Manage checkbox state.
+ * @param { number|number[] } id - Checkbox id or checklist ids 
+ * @param { 'checkbox-state'|'checklist-state'} type - Which checkbox fired the event  
+ * @param { 'checkbox'|'checklist' } btn - Button that fire event
+ */
+ const checkboxState = (id, type, btn) => {
+    const checkbox = selectNode(`#${btn}-${(btn === 'checkbox') ? 'task' : 'item'}-${id}`);
+    
+    const isCompleted = checkbox.checked ? true : false;
+    
+    id = (type === 'checkbox-state') ? id : id.split('-')
+    const task = (type === 'checkbox-state') ? findItemId(tasks, Number(id)) : findItemId(findItemId(tasks, Number(id[0])).checklist, Number(id[1])); 
+    task.update('complete', isCompleted);
+    
+    if (type === 'checkbox-state') {
+        if (isCompleted) {
+            task.addTag('complete');
+            task.deleteTag('inbox');
+            task.deleteTimeTags();
+        } else {
+            task.deleteTag('complete');
+            task.addTag('inbox');
+            task.updateTime();
+        }
+        
+        setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
+    }
 }
+
 export const addNewCheck = () => {
     console.log('add new check');
 }
