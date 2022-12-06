@@ -1,9 +1,7 @@
-import { appendChildren, findItemId, selectNode } from './helpers';
+import { findItemId, selectNode } from './helpers';
 import { addExpandListener } from './listeners';
 import { expandTaskUi } from './ui/tasks-ui';
-import { Checklist } from './classes';
 import { updateTagsLabel } from './ui/select-ui';
-import { checkboxUi } from './ui/checkbox-ui';
 
 // Tasks database
 export const tasks = [];
@@ -67,20 +65,3 @@ export const newTags = (event, id, value) => {
         select.selectedIndex = 0;
         select.blur();
 }
-
-export const addNewCheck = event => {
-        event.stopPropagation();
-        const id = event.target.dataset.number
-
-        const instance = new Checklist();
-        console.log(instance); 
-        const check = checkboxUi(instance, 'item', 'New checklist item');
-        console.log(check);
-        console.log('add new check');
-
-        const a = check[1]
-        const b = inpu
-
-        const wrapper = selectNode(`#checklist-wrapper-${id}`);
-        appendChildren(wrapper, check);
-    }

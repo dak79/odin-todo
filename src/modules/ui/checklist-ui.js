@@ -1,6 +1,7 @@
 import { checkboxUi } from './checkbox-ui';
-import { appendChildren, setAttributes } from '../helpers';
+import { appendChildren, setAttributes, selectNode } from '../helpers';
 import { btnsUi } from './btns-ui';
+import { appendInput, textInputUi } from './inputs-ui';
 /**
  * Create checklist Ui
  * @param { {} } object - Object for retriving data. 
@@ -30,12 +31,19 @@ export const checklistUi = (object, name) => {
     return fieldset;
 }
 
-const populateChecklist = (object, name, wrapper) => {
-    object.checklist.map((item, index) => {
+export const populateChecklist = (object, name, wrapper) => {
+    object.checklist.map((item) => {
+        createChecklistItem(object, item, name, wrapper);
+    });
+}
 
-        const group = document.createElement('div');
+export const createChecklistItem = (object, item, name, wrapper) => {
+
+    if (!wrapper) wrapper = selectNode(`#checklist-wrapper-${object.id}`);
+    
+    const group = document.createElement('div');
         setAttributes(group, {
-                id: `${name}-item-wrapper-${object.id}-${index}`,
+                id: `${name}-item-wrapper-${object.id}-${item.id}`,
                 class: `${name}-item-wrapper`
             });
 
@@ -45,17 +53,27 @@ const populateChecklist = (object, name, wrapper) => {
 
         const btnsWrapper = document.createElement('span');
         setAttributes(btnsWrapper, {
-            id: `${item.type}-btns-wrapper-${object.id}-${index}`,
+            id: `${item.type}-btns-wrapper-${object.id}-${item.id}`,
             class: `${item.type}-btns-wrapper`
         });
 
-        const btnEditChecklist = btnsUi({id: `${object.id}-${index}`, type: `${item.type}`}, 'edit', ['btns', 'checklist-edit-btn', 'svg-btns'], 'Edit this checklist item');
+        const btnEditChecklist = btnsUi({id: `${object.id}-${item.id}`, type: `${item.type}`}, 'edit', ['btns', 'checklist-edit-btn', 'svg-btns'], 'Edit this checklist item');
         
-        const btnDeleteChecklist = btnsUi({id: `${object.id}-${index}`, type: `${item.type}`}, 'delete', ['btns', 'checklist-delete-btn', 'svg-btns'], 'Delete this checklist item');
+        const btnDeleteChecklist = btnsUi({id: `${object.id}-${item.id}`, type: `${item.type}`}, 'delete', ['btns', 'checklist-delete-btn', 'svg-btns'], 'Delete this checklist item');
         
         appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist])
         group.appendChild(btnsWrapper);
 
+        console.log(group);
+
         wrapper.appendChild(group);
-    });
+}
+
+export const addNewCheckUi = (object, item, name, wrapper) => {
+    createChecklistItem(object, item, name, wrapper);
+
+    const input = textInputUi(item, 'new', false, 30);
+    appendInput(`#checklist-item-wrapper-${object.id}-${item.id} > label`, `#checklist-item-wrapper-${object.id}-${item.id}`, input, false);
+
+    return input;
 }

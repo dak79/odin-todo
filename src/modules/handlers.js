@@ -1,11 +1,12 @@
 import { saveOnEnter, findItemId, selectNode } from './helpers';
 import { lists, checkListName } from './lists';
-import { tasks, expandTask, newTags, addNewCheck } from './tasks';
+import { tasks, expandTask, newTags } from './tasks';
 import { renderLists, editListUi, newListUi } from './ui/lists-ui';
 import { editTaskUi, newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
 import { currentDesk, updateCurrentDesk } from './menu';
-import { List, Task } from './classes';
+import { Checklist, List, Task } from './classes';
+import { addNewCheckUi, populateChecklist } from './ui/checklist-ui';
 
 /**
  * Controller for events.
@@ -40,7 +41,7 @@ export const eventController = event => {
     }
 
     if (btn === 'new') {
-        const newItem = (type === 'new-checklist') ? addNewCheck(event) : addNewItem(event, type);
+        const newItem = addNewItem(event, type, id);
 
         if (newItem) newInputListeners(newItem, type);
     }
@@ -94,6 +95,7 @@ const newInputListeners = (newItem, type) => {
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
+    console.log(type);
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
@@ -120,8 +122,19 @@ const saveInput = (newItem, type) => {
             }
 
             renderTasks(currentDesk[0], false);
-        }  
+        }
+        
     } 
+    
+    if (type === 'new-checklist') {
+        const task = findItemId(tasks, Number(newItem.instance.taskId));
+        newItem.instance.add(task.checklist);
+        newItem.instance.update('title', String(newItem.node.value));
+       
+        const wrapper = selectNode(`#checklist-wrapper-${task.id}`);
+        wrapper.innerHTML = '';
+        populateChecklist(task, 'checklist', null);
+    }
 
     if (type === 'description') {
         newItem.instance.update('description', newItem.value);  
@@ -211,17 +224,18 @@ const deleteItem = (event, id, type) => {
 }
 
 /**
- * Add new task
+ * Add new task|list|checklist item
  * @param { event } event 
  * @property { Node } node - Input node for update.
  * @property { {} } instance - New task instance.
  * @returns { {} } New task data.
  */
-export const addNewItem = (event, type) => {
+export const addNewItem = (event, type, id) => {
     event.stopPropagation();
 
-    const instance = (type === 'new-task') ? new Task() : new List();
-    const input = (type === 'new-task') ? newTaskUi(instance) : newListUi(instance);
+    const instance = (type === 'new-task') ? new Task() : (type === 'new-list') ? new List() : new Checklist(id, null);
+   
+    const input = (type === 'new-task') ? newTaskUi(instance) : (type === 'new-list') ? newListUi(instance) : addNewCheckUi({id}, instance, 'checklist', null)
 
     return {node: input, instance}
 

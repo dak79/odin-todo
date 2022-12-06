@@ -60,10 +60,11 @@ class ListBase {
 }
 
 class ChecklistBase {
-    constructor(title) {
+    constructor(taskId, title) {
         this.constructor.incrementId();
         this.type= 'checklist';
         this.id = this.constructor.id;
+        this.taskId = taskId;
         this.title = title;
         this.complete = false;
     }
