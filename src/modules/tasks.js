@@ -1,9 +1,9 @@
-import { findItemId, selectNode } from './helpers';
+import { appendChildren, findItemId, selectNode } from './helpers';
 import { addExpandListener } from './listeners';
-import { renderTasks, newTaskUi, expandTaskUi } from './ui/tasks-ui';
-import { Task } from './classes';
+import { expandTaskUi } from './ui/tasks-ui';
+import { Checklist } from './classes';
 import { updateTagsLabel } from './ui/select-ui';
-import { currentDesk } from './menu';
+import { checkboxUi } from './ui/checkbox-ui';
 
 // Tasks database
 export const tasks = [];
@@ -20,46 +20,6 @@ export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) => first
  * @returns Updated array.
  */
 export const updateTimeTasks = () => tasks.map(task => task.updateTime());
-
-/**
- * Add new task
- * @param { event } event 
- * @property { Node } node - Input node for update.
- * @property { {} } instance - New task instance.
- * @returns { {} } New task data.
- */
-export const addNewTask = event => {
-        event.stopPropagation();
-
-        const instance = new Task();
-        const input = newTaskUi(instance);
-        
-        return {node: input, instance}
-}
-
-/**
- * Checkbox State.
- * @param { number } id - Task id. 
- */
-// export const checkboxState = id => {
-//     const checkbox = selectNode(`#task-checkbox-${id}`);
-
-//     const isCompleted = checkbox.checked ? true : false;
-//     const task = findItemId(tasks, Number(id));
-//     task.update('complete', isCompleted);
-    
-//     if (isCompleted) {
-//         task.addTag('complete');
-//         task.deleteTag('inbox');
-//         task.deleteTimeTags();
-//     } else {
-//         task.deleteTag('complete');
-//         task.addTag('inbox');
-//         task.updateTime();
-//     }
-    
-//     setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
-// }
 
 /**
  * Expand task.
@@ -107,3 +67,20 @@ export const newTags = (event, id, value) => {
         select.selectedIndex = 0;
         select.blur();
 }
+
+export const addNewCheck = event => {
+        event.stopPropagation();
+        const id = event.target.dataset.number
+
+        const instance = new Checklist();
+        console.log(instance); 
+        const check = checkboxUi(instance, 'item', 'New checklist item');
+        console.log(check);
+        console.log('add new check');
+
+        const a = check[1]
+        const b = inpu
+
+        const wrapper = selectNode(`#checklist-wrapper-${id}`);
+        appendChildren(wrapper, check);
+    }

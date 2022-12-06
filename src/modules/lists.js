@@ -1,25 +1,10 @@
 import { List } from './classes';
-import { newListUi, renderLists } from './ui/lists-ui';
+import { renderLists } from './ui/lists-ui';
 import { findItemName } from './helpers';
 
 // Lists database
 export const lists = [];
 
-/**
- * New list
- * @param { event } event 
- * @property { Node } node - Input node.
- * @property { {} } instance - New list instance. 
- * @returns { {} } - Data for new list: input node and new list instance. 
- */
-export const addNewList = event => {
-    event.stopPropagation();
-
-    const instance = new List();
-    const input = newListUi(instance);
-
-    return { node: input, instance };
-}
 
 /**
  * List name validation.

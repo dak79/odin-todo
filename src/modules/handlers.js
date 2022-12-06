@@ -1,10 +1,11 @@
 import { saveOnEnter, findItemId, selectNode } from './helpers';
-import { lists, checkListName, addNewList } from './lists';
-import { tasks, addNewTask, expandTask, newTags } from './tasks';
-import { renderLists, editListUi } from './ui/lists-ui';
-import { editTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
+import { lists, checkListName } from './lists';
+import { tasks, expandTask, newTags, addNewCheck } from './tasks';
+import { renderLists, editListUi, newListUi } from './ui/lists-ui';
+import { editTaskUi, newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
 import { currentDesk, updateCurrentDesk } from './menu';
+import { List, Task } from './classes';
 
 /**
  * Controller for events.
@@ -18,6 +19,8 @@ export const eventController = event => {
     const id = event.target.dataset.number;
     const value = event.target.value;
     const desk = event.target.dataset.name;
+
+    console.log(btn, type, id, value, desk);
 
     if (btn === 'delete') {
         deleteItem(event, id, type);
@@ -37,7 +40,7 @@ export const eventController = event => {
     }
 
     if (btn === 'new') {
-        const newItem = (type === 'new-task') ? addNewTask(event) : addNewList(event);
+        const newItem = (type === 'new-checklist') ? addNewCheck(event) : addNewItem(event, type);
 
         if (newItem) newInputListeners(newItem, type);
     }
@@ -207,8 +210,21 @@ const deleteItem = (event, id, type) => {
     }
 }
 
-export const addNewCheck = () => {
-    console.log('add new check');
+/**
+ * Add new task
+ * @param { event } event 
+ * @property { Node } node - Input node for update.
+ * @property { {} } instance - New task instance.
+ * @returns { {} } New task data.
+ */
+export const addNewItem = (event, type) => {
+    event.stopPropagation();
+
+    const instance = (type === 'new-task') ? new Task() : new List();
+    const input = (type === 'new-task') ? newTaskUi(instance) : newListUi(instance);
+
+    return {node: input, instance}
+
 }
 
 export const editChecklist = () => {
