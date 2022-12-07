@@ -1,4 +1,4 @@
-import { eventController, deleteChecklist } from './handlers';
+import { eventController } from './handlers';
 import { saveOnEnter } from './helpers';
 
 export const listeners = [];
@@ -39,7 +39,7 @@ export const addExpandListener = id => {
     addListeners(expandListeners, `.items-checklist`, 'change', eventController)
     addListener(expandListeners, `#new-checklist-${id}-btn`, 'click', eventController);
     addListeners(expandListeners, '.checklist-edit-btn', 'click', eventController);
-    addListeners(expandListeners, '.checklist-delete-btn', 'click', deleteChecklist);
+    addListeners(expandListeners, '.checklist-delete-btn', 'click', eventController);
 }
 
 

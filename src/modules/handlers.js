@@ -8,6 +8,7 @@ import { currentDesk, updateCurrentDesk } from './menu';
 import { Checklist, List, Task } from './classes';
 import { addNewCheckUi, populateChecklist } from './ui/checklist-ui';
 import { appendInput, dateInputUi, textInputUi } from './ui/inputs-ui';
+import { addExpandListener, clearListeners, expandListeners } from './listeners';
 
 /**
  * Controller for events.
@@ -145,6 +146,8 @@ const saveInput = (newItem, type) => {
         const wrapper = selectNode(`#checklist-wrapper-${task.id}`);
         wrapper.innerHTML = '';
         populateChecklist(task, 'checklist', null);
+        clearListeners(expandListeners);
+        addExpandListener(task.id);
     }
 
     if (type === 'description') {
@@ -176,9 +179,12 @@ const saveInput = (newItem, type) => {
 }
 
 const deleteItem = (event, id, type) => {
+    console.log(id, type);
     event.stopPropagation();
     const array = (type === 'list') ? lists : tasks;
-    const itemToDelete = findItemId(array, Number(id));
+    id = (type === 'checklist') ? id.split('-') : id;
+
+    const itemToDelete = findItemId(array, Number((type === 'checklist') ? id[0] : id));
    
     if (type === 'task' || type === 'list') {
         itemToDelete.delete(array);
@@ -190,6 +196,12 @@ const deleteItem = (event, id, type) => {
         itemToDelete.updateTime();
     }
 
+    if (type === 'checklist') {
+        const checkToDelete = findItemId(itemToDelete.checklist, Number(id[1]));
+        console.log(checkToDelete);
+        checkToDelete.delete(itemToDelete.checklist);
+    }
+
     if (type === 'list') {
         tasks.map(task => {
             if (task.tags.includes(String(itemToDelete.title.toLowerCase().trim()))) task.deleteTag(itemToDelete.title.toLowerCase().trim());
@@ -199,8 +211,16 @@ const deleteItem = (event, id, type) => {
         updateTagsLabel(null, null, null);
         renderLists(false);
         renderTasks(currentDesk[0], false);
-    } else {
+    } 
+    
+    if (type === 'task' || type === 'due-date') {
         renderTasks(currentDesk[0], false);
+    }
+
+    if (type === 'checklist') {
+        const wrapper = selectNode(`#checklist-wrapper-${id[0]}`);
+        wrapper.innerHTML = '';
+        populateChecklist(itemToDelete, 'checklist', null);
     }
 }
 
@@ -215,7 +235,7 @@ const deleteItem = (event, id, type) => {
     
     const isCompleted = checkbox.checked ? true : false;
     
-    id = (type === 'checkbox-state') ? id : id.split('-')
+    id = (type === 'checkbox-state') ? id : id.split('-');
     const task = (type === 'checkbox-state') ? findItemId(tasks, Number(id)) : findItemId(findItemId(tasks, Number(id[0])).checklist, Number(id[1])); 
     task.update('complete', isCompleted);
     
@@ -229,9 +249,10 @@ const deleteItem = (event, id, type) => {
             task.addTag('inbox');
             task.updateTime();
         }
-        
         setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
     }
+
+    checkbox.blur();
 }
 
 /**
@@ -273,8 +294,4 @@ const editItem = (id, type) => {
     }
     
     return nodes;
-}
-
-export const deleteChecklist = () => {
-    console.log('delete checklist item');
 }
