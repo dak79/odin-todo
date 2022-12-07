@@ -60,8 +60,6 @@ export const createChecklistItem = (object, item, name, wrapper) => {
         appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist])
         group.appendChild(btnsWrapper);
 
-        console.log(group);
-
         wrapper.appendChild(group);
 }
 

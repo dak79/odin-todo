@@ -23,8 +23,6 @@ export const eventController = event => {
     const value = event.target.value;
     const desk = event.target.dataset.name;
 
-    console.log(btn, type, id, value, desk);
-
     if (btn === 'delete') {
         deleteItem(event, id, type);
     } 
@@ -96,7 +94,7 @@ const newInputListeners = (newItem, type) => {
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
-    console.log(type);
+    
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
@@ -179,7 +177,7 @@ const saveInput = (newItem, type) => {
 }
 
 const deleteItem = (event, id, type) => {
-    console.log(id, type);
+    
     event.stopPropagation();
     const array = (type === 'list') ? lists : tasks;
     id = (type === 'checklist') ? id.split('-') : id;
@@ -198,7 +196,6 @@ const deleteItem = (event, id, type) => {
 
     if (type === 'checklist') {
         const checkToDelete = findItemId(itemToDelete.checklist, Number(id[1]));
-        console.log(checkToDelete);
         checkToDelete.delete(itemToDelete.checklist);
     }
 
