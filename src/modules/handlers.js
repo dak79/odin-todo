@@ -278,11 +278,11 @@ export const addNewItem = (event, type, id) => {
  * @returns { [] } - Input node and instance.
  */
 const editItem = (id, type) => {
-    
+    console.log(id, type);
     const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : (type === 'list') ? textInputUi({type}, 'edit', false, 15) : (type === 'checklist') ? textInputUi({type, id}, 'edit', false, 20) : dateInputUi({id});
 
     const nodes = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : (type === 'list') ? appendInput(`#title-list-${id}-btn`, `#list-item-list-${id}`, input, true) :
-    (type === 'checklist') ? appendInput(`#checklist-item-wrapper-${id} > label`, `#checklist-item-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
+    (type === 'checklist') ? appendInput(`#checklist-item-wrapper-${id} > label`, `#checklist-item-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, `#due-date-wrapper-${id}`, input, true);
 
     if (type === 'list') removeElement(`#btns-lists-${id}`);
         
