@@ -2,6 +2,8 @@ import { checkboxUi } from './checkbox-ui';
 import { appendChildren, setAttributes, selectNode } from '../helpers';
 import { btnsUi } from './btns-ui';
 import { appendInput, textInputUi } from './inputs-ui';
+import { populateChecklist } from '../tasks';
+
 /**
  * Create checklist Ui
  * @param { {} } object - Object for retriving data. 
@@ -29,12 +31,6 @@ export const checklistUi = (object, name) => {
     appendChildren(fieldset, [legend, wrapper]);
 
     return fieldset;
-}
-
-export const populateChecklist = (object, name, wrapper) => {
-    object.checklist.map((item) => {
-        createChecklistItem(object, item, name, wrapper);
-    });
 }
 
 export const createChecklistItem = (object, item, name, wrapper) => {

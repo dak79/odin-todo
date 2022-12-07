@@ -7,7 +7,7 @@ import { checkboxUi } from '../ui/checkbox-ui';
 import { checklistUi } from '../ui/checklist-ui';
 import { radioUi } from '../ui/radio-ui';
 import { tagsUi } from './select-ui';
-import { textInputUi, appendInput, dateInputUi } from '../ui/inputs-ui'
+import { textInputUi, appendInput } from '../ui/inputs-ui'
 
 /**
  * Render tasks

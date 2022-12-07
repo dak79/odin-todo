@@ -1,4 +1,5 @@
 import { appendChildren, setAttributes } from '../helpers';
+import { populateRadio } from '../tasks';
 
 /**
  * Radio buttons and priority UI.
@@ -62,22 +63,4 @@ export const radioUi = (object, name, legendText, radioLabels) => {
     appendChildren(fieldset, [legend, wrapper]);
 
     return fieldset;
-}
-
-/**
- * Populate Radio Buttons.
- * @param { {} } object - Object for retriving informations.
- * @param { node } label - Label to update.
- * @param { node } input - Input 
- */
-const populateRadio = (object, label, input) => {
-    if (object.priority) {
-        if (object.priority === label) {
-            input.checked = true;
-        } 
-    } else {
-        if (label === 'medium') {
-            input.checked = true;
-        }
-    }
 }

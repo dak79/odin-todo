@@ -1,4 +1,4 @@
-import { cleanNode, selectNode, setAttributes, appendChildren, removeElement, createUl, createLi } from '../helpers';
+import { cleanNode, selectNode, setAttributes, appendChildren, createUl, createLi } from '../helpers';
 import { lists } from '../lists';
 import { listeners, addAppListeners, clearListeners } from '../listeners';
 import { btnsUi } from './btns-ui';
@@ -81,4 +81,3 @@ export const newListUi = object => {
     
     return input;
 }
-

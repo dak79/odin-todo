@@ -5,7 +5,6 @@ import { findItemName } from './helpers';
 // Lists database
 export const lists = [];
 
-
 /**
  * List name validation.
  * @param { Object } item - Item to check

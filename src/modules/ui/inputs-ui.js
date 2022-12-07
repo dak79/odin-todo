@@ -1,4 +1,5 @@
 import { setAttributes, selectNode } from '../helpers';
+import { populateDescription } from '../tasks';
 
 /**
  * Create a text input field
@@ -80,13 +81,4 @@ export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => 
     }
 
     return input;
-}
-
-/**
- * Populate task description field
- * @param { {} } object - Object for retriving data. 
- * @param { node } input - Node containing value. 
- */
-const populateDescription = (object, input) => {
-    if (object.description) input.value = object.description;
 }

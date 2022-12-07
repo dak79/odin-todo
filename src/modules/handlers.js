@@ -1,12 +1,12 @@
 import { saveOnEnter, findItemId, selectNode, removeElement } from './helpers';
 import { lists, checkListName } from './lists';
-import { tasks, expandTask, newTags } from './tasks';
+import { tasks, expandTask, newTags, populateChecklist, updateTagsOptions, updateTagsLabel } from './tasks';
 import { renderLists, newListUi } from './ui/lists-ui';
 import { newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
-import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
+
 import { currentDesk, updateCurrentDesk } from './menu';
 import { Checklist, List, Task } from './classes';
-import { addNewCheckUi, populateChecklist } from './ui/checklist-ui';
+import { addNewCheckUi } from './ui/checklist-ui';
 import { appendInput, dateInputUi, textInputUi } from './ui/inputs-ui';
 import { addExpandListener, clearListeners, expandListeners } from './listeners';
 

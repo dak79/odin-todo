@@ -1,4 +1,5 @@
 import { setAttributes } from '../helpers';
+import { populateCheckboxes } from '../tasks';
 
 /**
  * Create a Checkbox UI
@@ -7,10 +8,6 @@ import { setAttributes } from '../helpers';
  * @param { string } ariaLabel - Content of aria-label 
  * @returns { Node[] } - Array with input and label for checkboxes
  */
-
-// name = checkbox || checklist
-// object.type = task || item
-// object.id = 5 || 5-0
 export const checkboxUi = (object, name, ariaLabel) => {
     const input = document.createElement('input');
     setAttributes(input, {
@@ -34,15 +31,4 @@ export const checkboxUi = (object, name, ariaLabel) => {
     populateCheckboxes(object, input, label);
 
     return [input, label];
-}
-
-/**
- * Populate checkboxes
- * @param { {} } object - Object for retrivin informations. 
- * @param { node } input - Input field type checkbox to update. 
- * @param { node } label - Label to update.
- */
-const populateCheckboxes = (object, input, label) => {
-    (object.title) ? label.textContent = `${object.title}` : label.textContent = '';
-    (object.complete) ? input.checked = true : input.checked = false;
 }
