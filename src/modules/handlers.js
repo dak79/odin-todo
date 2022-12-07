@@ -105,6 +105,7 @@ const saveInput = (newItem, type) => {
             if (currentDesk[0] === 'today') {
                 newItem.instance.deleteTimeTags();
                 newItem.instance.update('dueDate', new Date());
+                newItem.instance.updateTime();
             };
 
             renderTasks(currentDesk[0], false);
