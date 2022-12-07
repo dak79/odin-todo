@@ -1,5 +1,5 @@
 import { setAttributes, selectNode } from '../helpers';
-import { populateDescription } from '../tasks';
+import { populateDescription } from '../description';
 
 /**
  * Create a text input field

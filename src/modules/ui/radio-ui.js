@@ -1,5 +1,5 @@
 import { appendChildren, setAttributes } from '../helpers';
-import { populateRadio } from '../tasks';
+import { populateRadio } from '../radio';
 
 /**
  * Radio buttons and priority UI.

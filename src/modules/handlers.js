@@ -1,8 +1,11 @@
 import { saveOnEnter, findItemId, selectNode, removeElement } from './helpers';
 import { lists, checkListName } from './lists';
-import { tasks, expandTask, newTags, populateChecklist, updateTagsOptions, updateTagsLabel } from './tasks';
+import { tasks, expandTask } from './tasks';
+import { newTags, updateTagsLabel, updateTagsOptions } from './tags';
+import { populateChecklist } from './checklist';
 import { renderLists, newListUi } from './ui/lists-ui';
-import { newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
+import { newTaskUi, renderTasks } from './ui/tasks-ui';
+import { updatePriorityUi } from './ui/priority-ui';
 
 import { currentDesk, updateCurrentDesk } from './menu';
 import { Checklist, List, Task } from './classes';
@@ -196,6 +199,7 @@ const deleteItem = (event, id, type) => {
     }
 
     if (type === 'checklist') {
+        console.log(id);
         const checkToDelete = findItemId(itemToDelete.checklist, Number(id[1]));
         checkToDelete.delete(itemToDelete.checklist);
     }
@@ -219,6 +223,8 @@ const deleteItem = (event, id, type) => {
         const wrapper = selectNode(`#checklist-wrapper-${id[0]}`);
         wrapper.innerHTML = '';
         populateChecklist(itemToDelete, 'checklist', null);
+        clearListeners(expandListeners);
+        addExpandListener(Number(id[0]));
     }
 }
 
@@ -278,7 +284,7 @@ export const addNewItem = (event, type, id) => {
  * @returns { [] } - Input node and instance.
  */
 const editItem = (id, type) => {
-    console.log(id, type);
+    
     const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : (type === 'list') ? textInputUi({type}, 'edit', false, 15) : (type === 'checklist') ? textInputUi({type, id}, 'edit', false, 20) : dateInputUi({id});
 
     const nodes = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : (type === 'list') ? appendInput(`#title-list-${id}-btn`, `#list-item-list-${id}`, input, true) :

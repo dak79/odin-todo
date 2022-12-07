@@ -2,7 +2,7 @@ import { checkboxUi } from './checkbox-ui';
 import { appendChildren, setAttributes, selectNode } from '../helpers';
 import { btnsUi } from './btns-ui';
 import { appendInput, textInputUi } from './inputs-ui';
-import { populateChecklist } from '../tasks';
+import { populateChecklist } from '../checklist';
 
 /**
  * Create checklist Ui

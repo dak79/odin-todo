@@ -1,5 +1,5 @@
 import { setAttributes } from '../helpers';
-import { populateCheckboxes } from '../tasks';
+import { populateCheckboxes } from '../checkbox';
 
 /**
  * Create a Checkbox UI

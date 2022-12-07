@@ -1,5 +1,5 @@
 import { setAttributes } from '../helpers';
-import { updateTagsLabel, updateTagsOptions } from '../tasks';
+import { updateTagsLabel, updateTagsOptions } from '../tags';
 
 /**
  * Create tags ui.
