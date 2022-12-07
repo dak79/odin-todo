@@ -82,17 +82,3 @@ export const newListUi = object => {
     return input;
 }
 
-/**
- * Edit List Ui
- * @param { Event } event 
- * @returns { {Node, Number} } Node for retriving new value and id for update the instance
- */
-export const editListUi = (id, type) => {
-    
-    const input = textInputUi({type}, 'edit', false, 15);
-    const nodes = appendInput(`#title-list-${id}-btn`, `#list-item-list-${id}`, input, true);
-    
-    removeElement(`#btns-lists-${id}`);
-        
-    return nodes;
-}

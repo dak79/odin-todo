@@ -1,12 +1,13 @@
-import { saveOnEnter, findItemId, selectNode } from './helpers';
+import { saveOnEnter, findItemId, selectNode, removeElement } from './helpers';
 import { lists, checkListName } from './lists';
 import { tasks, expandTask, newTags } from './tasks';
-import { renderLists, editListUi, newListUi } from './ui/lists-ui';
-import { editTaskUi, newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
+import { renderLists, newListUi } from './ui/lists-ui';
+import { newTaskUi, renderTasks, updatePriorityUi } from './ui/tasks-ui';
 import { updateTagsOptions, updateTagsLabel } from './ui/select-ui';
 import { currentDesk, updateCurrentDesk } from './menu';
 import { Checklist, List, Task } from './classes';
 import { addNewCheckUi, populateChecklist } from './ui/checklist-ui';
+import { appendInput, dateInputUi, textInputUi } from './ui/inputs-ui';
 
 /**
  * Controller for events.
@@ -47,8 +48,7 @@ export const eventController = event => {
     }
 
     if (btn === 'edit') {
-        const newItem = (type === 'list') ? editListUi(id, type) : editTaskUi(id, type);
-
+        const newItem = editItem(id, type);
         if (newItem) newInputListeners(newItem, type); 
     }
     
@@ -126,11 +126,22 @@ const saveInput = (newItem, type) => {
         
     } 
     
-    if (type === 'new-checklist') {
-        const task = findItemId(tasks, Number(newItem.instance.taskId));
-        newItem.instance.add(task.checklist);
-        newItem.instance.update('title', String(newItem.node.value));
-       
+    if (type === 'new-checklist' || type === 'checklist') {
+        const id = (type === 'new-checklist') ? newItem.instance.taskId :
+        newItem.id.split('-');
+        
+        const task = findItemId(tasks, Number((type === 'new-checklist') ? id : id[0]));
+
+        if (type === 'new-checklist') {
+            newItem.instance.add(task.checklist);
+            newItem.instance.update('title', String(newItem.node.value));
+        }
+        
+        if (type === 'checklist') {
+            const checklist = findItemId(task.checklist, Number(id[1]));
+            checklist.update('title', String(newItem.node.value));
+        }
+
         const wrapper = selectNode(`#checklist-wrapper-${task.id}`);
         wrapper.innerHTML = '';
         populateChecklist(task, 'checklist', null);
@@ -241,8 +252,27 @@ export const addNewItem = (event, type, id) => {
 
 }
 
-export const editChecklist = () => {
-    console.log('edit checklist');
+/**
+ * Edit task|list|checklist
+ * @param { number|number[] } id - task or list instance id or array task id and checklist id. 
+ * @param { 'task'|'list'|'checklist' } type - Type of object 
+ * @returns { [] } - Input node and instance.
+ */
+const editItem = (id, type) => {
+    
+    const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : (type === 'list') ? textInputUi({type}, 'edit', false, 15) : (type === 'checklist') ? textInputUi({type, id}, 'edit', false, 20) : dateInputUi({id});
+
+    const nodes = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : (type === 'list') ? appendInput(`#title-list-${id}-btn`, `#list-item-list-${id}`, input, true) :
+    (type === 'checklist') ? appendInput(`#checklist-item-wrapper-${id} > label`, `#checklist-item-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
+
+    if (type === 'list') removeElement(`#btns-lists-${id}`);
+        
+    if (type === 'task') {
+        const btn = selectNode(`#edit-${type}-${id}-btn`);
+        btn.classList.add('svg-active');
+    }
+    
+    return nodes;
 }
 
 export const deleteChecklist = () => {

@@ -205,23 +205,6 @@ export const newTaskUi = newItem => {
     return input;
 }
 
-/**
- * Edit task Ui.
- * @param { event } event 
- * @returns { Node } - Input for edit task
- */
-export const editTaskUi = (id, type) => {
-
-    const input = (type === 'task') ? textInputUi({type, id}, 'edit', false, 40) : dateInputUi({id});
-
-    const newInput = (type === 'task') ? appendInput(`#checkbox-wrapper-${id} > label`, `#checkbox-wrapper-${id}`, input, true) : appendInput(`#task-${id}-due-date`, null, input, true);
- 
-    const btn = selectNode(`#edit-${type}-${id}-btn`);
-    btn.classList.add('svg-active');
-
-    return newInput;
-}
-
 export const updatePriorityUi = (task, wrapperMsg, isChanging) => {
     if (isChanging) wrapperMsg = selectNode(wrapperMsg);
     
