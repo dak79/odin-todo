@@ -212,7 +212,6 @@ const deleteItem = (event, id, type) => {
         updateTagsOptions(null);
         updateTagsLabel(null, null, null);
         renderLists(false);
-        renderTasks(currentDesk[0], false);
     } 
     
     if (type === 'task' || type === 'due-date') {
