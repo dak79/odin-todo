@@ -1,4 +1,4 @@
-import { isAfter, isToday , isThisWeek, endOfWeek, isBefore } from 'date-fns'
+import { isAfter, isToday , isThisWeek, endOfWeek, isBefore, parseISO } from 'date-fns'
 
 class TaskBase {
    

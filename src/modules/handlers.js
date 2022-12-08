@@ -12,6 +12,7 @@ import { Checklist, List, Task } from './classes';
 import { addNewCheckUi } from './ui/checklist-ui';
 import { appendInput, dateInputUi, textInputUi } from './ui/inputs-ui';
 import { addExpandListener, clearListeners, expandListeners } from './listeners';
+import { updateStorage } from './localStorage';
 
 /**
  * Controller for events.
@@ -25,6 +26,8 @@ export const eventController = event => {
     const id = event.target.dataset.number;
     const value = event.target.value;
     const desk = event.target.dataset.name;
+
+    console.log(btn, type, id, value, desk);
 
     if (btn === 'delete') {
         deleteItem(event, id, type);
@@ -58,6 +61,9 @@ export const eventController = event => {
         const task = findItemId(tasks, Number(id));
         task.update('priority', String(value));
         updatePriorityUi(task, `#task-msg-wrapper-${id}`, true);
+        updateStorage('tasks', tasks);
+    console.log(tasks);
+    console.log(localStorage);
     } 
     
     if (type === 'description') {
@@ -72,6 +78,10 @@ export const eventController = event => {
     if (type === 'tags') {
         newTags(event, id, value);
     }
+
+    // updateStorage('tasks', tasks);
+    // console.log(tasks);
+    // console.log(localStorage);
 }
 
 /**
@@ -97,11 +107,14 @@ const newInputListeners = (newItem, type) => {
  * @param { string } type - Button type that fired the event. 
  */
 const saveInput = (newItem, type) => {
+
+    console.log(newItem, type);
     
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
             newItem.instance.update('title', newItem.node.value);
+            
 
             if (!newItem.instance.tags.includes(currentDesk[0])) newItem.instance.addTag(String(currentDesk[0]));
             
@@ -178,6 +191,9 @@ const saveInput = (newItem, type) => {
             renderLists(false);
         }
     }
+    updateStorage('tasks', tasks);
+    console.log(tasks);
+    console.log(localStorage);
 }
 
 const deleteItem = (event, id, type) => {
@@ -199,7 +215,6 @@ const deleteItem = (event, id, type) => {
     }
 
     if (type === 'checklist') {
-        console.log(id);
         const checkToDelete = findItemId(itemToDelete.checklist, Number(id[1]));
         checkToDelete.delete(itemToDelete.checklist);
     }
@@ -225,6 +240,10 @@ const deleteItem = (event, id, type) => {
         clearListeners(expandListeners);
         addExpandListener(Number(id[0]));
     }
+
+    updateStorage('tasks', tasks);
+    console.log(tasks);
+    console.log(localStorage);
 }
 
 /**
@@ -234,19 +253,24 @@ const deleteItem = (event, id, type) => {
  * @param { 'checkbox'|'checklist' } btn - Button that fire event
  */
  const checkboxState = (id, type, btn) => {
+    console.log(id, btn, type)
     const checkbox = selectNode(`#${btn}-${(btn === 'checkbox') ? 'task' : 'item'}-${id}`);
     
     const isCompleted = checkbox.checked ? true : false;
     
     id = (type === 'checkbox-state') ? id : id.split('-');
     const task = (type === 'checkbox-state') ? findItemId(tasks, Number(id)) : findItemId(findItemId(tasks, Number(id[0])).checklist, Number(id[1])); 
+    console.log(task);
     task.update('complete', isCompleted);
     
     if (type === 'checkbox-state') {
         if (isCompleted) {
-            task.addTag('complete');
-            task.deleteTag('inbox');
-            task.deleteTimeTags();
+            console.log(isCompleted)
+            if (!task.tags.includes('complete')) {
+                task.addTag('complete');
+                task.deleteTag('inbox');
+                task.deleteTimeTags();
+            }
         } else {
             task.deleteTag('complete');
             task.addTag('inbox');
@@ -254,7 +278,10 @@ const deleteItem = (event, id, type) => {
         }
         setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
     }
-
+    
+    updateStorage('tasks', tasks);
+    console.log(tasks);
+    console.log(localStorage);
     checkbox.blur();
 }
 

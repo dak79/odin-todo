@@ -1,6 +1,8 @@
 import { tasks } from './tasks';
 import { lists } from './lists';
 import { findItemId, selectNodes } from './helpers';
+import { renderTasks } from './ui/tasks-ui';
+import { currentDesk } from './menu';
 
 /**
  * Update tags when selected.
@@ -19,6 +21,7 @@ import { findItemId, selectNodes } from './helpers';
             task.deleteTag(newTag);
     }
 
+    renderTasks(currentDesk[0], false);
     updateTagsLabel(null, null, null);
     select.selectedIndex = 0;
     select.blur();
