@@ -62,6 +62,7 @@ export const dateInputUi = object => {
  * @returns 
  */
 export const appendInput = (selectorNode, selectorParentNode, input, isEdit) => {
+    
     const node = selectNode(selectorNode);
     const parentNode = selectNode(selectorParentNode);
 

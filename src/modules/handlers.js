@@ -27,8 +27,6 @@ export const eventController = event => {
     const value = event.target.value;
     const desk = event.target.dataset.name;
 
-    console.log(btn, type, id, value, desk);
-
     if (btn === 'delete') {
         deleteItem(event, id, type);
     } 
@@ -102,8 +100,6 @@ const newInputListeners = (newItem, type) => {
  */
 const saveInput = (newItem, type) => {
 
-    console.log(newItem, type);
-    
     if (type === 'new-task' || type === 'task' || type === 'due-date') {
         if (type === 'new-task') {
             newItem.instance.add(tasks);
@@ -249,19 +245,17 @@ const deleteItem = (event, id, type) => {
  * @param { 'checkbox'|'checklist' } btn - Button that fire event
  */
  const checkboxState = (id, type, btn) => {
-    console.log(id, btn, type)
     const checkbox = selectNode(`#${btn}-${(btn === 'checkbox') ? 'task' : 'item'}-${id}`);
     
     const isCompleted = checkbox.checked ? true : false;
     
     id = (type === 'checkbox-state') ? id : id.split('-');
-    const task = (type === 'checkbox-state') ? findItemId(tasks, Number(id)) : findItemId(findItemId(tasks, Number(id[0])).checklist, Number(id[1])); 
-    console.log(task);
+    const task = (type === 'checkbox-state') ? findItemId(tasks, Number(id)) : findItemId(findItemId(tasks, Number(id[0])).checklist, Number(id[1]));
     task.update('complete', isCompleted);
     
     if (type === 'checkbox-state') {
         if (isCompleted) {
-            console.log(isCompleted)
+
             if (!task.tags.includes('complete')) {
                 task.addTag('complete');
                 task.deleteTag('inbox');
@@ -288,7 +282,7 @@ const deleteItem = (event, id, type) => {
  */
 export const addNewItem = (event, type, id) => {
     event.stopPropagation();
-
+    
     const instance = (type === 'new-task') ? new Task() : (type === 'new-list') ? new List() : new Checklist(id, null);
    
     const input = (type === 'new-task') ? newTaskUi(instance) : (type === 'new-list') ? newListUi(instance) : addNewCheckUi({id}, instance, 'checklist', null)

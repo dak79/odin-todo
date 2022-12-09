@@ -32,6 +32,7 @@ export const expandTask = id => {
                 hook.classList.remove('expand-btn-down');
                 hook.classList.add('expand-btn-up');
                 const nodes = expandTaskUi(task);
+                if (!task.checklist) task.checklist = [];
                 hook.appendChild(nodes.wrapper);
                 addExpandListener(id);
                 
