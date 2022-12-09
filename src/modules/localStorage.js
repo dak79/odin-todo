@@ -13,6 +13,7 @@ export const storageAvailable = type => {
         return e instanceof DOMException && (
             // everything except Firefox
             e.code === 22 ||
+            // Firefox
             e.code === 1014 ||
             e.name === 'QuotaExceededError' ||
             e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&

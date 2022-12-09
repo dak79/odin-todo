@@ -1,6 +1,6 @@
 import { btnsUi } from '../ui/btns-ui';
 import { appendChildren, setAttributes, cleanNode, selectNode, createUl, createLi } from '../helpers';
-import { format, parseISO } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 import { addAppListeners, clearListeners, listeners } from '../listeners';
 import { orderTaskByDate, tasks } from '../tasks';
 import { checkboxUi } from '../ui/checkbox-ui';
@@ -86,7 +86,13 @@ const taskItem = task => {
         'data-type': 'due-date',
         'data-btn': 'edit'
     });
-    taskDueDate.textContent = Date.parse(task.dueDate) ? `${format(parseISO(task.dueDate), 'dd-MM-yyyy')}` : '';
+    
+    if (!task.dueDate) task.dueDate = null;
+    if (typeof task.dueDate === 'string') {
+        task.dueDate = Date.parse(task.dueDate);
+    }
+    taskDueDate.textContent = (task.dueDate) ? format(task.dueDate, 'dd-MM-yyyy') : '';
+
 
     wrapperDueDate.appendChild(taskDueDate);
 

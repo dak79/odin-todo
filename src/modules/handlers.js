@@ -12,7 +12,7 @@ import { Checklist, List, Task } from './classes';
 import { addNewCheckUi } from './ui/checklist-ui';
 import { appendInput, dateInputUi, textInputUi } from './ui/inputs-ui';
 import { addExpandListener, clearListeners, expandListeners } from './listeners';
-import { updateStorage } from './localStorage';
+import { storageAvailable, updateStorage } from './localStorage';
 
 /**
  * Controller for events.
@@ -61,9 +61,7 @@ export const eventController = event => {
         const task = findItemId(tasks, Number(id));
         task.update('priority', String(value));
         updatePriorityUi(task, `#task-msg-wrapper-${id}`, true);
-        updateStorage('tasks', tasks);
-    console.log(tasks);
-    console.log(localStorage);
+        if (storageAvailable('localStorage')) updateStorage('tasks', tasks);
     } 
     
     if (type === 'description') {
@@ -78,10 +76,6 @@ export const eventController = event => {
     if (type === 'tags') {
         newTags(event, id, value);
     }
-
-    // updateStorage('tasks', tasks);
-    // console.log(tasks);
-    // console.log(localStorage);
 }
 
 /**
@@ -191,9 +185,10 @@ const saveInput = (newItem, type) => {
             renderLists(false);
         }
     }
-    updateStorage('tasks', tasks);
-    console.log(tasks);
-    console.log(localStorage);
+    if (storageAvailable('localStorage')) {
+        updateStorage('tasks', tasks);
+        updateStorage('lists', lists);
+    }
 }
 
 const deleteItem = (event, id, type) => {
@@ -241,9 +236,10 @@ const deleteItem = (event, id, type) => {
         addExpandListener(Number(id[0]));
     }
 
-    updateStorage('tasks', tasks);
-    console.log(tasks);
-    console.log(localStorage);
+    if (storageAvailable('localStorage')) {
+        updateStorage('tasks', tasks);
+        updateStorage('lists', lists);
+    }
 }
 
 /**
@@ -279,9 +275,7 @@ const deleteItem = (event, id, type) => {
         setTimeout(() => renderTasks(currentDesk[0], false), 1000);   
     }
     
-    updateStorage('tasks', tasks);
-    console.log(tasks);
-    console.log(localStorage);
+    if (storageAvailable('localStorage')) updateStorage('tasks', tasks);
     checkbox.blur();
 }
 

@@ -9,7 +9,7 @@ export const tasks = [];
  * Sort tasks array by due date and id (when due dat is the same).
  * @returns sorted array.
  */
-export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) => firstDate.dueDate - secondDate.dueDate || secondDate.id - firstDate.id
+export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) => new Date(firstDate.dueDate) - new Date(secondDate.dueDate) || secondDate.id - firstDate.id
 );
 
 /**

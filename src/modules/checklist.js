@@ -9,4 +9,5 @@ import { createChecklistItem } from './ui/checklist-ui';
     object.checklist.map((item) => {
             createChecklistItem(object, item, name, wrapper);
     });
+
 }
