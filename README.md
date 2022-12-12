@@ -8,11 +8,11 @@
 This project is part of The Odin Project - Full Stack JavaScript Path. The main goals is to implement a mantainable web app, exploring ES6, Npm and some code design principles. 
 
 ## Tecnologies
-HTML
-CSS
-JavaScript ES6
-Git
-Npm
+* HTML
+* CSS
+* JavaScript ES6
+* Git
+* Npm
 
 ## Assignement
 * Your ‘todos’ are going to be objects that you’ll want to dynamically create, which means either using factories or constructors/classes to generate them.
