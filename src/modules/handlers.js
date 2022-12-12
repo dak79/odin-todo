@@ -187,6 +187,12 @@ const saveInput = (newItem, type) => {
     }
 }
 
+/**
+ * Delete a todo item.
+ * @param { Event } event - Event fired from element. 
+ * @param { number|[] } id - Task id | Checklist ids 
+ * @param { string } type - Type of event fired.
+ */
 const deleteItem = (event, id, type) => {
     
     event.stopPropagation();

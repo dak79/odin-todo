@@ -18,19 +18,11 @@ export const exampleTasks = () => {
     todoFour.addTag('work');
     todoFour.add(tasks);
 
-    const todoFive = new Task('Passport', 'Kaya Passport', null, 'low', [new Checklist(5, 'Print Document'), new Checklist(5, 'Send document by mail')]);
+    const todoFive = new Task('Buy chili pepper', 'Get some spicy taste, sometime', new Date('2022-11-08'), 'high', [new Checklist(7, 'Take metro')]);
     todoFive.addTag('life');
     todoFive.add(tasks);
 
-    const todoSix = new Task('Call Police', 'Driving Licence', new Date('2022-10-28'), 'medium', [new Checklist(6, 'Print Document'), new Checklist(6, 'Send document by mail'), new Checklist(6, 'Bring document to police')]);
-    todoSix.addTag('life');
+    const todoSix = new Task('Mail', 'Send me mail please', new Date('2022-12-08'), 'high', [new Checklist(8, 'Take metro')]);
+    todoSix.addTag('work');
     todoSix.add(tasks);
-   
-    const todoSeven = new Task('Buy chili pepper', 'Get some spicy taste, sometime', new Date('2022-11-08'), 'high', [new Checklist(7, 'Take metro')]);
-    todoSeven.addTag('life');
-    todoSeven.add(tasks);
-
-    const todoEight = new Task('Mail', 'Send me mail please', new Date('2022-12-08'), 'high', [new Checklist(8, 'Take metro')]);
-    todoEight.addTag('work');
-    todoEight.add(tasks);
 }

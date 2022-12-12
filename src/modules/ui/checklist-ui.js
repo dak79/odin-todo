@@ -33,6 +33,13 @@ export const checklistUi = (object, name) => {
     return fieldset;
 }
 
+/**
+ * Create a checklist item.
+ * @param { {} } object - Task instance for retriving data. 
+ * @param { {} } item - Checklist instance for retriving data. 
+ * @param { string } name - Part of ids and classess attributes value.
+ * @param { Node } wrapper - Note for append item .
+ */
 export const createChecklistItem = (object, item, name, wrapper) => {
 
     if (!wrapper) wrapper = selectNode(`#checklist-wrapper-${object.id}`);
@@ -63,6 +70,14 @@ export const createChecklistItem = (object, item, name, wrapper) => {
         wrapper.appendChild(group);
 }
 
+/**
+ * Add checklist UI.
+ * @param { {} } object - Task instance for retriving data. 
+ * @param { {} } item - Checklist instance for retriving data. 
+ * @param { string } name - Part of ids and classess attributes value.
+ * @param { Node } wrapper - Note for append item .
+ * @returns { Node } - Text input Node.
+ */
 export const addNewCheckUi = (object, item, name, wrapper) => {
     createChecklistItem(object, item, name, wrapper);
 

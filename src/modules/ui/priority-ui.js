@@ -1,5 +1,10 @@
 import { selectNode, setAttributes } from '../helpers';
-
+/**
+ * Cheange UI for priority
+ * @param { {} } task - Task instance.
+ * @param { Node } wrapperMsg - Radio button wrapper. 
+ * @param { boolean } isChanging
+ */
 export const updatePriorityUi = (task, wrapperMsg, isChanging) => {
     if (isChanging) wrapperMsg = selectNode(wrapperMsg);
     

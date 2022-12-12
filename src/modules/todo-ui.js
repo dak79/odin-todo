@@ -5,7 +5,7 @@ import { renderLists } from './ui/lists-ui';
 import { renderMenu } from './ui/menu-ui';
 import { renderTasks } from './ui/tasks-ui';
 import { exampleTasks } from './default/tasks-example';
-import { orderTaskByDate, tasks, updateTimeTasks } from './tasks';
+import { tasks, updateTimeTasks } from './tasks';
 import { addAppListeners } from './listeners';
 import { currentDesk } from './menu';
 import { storageAvailable } from './localStorage';
@@ -20,9 +20,7 @@ export const renderPage = () => {
     exampleTasks();
     updateTimeTasks();
     if (storageAvailable('localStorage')) {
-        // localStorage.removeItem('tasks');
-        // localStorage.removeItem('lists');
-
+        
         if (!localStorage.getItem('tasks')) {
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }

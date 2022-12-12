@@ -1,3 +1,8 @@
+/**
+ * Is storage available in the browser?
+ * @param { 'localStorage'|'sessionStorage'} type 
+ * @returns { boolean } 
+ */
 export const storageAvailable = type => {
     let storage;
     try {
@@ -21,6 +26,9 @@ export const storageAvailable = type => {
     }
 }
 
+/**
+ * Update local storage.
+ */
 export const updateStorage = (item, array) => {
     localStorage.removeItem(item);
     localStorage.setItem(item, JSON.stringify(array));

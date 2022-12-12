@@ -60,10 +60,31 @@ export const findItemId = (array, id) => array.find(element => element.id === id
  */
 export const findItemName = (array, name) => array.find(element => (element.type === 'list') ? element.title.toLowerCase().trim() === name.toLowerCase().trim() : element.toLowerCase().trim() === name.toLowerCase().trim());
 
+/**
+ * Select node.
+ * @param { string } selector -  CSS selector for querySelector.
+ * @returns { Node } - Selected node.
+ */
 export const selectNode = selector => document.querySelector(selector);
+
+/**
+ * Select multiple nodes.
+ * @param { string } selector - CSS selector for querySelector. 
+ * @returns { NodeLists } - Seleceted nodes
+ */
 export const selectNodes = selector => document.querySelectorAll(selector);
+
+/**
+ * Remove all node children.
+ * @param { Node } node 
+ * @returns { Node } - Node without children
+ */
 export const cleanNode = node => node.replaceChildren();
 
+/**
+ * Remove an HTML element.
+ * @param { string } selector - CSS selector for querySelector 
+ */
 export const removeElement = selector => {
     const element = document.querySelector(selector);
     element.remove();
