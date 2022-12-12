@@ -1,4 +1,4 @@
-# odin-todo
+# To Do App
 
 
 ## Live Preview
