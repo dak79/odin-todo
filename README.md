@@ -1,13 +1,13 @@
 # odin-todo
 
 
-##Live Preview
+## Live Preview
 [To Do](https://dak79.github.io/odin-todo/)
 
-##Description
+## Description
 This project is part of The Odin Project - Full Stack JavaScript Path. The main goals is to implement a mantainable web app, exploring ES6, Npm and some code design principles. 
 
-##Tecnologies
+## Tecnologies
 HTML
 CSS
 JavaScript ES6
