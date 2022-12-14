@@ -9,37 +9,39 @@ export const tasks = [];
  * Sort tasks array by due date and id (when due dat is the same).
  * @returns sorted array.
  */
-export const orderTaskByDate = () => tasks.sort((firstDate, secondDate) => new Date(firstDate.dueDate) - new Date(secondDate.dueDate) || secondDate.id - firstDate.id
-);
+export const orderTaskByDate = () =>
+  tasks.sort(
+    (firstDate, secondDate) =>
+      new Date(firstDate.dueDate) - new Date(secondDate.dueDate) ||
+      secondDate.id - firstDate.id
+  );
 
 /**
  * Update array tags according to due date (and new due date).
  * @returns Updated array.
  */
-export const updateTimeTasks = () => tasks.map(task => task.updateTime());
+export const updateTimeTasks = () => tasks.map((task) => task.updateTime());
 
 /**
  * Expand task.
- * @param { number } id - Task id. 
+ * @param { number } id - Task id.
  */
-export const expandTask = id => {
-        
-        const task = findItemId(tasks, Number(id));
-        task.expanded = task.expanded ? false : true;
-        const hook = selectNode(`#list-item-task-${id}`);
+export const expandTask = (id) => {
+  const task = findItemId(tasks, Number(id));
+  task.expanded = task.expanded ? false : true;
+  const hook = selectNode(`#list-item-task-${id}`);
 
-        if (task.expanded) {
-                hook.classList.remove('expand-btn-down');
-                hook.classList.add('expand-btn-up');
-                const nodes = expandTaskUi(task);
-                if (!task.checklist) task.checklist = [];
-                hook.appendChild(nodes.wrapper);
-                addExpandListener(id);
-                
-        } else {
-                hook.classList.remove('expand-btn-up');
-                hook.classList.add('expand-btn-down');
-                const expandedSection = selectNode(`#expand-wrapper-${id}`);
-                if (expandedSection) expandedSection.remove();
-        }        
-}
+  if (task.expanded) {
+    hook.classList.remove('expand-btn-down');
+    hook.classList.add('expand-btn-up');
+    const nodes = expandTaskUi(task);
+    if (!task.checklist) task.checklist = [];
+    hook.appendChild(nodes.wrapper);
+    addExpandListener(id);
+  } else {
+    hook.classList.remove('expand-btn-up');
+    hook.classList.add('expand-btn-down');
+    const expandedSection = selectNode(`#expand-wrapper-${id}`);
+    if (expandedSection) expandedSection.remove();
+  }
+};

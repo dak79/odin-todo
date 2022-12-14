@@ -6,83 +6,106 @@ import { populateChecklist } from '../checklist';
 
 /**
  * Create checklist Ui
- * @param { {} } object - Object for retriving data. 
- * @param { string } name - Part of ids and classes atributes value's.  
+ * @param { {} } object - Object for retriving data.
+ * @param { string } name - Part of ids and classes atributes value's.
  * @returns { node } Return a fieldset with a checkbox in it.
  */
 export const checklistUi = (object, name) => {
-    const fieldset = document.createElement('fieldset');
-    setAttributes(fieldset, {
-        id: `${name}-fieldset-${object.id}`,
-        class: `${name}-fieldset`
-    });
+  const fieldset = document.createElement('fieldset');
+  setAttributes(fieldset, {
+    id: `${name}-fieldset-${object.id}`,
+    class: `${name}-fieldset`,
+  });
 
-    const legend = document.createElement('legend');
-    legend.textContent = `${name.charAt(0).toUpperCase() + name.slice(1)}: `;
+  const legend = document.createElement('legend');
+  legend.textContent = `${name.charAt(0).toUpperCase() + name.slice(1)}: `;
 
-    const wrapper = document.createElement('div');
-    setAttributes(wrapper, {
-        id: `${name}-wrapper-${object.id}`,
-        class: `${name}s-wrapper`
-    });
+  const wrapper = document.createElement('div');
+  setAttributes(wrapper, {
+    id: `${name}-wrapper-${object.id}`,
+    class: `${name}s-wrapper`,
+  });
 
-    if (object.checklist) populateChecklist(object, name, wrapper);
+  if (object.checklist) populateChecklist(object, name, wrapper);
 
-    appendChildren(fieldset, [legend, wrapper]);
+  appendChildren(fieldset, [legend, wrapper]);
 
-    return fieldset;
-}
+  return fieldset;
+};
 
 /**
  * Create a checklist item.
- * @param { {} } object - Task instance for retriving data. 
- * @param { {} } item - Checklist instance for retriving data. 
+ * @param { {} } object - Task instance for retriving data.
+ * @param { {} } item - Checklist instance for retriving data.
  * @param { string } name - Part of ids and classess attributes value.
  * @param { Node } wrapper - Note for append item .
  */
 export const createChecklistItem = (object, item, name, wrapper) => {
+  if (!wrapper) wrapper = selectNode(`#checklist-wrapper-${object.id}`);
 
-    if (!wrapper) wrapper = selectNode(`#checklist-wrapper-${object.id}`);
-    
-    const group = document.createElement('div');
-        setAttributes(group, {
-                id: `${name}-item-wrapper-${object.id}-${item.id}`,
-                class: `${name}-item-wrapper`
-            });
+  const group = document.createElement('div');
+  setAttributes(group, {
+    id: `${name}-item-wrapper-${object.id}-${item.id}`,
+    class: `${name}-item-wrapper`,
+  });
 
-        const checkbox = checkboxUi({id: `${object.id}-${item.id}`, type: 'item', title: item.title, complete: item.complete}, 'checklist', 'Checklist item done or not done');
+  const checkbox = checkboxUi(
+    {
+      id: `${object.id}-${item.id}`,
+      type: 'item',
+      title: item.title,
+      complete: item.complete,
+    },
+    'checklist',
+    'Checklist item done or not done'
+  );
 
-        appendChildren(group, checkbox);
+  appendChildren(group, checkbox);
 
-        const btnsWrapper = document.createElement('span');
-        setAttributes(btnsWrapper, {
-            id: `${item.type}-btns-wrapper-${object.id}-${item.id}`,
-            class: `${item.type}-btns-wrapper`
-        });
+  const btnsWrapper = document.createElement('span');
+  setAttributes(btnsWrapper, {
+    id: `${item.type}-btns-wrapper-${object.id}-${item.id}`,
+    class: `${item.type}-btns-wrapper`,
+  });
 
-        const btnEditChecklist = btnsUi({id: `${object.id}-${item.id}`, type: `${item.type}`}, 'edit', ['btns', 'checklist-edit-btn', 'svg-btns'], 'Edit this checklist item');
-        
-        const btnDeleteChecklist = btnsUi({id: `${object.id}-${item.id}`, type: `${item.type}`}, 'delete', ['btns', 'checklist-delete-btn', 'svg-btns'], 'Delete this checklist item');
-        
-        appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist])
-        group.appendChild(btnsWrapper);
+  const btnEditChecklist = btnsUi(
+    { id: `${object.id}-${item.id}`, type: `${item.type}` },
+    'edit',
+    ['btns', 'checklist-edit-btn', 'svg-btns'],
+    'Edit this checklist item'
+  );
 
-        wrapper.appendChild(group);
-}
+  const btnDeleteChecklist = btnsUi(
+    { id: `${object.id}-${item.id}`, type: `${item.type}` },
+    'delete',
+    ['btns', 'checklist-delete-btn', 'svg-btns'],
+    'Delete this checklist item'
+  );
+
+  appendChildren(btnsWrapper, [btnEditChecklist, btnDeleteChecklist]);
+  group.appendChild(btnsWrapper);
+
+  wrapper.appendChild(group);
+};
 
 /**
  * Add checklist UI.
- * @param { {} } object - Task instance for retriving data. 
- * @param { {} } item - Checklist instance for retriving data. 
+ * @param { {} } object - Task instance for retriving data.
+ * @param { {} } item - Checklist instance for retriving data.
  * @param { string } name - Part of ids and classess attributes value.
  * @param { Node } wrapper - Note for append item .
  * @returns { Node } - Text input Node.
  */
 export const addNewCheckUi = (object, item, name, wrapper) => {
-    createChecklistItem(object, item, name, wrapper);
+  createChecklistItem(object, item, name, wrapper);
 
-    const input = textInputUi(item, 'new', false, 30);
-    appendInput(`#checklist-item-wrapper-${object.id}-${item.id} > label`, `#checklist-item-wrapper-${object.id}-${item.id}`, input, false);
+  const input = textInputUi(item, 'new', false, 30);
+  appendInput(
+    `#checklist-item-wrapper-${object.id}-${item.id} > label`,
+    `#checklist-item-wrapper-${object.id}-${item.id}`,
+    input,
+    false
+  );
 
-    return input;
-}
+  return input;
+};

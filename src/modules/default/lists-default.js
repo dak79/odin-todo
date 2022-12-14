@@ -2,9 +2,9 @@ import { List } from '../classes';
 import { lists } from '../lists';
 
 export const defaultList = () => {
-    const life = new List('Life');
-    const work = new List('Work');
+  const life = new List('Life');
+  const work = new List('Work');
 
-    life.add(lists);
-    work.add(lists); 
-}
+  life.add(lists);
+  work.add(lists);
+};

@@ -5,43 +5,64 @@ export const listeners = [];
 export const expandListeners = [];
 
 export const addAppListeners = () => {
+  // Menu
+  addListener(listeners, '#new-task-btn', 'click', eventController);
+  addListeners(listeners, '.menu-btns', 'click', eventController);
 
-    // Menu
-    addListener(listeners, '#new-task-btn', 'click', eventController);
-    addListeners(listeners, '.menu-btns', 'click', eventController);
+  // Lists
+  addListeners(listeners, '.lists-btns', 'click', eventController);
+  addListeners(listeners, '.svg-btns-delete', 'click', eventController);
+  addListeners(listeners, '.svg-btns-edit', 'click', eventController);
+  addListener(listeners, '#new-list-btn', 'click', eventController);
 
-    // Lists
-    addListeners(listeners, '.lists-btns', 'click', eventController);
-    addListeners(listeners, '.svg-btns-delete', 'click', eventController);
-    addListeners(listeners, '.svg-btns-edit', 'click', eventController);
-    addListener(listeners, '#new-list-btn', 'click', eventController);
+  // Tasks
+  addListeners(listeners, '.tasks-checkbox', 'change', eventController);
+  addListeners(listeners, '.expand-btn', 'click', eventController);
+  addListeners(listeners, '.task-due-date', 'click', eventController);
+  addListeners(listeners, '.due-date-delete-btn', 'click', eventController);
+  addListeners(listeners, '.due-date-edit-btn', 'click', eventController);
+  addListeners(listeners, '.task-edit-btn', 'click', eventController);
+  addListeners(listeners, '.task-delete-btn', 'click', eventController);
+};
 
-    // Tasks
-    addListeners(listeners, '.tasks-checkbox', 'change', eventController);
-    addListeners(listeners, '.expand-btn', 'click', eventController);
-    addListeners(listeners, '.task-due-date', 'click', eventController);
-    addListeners(listeners, '.due-date-delete-btn', 'click', eventController);
-    addListeners(listeners, '.due-date-edit-btn', 'click', eventController);
-    addListeners(listeners, '.task-edit-btn', 'click', eventController);
-    addListeners(listeners, '.task-delete-btn', 'click', eventController);
-}
+export const addExpandListener = (id) => {
+  addListener(
+    expandListeners,
+    `#task-description-${id}`,
+    'focusout',
+    eventController
+  );
+  addListener(expandListeners, `#task-description-${id}`, 'keyup', saveOnEnter);
 
-export const addExpandListener = id => {
+  addListeners(
+    expandListeners,
+    `input[type='radio'][name='priority-${id}']`,
+    'change',
+    eventController
+  );
 
-    addListener(expandListeners, `#task-description-${id}`, 'focusout', eventController);
-    addListener(expandListeners, `#task-description-${id}`, 'keyup', saveOnEnter);
+  addListener(expandListeners, `#task-tags-${id}`, 'change', eventController);
 
-    addListeners(expandListeners, `input[type='radio'][name='priority-${id}']`, 'change', eventController);
-
-    addListener(expandListeners, `#task-tags-${id}`, 'change', eventController);
-
-    
-    addListeners(expandListeners, `.items-checklist`, 'change', eventController)
-    addListener(expandListeners, `#new-checklist-${id}-btn`, 'click', eventController);
-    addListeners(expandListeners, '.checklist-edit-btn', 'click', eventController);
-    addListeners(expandListeners, '.checklist-delete-btn', 'click', eventController);
-}
-
+  addListeners(expandListeners, `.items-checklist`, 'change', eventController);
+  addListener(
+    expandListeners,
+    `#new-checklist-${id}-btn`,
+    'click',
+    eventController
+  );
+  addListeners(
+    expandListeners,
+    '.checklist-edit-btn',
+    'click',
+    eventController
+  );
+  addListeners(
+    expandListeners,
+    '.checklist-delete-btn',
+    'click',
+    eventController
+  );
+};
 
 /**
  * Add event listener to multiple elements and track the listeners added.
@@ -51,17 +72,17 @@ export const addExpandListener = id => {
  * @param { Function } callback - Handler.
  */
 export const addListeners = (array, selector, eventType, callback) => {
-    document.querySelectorAll(selector).forEach(node => {
-        node.addEventListener(eventType, callback);
-        const listener = {
-            node,
-            selector,
-            eventType,
-            callback
-        };
-        array.push(listener);
-    });
-}
+  document.querySelectorAll(selector).forEach((node) => {
+    node.addEventListener(eventType, callback);
+    const listener = {
+      node,
+      selector,
+      eventType,
+      callback,
+    };
+    array.push(listener);
+  });
+};
 
 /**
  * Add event listener to a node.
@@ -71,25 +92,25 @@ export const addListeners = (array, selector, eventType, callback) => {
  * @param { Function } callback - Handler.
  */
 export const addListener = (array, selector, eventType, callback) => {
-    const node = document.querySelector(selector)
-    node.addEventListener(eventType, callback);
-    const listener = {
-        node,
-        selector,
-        eventType,
-        callback
-    }
-    array.push(listener);
-}
+  const node = document.querySelector(selector);
+  node.addEventListener(eventType, callback);
+  const listener = {
+    node,
+    selector,
+    eventType,
+    callback,
+  };
+  array.push(listener);
+};
 
 /**
  * Remove all event listener.
- * @param { [] } array - Storage of all event listener to remove. 
+ * @param { [] } array - Storage of all event listener to remove.
  */
-export const clearListeners = array => {
-    array.forEach(listener => {
-        listener.node.removeEventListener(listener.eventType, listener.callback); 
-    })
+export const clearListeners = (array) => {
+  array.forEach((listener) => {
+    listener.node.removeEventListener(listener.eventType, listener.callback);
+  });
 
-    array.splice(0);   
-}
+  array.splice(0);
+};

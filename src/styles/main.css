@@ -30,596 +30,594 @@
  *      b. Task Buttons.
  */
 
- /* 1. Fonts */
+/* 1. Fonts */
 /* Montserrat 700 - Latin from Google Font Helper */
 @font-face {
-    font-family: 'Montserrat-700';
-    font-display: swap;
-    font-style: normal;
-    font-weight: 700;
-    src:
-        url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
-        url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff')
+  font-family: 'Montserrat-700';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/montserrat-v25-latin-700.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-v25-latin-700.woff') format('woff');
 }
 
 /* 2. Root */
 :root {
-    /* Base Color: Tailwind Palette - Slate */
-    --slate-50: #f8fafc;
-    --slate-100: #f1f5f9;
-    --slate-200: #e2e8f0;
-    --slate-300: #cbd5e1;
-    --slate-400: #94a3b8;
-    --slate-500: #64748b;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-800: #1e293b;
-    --slate-900: #0f172a;
+  /* Base Color: Tailwind Palette - Slate */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
 
-    /* Accent Color: Tailwind Palette - Amber */
-    --amber-50: #fffbeb;
-    --amber-100: #fef3c7;
-    --amber-200: #fde68a;
-    --amber-300: #fcd34d;
-    --amber-400: #fbbf24;
-    --amber-500: #f59e0b;
-    --amber-600: #d97706;
-    --amber-700: #b45309;
-    --amber-800: #92400e;
-    --amber-900: #78350f;
+  /* Accent Color: Tailwind Palette - Amber */
+  --amber-50: #fffbeb;
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+  --amber-800: #92400e;
+  --amber-900: #78350f;
 
-    --gap-small: 1em;
-    --gap-medium: 1.5em;
-    --gap-big: 2em;
+  --gap-small: 1em;
+  --gap-medium: 1.5em;
+  --gap-big: 2em;
 
-    --radius-standard: 1em;
-    --radius-circle: 50%;
-    --radius-checkbox: 0.4em;
-    --radius-checkbox-checked: 0.25em;
+  --radius-standard: 1em;
+  --radius-circle: 50%;
+  --radius-checkbox: 0.4em;
+  --radius-checkbox-checked: 0.25em;
 
-    --shadow-grey: 5px 5px 5px rgba(148, 163, 184, 0.4);
-    --shadow-checkbox: inset 1em 1em var(--amber-500);
+  --shadow-grey: 5px 5px 5px rgba(148, 163, 184, 0.4);
+  --shadow-checkbox: inset 1em 1em var(--amber-500);
 }
 
 /* 3. Reset */
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* 4. Main */
 .container {
-    display: grid;
-    grid: 
-        [row1-start] "navbar desk" 1fr [row1-end]
-        /1fr 3fr;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Montserrat-700', sans-serif;
+  display: grid;
+  grid:
+    [row1-start] 'navbar desk' 1fr [row1-end]
+    / 1fr 3fr;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Montserrat-700', sans-serif;
 }
 
 .desk {
-    grid-area: desk;
-    background-color: var(--slate-200);
-    height: 100vh;
-    overflow: auto;
+  grid-area: desk;
+  background-color: var(--slate-200);
+  height: 100vh;
+  overflow: auto;
 }
 
 .navbar {
-    grid-area: navbar;
-    display: grid;
-    grid:
-        [row1-start] "header" 1fr [row1-end] 
-        [row2-start] "menu" 3fr [row2-end] 
-        [row3-start] "lists" 5fr [row3-end] 
-        / 1fr;
-    gap: var(--gap-medium);
-    background-color: var(--slate-700);
-    color: var(--slate-200);
-    align-items: flex-start;
-    height: 100vh;
-    overflow: auto;
+  grid-area: navbar;
+  display: grid;
+  grid:
+    [row1-start] 'header' 1fr [row1-end]
+    [row2-start] 'menu' 3fr [row2-end]
+    [row3-start] 'lists' 5fr [row3-end]
+    / 1fr;
+  gap: var(--gap-medium);
+  background-color: var(--slate-700);
+  color: var(--slate-200);
+  align-items: flex-start;
+  height: 100vh;
+  overflow: auto;
 }
 
 /* 5. Headers */
 .headers {
-    display: grid;
-    grid-template-columns: 1fr 0.5fr 2fr;
-    justify-items: start;
-    align-items: center;
-    gap: var(--gap-small);
-    width: 100%; 
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 2fr;
+  justify-items: start;
+  align-items: center;
+  gap: var(--gap-small);
+  width: 100%;
 }
 
 /* a. NavBar Header */
 #nav-header {
-    grid-area: header;
+  grid-area: header;
 }
 
 /* 6. Logo. */
 .nav-logo {
-    grid-area: 1 / 1 / 1 / 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  grid-area: 1 / 1 / 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    fill: var(--amber-500);
-    width: 7em;
-    height: 7em;
-    padding: 1em;;
+  fill: var(--amber-500);
+  width: 7em;
+  height: 7em;
+  padding: 1em;
 }
 
 /* 7. Titles */
 .titles {
-    grid-area: 1 / 3 / 1 / 4;
-    color: var(--slate-200);
-    font-size: 3rem;
-    font-weight: 700;
+  grid-area: 1 / 3 / 1 / 4;
+  color: var(--slate-200);
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 /* 8. Menus */
-.menu, 
+.menu,
 .section-lists {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--gap-small);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-small);
 }
 
 /* a. NavBar Menu */
 .nav-menu {
-    grid-area: menu;
+  grid-area: menu;
 }
 
 /* b. Lists Menu */
 .section-lists {
-    grid-area: lists;
+  grid-area: lists;
 }
 
 /* 9. Items */
 .items {
-    display: grid;
-    align-items: center;
-    color: var(--slate-200);
-    gap: var(--gap-small);
+  display: grid;
+  align-items: center;
+  color: var(--slate-200);
+  gap: var(--gap-small);
 }
 
 /* a. Lists Item */
 .lists-items {
-    grid:
-        [row1-start] "title btns" 1fr [row1-end]
-        / 2fr 1fr;
-    justify-items: center;
+  grid:
+    [row1-start] 'title btns' 1fr [row1-end]
+    / 2fr 1fr;
+  justify-items: center;
 }
 
 /* b. Task Item */
 .task-item {
-    grid-template-columns: 2.6fr 0.6fr 0.4fr 0.4fr;
-    margin: 1em;
-    background-color: var(--slate-700);
-    border-radius: var(--radius-standard);
-    box-shadow: var(--shadow-grey);
+  grid-template-columns: 2.6fr 0.6fr 0.4fr 0.4fr;
+  margin: 1em;
+  background-color: var(--slate-700);
+  border-radius: var(--radius-standard);
+  box-shadow: var(--shadow-grey);
 }
 
 .expand-wrapper {
-    grid-area: 2 / 1 / 4 / 5;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    padding: 0.5rem;
-    background-color: var(--slate-600);
-    border-radius: 0 0 15px 15px;
-    max-height: 15em;
-    border: 2px solid var(--slate-500);
+  grid-area: 2 / 1 / 4 / 5;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  padding: 0.5rem;
+  background-color: var(--slate-600);
+  border-radius: 0 0 15px 15px;
+  max-height: 15em;
+  border: 2px solid var(--slate-500);
 }
 
 /* 10. Checkboxes and Radio */
 /* Unchecked */
-input[type="checkbox"], 
-input[type="radio"] {
-    appearance: none;
-    background-color: #fff;
-    margin: 0;
-    font: inherit;
+input[type='checkbox'],
+input[type='radio'] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
 
-    display: grid;
-    place-content: center;
-    background-color: var(--slate-200);
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid var(--slate-200);
-    border-radius: var(--radius-checkbox);
-    transform: translateY(-0.075em);
-    outline: none;
+  display: grid;
+  place-content: center;
+  background-color: var(--slate-200);
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid var(--slate-200);
+  border-radius: var(--radius-checkbox);
+  transform: translateY(-0.075em);
+  outline: none;
 }
 
-input[type="checkbox"] {
-    transform: translateX(0.90em);
+input[type='checkbox'] {
+  transform: translateX(0.9em);
 }
 
-input[type="radio"] {
-    color: var(--slate-200);
-    border-radius: var(--radius-circle);
-    outline-color: var(--amber-500);
+input[type='radio'] {
+  color: var(--slate-200);
+  border-radius: var(--radius-circle);
+  outline-color: var(--amber-500);
 }
 
 /* Checked */
-input[type="checkbox"]::before,
-input[type="radio"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: var(--shadow-checkbox);
+input[type='checkbox']::before,
+input[type='radio']::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: var(--shadow-checkbox);
 }
 
-input[type="checkbox"]::before {
-    border-radius: var(--radius-checkbox-checked);
+input[type='checkbox']::before {
+  border-radius: var(--radius-checkbox-checked);
 }
 
-input[type="radio"]::before {
-    border-radius: var(--radius-circle);
+input[type='radio']::before {
+  border-radius: var(--radius-circle);
 }
 
-input[type="radio"]:checked::before,
-input[type="checkbox"]:checked:before {
-    transform: scale(1);
+input[type='radio']:checked::before,
+input[type='checkbox']:checked:before {
+  transform: scale(1);
 }
 
-input[type="checkbox"]:checked:before {
-    transform: translateX(-0.020em);  
+input[type='checkbox']:checked:before {
+  transform: translateX(-0.02em);
 }
 
-input[type="checkbox"]:checked + label,
-span.checkbox-wrapper:has(input[type="checkbox"]:checked) + span.due-date-wrapper {
-    color: var(--amber-500);
-    text-decoration: line-through;
+input[type='checkbox']:checked + label,
+span.checkbox-wrapper:has(input[type='checkbox']:checked)
+  + span.due-date-wrapper {
+  color: var(--amber-500);
+  text-decoration: line-through;
 }
 
 /* Hover and Focus */
 label:hover,
 label:focus,
-input[type="checkbox"]:hover,
-input[type="checkbox"]:hover + label,
+input[type='checkbox']:hover,
+input[type='checkbox']:hover + label,
 .task-due-date:hover,
 .task-tags:focus {
-    cursor: pointer;
-    color: var(--amber-500);
+  cursor: pointer;
+  color: var(--amber-500);
 }
 
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
-    background-color: var(--amber-200);
+input[type='checkbox']:focus,
+input[type='radio']:focus {
+  background-color: var(--amber-200);
 }
 
 /* a. Task Checkbox */
 .checkbox-wrapper {
-    grid-area: 1 / 1 / 2 / 2;
-    display: flex;
-    flex-direction: row;
-    gap: var(--gap-small);
-    align-items: center;
-    justify-content: space-between;
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-small);
+  align-items: center;
+  justify-content: space-between;
 }
 
 .tasks-checkbox {
-    grid-area: check;
+  grid-area: check;
 }
 
 .task-checkbox-labels {
-    grid-area: label;
+  grid-area: label;
 }
 
 /* b. Checklist Checkbox */
 .checklist-wrapper {
-    grid-area: 1 / 2 / 4 / 5 ;
-    display: flex;
-    flex-direction: row;
-    overflow-y: auto;
-    place-self: start;
-    min-height: 2.5em;
-    max-height: 100%;
-    min-width: 100%;
+  grid-area: 1 / 2 / 4 / 5;
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+  place-self: start;
+  min-height: 2.5em;
+  max-height: 100%;
+  min-width: 100%;
 }
 
 .checklist-fieldset {
-    display: flex;
-    flex-direction: column;  
-    padding: 0.50em 1em;
-    border: none; 
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1em;
+  border: none;
 }
 
 .checklist-item-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 5fr 3fr;
-    align-items: center;
-    justify-content: start;
-    gap: var(--gap-small);
+  display: grid;
+  grid-template-columns: 1fr 5fr 3fr;
+  align-items: center;
+  justify-content: start;
+  gap: var(--gap-small);
 }
 
 .checklist-btns-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
 }
 
 /* c. Priority Radio Buttons */
 .priority-wrapper {
-    grid-area: 2 / 1 / 3 / 2;
+  grid-area: 2 / 1 / 3 / 2;
 }
 
 .priority-wrapper fieldset {
-    border: none;
-    padding: 0.5em 0;
-    max-width: 62%;
+  border: none;
+  padding: 0.5em 0;
+  max-width: 62%;
 }
 
 .radios-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .radio-wrapper {
-    display: grid;
-    grid-template-columns: 1em auto;
-    gap: 1em;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 1em;
 }
 
 /* 11. Select Tags */
 /* Remove Default Select */
 select {
-    appearance: none;
-    background-color: transparent;
-    border: none;
-    padding: 0 0 1em 0;
-    margin: 0;
-    width: 100%;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
-    outline: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 0 1em 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
 }
 
 select::-ms-expand {
-    display: none;
+  display: none;
 }
 
 /* New Select Style */
 .task-tags {
-    width: 100%;
-    min-width: 30ch;
-    max-width: 40ch;
-    border: 1px solid var(--slate-700);
-    border-radius: 15px;
-    padding: 0.25em 0.5em;
-    font-size: 1rem;
-    cursor: pointer;
-    line-height: 1.1;
-    background-color: var(--slate-200);
-    color: var(--slate-700);
+  width: 100%;
+  min-width: 30ch;
+  max-width: 40ch;
+  border: 1px solid var(--slate-700);
+  border-radius: 15px;
+  padding: 0.25em 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: var(--slate-200);
+  color: var(--slate-700);
 }
 
 /* Layout */
 .tags-wrapper {
-    grid-area: 3 / 1 / 4 / 2;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    gap: 10px;
+  grid-area: 3 / 1 / 4 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 /* 12. Date */
 .due-date-wrapper {
-    grid-area: 1/ 2 / 1 / 3;
-    display: grid;
-    grid: 
-        [row1-start] "btn date" 1fr [row1-end]
-        / 4em 10em;
-    justify-items: end;
-    gap: var(--gap-medium);
-    align-items: center;
+  grid-area: 1/ 2 / 1 / 3;
+  display: grid;
+  grid:
+    [row1-start] 'btn date' 1fr [row1-end]
+    / 4em 10em;
+  justify-items: end;
+  gap: var(--gap-medium);
+  align-items: center;
 }
 
 .task-due-date {
-    grid-area: date;
-    place-self: center;
+  grid-area: date;
+  place-self: center;
 }
 
 .late-color {
-    color: var(--amber-500);
+  color: var(--amber-500);
 }
 
 /* 13. Messages */
 .task-msg-wrapper {
-    grid-area: 1 / 3 / 1 / 4;
-    display: flex;
-    flex-direction: row;
-    gap: var(--gap-medium);  
+  grid-area: 1 / 3 / 1 / 4;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-medium);
 }
 
 .late-msg,
 .high-priority {
-    fill: var(--amber-500)
+  fill: var(--amber-500);
 }
 
 .low-priority {
-    fill: var(--slate-400);
+  fill: var(--slate-400);
 }
 
 /* 14. Inputs Text and Input Date */
 .input-text {
-    font-family: 'Montserrat-700', sans-serif;
-    background-color: var(--slate-200);
-    color: var(--slate-700);
-    border-radius: var(--radius-standard);
-    outline-color: var(--amber-500);
-    caret-color: var(--amber-500);
+  font-family: 'Montserrat-700', sans-serif;
+  background-color: var(--slate-200);
+  color: var(--slate-700);
+  border-radius: var(--radius-standard);
+  outline-color: var(--amber-500);
+  caret-color: var(--amber-500);
 
-    padding: 0.3rem 0.5rem;
-    line-height: 1;
+  padding: 0.3rem 0.5rem;
+  line-height: 1;
 }
 
 /* a. Input Text Lists */
 #list-new {
-    width: 80%;
-    max-height: 80%;
-    font-size: 1.5rem;
+  width: 80%;
+  max-height: 80%;
+  font-size: 1.5rem;
 }
 
 .input-text-lists-error {
-    color: var(--amber-500);
-    background-color: var(--slate-300);
+  color: var(--amber-500);
+  background-color: var(--slate-300);
 }
 
 #list-edit {
-    grid-area: 1 /1 / 2 / 3;
-    font-size: 1.5rem;
+  grid-area: 1 /1 / 2 / 3;
+  font-size: 1.5rem;
 }
 
 /* b. Input Text Task */
 #task-edit,
 #task-new {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 #task-new {
-    min-width: 80%;
+  min-width: 80%;
 }
 
 #task-edit {
-    flex: 1 1 0;
-    max-width: 80%;
+  flex: 1 1 0;
+  max-width: 80%;
 }
 
 .task-description-wrapper {
-    grid-area: 1 / 1 / 2 / 2;
-    display: flex;
-    flex-direction: column;  
-    gap: var(--gap-small);
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
 }
 
 /* c. Input Date */
 .new-due-date {
-    color: var(--amber-500);
-    font-size: 1rem;
+  color: var(--amber-500);
+  font-size: 1rem;
 }
 
 /* 15. Buttons */
 .btns {
-    font-family: 'Montserrat-700', sans-serif;
-    font-weight: 700;
-    border: none;
-    outline: none;
+  font-family: 'Montserrat-700', sans-serif;
+  font-weight: 700;
+  border: none;
+  outline: none;
 }
 
 .round-btns {
-    color: var(--slate-700);
-    background-color: var(--slate-200);
-    box-shadow: var(--shadow-grey);
-    border-radius: var(--radius-circle);
+  color: var(--slate-700);
+  background-color: var(--slate-200);
+  box-shadow: var(--shadow-grey);
+  border-radius: var(--radius-circle);
 }
 
 .round-btns-big {
-    font-size: 2rem;
-    width: 4rem;
-    height: 4rem;
+  font-size: 2rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .round-btns-small {
-    font-size: 1rem;
-    width: 2rem;
-    height: 2rem;
+  font-size: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .text-btns {
-    color: var(--slate-200);
-    background-color: var(--slate-700);
-    font-size: 2rem;
+  color: var(--slate-200);
+  background-color: var(--slate-700);
+  font-size: 2rem;
 }
 
 .svg-btns {
-    background-color: var(--slate-700);
-    fill: var(--slate-200);
-    padding: 0.5em 0.5em;
+  background-color: var(--slate-700);
+  fill: var(--slate-200);
+  padding: 0.5em 0.5em;
 }
 
 /* Active */
 .round-btns:active {
-    color: var(--amber-500);
-    background-color: var(--slate-300);
-    transform: translateY(5px);
+  color: var(--amber-500);
+  background-color: var(--slate-300);
+  transform: translateY(5px);
 }
 
 /* Hover and Focus */
 .btns:hover,
 .btns:focus {
-    cursor: pointer;
-    fill: var(--amber-500);
-    color: var(--amber-500);
+  cursor: pointer;
+  fill: var(--amber-500);
+  color: var(--amber-500);
 }
 
 .round-btns:hover,
 .round-btns:focus {
-    box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4); 
+  box-shadow: 5px 5px 5px rgba(245, 158, 11, 0.4);
 }
 
 /* a. NavBar Buttons */
 .lists-btns {
-    grid-area: title;
+  grid-area: title;
 }
 
 .btns-lists {
-    grid-area: btns;    
+  grid-area: btns;
 }
 
 #new-task-btn {
-    grid-area: 1 / 2 / 1 / 3;
+  grid-area: 1 / 2 / 1 / 3;
 }
 
 #new-list-btn {
-    grid-area: 1 / 2 / 1 / 3;
+  grid-area: 1 / 2 / 1 / 3;
 }
 
 /* b. Task Buttons */
 .expand-btn {
-    grid-area: expand;
+  grid-area: expand;
 }
 
 .due-date-delete-btn,
 .due-date-edit-btn {
-    grid-area: btn;
+  grid-area: btn;
 }
 
 .svg-active {
-    fill: var(--amber-500);
+  fill: var(--amber-500);
 }
 
 .expand-btn-up svg.svg-expand {
-    transform: rotate(180deg); 
-    transition: 0.2s transform linear;
+  transform: rotate(180deg);
+  transition: 0.2s transform linear;
 }
 
 .expand-btn-down svg.svg-expand {
-    transform: rotate(0deg);
-    transition: 0.2s transform linear;
+  transform: rotate(0deg);
+  transition: 0.2s transform linear;
 }
 
 .task-btn-wrapper {
-    grid-area: 1 / 4 / 1 / 5;
-    place-self: center;
+  grid-area: 1 / 4 / 1 / 5;
+  place-self: center;
 }
 
 .checklist-edit-btn,
 .checklist-delete-btn {
-    
-    height: 3em;
-    background-color: var(--slate-600);
+  height: 3em;
+  background-color: var(--slate-600);
 }
