@@ -8,8 +8,12 @@
 This project is part of The Odin Project - Full Stack JavaScript Path. The main goals is to implement a mantainable web app, exploring ES6, Npm and some code design principles. 
 
 ``` mermaid
-graph TD
-A <-- B 
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+
 ```
 
 
