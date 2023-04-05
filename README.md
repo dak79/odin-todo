@@ -7,8 +7,10 @@
 ## Description
 This project is part of The Odin Project - Full Stack JavaScript Path. The main goals is to implement a mantainable web app, exploring ES6, Npm and some code design principles. 
 
-@startuml
+@startuml  
 b->q
+@enduml  
+
 ## Tecnologies
 * HTML
 * CSS
