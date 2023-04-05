@@ -7,13 +7,13 @@
 ## Description
 This project is part of The Odin Project - Full Stack JavaScript Path. The main goals is to implement a mantainable web app, exploring ES6, Npm and some code design principles. 
 
-@startuml  
+``` mermaid
 Class01 <|-- Class02  
 Class03 *-- Class04  
 Class05 o-- Class06  
 Class07 .. Class08  
 Class09 -- Class10  
-@enduml    
+```
 
 
 
