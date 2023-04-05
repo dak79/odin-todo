@@ -9,7 +9,7 @@ This project is part of The Odin Project - Full Stack JavaScript Path. The main 
 
 ``` puml
 @startuml
-A <|-- B 
+A <- B 
 @enduml
 ```
 
